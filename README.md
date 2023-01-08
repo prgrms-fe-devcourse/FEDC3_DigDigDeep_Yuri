@@ -1,2 +1,3 @@
-# FEDC3_DDD_Yuri-
+# FEDC3_DDD_Yuri
+
 [디그디그딥] 커뮤니케이션을 통한 학습 제공하는 개발자 전용 SNS 🦔
