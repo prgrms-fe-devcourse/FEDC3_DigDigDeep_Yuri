@@ -1,6 +1,8 @@
-import './App.css';
+import useAxiosInterceptor from './hooks/useAxiosInterceptor';
 
 function App() {
+  useAxiosInterceptor();
+
   return <div className="App"></div>;
 }
 
