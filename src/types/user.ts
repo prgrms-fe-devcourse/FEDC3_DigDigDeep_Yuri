@@ -5,11 +5,9 @@ export interface User {
 }
 
 export interface UserResponse {
-  coverImage: string; // 커버 이미지
-  image: string; // 프로필 이미지
+  coverImage: string;
+  image: string;
   role: string;
-  emailVerified: boolean; // 사용되지 않음
-  banned: boolean; // 사용되지 않음
   isOnline: boolean;
   posts: [];
   likes: [];
