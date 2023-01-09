@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage';
 import PostPage from './pages/PostPage';
 import NotificationsPage from './pages/NotificationsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   useAxiosInterceptor();
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/posts/:postId" element={<PostPage />}></Route>
+        <Route path="/search" element={<SearchPage />}></Route>
         <Route path="/profile/:userId" element={<ProfilePage />}></Route>
         <Route path="/notifications" element={<NotificationsPage />}></Route>
         <Route path="*" element={<NotFoundPage />} />

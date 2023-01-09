@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { LoginResponse } from '../types/user';
 import axiosInstance from '../utils/axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { tokenState, userState } from '../recoil/atoms/user';
+import type { LoginResponse } from '../types/response';
 
 const LoginPage = () => {
   const [user, setUser] = useRecoilState(userState);
