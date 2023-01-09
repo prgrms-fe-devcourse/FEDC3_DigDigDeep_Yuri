@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { UserResponse } from '../types/user';
+import { LoginResponse } from '../types/user';
 import axiosInstance from '../utils/axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { tokenState, userState } from '../recoil/atoms/user';
@@ -29,7 +29,7 @@ const LoginPage = () => {
     password: string;
   }) => {
     try {
-      const { data } = await axiosInstance.post<UserResponse>('/login', {
+      const { data } = await axiosInstance.post<LoginResponse>('/login', {
         email,
         password,
       });
