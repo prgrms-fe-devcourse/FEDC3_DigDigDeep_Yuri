@@ -42,6 +42,12 @@ const LoginPage = () => {
     }
   };
 
+  const logout = async () => {
+    await axiosInstance.post('/logout');
+    setUser({});
+    setToken('');
+  };
+
   return (
     <div>
       <h1>Login Page</h1>
@@ -68,6 +74,12 @@ const LoginPage = () => {
         )}
         <button disabled={isSubmitting}>Login</button>
       </form>
+      {user.fullName && (
+        <div>
+          <h2>Hello, {user.fullName}</h2>
+          <button onClick={logout}>Logout</button>
+        </div>
+      )}
     </div>
   );
 };
