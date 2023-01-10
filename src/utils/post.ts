@@ -11,3 +11,7 @@ export const getPost = async (postId: string) => {
   const { data } = await axiosInstance.get<PostResponse>(`/posts/${postId}`);
   return data;
 };
+
+export const deletePost = async (postId: string) => {
+  await axiosInstance.delete(`/posts/delete`, { data: { id: postId } });
+};
