@@ -3,9 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PostResponse } from '../types/response';
 import { getPost } from '../utils/post';
 
-type PostId = {
-  postId: string;
-};
+type PostId = string;
 
 const PostPage = () => {
   const { postId } = useParams<PostId>();
