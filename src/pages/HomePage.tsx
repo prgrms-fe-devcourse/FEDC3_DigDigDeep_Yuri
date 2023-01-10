@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { PostResponse } from '../types/response';
+import getPosts from '../utils/getPosts';
 
 const HomePage = () => {
   const [search, setSearch] = useState('');
   const [select, setSelect] = useState('all');
+  const [posts, setPosts] = useState<PostResponse[]>([]);
   const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +21,20 @@ const HomePage = () => {
     e.preventDefault();
     navigate(`/search?q=${search}&type=${select}`);
   };
+
+  const fetchHandler = useCallback(async () => {
+    try {
+      const posts = await getPosts();
+      setPosts(posts);
+      console.log(posts);
+    } catch {
+      alert('포스트 정보를 불러올 수 없습니다.');
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchHandler();
+  }, [fetchHandler]);
 
   return (
     <div>
@@ -38,7 +55,18 @@ const HomePage = () => {
         <input type="search" value={search} onChange={onChange} />
         <button type="submit">Search</button>
       </form>
-      {select}
+      <ul>
+        {posts.map((el) => (
+          <li key={el._id}>
+            <div>{el.title}</div>
+            <div>{el.createdAt}</div>
+            <div>{el.author.fullName}</div>
+            <div>likes: {el.likes.length}</div>
+            <div>comments: {el.comments.length}</div>
+            <button>share</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
