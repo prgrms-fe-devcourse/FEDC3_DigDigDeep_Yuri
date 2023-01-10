@@ -22,11 +22,14 @@ const HomePage = () => {
     navigate(`/search?q=${search}&type=${select}`);
   };
 
+  const clickHandler = (postId: string) => {
+    navigate(`/posts/${postId}`);
+  };
+
   const fetchHandler = useCallback(async () => {
     try {
       const posts = await getPosts();
       setPosts(posts);
-      console.log(posts);
     } catch {
       alert('포스트 정보를 불러올 수 없습니다.');
     }
@@ -56,8 +59,14 @@ const HomePage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {posts.map((el) => (
-          <li key={el._id}>
+        {posts.map((el: PostResponse) => (
+          <li
+            key={el._id}
+            id={el._id}
+            onClick={() => {
+              clickHandler(el._id);
+            }}
+          >
             <div>{el.title}</div>
             <div>{el.createdAt}</div>
             <div>{el.author.fullName}</div>
