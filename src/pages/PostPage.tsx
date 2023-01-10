@@ -5,7 +5,9 @@ import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { deletePost, getPost } from '../utils/post';
 
-type PostId = string;
+type PostId = {
+  postId: string;
+};
 
 const PostPage = () => {
   const { postId } = useParams<PostId>();
@@ -21,10 +23,6 @@ const PostPage = () => {
       }
     }
   }, [postId, navigate]);
-
-  const handleEdit = () => {
-    navigate(`/edit/${post?._id}`);
-  };
 
   const fetchHandler = useCallback(async () => {
     if (postId) {
@@ -61,7 +59,7 @@ const PostPage = () => {
             {user._id === post.author._id && (
               <div>
                 <button onClick={handleDelete}>삭제</button>
-                <button onClick={handleEdit}>수정</button>
+                <button>수정</button>
               </div>
             )}
           </div>
