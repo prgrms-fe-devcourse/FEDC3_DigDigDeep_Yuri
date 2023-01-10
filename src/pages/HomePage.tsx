@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PostResponse } from '../types/response';
 import getPosts from '../utils/getPosts';
@@ -22,11 +22,19 @@ const HomePage = () => {
     navigate(`/search?q=${search}&type=${select}`);
   };
 
-  useEffect(() => {
-    getPosts().then((data) => {
-      setPosts(data || []);
-    });
+  const fetchHandler = useCallback(async () => {
+    try {
+      const posts = await getPosts();
+      setPosts(posts);
+      console.log(posts);
+    } catch {
+      alert('포스트 정보를 불러올 수 없습니다.');
+    }
   }, []);
+
+  useEffect(() => {
+    fetchHandler();
+  }, [fetchHandler]);
 
   return (
     <div>
