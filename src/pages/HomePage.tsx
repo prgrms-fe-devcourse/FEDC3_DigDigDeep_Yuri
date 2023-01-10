@@ -63,20 +63,20 @@ const HomePage = () => {
       </form>
       <ul>
         {posts.map((post: PostResponse) => (
-          <li
-            key={post._id}
-            id={post._id}
-            onClick={() => {
-              clickHandler(post._id);
-            }}
-          >
-            <div>{post.title}</div>
-            <div>{post.createdAt}</div>
-            <div>{post.author.fullName}</div>
-            <div>likes: {post.likes.length}</div>
-            <div>comments: {post.comments.length}</div>
+          <div key={post._id}>
+            <li
+              onClick={() => {
+                clickHandler(post._id);
+              }}
+            >
+              <div>{post.title}</div>
+              <div>{post.createdAt}</div>
+              <div>{post.author.fullName}</div>
+              <div>likes: {post.likes.length}</div>
+              <div>comments: {post.comments.length}</div>
+            </li>
             <button>share</button>
-          </li>
+          </div>
         ))}
       </ul>
     </div>
