@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PostResponse } from '../types/response';
-import axiosInstance from '../utils/axios';
+import getPosts from '../utils/getPosts';
 
 const HomePage = () => {
   const [search, setSearch] = useState('');
@@ -22,15 +22,11 @@ const HomePage = () => {
     navigate(`/search?q=${search}&type=${select}`);
   };
 
-  const getPosts = useCallback(async () => {
-    // 10개만 offset으로 무한스크롤 구현 가능
-    const { data } = await axiosInstance.get<PostResponse[]>(`/posts?limit=10`);
-    setPosts(data);
-  }, []);
-
   useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    getPosts().then((data) => {
+      setPosts(data || []);
+    });
+  }, []);
 
   return (
     <div>
