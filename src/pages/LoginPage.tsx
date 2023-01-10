@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import axiosInstance from '../utils/axios';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { tokenState, userState } from '../recoil/atoms/user';
-import type { LoginResponse } from '../types/response';
+import { login, logout } from '../utils/api/user';
+import { AxiosError } from 'axios';
 
 const LoginPage = () => {
   const [user, setUser] = useRecoilState(userState);
@@ -16,34 +16,28 @@ const LoginPage = () => {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      email: 'minjongbaek@gmail.com',
+      email: '',
       password: '',
     },
   });
 
-  const login = async ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const { data } = await axiosInstance.post<LoginResponse>('/login', {
-        email,
-        password,
-      });
-      setUser(data.user);
-      setToken(data.token);
-      // TODO: 페이지 이동
+      const { user, token } = await login(data);
+      setUser(user);
+      setToken(token);
     } catch (error) {
       console.error(error);
-      alert('입력한 정보와 일치하는 계정이 없습니다.');
+      if (error instanceof AxiosError && error.response?.data) {
+        alert(error.response.data);
+      } else {
+        alert('서버와 통신 중 문제가 발생했습니다.');
+      }
     }
   };
 
-  const logout = async () => {
-    await axiosInstance.post('/logout');
+  const onClickLogoutButton = async () => {
+    await logout();
     setUser({});
     setToken('');
   };
@@ -51,7 +45,7 @@ const LoginPage = () => {
   return (
     <div>
       <h1>Login Page</h1>
-      <form onSubmit={handleSubmit(login)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email">Email</label>
         <StyledInput
           id="email"
@@ -77,7 +71,7 @@ const LoginPage = () => {
       {user.fullName && (
         <div>
           <h2>Hello, {user.fullName}</h2>
-          <button onClick={logout}>Logout</button>
+          <button onClick={onClickLogoutButton}>Logout</button>
         </div>
       )}
     </div>

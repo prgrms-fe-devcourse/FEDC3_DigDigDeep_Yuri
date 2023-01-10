@@ -16,3 +16,21 @@ export const signUp = async ({
     fullName,
   });
 };
+
+export const login = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  const { data } = await axiosInstance.post<LoginResponse>('/login', {
+    email,
+    password,
+  });
+  return data;
+};
+
+export const logout = async () => {
+  await axiosInstance.post('/logout');
+};
