@@ -2,12 +2,15 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { tokenState, userState } from '../recoil/atoms/user';
-import { login, logout } from '../utils/api/user';
+import { login } from '../utils/api/user';
 import { AxiosError } from 'axios';
+import useLogout from '../hooks/useLogout';
 
 const LoginPage = () => {
   const [user, setUser] = useRecoilState(userState);
   const setToken = useSetRecoilState(tokenState);
+
+  const logout = useLogout();
 
   const {
     register,
@@ -34,12 +37,6 @@ const LoginPage = () => {
         alert('서버와 통신 중 문제가 발생했습니다.');
       }
     }
-  };
-
-  const onClickLogoutButton = async () => {
-    await logout();
-    setUser({});
-    setToken('');
   };
 
   return (
@@ -71,7 +68,7 @@ const LoginPage = () => {
       {user.fullName && (
         <div>
           <h2>Hello, {user.fullName}</h2>
-          <button onClick={onClickLogoutButton}>Logout</button>
+          <button onClick={logout}>Logout</button>
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useLogout from '../hooks/useLogout';
 import { PostResponse } from '../types/response';
 import getPosts from '../utils/getPosts';
 
@@ -8,6 +9,7 @@ const HomePage = () => {
   const [select, setSelect] = useState('all');
   const [posts, setPosts] = useState<PostResponse[]>([]);
   const navigate = useNavigate();
+  const logout = useLogout();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -46,6 +48,7 @@ const HomePage = () => {
         <Link to="/profile/me">
           <button>profile</button>
         </Link>
+        <button onClick={logout}>logout</button>
       </div>
       <form onSubmit={onSubmit}>
         <select onChange={handleSelect}>
