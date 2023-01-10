@@ -11,12 +11,15 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState<UserResponse>();
 
   const getUser = useCallback(async () => {
-    console.log(user);
     const requestId = userId === 'me' ? user._id : userId;
-    const { data } = await axiosInstance.get<UserResponse>(
-      `/users/${requestId}`
-    );
-    setUserInfo(data);
+    try {
+      const { data } = await axiosInstance.get<UserResponse>(
+        `/users/${requestId}`
+      );
+      setUserInfo(data);
+    } catch (err) {
+      console.error(err);
+    }
   }, [user, userId]);
 
   useEffect(() => {
