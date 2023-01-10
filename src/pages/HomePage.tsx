@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PostResponse } from '../types/response';
-import getPosts from '../utils/getPosts';
+import { getPosts } from '../utils/post';
 
 const HomePage = () => {
   const [search, setSearch] = useState('');
@@ -59,19 +59,19 @@ const HomePage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {posts.map((el: PostResponse) => (
+        {posts.map((post: PostResponse) => (
           <li
-            key={el._id}
-            id={el._id}
+            key={post._id}
+            id={post._id}
             onClick={() => {
-              clickHandler(el._id);
+              clickHandler(post._id);
             }}
           >
-            <div>{el.title}</div>
-            <div>{el.createdAt}</div>
-            <div>{el.author.fullName}</div>
-            <div>likes: {el.likes.length}</div>
-            <div>comments: {el.comments.length}</div>
+            <div>{post.title}</div>
+            <div>{post.createdAt}</div>
+            <div>{post.author.fullName}</div>
+            <div>likes: {post.likes.length}</div>
+            <div>comments: {post.comments.length}</div>
             <button>share</button>
           </li>
         ))}
