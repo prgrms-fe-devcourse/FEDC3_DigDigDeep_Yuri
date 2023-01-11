@@ -27,3 +27,12 @@ export interface LoginResponse {
   user: UserResponse;
   token: string;
 }
+
+export interface FollowResponse {
+  _id: string;
+  user?: string;
+  follower?: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
