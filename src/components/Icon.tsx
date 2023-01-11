@@ -16,7 +16,7 @@ const Icon = ({ name, size = 16, style, ...props }: IconProps) => {
 
   return (
     <IconContainer {...props} style={shapeStyle}>
-      <img src={`/image/icon/${name}.png`} alt={name} />
+      <StyledIcon src={`/image/icon/${name}.png`} alt={name} />
     </IconContainer>
   );
 };
@@ -25,4 +25,9 @@ export default Icon;
 
 const IconContainer = styled.i`
   display: inline-block;
+`;
+
+const StyledIcon = styled.img`
+  width: inherit;
+  height: inherit;
 `;

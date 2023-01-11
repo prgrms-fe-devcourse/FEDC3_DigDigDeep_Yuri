@@ -17,12 +17,12 @@ export default LoginPage;
 const LoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5rem;
   width: 100%;
   height: 100vh;
 `;
 
 const ImageWrapper = styled.div`
-  margin-top: 127px;
-  margin-bottom: 66px;
+  margin-top: 8rem;
   text-align: center;
 `;

@@ -3,13 +3,14 @@ import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../recoil/atoms/user';
 import { login } from '../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from '../components/UserInput';
+import UserInput from './UserInput';
 import UserForm from './UserForm';
 import FormButton from './FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Divider from './Divider';
 import { Link } from 'react-router-dom';
+import { COLOR } from '../utils/color';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -84,11 +85,11 @@ const LoginForm = () => {
       <FormButton
         type="submit"
         disabled={isSubmitting}
-        style={{ marginTop: 66 }}
+        style={{ marginTop: 32 }}
       >
         LOG IN
       </FormButton>
-      <Divider type="horizontal" style={{ width: '70%' }} />
+      <Divider type="horizontal" size={24} style={{ width: '70%' }} />
       <StyledDiv>
         <span>아직 회원이 아니신가요?</span>
         <StyledLink to="/signup">SIGN UP</StyledLink>
@@ -109,7 +110,7 @@ const ErrorMessage = styled.span`
   line-height: 16px;
   letter-spacing: -0.01em;
 
-  color: #e6540a;
+  color: ${COLOR.orange};
 `;
 
 const StyledDiv = styled.div`
@@ -126,6 +127,6 @@ const StyledDiv = styled.div`
 
 const StyledLink = styled(Link)`
   margin-left: 10px;
-  color: #95c746;
+  color: ${COLOR.green};
   text-decoration: none;
 `;

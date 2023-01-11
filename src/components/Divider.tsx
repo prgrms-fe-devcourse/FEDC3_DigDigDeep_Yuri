@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Line = styled.hr`
   border: none;
-  background-color: #aaa;
+  background-color: #dadada;
 
   &.vertical {
     position: relative;
@@ -20,7 +20,7 @@ const Line = styled.hr`
   }
 `;
 
-const Divider = ({ type = 'horizontal', size = 8, ...props }) => {
+const Divider = ({ type = 'horizontal', size = 16, ...props }) => {
   const dividerStyle = {
     margin: type === 'vertical' ? `0 ${size}px` : `${size}px auto`,
   };

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
 import type {
   Control,
   FieldPath,
@@ -9,6 +9,7 @@ import type {
 import { useController } from 'react-hook-form';
 import styled from 'styled-components';
 import Icon from './Icon';
+import { COLOR } from '../utils/color';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -65,7 +66,7 @@ const UserInput = <T extends FieldValues>({
           </StyledButton>
         )}
       </InputWrapper>
-      {error?.message && <ErrorMessage>{error.message}</ErrorMessage>}
+      <ErrorMessage>{error?.message && error.message}</ErrorMessage>
     </InputContainer>
   );
 };
@@ -80,19 +81,17 @@ const InputContainer = styled.div`
 
 const InputWrapper = styled.div`
   display: flex;
-  height: 51px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(146, 113, 96, 0.11);
   border-radius: 23.5px;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
+  gap: 1rem;
+  padding: 1rem 5%;
   border: 1px solid;
 
   :focus-within {
-    border: 1px solid #927160;
+    border: 1px solid ${COLOR.lightBrown};
   }
 `;
 
@@ -105,19 +104,19 @@ const StyledInput = styled.input`
   border: none;
   outline: none;
   letter-spacing: -0.01em;
-  color: #bfb0a8;
+  color: ${COLOR.brownGray};
   font-weight: 400;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1rem;
   font-family: 'Inter';
   font-style: normal;
-  padding: 0;
   flex-shrink: 1;
   flex-grow: 1;
+  padding: 0;
 
   ::placeholder {
     color: inherit;
-    line-height: 17px;
+    line-height: 1rem;
   }
 `;
 
@@ -126,18 +125,17 @@ const ErrorMessage = styled.span`
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  line-height: 16px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+  line-height: 1rem;
   letter-spacing: -0.01em;
   color: #e6540a;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 1rem;
+  height: 1rem;
 `;
 
 const StyledButton = styled.button`
   background-color: unset;
   border: none;
   padding: 0;
+  width: 1rem;
+  height: 1rem;
 `;

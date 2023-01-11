@@ -1,5 +1,7 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { COLOR } from '../utils/color';
+import type { ButtonHTMLAttributes } from 'react';
 
 interface FormButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
@@ -21,14 +23,12 @@ const StyledButton = styled.button`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 19px;
   letter-spacing: -0.01em;
-  color: #f8f8f8;
-  padding-top: 16px;
-  padding-bottom: 15px;
+  color: ${COLOR.white};
+  padding: 1rem 0;
   background-color: #95c746;
   box-shadow: 0px 2px 4px 1px rgba(127, 176, 49, 0.37);
   border-radius: 23.5px;
-  border: 1px solid #e9e9e9;
 `;
