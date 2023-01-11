@@ -1,4 +1,5 @@
 import { LoginResponse } from '../../types/response';
+import { UserResponse } from '../../types/user';
 import axiosInstance from '../axios';
 
 export const signUp = async ({
@@ -33,4 +34,14 @@ export const login = async ({
 
 export const logout = async () => {
   await axiosInstance.post('/logout');
+};
+
+export const getUser = async (userId: string) => {
+  const { data } = await axiosInstance.get<UserResponse>(`/users/${userId}`);
+  return data;
+};
+
+export const getUsers = async () => {
+  const { data } = await axiosInstance.get<UserResponse[]>('users/get-users');
+  return data;
 };
