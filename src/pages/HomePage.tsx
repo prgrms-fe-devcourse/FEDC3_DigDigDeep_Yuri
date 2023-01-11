@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Post from '../components/Post';
 import useLogout from '../hooks/useLogout';
 import { PostResponse } from '../types/response';
 import getPosts from '../utils/getPosts';
@@ -59,15 +60,16 @@ const HomePage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
-        {posts.map((el) => (
-          <li key={el._id}>
-            <div>{el.title}</div>
-            <div>{el.createdAt}</div>
-            <div>{el.author.fullName}</div>
-            <div>likes: {el.likes.length}</div>
-            <div>comments: {el.comments.length}</div>
-            <button>share</button>
-          </li>
+        {posts.map((post) => (
+          <Post
+            key={post._id}
+            _id={post._id}
+            title={post.title}
+            createdAt={post.createdAt}
+            author={post.author}
+            likes={post.likes}
+            comments={post.comments}
+          />
         ))}
       </ul>
     </div>
