@@ -8,6 +8,8 @@ import UserForm from './UserForm';
 import FormButton from './FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Divider from './Divider';
+import { Link } from 'react-router-dom';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -83,6 +85,11 @@ const LoginForm = () => {
       >
         LOG IN
       </FormButton>
+      <Divider type="horizontal" style={{ width: '80%' }} />
+      <StyledDiv>
+        <span>아직 회원이 아니신가요?</span>
+        <StyledLink to="/signup">SIGN UP</StyledLink>
+      </StyledDiv>
     </UserForm>
   );
 };
@@ -100,4 +107,22 @@ const ErrorMessage = styled.span`
   letter-spacing: -0.01em;
 
   color: #e6540a;
+`;
+
+const StyledDiv = styled.div`
+  text-align: center;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+
+  color: #715141;
+`;
+
+const StyledLink = styled(Link)`
+  margin-left: 10px;
+  color: #e6540a;
+  text-decoration: none;
 `;
