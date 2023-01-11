@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Post from '../components/Post';
 import useLogout from '../hooks/useLogout';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
@@ -62,6 +63,7 @@ const HomePage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
+<<<<<<< HEAD
         {posts.map((post: PostResponse) => (
           <div key={post._id}>
             <li
@@ -77,6 +79,18 @@ const HomePage = () => {
             </li>
             <button>share</button>
           </div>
+=======
+        {posts.map((post) => (
+          <Post
+            key={post._id}
+            _id={post._id}
+            title={post.title}
+            createdAt={post.createdAt}
+            author={post.author}
+            likes={post.likes}
+            comments={post.comments}
+          />
+>>>>>>> fc6bce6 (feat: 포스트 컴포넌트 베이스 구현)
         ))}
       </ul>
     </div>
