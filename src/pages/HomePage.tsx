@@ -63,23 +63,6 @@ const HomePage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
-<<<<<<< HEAD
-        {posts.map((post: PostResponse) => (
-          <div key={post._id}>
-            <li
-              onClick={() => {
-                clickHandler(post._id);
-              }}
-            >
-              <div>{post.title}</div>
-              <div>{post.createdAt}</div>
-              <div>{post.author.fullName}</div>
-              <div>likes: {post.likes.length}</div>
-              <div>comments: {post.comments.length}</div>
-            </li>
-            <button>share</button>
-          </div>
-=======
         {posts.map((post) => (
           <Post
             key={post._id}
@@ -90,7 +73,6 @@ const HomePage = () => {
             likes={post.likes}
             comments={post.comments}
           />
->>>>>>> fc6bce6 (feat: 포스트 컴포넌트 베이스 구현)
         ))}
       </ul>
     </div>
