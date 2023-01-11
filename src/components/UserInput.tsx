@@ -4,6 +4,7 @@ import type {
   FieldPath,
   FieldValues,
   RegisterOptions,
+  UseFormResetField,
 } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import styled from 'styled-components';
@@ -14,12 +15,14 @@ interface UserInputPrpos<T extends FieldValues>
   control: Control<T>;
   name: FieldPath<T>;
   rules?: RegisterOptions<T>;
+  resetField?: UseFormResetField<T>;
 }
 
 const UserInput = <T extends FieldValues>({
   name,
   rules,
   control,
+  resetField,
   ...props
 }: UserInputPrpos<T>) => {
   const {
@@ -30,6 +33,10 @@ const UserInput = <T extends FieldValues>({
     rules,
     control,
   });
+
+  const onClickHandler = () => {
+    if (resetField) resetField(name);
+  };
 
   return (
     <InputContainer>
@@ -45,11 +52,20 @@ const UserInput = <T extends FieldValues>({
           onChange={onChange}
           onBlur={onBlur}
           id={name}
+          autoComplete="off"
           {...props}
         />
+        {value && (
+          <StyledButton onClick={onClickHandler} type="button">
+            <Icon
+              name="close"
+              size={16}
+              // style={{ paddingLeft: 16, paddingRight: 16 }}
+            />
+          </StyledButton>
+        )}
       </InputWrapper>
       {error?.message && <ErrorMessage>{error.message}</ErrorMessage>}
-      {/* {<ErrorMessage>{JSON.stringify(error)}</ErrorMessage>} */}
     </InputContainer>
   );
 };
@@ -118,4 +134,10 @@ const ErrorMessage = styled.span`
   color: #e6540a;
   padding-left: 16px;
   padding-right: 16px;
+`;
+
+const StyledButton = styled.button`
+  background-color: unset;
+  border: none;
+  padding: 0;
 `;

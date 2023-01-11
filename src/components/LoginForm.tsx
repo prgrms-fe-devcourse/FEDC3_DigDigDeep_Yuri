@@ -22,6 +22,7 @@ const LoginForm = () => {
 
   const {
     handleSubmit,
+    resetField,
     control,
     formState: { isSubmitting },
   } = useForm({
@@ -32,9 +33,9 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: { email: string; password: string }) => {
-    setErrorMessages([]);
     try {
       const { user, token } = await login(data);
+      setErrorMessages([]);
       setUser(user);
       setToken(token);
     } catch (error) {
@@ -61,6 +62,7 @@ const LoginForm = () => {
         rules={{
           required: '이메일을 입력해주세요.',
         }}
+        resetField={resetField}
       />
       <UserInput
         control={control}
@@ -70,6 +72,7 @@ const LoginForm = () => {
         rules={{
           required: '비밀번호를 입력해주세요.',
         }}
+        resetField={resetField}
       />
       {errorMessages.length !== 0 && (
         <div>
@@ -85,7 +88,7 @@ const LoginForm = () => {
       >
         LOG IN
       </FormButton>
-      <Divider type="horizontal" style={{ width: '80%' }} />
+      <Divider type="horizontal" style={{ width: '70%' }} />
       <StyledDiv>
         <span>아직 회원이 아니신가요?</span>
         <StyledLink to="/signup">SIGN UP</StyledLink>
@@ -123,6 +126,6 @@ const StyledDiv = styled.div`
 
 const StyledLink = styled(Link)`
   margin-left: 10px;
-  color: #e6540a;
+  color: #95c746;
   text-decoration: none;
 `;
