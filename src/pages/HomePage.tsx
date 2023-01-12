@@ -25,10 +25,6 @@ const HomePage = () => {
     navigate(`/search?q=${search}&type=${select}`);
   };
 
-  const clickHandler = (postId: string) => {
-    navigate(`/posts/${postId}`);
-  };
-
   const fetchHandler = useCallback(async () => {
     try {
       const posts = await getPosts();
