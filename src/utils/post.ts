@@ -1,6 +1,34 @@
 import { PostResponse } from '../types/response';
 import axiosInstance from './axios';
 
+interface PostParam {
+  (title: string, image: number | null, channelId: string): void;
+}
+
+export const createPost: PostParam = async (title, image, channelId) => {
+  await axiosInstance.post(`/posts/create`, {
+    title,
+    image,
+    channelId,
+  });
+};
+
+export const updatePost = async (
+  postId: string,
+  title: string,
+  image: number | null,
+  channelId: string,
+  imageToDeletePublicId?: string
+) => {
+  await axiosInstance.put(`/posts/update`, {
+    postId,
+    title,
+    image,
+    channelId,
+    imageToDeletePublicId,
+  });
+};
+
 export const getPosts = async () => {
   // 10개만 offset으로 무한스크롤 구현 가능
   const { data } = await axiosInstance.get<PostResponse[]>(`/posts?limit=10`);
