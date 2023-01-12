@@ -1,7 +1,7 @@
 interface BasicResponse {
   _id: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 }
 
 export interface UserResponse extends BasicResponse {
@@ -35,7 +35,7 @@ export interface PostResponse extends BasicResponse {
   image?: string;
   imagePublicId?: string;
   title: string;
-  channel: ChannelResponse;
+  channel?: ChannelResponse;
   author: UserResponse;
 }
 
