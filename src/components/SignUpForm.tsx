@@ -103,8 +103,9 @@ const SignUpForm = () => {
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <FormButton
         type="submit"
-        disabled={!isValid || isSubmitting}
         style={{ marginTop: 32 }}
+        isSubmitting={isSubmitting}
+        isValid={isValid}
       >
         SIGN UP
       </FormButton>
