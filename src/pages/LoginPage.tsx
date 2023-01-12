@@ -20,6 +20,8 @@ const LoginPageContainer = styled.div`
   gap: 5rem;
   width: 100%;
   height: 100vh;
+  padding: 0 1.6rem;
+  box-sizing: border-box;
 `;
 
 const ImageWrapper = styled.div`
