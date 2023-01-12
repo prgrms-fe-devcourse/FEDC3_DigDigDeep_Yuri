@@ -1,5 +1,4 @@
-import { LoginResponse } from '../../types/response';
-import { UserResponse } from '../../types/user';
+import { LoginResponse, UserResponse } from '../../types/response';
 import axiosInstance from '../axios';
 
 export const signUp = async ({

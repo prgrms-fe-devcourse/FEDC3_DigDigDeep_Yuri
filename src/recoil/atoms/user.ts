@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import type { AtomEffect } from 'recoil';
-import { UserResponse } from '../../types/response';
+import { User } from '../../types/user';
 
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key: string) =>
@@ -15,7 +15,7 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export const userState = atom<Partial<UserResponse>>({
+export const userState = atom<User>({
   key: 'userState',
   default: {},
   effects: [localStorageEffect('user')],

@@ -1,27 +1,9 @@
-export interface User {
-  image?: string;
-  _id?: string;
-  fullName?: string;
-}
+import { UserResponse } from './response';
 
-export interface UserResponse {
-  coverImage: string;
-  image: string;
-  role: string;
-  isOnline: boolean;
-  posts: [];
-  likes: [];
-  comments: string[];
-  followers: [];
-  following: [];
-  notifications: [];
-  messages: [];
-  _id: string;
-  fullName: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-}
+export type User = Pick<
+  Partial<UserResponse>,
+  '_id' | 'image' | 'fullName' | 'likes'
+>;
 
 export interface LoginResponse {
   user: UserResponse;
