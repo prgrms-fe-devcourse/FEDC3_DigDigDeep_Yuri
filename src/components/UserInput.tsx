@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import type {
   Control,
   FieldPath,
@@ -27,7 +27,7 @@ const UserInput = <T extends FieldValues>({
   ...props
 }: UserInputPrpos<T>) => {
   const {
-    field: { value, onChange, onBlur },
+    field: { value, onChange, onBlur, ref },
     fieldState: { error },
   } = useController({
     name,
@@ -35,13 +35,24 @@ const UserInput = <T extends FieldValues>({
     control,
   });
 
-  const onClickHandler = () => {
+  const onClick = () => {
+    ref(() => {});
     if (resetField) resetField(name);
   };
 
+  const [isFocus, setIsFocus] = useState(false);
+
   return (
     <InputContainer>
-      <InputWrapper style={{ borderColor: error ? '#e6540a' : '#e9e9e9' }}>
+      <InputWrapper
+        style={{
+          borderColor: isFocus
+            ? `${COLOR.lightBrown}`
+            : error
+            ? `${COLOR.orange}`
+            : `${COLOR.lightGray}`,
+        }}
+      >
         <Icon
           name="user"
           size={16}
@@ -51,13 +62,17 @@ const UserInput = <T extends FieldValues>({
         <StyledInput
           value={value}
           onChange={onChange}
-          onBlur={onBlur}
+          onBlur={() => {
+            setIsFocus(false);
+            onBlur();
+          }}
+          onFocus={() => setIsFocus(true)}
           id={name}
           autoComplete="off"
           {...props}
         />
         {value && (
-          <StyledButton onClick={onClickHandler} type="button">
+          <StyledButton onClick={onClick} type="button">
             <Icon name="close" size={16} />
           </StyledButton>
         )}
@@ -100,7 +115,7 @@ const StyledInput = styled.input`
   border: none;
   outline: none;
   letter-spacing: -0.01em;
-  color: ${COLOR.brownGray};
+  color: ${COLOR.lightBrown};
   font-weight: 400;
   font-size: 14px;
   line-height: 1rem;

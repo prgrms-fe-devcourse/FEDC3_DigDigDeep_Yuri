@@ -78,7 +78,7 @@ const LoginForm = () => {
       {errorMessages.length !== 0 && (
         <div>
           {errorMessages.map((errorMessage) => (
-            <ErrorMessage>{errorMessage}</ErrorMessage>
+            <ErrorMessage key={errorMessage}>{errorMessage}</ErrorMessage>
           ))}
         </div>
       )}
