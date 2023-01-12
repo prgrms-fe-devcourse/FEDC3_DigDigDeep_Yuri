@@ -103,7 +103,7 @@ export default LoginForm;
 const ErrorMessage = styled.span`
   display: block;
   text-align: center;
-  font-family: 'Inter';
+  font-family: 'Inter' sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -115,14 +115,14 @@ const ErrorMessage = styled.span`
 
 const StyledDiv = styled.div`
   text-align: center;
-  font-family: 'Noto Sans KR';
+  font-family: 'Noto Sans KR' sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.01em;
 
-  color: #715141;
+  color: ${COLOR.text};
 `;
 
 const StyledLink = styled(Link)`

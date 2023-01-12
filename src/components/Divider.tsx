@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+const Divider = ({ type = 'horizontal', size = 16, ...props }) => {
+  const dividerStyle = {
+    margin: type === 'vertical' ? `0 ${size}px` : `${size}px auto`,
+  };
+  return (
+    <Line
+      {...props}
+      className={type}
+      style={{ ...dividerStyle, ...props.style }}
+    />
+  );
+};
+
+export default Divider;
+
 const Line = styled.hr`
   border: none;
   background-color: #dadada;
@@ -19,18 +34,3 @@ const Line = styled.hr`
     height: 1px;
   }
 `;
-
-const Divider = ({ type = 'horizontal', size = 16, ...props }) => {
-  const dividerStyle = {
-    margin: type === 'vertical' ? `0 ${size}px` : `${size}px auto`,
-  };
-  return (
-    <Line
-      {...props}
-      className={type}
-      style={{ ...dividerStyle, ...props.style }}
-    />
-  );
-};
-
-export default Divider;

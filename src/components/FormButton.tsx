@@ -20,7 +20,7 @@ export default FormButton;
 
 const StyledButton = styled.button`
   width: 100%;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 1rem;
@@ -28,7 +28,7 @@ const StyledButton = styled.button`
   letter-spacing: -0.01em;
   color: ${COLOR.white};
   padding: 1rem 0;
-  background-color: #95c746;
+  background-color: ${COLOR.green};
   box-shadow: 0px 2px 4px 1px rgba(127, 176, 49, 0.37);
   border-radius: 23.5px;
 `;

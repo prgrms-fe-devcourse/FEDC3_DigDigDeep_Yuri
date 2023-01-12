@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <LoginPageContainer>
       <ImageWrapper>
-        <img src="/image/logo/big.png" alt="logo" />
+        <Image src="/image/logo/big.png" alt="logo" />
       </ImageWrapper>
       <LoginForm />
     </LoginPageContainer>
@@ -26,3 +26,5 @@ const ImageWrapper = styled.div`
   margin-top: 8rem;
   text-align: center;
 `;
+
+const Image = styled.img``;

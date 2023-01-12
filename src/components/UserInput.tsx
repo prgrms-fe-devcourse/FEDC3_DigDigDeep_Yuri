@@ -58,11 +58,7 @@ const UserInput = <T extends FieldValues>({
         />
         {value && (
           <StyledButton onClick={onClickHandler} type="button">
-            <Icon
-              name="close"
-              size={16}
-              // style={{ paddingLeft: 16, paddingRight: 16 }}
-            />
+            <Icon name="close" size={16} />
           </StyledButton>
         )}
       </InputWrapper>
@@ -81,7 +77,7 @@ const InputContainer = styled.div`
 
 const InputWrapper = styled.div`
   display: flex;
-  background: #ffffff;
+  background: ${COLOR.white};
   box-shadow: 0px 2px 4px rgba(146, 113, 96, 0.11);
   border-radius: 23.5px;
   align-items: center;
@@ -121,13 +117,13 @@ const StyledInput = styled.input`
 `;
 
 const ErrorMessage = styled.span`
-  font-family: 'Inter';
+  font-family: 'Inter' sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 1rem;
   letter-spacing: -0.01em;
-  color: #e6540a;
+  color: ${COLOR.orange};
   padding: 0 1rem;
   height: 1rem;
 `;
