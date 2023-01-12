@@ -32,4 +32,9 @@ const StyledButton = styled.button`
   box-shadow: 0px 2px 4px 1px rgba(127, 176, 49, 0.37);
   border-radius: 23.5px;
   border: none;
+
+  :disabled {
+    background-color: ${COLOR.lightGray};
+    box-shadow: none;
+  }
 `;
