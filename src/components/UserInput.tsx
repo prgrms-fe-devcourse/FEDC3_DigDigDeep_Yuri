@@ -46,10 +46,10 @@ const UserInput = <T extends FieldValues>({
     <InputContainer>
       <InputWrapper
         style={{
-          borderColor: isFocus
-            ? `${COLOR.lightBrown}`
-            : error
+          borderColor: error
             ? `${COLOR.orange}`
+            : isFocus
+            ? `${COLOR.lightBrown}`
             : `${COLOR.lightGray}`,
         }}
       >
@@ -96,10 +96,6 @@ const InputWrapper = styled.div`
   gap: 1.6rem;
   padding: 1.6rem 5%;
   border: 1px solid;
-
-  :focus-within {
-    border: 1px solid ${COLOR.lightBrown};
-  }
 `;
 
 const StyledLabel = styled.label`

@@ -25,7 +25,7 @@ const LoginForm = () => {
     handleSubmit,
     resetField,
     control,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isValid },
   } = useForm({
     defaultValues: {
       email: '',
@@ -84,8 +84,9 @@ const LoginForm = () => {
       )}
       <FormButton
         type="submit"
-        disabled={isSubmitting}
         style={{ marginTop: 32 }}
+        isSubmitting={isSubmitting}
+        isValid={isValid}
       >
         LOG IN
       </FormButton>
