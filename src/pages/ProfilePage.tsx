@@ -46,8 +46,8 @@ const ProfilePage = () => {
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
   const [posts, setPosts] = useState<PostResponse[]>();
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState<FollowResponse[]>();
+  const [following, setFollowing] = useState<FollowResponse[]>();
 
   const fetchUser = useCallback(async () => {
     try {
