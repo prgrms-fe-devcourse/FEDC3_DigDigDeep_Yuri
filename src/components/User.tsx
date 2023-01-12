@@ -1,4 +1,4 @@
-import { UserResponse } from '../types/user';
+import { UserResponse } from '../types/response';
 
 const User = ({
   userInfo,

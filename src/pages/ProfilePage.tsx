@@ -4,9 +4,9 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import User from '../components/User';
 import { userState } from '../recoil/atoms/user';
-import type { FollowResponse, UserResponse } from '../types/user';
+import { UserResponse } from '../types/response';
+import type { FollowResponse } from '../types/user';
 import { getUser, getUsers } from '../utils/api/user';
-import axiosInstance from '../utils/axios';
 import { formatDate } from '../utils/formatDate';
 
 const testFollowers = [
@@ -29,7 +29,6 @@ const testFollowers = [
     _id: '63bd1ffa4b0e607612a82b35',
   },
 ];
-
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -64,7 +63,7 @@ const ProfilePage = () => {
   useEffect(() => {
     fetchUser();
     fetchFollowUsers(testFollowers);
-  }, [testFollowers]);
+  }, [fetchFollowUsers, fetchUser]);
 
   return (
     <div>
