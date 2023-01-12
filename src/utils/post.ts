@@ -40,6 +40,13 @@ export const getPost = async (postId: string) => {
   return data;
 };
 
+export const getPostByAuthor = async (authorId: string) => {
+  const { data } = await axiosInstance.get<PostResponse>(
+    `/posts/author/${authorId}`
+  );
+  return data;
+};
+
 export const deletePost = async (postId: string) => {
   await axiosInstance.delete(`/posts/delete`, { data: { id: postId } });
 };
