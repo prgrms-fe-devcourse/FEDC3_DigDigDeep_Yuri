@@ -28,9 +28,18 @@ const Post = ({
   };
 
   const handleLike = async (postId: string) => {
-    // 있으면 양수 없을때 -1
     const isLike = likesState.findIndex((like) => like.user === user._id);
-    if (!isLike) {
+    if (isLike) {
+      const { data } = await createLike(postId);
+      if (user.likes && user._id) {
+        setLikesState([...likesState, data]);
+        setUser({
+          ...user,
+          likes: [...user.likes, data],
+        });
+        sendLikeNotification(data._id, user._id, postId);
+      }
+    } else {
       setLikesState(
         likesState.filter((item) => item._id !== likesState[isLike]._id)
       );
@@ -39,17 +48,6 @@ const Post = ({
         likes: likesState.filter((item) => item._id !== likesState[isLike]._id),
       });
       deleteLike(likesState[isLike]._id);
-    } else {
-      const { data } = await createLike(postId);
-      if (user.likes && user._id) {
-        setLikesState([...likesState, data]);
-        setUser({
-          ...user,
-          likes: [...user.likes, data],
-        });
-        // 알림 날림
-        sendLikeNotification(data._id, user._id, postId);
-      }
     }
   };
 
@@ -60,6 +58,11 @@ const Post = ({
         <div>Created At: {formatDate.fullDate(createdAt)}</div>
         <div>Author: {author.fullName}</div>
         <div>Likes: {likesState.length}</div>
+        <div>
+          {likesState.find((like) => like.user === user._id) && (
+            <span>liked post</span>
+          )}
+        </div>
         <div>Comments: {comments.length}</div>
       </div>
       <button onClick={() => handleShare(_id)}>share</button>
