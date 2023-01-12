@@ -8,7 +8,12 @@ const useLogout = () => {
 
   const logout = async () => {
     await requestLogout();
-    setUser({});
+    setUser({
+      _id: '',
+      likes: [],
+      image: '',
+      fullName: '',
+    });
     setToken('');
   };
 
