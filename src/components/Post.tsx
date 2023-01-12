@@ -29,7 +29,8 @@ const Post = ({
 
   const handleLike = async (postId: string) => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
-    if (isLike) {
+    console.log(isLike);
+    if (isLike === -1) {
       const { data } = await createLike(postId);
       if (user.likes && user._id) {
         setLikesState([...likesState, data]);
@@ -43,10 +44,14 @@ const Post = ({
       setLikesState(
         likesState.filter((item) => item._id !== likesState[isLike]._id)
       );
-      setUser({
-        ...user,
-        likes: likesState.filter((item) => item._id !== likesState[isLike]._id),
-      });
+      if (user.likes) {
+        setUser({
+          ...user,
+          likes: user.likes.filter(
+            (item) => item._id !== likesState[isLike]._id
+          ),
+        });
+      }
       deleteLike(likesState[isLike]._id);
     }
   };
