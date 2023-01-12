@@ -17,7 +17,12 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
 
 export const userState = atom<User>({
   key: 'userState',
-  default: {},
+  default: {
+    _id: '',
+    likes: [],
+    image: '',
+    fullName: '',
+  },
   effects: [localStorageEffect('user')],
 });
 
