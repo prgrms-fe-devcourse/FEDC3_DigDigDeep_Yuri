@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import User from '../components/User';
+import PostList from '../components/PostList';
+import Tab from '../components/Tab';
+import UserList from '../components/UserList';
 import { userState } from '../recoil/atoms/user';
-import { UserResponse } from '../types/response';
+import { PostResponse, UserResponse } from '../types/response';
 import type { FollowResponse } from '../types/user';
 import { getUser, getUsers } from '../utils/api/user';
 import { formatDate } from '../utils/formatDate';
@@ -30,12 +32,19 @@ const testFollowers = [
   },
 ];
 
+export type TTabMenuItems = keyof Pick<
+  UserResponse,
+  'posts' | 'followers' | 'following'
+>;
+
+const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
+
 const ProfilePage = () => {
   const { userId } = useParams();
   const user = useRecoilValue(userState);
   const [userInfo, setUserInfo] = useState<UserResponse>();
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
-
+  const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
   const fetchUser = useCallback(async () => {
     try {
       const requestId = userId === 'me' ? user._id : userId;
@@ -72,19 +81,29 @@ const ProfilePage = () => {
         <h1>{userInfo?.fullName}</h1>
         <p>member since {userInfo && formatDate.year(userInfo.createdAt)}</p>
       </div>
-      <TabItemArea>
-        <ul>
-          {followUsersInfo &&
-            followUsersInfo.map((follow) => (
-              <User key={follow._id} userInfo={follow} unfollowable={true} />
-            ))}
-        </ul>
-      </TabItemArea>
+      <TabList>
+        {TabMenuItems.map((item) => {
+          return (
+            <Tab
+              key={item}
+              item={item}
+              value={userInfo && userInfo[item].length}
+              isActive={activeTab === item}
+              onClick={() => setActiveTab(item)}
+            />
+          );
+        })}
+      </TabList>
     </div>
   );
 };
 
 export default ProfilePage;
-const TabItemArea = styled.div`
+
+const TabList = styled.div`
+  display: flex;
+`;
+
+const TabContentArea = styled.ul`
   display: block;
 `;
