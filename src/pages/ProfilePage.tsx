@@ -45,11 +45,18 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState<UserResponse>();
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
+  const [posts, setPosts] = useState<PostResponse[]>();
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+
   const fetchUser = useCallback(async () => {
     try {
       const requestId = userId === 'me' ? user._id : userId;
       const data = await getUser(requestId as string);
       setUserInfo(data);
+      setPosts(data.posts);
+      setFollowers(data.followers);
+      setFollowing(data.following);
     } catch (err) {
       console.error(err);
     }
@@ -94,6 +101,15 @@ const ProfilePage = () => {
           );
         })}
       </TabList>
+      <TabContent>
+        {activeTab === 'posts' && posts && <PostList posts={posts} />}
+        {activeTab === 'following' && following && (
+          <UserList users={followUsersInfo!} unfollowable={true} />
+        )}
+        {activeTab === 'followers' && followers && (
+          <UserList users={followUsersInfo!} unfollowable={false} />
+        )}
+      </TabContent>
     </div>
   );
 };
@@ -104,6 +120,6 @@ const TabList = styled.div`
   display: flex;
 `;
 
-const TabContentArea = styled.ul`
+const TabContent = styled.ul`
   display: block;
 `;
