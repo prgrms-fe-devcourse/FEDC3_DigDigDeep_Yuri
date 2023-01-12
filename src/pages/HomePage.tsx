@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Post from '../components/Post';
 import useLogout from '../hooks/useLogout';
 import { PostResponse } from '../types/response';
-import { getPosts } from '../utils/post';
+import { createPost, getPosts, updatePost } from '../utils/post';
 
 const HomePage = () => {
   const [search, setSearch] = useState('');
@@ -71,6 +71,34 @@ const HomePage = () => {
           />
         ))}
       </ul>
+      {/* 테스트 & 예시 코드입니다. */}
+      <button
+        onClick={async () => {
+          await createPost(
+            '민재가 하는 테스트',
+            null,
+            '63b5b86c21d0f92287bd6474'
+          );
+          const posts = await getPosts();
+          setPosts(posts);
+        }}
+      >
+        New Post
+      </button>
+      <button
+        onClick={async () => {
+          await updatePost(
+            '63bfc1dfec8c5b4385125337',
+            '민재가 바꾼 테스트',
+            null,
+            '63b5b86c21d0f92287bd6474'
+          );
+          const posts = await getPosts();
+          setPosts(posts);
+        }}
+      >
+        Edit Test
+      </button>
     </div>
   );
 };
