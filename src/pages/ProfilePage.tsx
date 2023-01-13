@@ -89,9 +89,7 @@ const ProfilePage = () => {
   return (
     <div>
       <div>
-        <button onClick={() => navigate('/profile/me/my-likes')}>
-          MY LIKES
-        </button>
+        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>
       </div>
       <div>
         <img src={userInfo?.image} alt={userInfo?.fullName} />
