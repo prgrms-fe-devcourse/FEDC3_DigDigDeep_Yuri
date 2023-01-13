@@ -13,7 +13,7 @@ export interface UserResponse extends BasicResponse {
   isOnline: boolean;
   posts: PostResponse[];
   likes: LikeResponse[];
-  comments: string[];
+  comments: CommentResponse[];
   followers: [];
   following: [];
   notifications: NotificationResponse[];
@@ -31,7 +31,7 @@ export interface ChannelResponse extends BasicResponse {
 
 export interface PostResponse extends BasicResponse {
   likes: LikeResponse[];
-  comments: Comment[];
+  comments: CommentResponse[];
   image?: string;
   imagePublicId?: string;
   title: string;

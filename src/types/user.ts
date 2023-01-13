@@ -2,7 +2,7 @@ import { UserResponse } from './response';
 
 export type User = Pick<
   UserResponse,
-  '_id' | 'image' | 'fullName' | 'likes' | 'email'
+  '_id' | 'image' | 'fullName' | 'likes' | 'comments' | 'email'
 >;
 
 export interface LoginResponse {
