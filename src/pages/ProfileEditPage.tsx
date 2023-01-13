@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import UploadPhotoButton from '../components/UploadPhotoButton';
 import ProfileEditForm from '../components/ProfileEditForm';
 
 const ProfileEditPage = () => {
   return (
     <LoginPageContainer>
+      <UploadPhotoButton />
       <ProfileEditForm />
     </LoginPageContainer>
   );
@@ -19,4 +21,5 @@ const LoginPageContainer = styled.div`
   height: 100vh;
   padding: 0 1.6rem;
   box-sizing: border-box;
+  text-align: center;
 `;

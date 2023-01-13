@@ -1,5 +1,3 @@
-import { AxiosError } from 'axios';
-import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -14,11 +12,7 @@ import useGetMyInfo from '../hooks/useGetMyInfo';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
-
-  const [errorMessage, setErrorMessage] = useState<string>('');
-
   const getMyInfo = useGetMyInfo();
-
   const user = useRecoilValue(userState);
 
   const {
@@ -104,7 +98,6 @@ const ProfileEditForm = () => {
         }}
         resetField={resetField}
       />
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <FormButton
         type="submit"
         style={{ marginTop: 32 }}
