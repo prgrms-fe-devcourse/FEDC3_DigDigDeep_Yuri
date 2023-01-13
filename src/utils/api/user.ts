@@ -48,6 +48,13 @@ export const getUserInfo = async (userId: string) => {
   return data;
 };
 
+export const uploadPhoto = async (photo: Blob) => {
+  const formData = new FormData();
+  formData.append('image', photo);
+  formData.append('isCover', 'false');
+  await axiosInstance.post('/users/upload-photo', formData);
+};
+
 export const logout = async () => {
   await axiosInstance.post('/logout');
 };
