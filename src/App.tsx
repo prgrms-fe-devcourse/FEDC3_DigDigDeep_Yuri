@@ -4,6 +4,7 @@ import {
   HomePage,
   LoginPage,
   ProfilePage,
+  LikedPostsPage,
   SignUpPage,
   NotFoundPage,
   PostPage,
@@ -38,6 +39,10 @@ function App() {
           <Route path="/posts/:postId" element={<PostPage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
           <Route path="/profile/:userId" element={<ProfilePage />}></Route>
+          <Route
+            path="/profile/me/liked-posts"
+            element={<LikedPostsPage />}
+          ></Route>
           <Route
             path="/profile/me/edit"
             element={
