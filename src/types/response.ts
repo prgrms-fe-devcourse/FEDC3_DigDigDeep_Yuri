@@ -15,7 +15,7 @@ export interface UserResponse extends BasicResponse {
   likes: LikeResponse[];
   comments: CommentResponse[];
   followers: [];
-  following: [];
+  following: FollowResponse[];
   notifications: NotificationResponse[];
   messages: [];
   fullName: string;
@@ -60,9 +60,13 @@ export interface NotificationResponse extends BasicResponse {
   message?: string; // 메시지 id
 }
 
-export interface FollowResponse extends BasicResponse {
-  user: string; // 사용자 id
-  follower: string; // 사용자 id
+export interface FollowResponse {
+  _id: string;
+  user?: string;
+  follower?: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 export interface LoginResponse {
