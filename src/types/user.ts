@@ -1,6 +1,9 @@
 import { UserResponse } from './response';
 
-export type User = Pick<UserResponse, '_id' | 'image' | 'fullName' | 'likes'>;
+export type User = Pick<
+  UserResponse,
+  '_id' | 'image' | 'fullName' | 'likes' | 'email'
+>;
 
 export interface LoginResponse {
   user: UserResponse;

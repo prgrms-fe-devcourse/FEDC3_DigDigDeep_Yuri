@@ -22,6 +22,7 @@ export const userState = atom<User>({
     likes: [],
     image: '',
     fullName: '',
+    email: '',
   },
   effects: [localStorageEffect('user')],
 });

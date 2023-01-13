@@ -13,6 +13,7 @@ const useLogout = () => {
       likes: [],
       image: '',
       fullName: '',
+      email: '',
     });
     setToken('');
   };
