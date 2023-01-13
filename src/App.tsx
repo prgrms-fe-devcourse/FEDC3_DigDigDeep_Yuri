@@ -14,6 +14,7 @@ import {
 import { useRecoilValue } from 'recoil';
 import { tokenState } from './recoil/atoms/user';
 import GlobalStyle from './components/GlobalStyle';
+import ProfileEditPage from './pages/ProfileEditPage';
 
 function App() {
   useAxiosInterceptor();
@@ -37,6 +38,16 @@ function App() {
           <Route path="/posts/:postId" element={<PostPage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
           <Route path="/profile/:userId" element={<ProfilePage />}></Route>
+          <Route
+            path="/profile/me/edit"
+            element={
+              !token ? (
+                <Navigate replace to="/profile/me" />
+              ) : (
+                <ProfileEditPage />
+              )
+            }
+          ></Route>
           <Route path="/notifications" element={<NotificationsPage />}></Route>
           <Route path="/edit/:postId" element={<PostEditPage />}></Route>
           <Route path="*" element={<NotFoundPage />} />
