@@ -31,6 +31,23 @@ export const login = async ({
   return data;
 };
 
+export const updateUserName = async ({ fullName }: { fullName: string }) => {
+  await axiosInstance.put('/settings/update-user', {
+    fullName,
+  });
+};
+
+export const updatePassword = async ({ password }: { password: string }) => {
+  await axiosInstance.put('/settings/update-password', {
+    password,
+  });
+};
+
+export const getUserInfo = async (userId: string) => {
+  const { data } = await axiosInstance.get<UserResponse>(`/users/${userId}`);
+  return data;
+};
+
 export const logout = async () => {
   await axiosInstance.post('/logout');
 };
