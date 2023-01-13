@@ -7,7 +7,7 @@ import { createPost, getPosts, updatePost } from '../utils/post';
 
 const HomePage = () => {
   const [search, setSearch] = useState('');
-  const [select, setSelect] = useState('all');
+  const [select, setSelect] = useState('posts');
   const [posts, setPosts] = useState<PostResponse[]>([]);
   const navigate = useNavigate();
   const logout = useLogout();
@@ -52,7 +52,7 @@ const HomePage = () => {
       </div>
       <form onSubmit={onSubmit}>
         <select onChange={handleSelect}>
-          <option value="all">post + user</option>
+          <option value="posts">posts</option>
           <option value="users">users</option>
         </select>
         <input type="search" value={search} onChange={onChange} />
