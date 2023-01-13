@@ -2,9 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import User from '../components/User';
+import PostList from '../components/PostList';
+import TabItem from '../components/TabItem';
+import UserList from '../components/UserList';
 import { userState } from '../recoil/atoms/user';
-import { UserResponse } from '../types/response';
+import { PostResponse, UserResponse } from '../types/response';
 import type { FollowResponse } from '../types/user';
 import { getUser, getUsers } from '../utils/api/user';
 import { formatDate } from '../utils/formatDate';
@@ -30,17 +32,35 @@ const testFollowers = [
   },
 ];
 
+export type TTabMenuItems = keyof Pick<
+  UserResponse,
+  'posts' | 'followers' | 'following'
+>;
+
+const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
+
 const ProfilePage = () => {
   const { userId } = useParams();
   const user = useRecoilValue(userState);
   const [userInfo, setUserInfo] = useState<UserResponse>();
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
+  const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
+  const [posts, setPosts] = useState<PostResponse[]>();
+  const [followers, setFollowers] = useState<FollowResponse[]>();
+  const [following, setFollowing] = useState<FollowResponse[]>();
 
   const fetchUser = useCallback(async () => {
     try {
-      const requestId = userId === 'me' ? user._id : userId;
-      const data = await getUser(requestId as string);
+      let data: UserResponse;
+      if (userId === 'me') {
+        data = user as UserResponse;
+      } else {
+        data = await getUser(userId as string);
+      }
       setUserInfo(data);
+      setPosts(data.posts);
+      setFollowers(data.followers);
+      setFollowing(data.following);
     } catch (err) {
       console.error(err);
     }
@@ -72,19 +92,38 @@ const ProfilePage = () => {
         <h1>{userInfo?.fullName}</h1>
         <p>member since {userInfo && formatDate.year(userInfo.createdAt)}</p>
       </div>
-      <TabItemArea>
-        <ul>
-          {followUsersInfo &&
-            followUsersInfo.map((follow) => (
-              <User key={follow._id} userInfo={follow} unfollowable={true} />
-            ))}
-        </ul>
-      </TabItemArea>
+      <TabList>
+        {TabMenuItems.map((item) => {
+          return (
+            <TabItem
+              key={item}
+              item={item}
+              value={userInfo && userInfo[item].length}
+              isActive={activeTab === item}
+              onClick={() => setActiveTab(item)}
+            />
+          );
+        })}
+      </TabList>
+      <TabContent>
+        {activeTab === 'posts' && posts && <PostList posts={posts} />}
+        {activeTab === 'following' && following && (
+          <UserList users={followUsersInfo!} unfollowable={true} />
+        )}
+        {activeTab === 'followers' && followers && (
+          <UserList users={followUsersInfo!} unfollowable={false} />
+        )}
+      </TabContent>
     </div>
   );
 };
 
 export default ProfilePage;
-const TabItemArea = styled.div`
+
+const TabList = styled.div`
+  display: flex;
+`;
+
+const TabContent = styled.ul`
   display: block;
 `;
