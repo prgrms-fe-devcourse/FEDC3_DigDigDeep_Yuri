@@ -8,7 +8,7 @@ interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?(): void;
 }
 
-const Tab = ({ item, value, isActive, onClick }: TabProps) => {
+const TabItem = ({ item, value, isActive, onClick }: TabProps) => {
   return (
     <TabButton key={item} onClick={onClick} isActive={isActive}>
       <div>{value}</div>
@@ -17,7 +17,7 @@ const Tab = ({ item, value, isActive, onClick }: TabProps) => {
   );
 };
 
-export default Tab;
+export default TabItem;
 
 const TabButton = styled.button<{ isActive: boolean }>`
   background-color: ${({ isActive }) => (isActive ? 'red' : 'white')};

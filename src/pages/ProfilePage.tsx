@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import PostList from '../components/PostList';
-import Tab from '../components/Tab';
+import TabItem from '../components/TabItem';
 import UserList from '../components/UserList';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse, UserResponse } from '../types/response';
@@ -91,7 +91,7 @@ const ProfilePage = () => {
       <TabList>
         {TabMenuItems.map((item) => {
           return (
-            <Tab
+            <TabItem
               key={item}
               item={item}
               value={userInfo && userInfo[item].length}
