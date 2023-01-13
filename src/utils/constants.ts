@@ -5,4 +5,5 @@ export const defaultUserValue = {
   image: '',
   fullName: '',
   email: '',
+  following: [],
 };
