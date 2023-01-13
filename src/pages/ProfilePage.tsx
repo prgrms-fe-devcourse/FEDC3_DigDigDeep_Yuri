@@ -51,8 +51,12 @@ const ProfilePage = () => {
 
   const fetchUser = useCallback(async () => {
     try {
-      const requestId = userId === 'me' ? user._id : userId;
-      const data = await getUser(requestId as string);
+      let data: UserResponse;
+      if (userId === 'me') {
+        data = user as UserResponse;
+      } else {
+        data = await getUser(userId as string);
+      }
       setUserInfo(data);
       setPosts(data.posts);
       setFollowers(data.followers);
