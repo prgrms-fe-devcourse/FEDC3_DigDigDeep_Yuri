@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, useState } from 'react';
 import type {
   Control,
+  FieldError,
   FieldPath,
   FieldValues,
   RegisterOptions,
@@ -44,15 +45,7 @@ const UserInput = <T extends FieldValues>({
 
   return (
     <InputContainer>
-      <InputWrapper
-        style={{
-          borderColor: error
-            ? `${COLOR.orange}`
-            : isFocus
-            ? `${COLOR.lightBrown}`
-            : `${COLOR.lightGray}`,
-        }}
-      >
+      <InputWrapper error={error} isFocus={isFocus}>
         <Icon name="user" size={16} />
         <StyledLabel htmlFor={name} />
         <StyledInput
@@ -67,7 +60,7 @@ const UserInput = <T extends FieldValues>({
           autoComplete="off"
           {...props}
         />
-        {value && (
+        {resetField && value && (
           <StyledButton onClick={onClick} type="button">
             <Icon name="close" size={16} />
           </StyledButton>
@@ -86,7 +79,12 @@ const InputContainer = styled.div`
   gap: 1.2rem;
 `;
 
-const InputWrapper = styled.div`
+interface InputWrapperProps {
+  error?: FieldError;
+  isFocus: boolean;
+}
+
+const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   background: ${COLOR.white};
   box-shadow: 0px 2px 4px rgba(146, 113, 96, 0.11);
@@ -96,6 +94,8 @@ const InputWrapper = styled.div`
   gap: 1.6rem;
   padding: 1.6rem 5%;
   border: 1px solid;
+  border-color: ${({ error, isFocus }) =>
+    error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
 `;
 
 const StyledLabel = styled.label`
@@ -120,6 +120,10 @@ const StyledInput = styled.input`
   ::placeholder {
     color: inherit;
     line-height: 1.6rem;
+  }
+
+  :disabled {
+    background: inherit;
   }
 `;
 
