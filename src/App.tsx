@@ -4,7 +4,7 @@ import {
   HomePage,
   LoginPage,
   ProfilePage,
-  LikedPostsPage,
+  MyLikesPage,
   SignUpPage,
   NotFoundPage,
   PostPage,
@@ -41,7 +41,7 @@ function App() {
           <Route path="/profile/:userId" element={<ProfilePage />}></Route>
           <Route
             path="/profile/me/liked-posts"
-            element={<LikedPostsPage />}
+            element={<MyLikesPage />}
           ></Route>
           <Route
             path="/profile/me/edit"
