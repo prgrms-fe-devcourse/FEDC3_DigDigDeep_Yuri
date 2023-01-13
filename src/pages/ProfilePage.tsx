@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import PostList from '../components/PostList';
@@ -41,6 +41,7 @@ const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
 
 const ProfilePage = () => {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const user = useRecoilValue(userState);
   const [userInfo, setUserInfo] = useState<UserResponse>();
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
@@ -87,6 +88,11 @@ const ProfilePage = () => {
 
   return (
     <div>
+      <div>
+        <button onClick={() => navigate('/profile/me/my-likes')}>
+          MY LIKES
+        </button>
+      </div>
       <div>
         <img src={userInfo?.image} alt={userInfo?.fullName} />
         <h1>{userInfo?.fullName}</h1>
