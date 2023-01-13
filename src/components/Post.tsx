@@ -11,7 +11,7 @@ const Post = ({
   title,
   createdAt,
   author,
-  likes, // post!!
+  likes,
   comments,
   ...props
 }: PostResponse) => {

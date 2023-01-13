@@ -1,22 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PostResponse } from '../types/response';
-import type { User } from '../types/user';
+import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
-  const [userResult, setUserResult] = useState<User[]>([]);
+  const [userResult, setUserResult] = useState<UserResponse[]>([]);
   const [postResult, setPostResult] = useState<PostResponse[]>([]);
   const getSearch = useCallback(async () => {
-    if (searchParams.get('type') === 'users') {
-      const { data } = await axiosInstance.get<User[]>(
-        `/search/users/${searchParams.get('q')}`
+    const getType = searchParams.get('type');
+    const getSearchTerm = searchParams.get('q');
+    if (getType === 'users') {
+      const { data } = await axiosInstance.get<UserResponse[]>(
+        `/search/users/${getSearchTerm}`
       );
       setUserResult(data);
-    } else {
+    }
+    if (searchParams.get('type') === 'posts') {
       const { data } = await axiosInstance.get<PostResponse[]>(
-        `/search/all/${searchParams.get('q')}`
+        `/search/all/${getSearchTerm}`
       );
       const postOnly = data.filter((el) => 'author' in el);
       setPostResult(postOnly);
@@ -29,14 +31,29 @@ const SearchPage = () => {
 
   return (
     <div>
-      SearchPage, q: {searchParams.get('q')}, type: {searchParams.get('type')}
-      <ul>
-        {searchParams.get('type') === 'users' ? (
-          <li>{userResult.map((el) => el.fullName)}</li>
-        ) : (
-          <li>{postResult.map((el) => el.title)}</li>
-        )}
-      </ul>
+      SearchPage
+      {searchParams.get('type') === 'users' ? (
+        <ul>
+          {userResult.map((el) => (
+            <div key={el._id}>
+              <li>{el.image}</li>
+              <li>{el.fullName}</li>
+            </div>
+          ))}
+        </ul>
+      ) : (
+        <ul>
+          {postResult.map((el) => (
+            <div key={el._id}>
+              <li>{JSON.stringify(el.author)}</li>
+              <li>{el.author.fullName}</li>
+              <li>{el.createdAt}</li>
+              <li>{el.title}</li>
+              {/* post 컴포넌트 */}
+            </div>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
