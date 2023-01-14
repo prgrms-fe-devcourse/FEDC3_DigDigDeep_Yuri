@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import ProfileButton from '../components/ProfileButton';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { createComment, deleteComment } from '../utils/comment';
@@ -87,9 +88,9 @@ const PostPage = () => {
         <Link to="/notifications">
           <button>notification</button>
         </Link>
-        <Link to="/profile/me">
-          <button>profile</button>
-        </Link>
+        <ProfileButton userId={post?.author._id as string}>
+          Profile
+        </ProfileButton>
       </div>
       {post && (
         <>
