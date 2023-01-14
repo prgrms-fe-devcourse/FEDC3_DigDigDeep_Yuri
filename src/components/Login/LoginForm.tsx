@@ -8,7 +8,7 @@ import UserForm from '../UserForm/UserForm';
 import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Divider from '../Divider';
+import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
 import { COLOR } from '../../utils/color';
 
