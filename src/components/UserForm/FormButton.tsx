@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 import type { ButtonHTMLAttributes } from 'react';
 
 interface FormButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { signUp } from '../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from './UserInput';
-import UserForm from './UserForm';
-import FormButton from './FormButton';
+import UserInput from './UserForm/UserInput';
+import UserForm from './UserForm/UserForm';
+import FormButton from './UserForm/FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';

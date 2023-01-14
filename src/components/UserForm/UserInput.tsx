@@ -9,8 +9,8 @@ import type {
 } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import styled from 'styled-components';
-import Icon from './Icon';
-import { COLOR } from '../utils/color';
+import Icon from '../Icon';
+import { COLOR } from '../../utils/color';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {

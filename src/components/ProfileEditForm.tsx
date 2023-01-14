@@ -1,10 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { COLOR } from '../utils/color';
-import FormButton from './FormButton';
-import UserForm from './UserForm';
-import UserInput from './UserInput';
+import FormButton from './UserForm/FormButton';
+import UserForm from './UserForm/UserForm';
+import UserInput from './UserForm/UserInput';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../recoil/atoms/user';
 import { updatePassword, updateUserName } from '../utils/api/user';
@@ -111,16 +109,3 @@ const ProfileEditForm = () => {
 };
 
 export default ProfileEditForm;
-
-const ErrorMessage = styled.span`
-  display: block;
-  text-align: center;
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-
-  color: ${COLOR.orange};
-`;
