@@ -1,5 +1,7 @@
+import NotificationList from '../components/NotificationList';
+
 const NotificationsPage = () => {
-  return <div>NotificationPage</div>;
+  return <NotificationList />;
 };
 
 export default NotificationsPage;
