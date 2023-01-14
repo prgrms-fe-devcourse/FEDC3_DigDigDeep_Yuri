@@ -1,16 +1,18 @@
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import FormButton from '../UserForm/FormButton';
-import UserForm from '../UserForm/UserForm';
-import FormInput from '../UserForm/FormInput';
+import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { updatePassword, updateUserName } from '../../utils/api/user';
+import UserForm from '../UserForm/UserForm';
+import FormButton from '../UserForm/FormButton';
+import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
+
   const getMyInfo = useGetMyInfo();
+
   const user = useRecoilValue(userState);
 
   const {
@@ -35,8 +37,6 @@ const ProfileEditForm = () => {
     fullName: string;
     password: string;
   }) => {
-    console.log('submit data:', data);
-
     const promises = [];
 
     if (getValues('fullName') !== user.fullName) {
@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     if (promises.length === 0) return;
 
     Promise.all(promises)
-      .then((response) => {
+      .then(() => {
         getMyInfo();
         alert('변경되었습니다.');
         navigate('/profile/me');
