@@ -31,7 +31,6 @@ const PostPage = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
-    console.log(post);
   };
 
   const onSubmit = async (
