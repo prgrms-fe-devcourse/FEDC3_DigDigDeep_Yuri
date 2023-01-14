@@ -1,8 +1,8 @@
 import axiosInstance from './axios';
 
-export const deleteFollow = async (userId: string) =>
+export const deleteFollow = async (followId: string) =>
   await axiosInstance.delete(`/follow/delete`, {
-    data: { id: userId },
+    data: { id: followId },
   });
 
 export const createFollow = async (userId: string) =>

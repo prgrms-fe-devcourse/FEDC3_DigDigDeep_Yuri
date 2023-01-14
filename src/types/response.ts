@@ -63,7 +63,7 @@ export interface NotificationResponse extends BasicResponse {
 export interface FollowResponse {
   _id: string;
   user?: string;
-  follower?: string;
+  follower: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
