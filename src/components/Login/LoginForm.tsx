@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { tokenState, userState } from '../../recoil/atoms/user';
 import { login } from '../../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from '../UserForm/FormInput';
+import FormInput from '../UserForm/FormInput';
 import UserForm from '../UserForm/UserForm';
 import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ const LoginForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <UserInput
+      <FormInput
         control={control}
         name="email"
         placeholder="email"
@@ -64,7 +64,7 @@ const LoginForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="password"
         placeholder="password"

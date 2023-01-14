@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { signUp } from '../../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from '../UserForm/FormInput';
+import FormInput from '../UserForm/FormInput';
 import UserForm from '../UserForm/UserForm';
 import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
@@ -56,7 +56,7 @@ const SignUpForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <UserInput
+      <FormInput
         control={control}
         name="fullName"
         placeholder="user name"
@@ -65,7 +65,7 @@ const SignUpForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="email"
         placeholder="email"
@@ -78,7 +78,7 @@ const SignUpForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="password"
         placeholder="password"
@@ -89,7 +89,7 @@ const SignUpForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      <UserInput
+      <FormInput
         control={control}
         name="confirmPassword"
         placeholder="password check"

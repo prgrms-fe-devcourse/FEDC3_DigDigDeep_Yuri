@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormButton from '../UserForm/FormButton';
 import UserForm from '../UserForm/UserForm';
-import UserInput from '../UserForm/FormInput';
+import FormInput from '../UserForm/FormInput';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { updatePassword, updateUserName } from '../../utils/api/user';
@@ -63,7 +63,7 @@ const ProfileEditForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <UserInput
+      <FormInput
         control={control}
         name="fullName"
         placeholder="user name"
@@ -72,13 +72,13 @@ const ProfileEditForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="email"
         placeholder="email"
         disabled={true}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="password"
         placeholder="password"
@@ -86,7 +86,7 @@ const ProfileEditForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      <UserInput
+      <FormInput
         control={control}
         name="confirmPassword"
         placeholder="password check"
