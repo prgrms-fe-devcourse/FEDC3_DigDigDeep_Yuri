@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SignUpForm from '../components/SignUpForm';
+import SignUpForm from '../components/SIgnUp/SignUpForm';
 import { COLOR } from '../utils/color';
 
 const SignUpPage = () => {
