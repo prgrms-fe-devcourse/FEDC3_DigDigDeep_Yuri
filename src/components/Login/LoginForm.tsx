@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
 import { COLOR } from '../../utils/color';
+import ErrorMessage from '../UserForm/ErrorMessage';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -75,7 +76,11 @@ const LoginForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      {errorMessage && <ErrorMessage> {errorMessage}</ErrorMessage>}
+      {errorMessage && (
+        <ErrorMessage style={{ textAlign: 'center' }}>
+          {errorMessage}
+        </ErrorMessage>
+      )}
       <FormButton
         type="submit"
         style={{ marginTop: 32 }}
@@ -94,20 +99,6 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-const ErrorMessage = styled.span`
-  display: block;
-  text-align: center;
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.9rem;
-  letter-spacing: -0.01em;
-  white-space: pre-wrap;
-
-  color: ${COLOR.orange};
-`;
 
 const SignUpLinkWrapper = styled.div`
   text-align: center;

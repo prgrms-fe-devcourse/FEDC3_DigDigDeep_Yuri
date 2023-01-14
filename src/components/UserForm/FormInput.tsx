@@ -11,6 +11,7 @@ import { useController } from 'react-hook-form';
 import styled from 'styled-components';
 import Icon from '../Base/Icon';
 import { COLOR } from '../../utils/color';
+import ErrorMessage from './ErrorMessage';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -138,17 +139,5 @@ const ResetButton = styled.button`
   border: none;
   padding: 0;
   width: 1.6rem;
-  height: 1.6rem;
-`;
-
-const ErrorMessage = styled.span`
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-  color: ${COLOR.orange};
-  padding: 0 1.6rem;
   height: 1.6rem;
 `;

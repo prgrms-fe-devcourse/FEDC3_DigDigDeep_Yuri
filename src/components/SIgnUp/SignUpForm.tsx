@@ -8,6 +8,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { COLOR } from '../../utils/color';
+import ErrorMessage from '../UserForm/ErrorMessage';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
@@ -102,7 +103,11 @@ const SignUpForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && (
+        <ErrorMessage style={{ textAlign: 'center' }}>
+          {errorMessage}
+        </ErrorMessage>
+      )}
       <FormButton
         type="submit"
         style={{ marginTop: 32 }}
@@ -116,16 +121,3 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
-
-const ErrorMessage = styled.span`
-  display: block;
-  text-align: center;
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-
-  color: ${COLOR.orange};
-`;
