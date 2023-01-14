@@ -111,7 +111,7 @@ export default NotificationList;
 const List = styled.ul`
   width: 50%;
   margin: 0 auto;
-  g @media screen and (max-width: 767px) and (orientation: portrait) {
+  @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
   }
 `;
