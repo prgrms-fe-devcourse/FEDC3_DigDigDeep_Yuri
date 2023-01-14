@@ -61,9 +61,9 @@ export interface NotificationResponse extends BasicResponse {
 }
 
 export interface FollowResponse {
-  _id: string;
-  user?: string;
-  follower: string;
+  _id: string; // 팔로우 id
+  user: string; // 팔로우 할 사용자 id
+  follower: string; // 사용자 id
   createdAt: string;
   updatedAt: string;
   __v: number;
