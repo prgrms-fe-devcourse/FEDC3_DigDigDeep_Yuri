@@ -1,13 +1,11 @@
-import { useForm } from 'react-hook-form';
-import { signUp } from '../../utils/api/user';
-import { AxiosError } from 'axios';
-import FormInput from '../UserForm/FormInput';
-import UserForm from '../UserForm/UserForm';
-import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
-import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { COLOR } from '../../utils/color';
+import { AxiosError } from 'axios';
+import { signUp } from '../../utils/api/user';
+import UserForm from '../UserForm/UserForm';
+import FormInput from '../UserForm/FormInput';
+import FormButton from '../UserForm/FormButton';
 import ErrorMessage from '../UserForm/ErrorMessage';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
@@ -15,7 +13,7 @@ const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 const SignUpForm = () => {
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     handleSubmit,
