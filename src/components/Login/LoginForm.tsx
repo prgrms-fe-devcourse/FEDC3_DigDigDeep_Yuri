@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { tokenState, userState } from '../recoil/atoms/user';
-import { login } from '../utils/api/user';
+import { tokenState, userState } from '../../recoil/atoms/user';
+import { login } from '../../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from './UserForm/UserInput';
-import UserForm from './UserForm/UserForm';
-import FormButton from './UserForm/FormButton';
+import UserInput from '../UserForm/UserInput';
+import UserForm from '../UserForm/UserForm';
+import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Divider from './Divider';
+import Divider from '../Divider';
 import { Link } from 'react-router-dom';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
