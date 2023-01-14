@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Notification from './Notification';
-import { getNotification } from '../utils/notification';
+import { getNotification, seenNotification } from '../utils/notification';
 import { NotificationResponse } from '../types/response';
 
 const NotificationList = () => {
@@ -11,6 +11,8 @@ const NotificationList = () => {
     try {
       const notifications = await getNotification();
       setNotification(notifications);
+
+      await seenNotification();
     } catch {
       alert('알림을 불러올 수 없습니다.');
     }
