@@ -1,13 +1,18 @@
 import axiosInstance from './axios';
 
 interface LikeParam {
-  (dataId: string, userId: string, postId: string): void;
+  (type: string, dataId: string, userId: string, postId: string): void;
 }
 
-export const sendLikeNotification: LikeParam = async (dataId, userId, postId) =>
+export const sendNotification: LikeParam = async (
+  type,
+  dataId,
+  userId,
+  postId
+) =>
   await axiosInstance.post(`/notifications/create`, {
-    notificationType: 'LIKE',
+    notificationType: type,
     notificationTypeId: dataId,
-    userId: userId,
-    postId: postId,
+    userId,
+    postId,
   });

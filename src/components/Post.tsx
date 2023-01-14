@@ -5,7 +5,7 @@ import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { formatDate } from '../utils/formatDate';
 import { createLike, deleteLike } from '../utils/like';
-import { sendLikeNotification } from '../utils/notification';
+import { sendNotification } from '../utils/notification';
 const Post = ({
   _id,
   title,
@@ -27,7 +27,7 @@ const Post = ({
     navigate(`/posts/${postId}`);
   };
 
-  const handleLike = async (postId: string) => {
+  const handleLike = async (postId: string, authorId: string) => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
     console.log(isLike);
     if (isLike === -1) {
@@ -38,7 +38,7 @@ const Post = ({
           ...user,
           likes: [...user.likes, data],
         });
-        sendLikeNotification(data._id, user._id, postId);
+        sendNotification('LIKE', data._id, authorId, postId);
       }
     } else {
       setLikesState(
@@ -71,7 +71,7 @@ const Post = ({
         <div>Comments: {comments.length}</div>
       </div>
       <button onClick={() => handleShare(_id)}>share</button>
-      <button onClick={() => handleLike(_id)}>like</button>
+      <button onClick={() => handleLike(_id, author._id)}>like</button>
     </li>
   );
 };
