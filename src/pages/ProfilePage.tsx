@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState<UserResponse>();
   const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>([]);
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
-  const [posts, setPosts] = useState<PostResponse[]>();
+  const [posts, setPosts] = useState<PostResponse[]>([]);
   const [followers, setFollowers] = useState<FollowResponse[]>();
   const [following, setFollowing] = useState<FollowResponse[]>();
 
@@ -47,13 +47,18 @@ const ProfilePage = () => {
     }
   }, [user, userId]);
 
-  const fetchFollowUsers = useCallback(
-    async (followUsers: FollowResponse[]) => {
+  const fetchFollows = useCallback(
+    async (followUsers: FollowResponse[], type: string) => {
       try {
         const data = followUsers.map(async (follow) => {
-          return await getUser(follow.follower);
+          if (type === 'followers') {
+            return await getUser(follow.follower);
+          }
+          if (type === 'following') {
+            return await getUser(follow.user);
+          }
         });
-        Promise.all(data).then((res) => setFollowUsersInfo(res));
+        Promise.all(data).then((res) => setFollowUsersInfo(res as []));
       } catch (err) {
         console.error(err);
       }
@@ -65,18 +70,16 @@ const ProfilePage = () => {
     setActiveTab(item);
     if (item === 'posts') return;
     if (item === 'followers') {
-      followers && fetchFollowUsers(followers);
+      followers && fetchFollows(followers, 'followers');
     }
     if (item === 'following') {
-      following && fetchFollowUsers(following);
+      following && fetchFollows(following, 'following');
     }
   };
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
-
-  console.log(followUsersInfo);
 
   return (
     <div>
@@ -112,12 +115,12 @@ const ProfilePage = () => {
         })}
       </TabList>
       <TabContent>
-        {activeTab === 'posts' && posts && <PostList posts={posts} />}
-        {activeTab === 'following' && following && (
-          <UserList users={followUsersInfo!} unfollowable={true} />
+        {activeTab === 'posts' && <PostList posts={posts} />}
+        {activeTab === 'following' && (
+          <UserList users={followUsersInfo} unfollowable={true} />
         )}
-        {activeTab === 'followers' && followers && (
-          <UserList users={followUsersInfo!} unfollowable={false} />
+        {activeTab === 'followers' && (
+          <UserList users={followUsersInfo} unfollowable={false} />
         )}
       </TabContent>
     </div>
