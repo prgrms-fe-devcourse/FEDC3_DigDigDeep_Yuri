@@ -99,7 +99,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
   align-items: center;
   justify-content: space-between;
   gap: 1.6rem;
-  padding: 1.6rem 5%;
+  padding: 1.6rem 2.4rem;
   border: 1px solid;
   border-color: ${({ error, isFocus }) =>
     error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
