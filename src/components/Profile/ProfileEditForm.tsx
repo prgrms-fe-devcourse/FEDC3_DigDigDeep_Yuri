@@ -1,16 +1,18 @@
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import FormButton from '../UserForm/FormButton';
-import UserForm from '../UserForm/UserForm';
-import UserInput from '../UserForm/FormInput';
+import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { updatePassword, updateUserName } from '../../utils/api/user';
+import UserForm from '../UserForm/UserForm';
+import FormButton from '../UserForm/FormButton';
+import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
+
   const getMyInfo = useGetMyInfo();
+
   const user = useRecoilValue(userState);
 
   const {
@@ -35,8 +37,6 @@ const ProfileEditForm = () => {
     fullName: string;
     password: string;
   }) => {
-    console.log('submit data:', data);
-
     const promises = [];
 
     if (getValues('fullName') !== user.fullName) {
@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     if (promises.length === 0) return;
 
     Promise.all(promises)
-      .then((response) => {
+      .then(() => {
         getMyInfo();
         alert('변경되었습니다.');
         navigate('/profile/me');
@@ -63,7 +63,7 @@ const ProfileEditForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <UserInput
+      <FormInput
         control={control}
         name="fullName"
         placeholder="user name"
@@ -72,13 +72,13 @@ const ProfileEditForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="email"
         placeholder="email"
         disabled={true}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="password"
         placeholder="password"
@@ -86,7 +86,7 @@ const ProfileEditForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      <UserInput
+      <FormInput
         control={control}
         name="confirmPassword"
         placeholder="password check"

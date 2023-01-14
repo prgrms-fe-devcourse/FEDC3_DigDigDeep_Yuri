@@ -1,20 +1,19 @@
-import { useForm } from 'react-hook-form';
-import { signUp } from '../../utils/api/user';
-import { AxiosError } from 'axios';
-import UserInput from '../UserForm/FormInput';
-import UserForm from '../UserForm/UserForm';
-import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
-import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { COLOR } from '../../utils/color';
+import { AxiosError } from 'axios';
+import { signUp } from '../../utils/api/user';
+import UserForm from '../UserForm/UserForm';
+import FormInput from '../UserForm/FormInput';
+import FormButton from '../UserForm/FormButton';
+import ErrorMessage from '../UserForm/ErrorMessage';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     handleSubmit,
@@ -56,7 +55,7 @@ const SignUpForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <UserInput
+      <FormInput
         control={control}
         name="fullName"
         placeholder="user name"
@@ -65,7 +64,7 @@ const SignUpForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="email"
         placeholder="email"
@@ -78,7 +77,7 @@ const SignUpForm = () => {
         }}
         resetField={resetField}
       />
-      <UserInput
+      <FormInput
         control={control}
         name="password"
         placeholder="password"
@@ -89,7 +88,7 @@ const SignUpForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      <UserInput
+      <FormInput
         control={control}
         name="confirmPassword"
         placeholder="password check"
@@ -102,7 +101,11 @@ const SignUpForm = () => {
         resetField={resetField}
         icon="lock"
       />
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && (
+        <ErrorMessage style={{ textAlign: 'center' }}>
+          {errorMessage}
+        </ErrorMessage>
+      )}
       <FormButton
         type="submit"
         style={{ marginTop: 32 }}
@@ -116,16 +119,3 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
-
-const ErrorMessage = styled.span`
-  display: block;
-  text-align: center;
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-
-  color: ${COLOR.orange};
-`;

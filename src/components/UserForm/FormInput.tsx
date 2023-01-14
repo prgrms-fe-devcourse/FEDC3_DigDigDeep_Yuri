@@ -11,6 +11,7 @@ import { useController } from 'react-hook-form';
 import styled from 'styled-components';
 import Icon from '../Base/Icon';
 import { COLOR } from '../../utils/color';
+import ErrorMessage from './ErrorMessage';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -98,7 +99,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
   align-items: center;
   justify-content: space-between;
   gap: 1.6rem;
-  padding: 1.6rem 5%;
+  padding: 1.6rem 2.4rem;
   border: 1px solid;
   border-color: ${({ error, isFocus }) =>
     error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
@@ -138,17 +139,5 @@ const ResetButton = styled.button`
   border: none;
   padding: 0;
   width: 1.6rem;
-  height: 1.6rem;
-`;
-
-const ErrorMessage = styled.span`
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-  color: ${COLOR.orange};
-  padding: 0 1.6rem;
   height: 1.6rem;
 `;
