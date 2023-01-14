@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import FormButton from '../UserForm/FormButton';
 import UserForm from '../UserForm/UserForm';
-import UserInput from '../UserForm/UserInput';
+import UserInput from '../UserForm/FormInput';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { updatePassword, updateUserName } from '../../utils/api/user';
@@ -84,6 +84,7 @@ const ProfileEditForm = () => {
         placeholder="password"
         type="password"
         resetField={resetField}
+        icon="lock"
       />
       <UserInput
         control={control}
@@ -95,6 +96,7 @@ const ProfileEditForm = () => {
             value === watch('password') || '비밀번호가 일치하지 않습니다.',
         }}
         resetField={resetField}
+        icon="lock"
       />
       <FormButton
         type="submit"

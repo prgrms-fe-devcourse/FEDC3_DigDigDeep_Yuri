@@ -4,9 +4,9 @@ import LoginForm from '../components/Login/LoginForm';
 const LoginPage = () => {
   return (
     <LoginPageContainer>
-      <ImageWrapper>
+      <LogoImageWrapper>
         <Image src="/image/logo/big.png" alt="logo" />
-      </ImageWrapper>
+      </LogoImageWrapper>
       <LoginForm />
     </LoginPageContainer>
   );
@@ -24,7 +24,7 @@ const LoginPageContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const ImageWrapper = styled.div`
+const LogoImageWrapper = styled.div`
   margin-top: 8rem;
   text-align: center;
 `;

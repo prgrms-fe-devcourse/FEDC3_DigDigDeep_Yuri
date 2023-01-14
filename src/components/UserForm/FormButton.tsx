@@ -18,7 +18,7 @@ const FormButton = ({
   ...props
 }: FormButtonProps) => {
   return (
-    <StyledButton
+    <Button
       type={type}
       disabled={isSubmitting}
       isValid={isValid}
@@ -27,13 +27,13 @@ const FormButton = ({
       {...props}
     >
       {children}
-    </StyledButton>
+    </Button>
   );
 };
 
 export default FormButton;
 
-const StyledButton = styled.button<FormButtonProps>`
+const Button = styled.button<FormButtonProps>`
   width: 100%;
   font-family: 'Inter', sans-serif;
   font-style: normal;
