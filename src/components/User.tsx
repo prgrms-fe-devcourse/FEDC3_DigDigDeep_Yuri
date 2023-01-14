@@ -1,4 +1,5 @@
 import { UserResponse } from '../types/response';
+import UnfollowButton from './UnfollowButton';
 
 const User = ({
   userInfo,
@@ -13,7 +14,7 @@ const User = ({
       <img src={userInfo.image} alt={userInfo.fullName} />
       <h3>{userInfo.fullName}</h3>
       <button>Go To Profile</button>
-      {unfollowable && <button>unfollow</button>}
+      {unfollowable && <UnfollowButton userId={userInfo._id} />}
     </li>
   );
 };
