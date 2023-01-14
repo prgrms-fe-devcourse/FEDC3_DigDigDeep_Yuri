@@ -40,7 +40,7 @@ const Container = styled.div`
   height: 6rem;
   align-items: center;
   position: sticky;
-  top: 0px;
+  top: 0;
   background-color: ${COLOR.bgColor};
   /* border-bottom: 1px solid #eeeeee; */
 `;
