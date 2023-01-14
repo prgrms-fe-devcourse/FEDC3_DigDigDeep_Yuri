@@ -36,7 +36,7 @@ const FollowButton = () => {
         });
       }
     } catch (err) {
-      alert('Something went wrong');
+      alert('팔로잉 처리 중 에러가 발생했습니다.');
       console.error(err);
     }
   };
