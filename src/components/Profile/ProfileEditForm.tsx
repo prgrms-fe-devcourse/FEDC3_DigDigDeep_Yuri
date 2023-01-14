@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import FormButton from './UserForm/FormButton';
-import UserForm from './UserForm/UserForm';
-import UserInput from './UserForm/UserInput';
+import FormButton from '../UserForm/FormButton';
+import UserForm from '../UserForm/UserForm';
+import UserInput from '../UserForm/UserInput';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../recoil/atoms/user';
-import { updatePassword, updateUserName } from '../utils/api/user';
-import useGetMyInfo from '../hooks/useGetMyInfo';
+import { userState } from '../../recoil/atoms/user';
+import { updatePassword, updateUserName } from '../../utils/api/user';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();

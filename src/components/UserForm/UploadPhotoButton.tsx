@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../recoil/atoms/user';
+import { userState } from '../../recoil/atoms/user';
 import { useState } from 'react';
-import { uploadPhoto } from '../utils/api/user';
-import useGetMyInfo from '../hooks/useGetMyInfo';
+import { uploadPhoto } from '../../utils/api/user';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 const UploadPhotoButton = () => {
   const user = useRecoilValue(userState);

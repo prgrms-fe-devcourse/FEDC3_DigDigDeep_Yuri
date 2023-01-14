@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import UploadPhotoButton from '../components/UploadPhotoButton';
-import ProfileEditForm from '../components/ProfileEditForm';
+import UploadPhotoButton from '../components/UserForm/UploadPhotoButton';
+import ProfileEditForm from '../components/Profile/ProfileEditForm';
 
 const ProfileEditPage = () => {
   return (
