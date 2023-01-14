@@ -15,6 +15,8 @@ const Post = ({
   comments,
   ...props
 }: PostResponse) => {
+  const postProps = Object.assign({}, props);
+  delete postProps.updatedAt;
   const [user, setUser] = useRecoilState(userState);
   const [likesState, setLikesState] = useState(likes);
   const navigate = useNavigate();
@@ -29,7 +31,6 @@ const Post = ({
 
   const handleLike = async (postId: string, authorId: string) => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
-    console.log(isLike);
     if (isLike === -1) {
       const { data } = await createLike(postId);
       if (user.likes && user._id) {
