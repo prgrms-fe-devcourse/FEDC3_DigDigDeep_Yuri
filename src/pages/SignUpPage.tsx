@@ -5,10 +5,10 @@ import { COLOR } from '../utils/color';
 const SignUpPage = () => {
   return (
     <SignUpPageContainer>
-      <ImageWrapper>
+      <LogoImageWrapper>
         <Image src="/image/logo/big.png" alt="logo" />
-      </ImageWrapper>
-      <StyledText>Create your account!</StyledText>
+      </LogoImageWrapper>
+      <GuideText>Create your account!</GuideText>
       <SignUpForm />
     </SignUpPageContainer>
   );
@@ -25,13 +25,15 @@ const SignUpPageContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const ImageWrapper = styled.div`
+const LogoImageWrapper = styled.div`
   margin-top: 8rem;
   margin-bottom: 5rem;
   text-align: center;
 `;
 
-const StyledText = styled.span`
+const Image = styled.img``;
+
+const GuideText = styled.span`
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -43,5 +45,3 @@ const StyledText = styled.span`
   margin-bottom: 2rem;
   padding: 0 0.8rem;
 `;
-
-const Image = styled.img``;
