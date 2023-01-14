@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { tokenState, userState } from '../recoil/atoms/user';
-import { login } from '../utils/api/user';
+import { tokenState, userState } from '../../recoil/atoms/user';
+import { login } from '../../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from './UserInput';
-import UserForm from './UserForm';
-import FormButton from './FormButton';
+import UserInput from '../UserForm/FormInput';
+import UserForm from '../UserForm/UserForm';
+import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Divider from './Divider';
+import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -19,7 +19,7 @@ const LoginForm = () => {
   const setUser = useSetRecoilState(userState);
   const setToken = useSetRecoilState(tokenState);
 
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     handleSubmit,
@@ -36,20 +36,19 @@ const LoginForm = () => {
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
       const { user, token } = await login(data);
-      setErrorMessages([]);
+      setErrorMessage('');
       setUser(user);
       setToken(token);
     } catch (error) {
       console.error(error);
       if (error instanceof AxiosError && error.response?.data) {
         if (error.response.data === RESPONSE_ERROR_MESSAGE) {
-          setErrorMessages([
-            '이메일 또는 비밀번호를 잘못 입력했습니다.',
-            '입력하신 내용을 다시 확인해주세요.',
-          ]);
+          setErrorMessage(
+            '이메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.'
+          );
         }
       } else {
-        setErrorMessages(['서버와 통신 중 문제가 발생했습니다.']);
+        setErrorMessage('서버와 통신 중 문제가 발생했습니다.');
       }
     }
   };
@@ -74,14 +73,9 @@ const LoginForm = () => {
           required: '비밀번호를 입력해주세요.',
         }}
         resetField={resetField}
+        icon="lock"
       />
-      {errorMessages.length !== 0 && (
-        <div>
-          {errorMessages.map((errorMessage) => (
-            <ErrorMessage key={errorMessage}>{errorMessage}</ErrorMessage>
-          ))}
-        </div>
-      )}
+      {errorMessage && <ErrorMessage> {errorMessage}</ErrorMessage>}
       <FormButton
         type="submit"
         style={{ marginTop: 32 }}
@@ -91,10 +85,10 @@ const LoginForm = () => {
         LOG IN
       </FormButton>
       <Divider type="horizontal" size={24} style={{ width: '70%' }} />
-      <StyledDiv>
-        <span>아직 회원이 아니신가요?</span>
-        <StyledLink to="/signup">SIGN UP</StyledLink>
-      </StyledDiv>
+      <SignUpLinkWrapper>
+        아직 회원이 아니신가요?
+        <SignUpLink to="/signup">SIGN UP</SignUpLink>
+      </SignUpLinkWrapper>
     </UserForm>
   );
 };
@@ -108,13 +102,14 @@ const ErrorMessage = styled.span`
   font-style: normal;
   font-weight: 400;
   font-size: 1.3rem;
-  line-height: 1.6rem;
+  line-height: 1.9rem;
   letter-spacing: -0.01em;
+  white-space: pre-wrap;
 
   color: ${COLOR.orange};
 `;
 
-const StyledDiv = styled.div`
+const SignUpLinkWrapper = styled.div`
   text-align: center;
   font-family: 'Noto Sans KR' sans-serif;
   font-style: normal;
@@ -126,7 +121,8 @@ const StyledDiv = styled.div`
   color: ${COLOR.text};
 `;
 
-const StyledLink = styled(Link)`
+const SignUpLink = styled(Link)`
+  font-size: 1.6rem;
   margin-left: 1rem;
   color: ${COLOR.green};
   text-decoration: none;

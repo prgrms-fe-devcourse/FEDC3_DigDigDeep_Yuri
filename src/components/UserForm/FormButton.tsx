@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 import type { ButtonHTMLAttributes } from 'react';
 
 interface FormButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,7 +18,7 @@ const FormButton = ({
   ...props
 }: FormButtonProps) => {
   return (
-    <StyledButton
+    <Button
       type={type}
       disabled={isSubmitting}
       isValid={isValid}
@@ -27,13 +27,13 @@ const FormButton = ({
       {...props}
     >
       {children}
-    </StyledButton>
+    </Button>
   );
 };
 
 export default FormButton;
 
-const StyledButton = styled.button<FormButtonProps>`
+const Button = styled.button<FormButtonProps>`
   width: 100%;
   font-family: 'Inter', sans-serif;
   font-style: normal;

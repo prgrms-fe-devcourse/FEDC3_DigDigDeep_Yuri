@@ -9,8 +9,8 @@ import type {
 } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import styled from 'styled-components';
-import Icon from './Icon';
-import { COLOR } from '../utils/color';
+import Icon from '../Base/Icon';
+import { COLOR } from '../../utils/color';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,13 +18,20 @@ interface UserInputPrpos<T extends FieldValues>
   name: FieldPath<T>;
   rules?: RegisterOptions<T>;
   resetField?: UseFormResetField<T>;
+  icon?: string;
 }
 
-const UserInput = <T extends FieldValues>({
+interface InputWrapperProps {
+  error?: FieldError;
+  isFocus: boolean;
+}
+
+const FormInput = <T extends FieldValues>({
   name,
   rules,
   control,
   resetField,
+  icon = 'user',
   ...props
 }: UserInputPrpos<T>) => {
   const {
@@ -36,34 +43,38 @@ const UserInput = <T extends FieldValues>({
     control,
   });
 
-  const onClick = () => {
+  const [isFocus, setIsFocus] = useState(false);
+
+  const onInputFocus = () => setIsFocus(true);
+
+  const onInputBlur = () => {
+    setIsFocus(false);
+    onBlur();
+  };
+
+  const onResetButtonClick = () => {
     ref(() => {});
     if (resetField) resetField(name);
   };
 
-  const [isFocus, setIsFocus] = useState(false);
-
   return (
     <InputContainer>
       <InputWrapper error={error} isFocus={isFocus}>
-        <Icon name="user" size={16} />
-        <StyledLabel htmlFor={name} />
-        <StyledInput
+        <Icon name={icon} size={16} />
+        <InputLabel htmlFor={name} />
+        <Input
           value={value}
           onChange={onChange}
-          onBlur={() => {
-            setIsFocus(false);
-            onBlur();
-          }}
-          onFocus={() => setIsFocus(true)}
+          onBlur={onInputBlur}
+          onFocus={onInputFocus}
           id={name}
           autoComplete="off"
           {...props}
         />
         {resetField && value && (
-          <StyledButton onClick={onClick} type="button">
+          <ResetButton onClick={onResetButtonClick} type="button">
             <Icon name="close" size={16} />
-          </StyledButton>
+          </ResetButton>
         )}
       </InputWrapper>
       <ErrorMessage>{error?.message && error.message}</ErrorMessage>
@@ -71,18 +82,13 @@ const UserInput = <T extends FieldValues>({
   );
 };
 
-export default UserInput;
+export default FormInput;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 `;
-
-interface InputWrapperProps {
-  error?: FieldError;
-  isFocus: boolean;
-}
 
 const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
@@ -98,11 +104,11 @@ const InputWrapper = styled.div<InputWrapperProps>`
     error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
 `;
 
-const StyledLabel = styled.label`
+const InputLabel = styled.label`
   position: absolute;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
   width: 100%;
   border: none;
   outline: none;
@@ -118,13 +124,21 @@ const StyledInput = styled.input`
   padding: 0;
 
   ::placeholder {
-    color: inherit;
+    color: ${COLOR.brownGray};
     line-height: 1.6rem;
   }
 
   :disabled {
     background: inherit;
   }
+`;
+
+const ResetButton = styled.button`
+  background-color: unset;
+  border: none;
+  padding: 0;
+  width: 1.6rem;
+  height: 1.6rem;
 `;
 
 const ErrorMessage = styled.span`
@@ -136,13 +150,5 @@ const ErrorMessage = styled.span`
   letter-spacing: -0.01em;
   color: ${COLOR.orange};
   padding: 0 1.6rem;
-  height: 1.6rem;
-`;
-
-const StyledButton = styled.button`
-  background-color: unset;
-  border: none;
-  padding: 0;
-  width: 1.6rem;
   height: 1.6rem;
 `;

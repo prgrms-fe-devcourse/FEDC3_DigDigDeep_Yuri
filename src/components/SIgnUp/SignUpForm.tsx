@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
-import { signUp } from '../utils/api/user';
+import { signUp } from '../../utils/api/user';
 import { AxiosError } from 'axios';
-import UserInput from './UserInput';
-import UserForm from './UserForm';
-import FormButton from './FormButton';
+import UserInput from '../UserForm/FormInput';
+import UserForm from '../UserForm/UserForm';
+import FormButton from '../UserForm/FormButton';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
@@ -87,6 +87,7 @@ const SignUpForm = () => {
           required: '비밀번호를 입력해주세요.',
         }}
         resetField={resetField}
+        icon="lock"
       />
       <UserInput
         control={control}
@@ -99,6 +100,7 @@ const SignUpForm = () => {
             value === watch('password') || '비밀번호가 일치하지 않습니다.',
         }}
         resetField={resetField}
+        icon="lock"
       />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <FormButton

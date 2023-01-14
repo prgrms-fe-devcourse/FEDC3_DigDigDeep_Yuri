@@ -1,14 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { COLOR } from '../utils/color';
-import FormButton from './FormButton';
-import UserForm from './UserForm';
-import UserInput from './UserInput';
+import FormButton from '../UserForm/FormButton';
+import UserForm from '../UserForm/UserForm';
+import UserInput from '../UserForm/FormInput';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../recoil/atoms/user';
-import { updatePassword, updateUserName } from '../utils/api/user';
-import useGetMyInfo from '../hooks/useGetMyInfo';
+import { userState } from '../../recoil/atoms/user';
+import { updatePassword, updateUserName } from '../../utils/api/user';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
@@ -86,6 +84,7 @@ const ProfileEditForm = () => {
         placeholder="password"
         type="password"
         resetField={resetField}
+        icon="lock"
       />
       <UserInput
         control={control}
@@ -97,6 +96,7 @@ const ProfileEditForm = () => {
             value === watch('password') || '비밀번호가 일치하지 않습니다.',
         }}
         resetField={resetField}
+        icon="lock"
       />
       <FormButton
         type="submit"
@@ -111,16 +111,3 @@ const ProfileEditForm = () => {
 };
 
 export default ProfileEditForm;
-
-const ErrorMessage = styled.span`
-  display: block;
-  text-align: center;
-  font-family: 'Inter' sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.3rem;
-  line-height: 1.6rem;
-  letter-spacing: -0.01em;
-
-  color: ${COLOR.orange};
-`;
