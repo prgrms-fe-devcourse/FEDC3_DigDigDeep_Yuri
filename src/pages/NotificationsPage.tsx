@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const NotificationsPage = () => {
   return (
     <Container>
-      <DetailHeader />
+      <DetailHeader title="알림" isButton={false} />
       <NotificationList />
     </Container>
   );

@@ -2,14 +2,20 @@ import Icon from './Base/Icon';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
+interface Props {
+  title: string;
+  isButton: boolean;
+  buttonText?: string;
+}
 
-const DetailHeader = () => {
+const DetailHeader = ({ title, isButton, buttonText }: Props) => {
   return (
     <Container>
       <BackHomeLink to="/">
         <Icon name="back" size={16} />
       </BackHomeLink>
-      <Title>알림</Title>
+      <Title>{title}</Title>
+      {isButton && <Button>{buttonText}</Button>}
     </Container>
   );
 };
@@ -40,3 +46,5 @@ const Title = styled.h3`
   color: ${COLOR.text};
   justify-self: center;
 `;
+
+const Button = styled.button``;

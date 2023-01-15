@@ -55,9 +55,9 @@ export interface NotificationResponse extends BasicResponse {
   author: UserResponse;
   user: UserResponse | String;
   post: string | null; // 포스트 id
+  like: LikeResponse;
   follow?: string; // 사용자 id
   comment?: CommentResponse;
-  message?: string; // 메시지 id
 }
 
 export interface FollowResponse extends BasicResponse {
