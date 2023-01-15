@@ -3,14 +3,21 @@ import styled from 'styled-components';
 
 interface IconProps {
   name: string;
-  size: number;
+  width: number;
+  height: number;
   style?: CSSProperties;
 }
 
-const Icon = ({ name, size = 16, style, ...props }: IconProps) => {
+const Icon = ({
+  name,
+  width = 16,
+  height = 16,
+  style,
+  ...props
+}: IconProps) => {
   const shapeStyle = {
-    width: size,
-    height: size,
+    width,
+    height,
     ...style,
   };
 
