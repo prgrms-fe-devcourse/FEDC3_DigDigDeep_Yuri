@@ -32,9 +32,9 @@ const ConfirmModal = () => {
         <Messasge>{message}</Messasge>
 
         <ButtonContainer>
-          <Button onClick={onCancel}>No</Button>
+          <Button onClick={onCancel}>NO</Button>
           <Button isConfirm={true} onClick={onConfirm}>
-            Yes
+            YES
           </Button>
         </ButtonContainer>
       </Modal>
