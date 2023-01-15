@@ -17,6 +17,7 @@ import { tokenState } from './recoil/atoms/user';
 import GlobalStyle from './components/GlobalStyle';
 import ProfileEditPage from './pages/ProfileEditPage';
 import ConfirmModal from './components/Base/ConfirmModal';
+import ToastList from './components/Base/ToastList';
 
 function App() {
   useAxiosInterceptor();
@@ -26,6 +27,7 @@ function App() {
     <>
       <GlobalStyle />
       <ConfirmModal />
+      <ToastList />
       <BrowserRouter>
         {/* <Header /> */}
         <Routes>
