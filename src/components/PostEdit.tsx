@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
+import Icon from './Base/Icon';
 
 const PostEdit = () => {
   return (
     <Container>
       <Title placeholder="그라운드 제목을 주세요..."></Title>
       <Body placeholder="내용을 입력해주세요..."></Body>
+      <Button>
+        <Icon name="add-image" size={40} />
+      </Button>
     </Container>
   );
 };
@@ -14,7 +18,7 @@ export default PostEdit;
 
 const Container = styled.div`
   width: 50%;
-  height: 90vh;
+  height: 92vh;
   background: ${COLOR.white};
   display: flex;
   flex-direction: column;
@@ -70,5 +74,15 @@ const Body = styled.textarea`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
     font-size: 1.6rem;
+  }
+`;
+
+const Button = styled.button`
+  position: fixed;
+  right: 54vh;
+  bottom: 2rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    right: 2rem;
   }
 `;
