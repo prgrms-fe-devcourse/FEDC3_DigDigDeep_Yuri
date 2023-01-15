@@ -28,7 +28,7 @@ const HomePage = () => {
     <Container>
       <Header />
       <Searchbar />
-      <Ul>
+      <List>
         {posts.map((post) => (
           <Post
             key={post._id}
@@ -38,9 +38,10 @@ const HomePage = () => {
             author={post.author}
             likes={post.likes}
             comments={post.comments}
+            image={post.image}
           />
         ))}
-      </Ul>
+      </List>
       {/* 테스트 & 예시 코드입니다. */}
       <button onClick={logout}>로그아웃</button>
       <button
@@ -82,9 +83,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Ul = styled.ul`
-  text-align: center;
-  margin: 2rem 0;
+const List = styled.ul`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `;
 
 export default HomePage;
