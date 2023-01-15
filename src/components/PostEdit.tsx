@@ -18,8 +18,9 @@ export default PostEdit;
 
 const Container = styled.div`
   width: 50%;
-  height: 92vh;
+  height: 90vh;
   background: ${COLOR.white};
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +29,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
+    height: 92vh;
     gap: 1rem;
   }
 `;
@@ -78,8 +80,8 @@ const Body = styled.textarea`
 `;
 
 const Button = styled.button`
-  position: fixed;
-  right: 54vh;
+  position: absolute;
+  right: 3rem;
   bottom: 2rem;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
