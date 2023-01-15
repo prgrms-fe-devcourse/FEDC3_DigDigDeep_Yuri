@@ -12,7 +12,7 @@ const DetailHeader = ({ title, isButton, buttonText }: Props) => {
   return (
     <Container>
       <BackHomeLink to="/">
-        <Icon name="back" size={16} />
+        <Icon name="back" width={20} height={16} />
       </BackHomeLink>
       <Title>{title}</Title>
       {isButton && <Button>{buttonText}</Button>}
