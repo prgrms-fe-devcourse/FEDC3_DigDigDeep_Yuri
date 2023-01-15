@@ -16,6 +16,7 @@ import { useRecoilValue } from 'recoil';
 import { tokenState } from './recoil/atoms/user';
 import GlobalStyle from './components/GlobalStyle';
 import ProfileEditPage from './pages/ProfileEditPage';
+import ConfirmModal from './components/Base/ConfirmModal';
 
 function App() {
   useAxiosInterceptor();
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <ConfirmModal />
       <BrowserRouter>
         {/* <Header /> */}
         <Routes>
