@@ -4,8 +4,8 @@ import { COLOR } from '../utils/color';
 const PostEdit = () => {
   return (
     <Container>
-      <Title></Title>
-      <Body></Body>
+      <Title placeholder="그라운드 제목을 주세요..."></Title>
+      <Body placeholder="내용을 입력해주세요..."></Body>
     </Container>
   );
 };
@@ -21,6 +21,7 @@ const Container = styled.div`
   align-items: center;
   gap: 2rem;
   box-shadow: 0px -1px 4px rgba(210, 210, 210, 0.25);
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
     gap: 1rem;
@@ -37,6 +38,12 @@ const Title = styled.textarea`
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   margin-top: 3rem;
+
+  ::placeholder {
+    color: ${COLOR.brownGray};
+    font-weight: 400;
+  }
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
     font-size: 2.2rem;
@@ -54,6 +61,12 @@ const Body = styled.textarea`
   line-height: 2.3rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
+
+  ::placeholder {
+    color: ${COLOR.brownGray};
+    font-weight: 300;
+  }
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
     font-size: 1.6rem;
