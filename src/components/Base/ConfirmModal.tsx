@@ -63,14 +63,14 @@ const Modal = styled.div`
   gap: 3.2rem;
   transform: translate(-50%, -50%);
   padding: 6rem 4.6rem 3rem 4.6rem;
-  background: #ffffff;
+  background: ${COLOR.white};
   box-shadow: 0px 3px 4px rgba(95, 95, 95, 0.24);
   border-radius: 15px;
   box-sizing: border-box;
 `;
 
 const Messasge = styled.div`
-  font-family: 'Noto Sans KR';
+  font-family: 'Noto Sans KR', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.6rem;
@@ -88,11 +88,10 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button<ButtonProps>`
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 11px;
-  line-height: 13px;
+  font-size: 1.1rem;
   align-items: center;
   text-align: center;
   letter-spacing: -0.01em;
