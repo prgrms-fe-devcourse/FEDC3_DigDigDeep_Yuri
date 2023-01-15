@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import useModal from '../../hooks/useModal';
 import { useRecoilValue } from 'recoil';
 import { modalState } from '../../recoil/atoms/modal';
+import { COLOR } from '../../utils/color';
+
+interface ButtonProps {
+  isConfirm?: boolean;
+}
 
 const ConfirmModal = () => {
   const modalProps = useRecoilValue(modalState);
@@ -22,12 +27,17 @@ const ConfirmModal = () => {
   };
 
   return (
-    <Background>
-      <Container>
-        <div>{message}</div>
-        <button onClick={onCancel}>No</button>
-        <button onClick={onConfirm}>Yes</button>
-      </Container>
+    <Background onClick={hideModal}>
+      <Modal>
+        <Messasge>{message}</Messasge>
+
+        <ButtonContainer>
+          <Button onClick={onCancel}>No</Button>
+          <Button isConfirm={true} onClick={onConfirm}>
+            Yes
+          </Button>
+        </ButtonContainer>
+      </Modal>
     </Background>
   );
 };
@@ -43,13 +53,54 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Container = styled.div`
+const Modal = styled.div`
+  width: 75%;
   position: fixed;
   top: 50%;
   left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
   transform: translate(-50%, -50%);
-  padding: 0.8rem;
-  background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 6rem 4.6rem 3rem 4.6rem;
+  background: #ffffff;
+  box-shadow: 0px 3px 4px rgba(95, 95, 95, 0.24);
+  border-radius: 15px;
   box-sizing: border-box;
+`;
+
+const Messasge = styled.div`
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.3rem;
+  letter-spacing: -0.01em;
+  text-align: center;
+
+  color: ${COLOR.text};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+`;
+
+const Button = styled.button<ButtonProps>`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  width: 7rem;
+
+  color: ${COLOR.white};
+  background-color: ${({ isConfirm }) =>
+    isConfirm ? COLOR.green : COLOR.lightGray};
+  border-radius: 23.5px;
+  padding: 1rem;
 `;
