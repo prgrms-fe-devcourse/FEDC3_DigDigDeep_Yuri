@@ -6,6 +6,7 @@ import { PostResponse } from '../types/response';
 import { createComment, deleteComment } from '../utils/comment';
 import { sendNotification } from '../utils/notification';
 import { deletePost, getPost } from '../utils/post';
+import useModal from '../hooks/useModal';
 
 type PostId = string;
 
@@ -15,15 +16,19 @@ const PostPage = () => {
   const [comment, setComment] = useState('');
   const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
+  const { showModal } = useModal();
 
   const handleDelete = useCallback(async () => {
     if (postId) {
-      if (window.confirm('정말로 삭제하시겠습니다?')) {
-        await deletePost(postId);
-        navigate('/');
-      }
+      showModal({
+        message: '정말로 삭제하시겠습니까?',
+        handleConfirm: async () => {
+          await deletePost(postId);
+          navigate('/');
+        },
+      });
     }
-  }, [postId, navigate]);
+  }, [postId, showModal, navigate]);
 
   const handleEdit = () => {
     navigate(`/edit/${post?._id}`);
