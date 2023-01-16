@@ -19,6 +19,14 @@ jobs:
                 "source": "/api/:url*",
                 "destination": "${{ secrets.API_BASE_URL }}/:url*"
               }
+            ],
+            "version": 2,
+            "public": false,
+            "github": {
+              "enabled": false
+            },
+            "builds": [
+              { "src": "{{Source for distribution}}", "use": "@vercel/static" }
             ]
           }
           ' >> vercel.json
@@ -29,5 +37,4 @@ jobs:
           vercel-args: '--preview'
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCE_PROJECT_ID}}
-          working-directory: ./sub-directory
           github-comment: false
