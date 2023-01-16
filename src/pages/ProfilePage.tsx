@@ -22,8 +22,9 @@ const ProfilePage = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const user = useRecoilValue(userState);
-  const [userInfo, setUserInfo] = useState<UserResponse>();
-  const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>([]);
+  const [userInfo, setUserInfo] = useState<UserResponse>(); // 현재 페이지로 접근한 사용자의 정보
+  const [followersInfo, setFollowersInfo] = useState<UserResponse[]>([]); //현재 페이지로 접근한 사용자의 팔로우? 팔로잉? 목록
+  const [followingsInfo, setFollowingsInfo] = useState<UserResponse[]>([]); //현재 페이지로 접근한 사용자의 팔로우? 팔로잉? 목록
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
   const [posts, setPosts] = useState<PostResponse[]>([]);
   const [followers, setFollowers] = useState<FollowResponse[]>();
@@ -58,7 +59,11 @@ const ProfilePage = () => {
             return await getUser(follow.user);
           }
         });
-        Promise.all(data).then((res) => setFollowUsersInfo(res as []));
+        Promise.all(data).then((res) =>
+          type === 'followers'
+            ? setFollowersInfo(res as [])
+            : setFollowingsInfo(res as [])
+        );
       } catch (err) {
         console.error(err);
       }
@@ -81,8 +86,16 @@ const ProfilePage = () => {
     fetchUser();
   }, [fetchUser]);
 
+  useEffect(() => {
+    followers && fetchFollows(followers, 'followers');
+  }, [followers, fetchFollows]);
+
+  useEffect(() => {
+    following && fetchFollows(following, 'following');
+  }, [following, fetchFollows]);
+
   return (
-    <div>
+    <>
       <ProfileUtils>
         {userId === 'me' ? (
           <button onClick={() => navigate('/profile/me/likes')}>
@@ -117,13 +130,16 @@ const ProfilePage = () => {
       <TabContent>
         {activeTab === 'posts' && <PostList posts={posts} />}
         {activeTab === 'following' && (
-          <UserList users={followUsersInfo} unfollowable={true} />
+          <UserList
+            users={followingsInfo}
+            unfollowable={userId === 'me' && true}
+          />
         )}
         {activeTab === 'followers' && (
-          <UserList users={followUsersInfo} unfollowable={false} />
+          <UserList users={followersInfo} unfollowable={false} />
         )}
       </TabContent>
-    </div>
+    </>
   );
 };
 

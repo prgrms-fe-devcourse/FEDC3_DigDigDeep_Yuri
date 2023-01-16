@@ -17,6 +17,7 @@ const Post = ({
 }: PostResponse) => {
   const postProps = Object.assign({}, props);
   delete postProps.updatedAt;
+
   const [user, setUser] = useRecoilState(userState);
   const [likesState, setLikesState] = useState(likes);
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const Post = ({
   };
 
   return (
-    <li {...props}>
+    <li {...postProps}>
       <div onClick={() => clickHandler(_id)}>
         <div>Title: {title}</div>
         <div>Created At: {formatDate.fullDate(createdAt)}</div>

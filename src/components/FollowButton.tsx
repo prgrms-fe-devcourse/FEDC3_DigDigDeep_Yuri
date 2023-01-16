@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { userState } from '../recoil/atoms/user';
 import { COLOR } from '../utils/color';
 import { createFollow, deleteFollow } from '../utils/follow';
+import { sendNotification } from '../utils/notification';
 
 const FollowButton = () => {
   const { userId } = useParams();
@@ -27,6 +28,7 @@ const FollowButton = () => {
           ...user,
           following: [...user.following, data],
         });
+        //TODO: send notification
       } else {
         setIsFollowing(false);
         deleteFollow(followId);

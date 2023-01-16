@@ -17,9 +17,8 @@ const UnfollowButton = ({ userId }: TUnfollowButton) => {
     try {
       user.following.map(async (item: FollowResponse) => {
         const { id } = e.currentTarget.dataset;
-        console.log(user.following);
         if (id === item.user) {
-          deleteFollow(item._id);
+          await deleteFollow(item._id);
           setUser({
             ...user,
             following: user.following.filter((item) => item.user !== userId),
