@@ -19,7 +19,7 @@ jobs:
                 "source": "/api/:url*",
                 "destination": "${{ secrets.API_BASE_URL }}/:url*"
               }
-            ],
+            ]
           }
           ' >> vercel.json
       - uses: amondnet/vercel-action@v20
