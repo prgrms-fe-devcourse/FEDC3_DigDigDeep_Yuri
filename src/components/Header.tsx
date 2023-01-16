@@ -15,13 +15,18 @@ const Header = () => {
         <LogoButton to="/">
           <Logo />
         </LogoButton>
-        <Icon name="search" size={24} />
+        <Icon name="search" width={24} height={24} />
       </Wrapper>
       {token ? (
         <Wrapper>
-          <LinkButton to="/" name="new" size={24} />
-          <LinkButton to="/notifications" name="notification" size={24} />
-          <LinkButton to="/profile/me" name="profile" size={24} />
+          <LinkButton to="/" name="new" width={24} height={24} />
+          <LinkButton
+            to="/notifications"
+            name="notification"
+            width={24}
+            height={24}
+          />
+          <LinkButton to="/profile/me" name="profile" width={24} height={24} />
         </Wrapper>
       ) : (
         <Wrapper>

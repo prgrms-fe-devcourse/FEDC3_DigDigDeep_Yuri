@@ -43,7 +43,7 @@ const Searchbar = () => {
   return (
     <Form isFocus={isFocus} onSubmit={onSubmit}>
       <Button>
-        <Icon name="search" size={13} />
+        <Icon name="search" width={13} height={13} />
       </Button>
       <Input
         type="text"
@@ -55,7 +55,7 @@ const Searchbar = () => {
       />
       {search && (
         <Button type="button" onClick={handleReset}>
-          <Icon name="close" size={12} />
+          <Icon name="close" width={12} height={12} />
         </Button>
       )}
       <Divider type="vertical" size={0} />

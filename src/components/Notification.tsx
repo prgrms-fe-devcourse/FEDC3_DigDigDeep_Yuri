@@ -18,7 +18,7 @@ const Notification = ({
           {author.image ? (
             <Image src={author.image} />
           ) : (
-            <Icon name="default-profile" size={38} />
+            <Icon name="default-profile" width={38} height={38} />
           )}
           <Text>
             <Strong>{author.fullName}</Strong>님이{` `}
