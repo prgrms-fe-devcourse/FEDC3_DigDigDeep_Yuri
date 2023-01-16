@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
 
-const PostEdit = () => {
+interface Props {
+  hasId: boolean;
+}
+
+const PostEdit = ({ hasId }: Props) => {
   return (
     <Container>
-      <Title placeholder="그라운드 제목을 주세요..."></Title>
+      <Title
+        placeholder={hasId ? '이미 있음' : '그라운드 제목을 주세요...'}
+      ></Title>
       <Body placeholder="내용을 입력해주세요..."></Body>
       <Button>
         <Icon name="add-image" size={40} />

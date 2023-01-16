@@ -55,6 +55,7 @@ function App() {
             }
           ></Route>
           <Route path="/notifications" element={<NotificationsPage />}></Route>
+          <Route path="/newPost" element={<PostEditPage />}></Route>
           <Route path="/edit/:postId" element={<PostEditPage />}></Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
