@@ -1,16 +1,17 @@
 import { PostResponse } from '../types/response';
 import axiosInstance from './axios';
 
-interface PostParam {
-  (title: string, image: number | null, channelId: string): void;
-}
-
-export const createPost: PostParam = async (title, image, channelId) => {
-  await axiosInstance.post(`/posts/create`, {
+export const createPost = async (
+  title: string,
+  image: Blob | null,
+  channelId: string
+) => {
+  const { data } = await axiosInstance.post(`/posts/create`, {
     title,
     image,
     channelId,
   });
+  return data;
 };
 
 export const updatePost = async (

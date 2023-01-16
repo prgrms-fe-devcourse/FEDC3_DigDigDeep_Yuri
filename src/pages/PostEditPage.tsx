@@ -3,12 +3,14 @@ import DetailHeader from '../components/DetailHeader';
 import PostEdit from '../components/PostEdit';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import usePost from '../hooks/usePost';
 
 type PostId = string;
 
 const PostEditPage = () => {
   const { postId } = useParams<PostId>();
   const [hasId, setHasId] = useState<boolean>(false);
+  const { title, body, handleChangeTitle, handleChangeBody } = usePost();
 
   useEffect(() => {
     if (postId) setHasId(true);
@@ -17,11 +19,17 @@ const PostEditPage = () => {
   return (
     <Container>
       <DetailHeader
-        title="그라운드"
+        name="그라운드"
         isButton={true}
         buttonText={postId ? 'DONE' : 'CREATE'}
+        title={title}
+        body={body}
       />
-      <PostEdit hasId={hasId} />
+      <PostEdit
+        hasId={hasId}
+        handleTitle={handleChangeTitle}
+        handleBody={handleChangeBody}
+      />
     </Container>
   );
 };
