@@ -9,16 +9,31 @@ interface Props {
   buttonText?: string;
   title?: string;
   body?: string;
+  postId?: string;
 }
 
-const DetailHeader = ({ name, isButton, buttonText, title, body }: Props) => {
+const DetailHeader = ({
+  name,
+  isButton,
+  buttonText,
+  title,
+  body,
+  postId,
+}: Props) => {
   return (
     <Container>
       <BackHomeLink to="/">
         <Icon name="back" width={20} height={16} />
       </BackHomeLink>
       <Title>{name}</Title>
-      {isButton && <EditButton text={buttonText} title={title} body={body} />}
+      {isButton && (
+        <EditButton
+          text={buttonText}
+          title={title}
+          body={body}
+          postId={postId}
+        />
+      )}
     </Container>
   );
 };

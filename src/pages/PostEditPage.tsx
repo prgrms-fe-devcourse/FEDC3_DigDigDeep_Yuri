@@ -29,6 +29,7 @@ const PostEditPage = () => {
         buttonText={postId ? 'DONE' : 'CREATE'}
         title={title}
         body={body}
+        postId={postId}
       />
       <PostEdit
         postId={postId}
