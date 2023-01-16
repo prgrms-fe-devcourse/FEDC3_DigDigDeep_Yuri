@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -5,75 +6,205 @@ import { tokenState } from '../recoil/atoms/user';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
 import LinkButton from './LinkButton';
+import Searchbar from './Searchbar';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
+  const [isShow, setIsShow] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const toggleSearchbar = () => {
+    setIsShow(!isShow);
+  };
+
+  const offSearchbar = () => {
+    setIsShow(false);
+  };
+
+  useEffect(() => {
+    const onScroll = (e: Event) => {
+      const handleSetTimeout = setTimeout(() => {
+        offSearchbar();
+        clearTimeout(handleSetTimeout);
+      }, 300);
+    };
+
+    if (window.innerWidth < 420) {
+      setIsMobile(true);
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 420) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', () => {
+        if (window.innerWidth < 420) {
+          setIsMobile(true);
+        } else {
+          setIsMobile(false);
+          setIsShow(true);
+        }
+      });
+    };
+  }, []);
 
   return (
     <Container>
-      <Wrapper>
-        <LogoButton to="/">
-          <Logo />
-        </LogoButton>
-        <Icon name="search" size={24} />
-      </Wrapper>
-      {token ? (
-        <Wrapper>
-          <LinkButton to="/" name="new" size={24} />
-          <LinkButton to="/notifications" name="notification" size={24} />
-          <LinkButton to="/profile/me" name="profile" size={24} />
-        </Wrapper>
+      {isMobile ? (
+        <>
+          {isShow ? (
+            <SearchWrapper>
+              <Searchbar isMobile={isMobile} />
+            </SearchWrapper>
+          ) : token ? (
+            <>
+              <Wrapper>
+                <LogoButton to="/">
+                  <Logo />
+                </LogoButton>
+                <Button onClick={toggleSearchbar}>
+                  <Icon name="search" size={24} />
+                </Button>
+              </Wrapper>
+              <Wrapper>
+                <LinkButton to="/" name="new" size={24} />
+                <LinkButton to="/notifications" name="notification" size={24} />
+                <LinkButton to="/profile/me" name="profile" size={24} />
+              </Wrapper>
+            </>
+          ) : (
+            <>
+              <Wrapper>
+                <LogoButton to="/">
+                  <Logo />
+                </LogoButton>
+                <Button onClick={toggleSearchbar}>
+                  <Icon name="search" size={24} />
+                </Button>
+              </Wrapper>
+              <Wrapper>
+                <Wrapper>
+                  <LogInButton to="/login">LOG IN</LogInButton>
+                </Wrapper>
+              </Wrapper>
+            </>
+          )}
+        </>
       ) : (
-        <Wrapper>
-          <LogInButton to="/login">LOG IN</LogInButton>
-        </Wrapper>
+        <>
+          <WebSearchWrapper>
+            <LogoButton to="/">
+              <Logo />
+            </LogoButton>
+            <Searchbar isMobile={isMobile} />
+          </WebSearchWrapper>
+          {token ? (
+            <Wrapper>
+              <LinkButton to="/" name="new" size={20} />
+              <LinkButton to="/notifications" name="notification" size={20} />
+              <LinkButton to="/profile/me" name="profile" size={20} />
+            </Wrapper>
+          ) : (
+            <Wrapper>
+              <LogInButton to="/login">LOG IN</LogInButton>
+            </Wrapper>
+          )}
+        </>
       )}
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
-  margin: 0 auto;
   justify-content: space-between;
-  height: 6rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  z-index: 1;
+  height: 5rem;
   align-items: center;
   position: sticky;
   top: 0;
   background-color: ${COLOR.bgColor};
-  /* border-bottom: 1px solid #eeeeee; */
+  border-bottom: 1px solid #eeeeee;
+  box-sizing: border-box;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+    display: flex;
+    z-index: 1;
+    padding: 0 0;
+    justify-content: space-between;
+    height: 6rem;
+    align-items: center;
+    border-bottom: none;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-around;
   align-items: center;
   padding: 1.8rem 0;
-  gap: 1.5rem;
+  gap: 1rem;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    gap: 1.5rem;
+  }
+`;
+
+const WebSearchWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
+`;
+
+const SearchWrapper = styled.div`
+  width: 100%;
+  padding: 1.8rem 0;
 `;
 
 const LogInButton = styled(Link)`
   width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 600;
   text-decoration: none;
   line-height: 0.2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.white};
-  padding: 1.4rem 1.8rem;
+  padding: 1.2rem 1.6rem;
   background-color: ${COLOR.green};
   border-radius: 23.5px;
   border: none;
+  min-width: 3.3rem;
+  cursor: pointer;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 1.4rem 1.8rem;
+  }
+`;
+
+const Button = styled.div`
   cursor: pointer;
 `;
 
 const LogoButton = styled(Link)``;
 
 const Logo = styled.img`
-  width: 4rem;
-  height: 4rem;
-  content: url('/image/logo/small.png');
+  width: 14rem;
+  height: 2rem;
+  content: url('/image/logo/long.png');
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 4rem;
+    height: 4rem;
+    content: url('/image/logo/small.png');
+  }
 `;
 
 export default Header;
