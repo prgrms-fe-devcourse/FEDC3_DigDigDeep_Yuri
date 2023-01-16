@@ -138,6 +138,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
     padding: 0;
     margin: 0;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
   }
   input {
     border: none;
@@ -147,6 +148,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     resize: none;
     outline: none;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
   }
   a {
     color: black;
