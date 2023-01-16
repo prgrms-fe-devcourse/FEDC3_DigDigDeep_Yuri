@@ -10,15 +10,30 @@ import Searchbar from './Searchbar';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
-  const [isShow, setIsShow] = useState(false);
+  const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const toggleSearchbar = () => {
-    setIsShow(!isShow);
+    setIsSearchbarShow(!isSearchbarShow);
   };
 
   const offSearchbar = () => {
-    setIsShow(false);
+    setIsSearchbarShow(false);
+  };
+
+  const resizeScreen = () => {
+    if (window.innerWidth < 420) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+      setIsSearchbarShow(true);
+    }
+  };
+
+  const checkIsMobile = () => {
+    if (window.innerWidth < 420) {
+      setIsMobile(true);
+    }
   };
 
   useEffect(() => {
@@ -29,28 +44,13 @@ const Header = () => {
       }, 300);
     };
 
-    if (window.innerWidth < 420) {
-      setIsMobile(true);
-    }
+    checkIsMobile();
 
     window.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 420) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    });
+    window.addEventListener('resize', resizeScreen);
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', () => {
-        if (window.innerWidth < 420) {
-          setIsMobile(true);
-        } else {
-          setIsMobile(false);
-          setIsShow(true);
-        }
-      });
+      window.removeEventListener('resize', resizeScreen);
     };
   }, []);
 
@@ -58,7 +58,7 @@ const Header = () => {
     <Container>
       {isMobile ? (
         <>
-          {isShow ? (
+          {isSearchbarShow ? (
             <SearchWrapper>
               <Searchbar isMobile={isMobile} />
             </SearchWrapper>
