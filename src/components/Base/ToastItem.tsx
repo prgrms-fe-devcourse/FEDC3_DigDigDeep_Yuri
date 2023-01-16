@@ -29,8 +29,6 @@ const Toast = styled.div<{ visible: boolean }>`
   transform: translate(-50%, -50%);
   background-color: ${COLOR.lightGray};
 
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 2rem;

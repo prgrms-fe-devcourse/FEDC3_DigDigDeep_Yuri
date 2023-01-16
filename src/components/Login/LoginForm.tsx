@@ -102,8 +102,6 @@ export default LoginForm;
 
 const SignUpLinkWrapper = styled.div`
   text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 700;
   font-size: 1.4rem;
   line-height: 2rem;

@@ -36,8 +36,6 @@ const Container = styled.div`
 
 const Title = styled.textarea`
   width: 90%;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 500;
   font-size: 2.7rem;
   line-height: 3.5rem;
@@ -60,8 +58,6 @@ const Title = styled.textarea`
 const Body = styled.textarea`
   width: 90%;
   height: 100%;
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 2.3rem;

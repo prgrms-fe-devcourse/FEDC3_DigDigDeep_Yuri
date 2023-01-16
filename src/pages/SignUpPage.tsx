@@ -22,8 +22,6 @@ const SignUpPage = () => {
 export default SignUpPage;
 
 const Text = styled.span`
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1.9rem;

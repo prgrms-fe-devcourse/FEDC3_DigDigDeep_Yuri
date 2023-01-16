@@ -39,7 +39,6 @@ const BackHomeLink = styled(Link)`
 `;
 
 const Title = styled.h3`
-  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1.9rem;
@@ -51,8 +50,6 @@ const Title = styled.h3`
 const Button = styled.button`
   background: ${COLOR.green};
   border-radius: 23.5px;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: -0.01em;

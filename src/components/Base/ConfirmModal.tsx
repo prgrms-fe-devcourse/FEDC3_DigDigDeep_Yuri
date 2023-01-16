@@ -70,8 +70,6 @@ const Modal = styled.div`
 `;
 
 const Messasge = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 2.3rem;
@@ -88,8 +86,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button<ButtonProps>`
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 700;
   font-size: 1.1rem;
   align-items: center;
