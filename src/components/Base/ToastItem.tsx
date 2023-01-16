@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { ToastProps } from '../../recoil/atoms/toast';
 import { COLOR } from '../../utils/color';
 
-const ToastItem = ({ message, duration = 1200 }: ToastProps) => {
+const ToastItem = ({ message, duration = 1500 }: ToastProps) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     setVisible(true);
 
-    const setTimeoutHandler2 = setTimeout(() => {
+    const handleSetTimeout = setTimeout(() => {
       setVisible(false);
-      clearTimeout(setTimeoutHandler2);
+      clearTimeout(handleSetTimeout);
     }, duration);
   }, [duration]);
 
@@ -42,6 +42,6 @@ const Toast = styled.div<{ visible: boolean }>`
 
   color: ${COLOR.text};
 
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: opacity 0.4s ease-out;
+  opacity: ${({ visible }) => (visible ? 0.7 : 0)};
+  transition: opacity 0.5s ease-out;
 `;
