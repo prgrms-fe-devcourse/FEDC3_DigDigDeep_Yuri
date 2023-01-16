@@ -35,8 +35,6 @@ export default FormButton;
 
 const Button = styled.button<FormButtonProps>`
   width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1.9rem;

@@ -54,8 +54,6 @@ const Wrapper = styled.div`
 
 const LogInButton = styled(Link)`
   width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 600;
   text-decoration: none;
   line-height: 0.2rem;

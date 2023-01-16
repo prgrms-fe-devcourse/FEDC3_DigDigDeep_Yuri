@@ -98,8 +98,6 @@ const Input = styled.input`
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.6rem;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   flex-shrink: 1;
   flex-grow: 1;
   padding: 0;
@@ -113,7 +111,6 @@ const Input = styled.input`
 const Select = styled.select`
   border: none;
   font-size: 1.2rem;
-  font-family: 'Inter', sans-serif;
   color: ${COLOR.lightBrown};
   outline: none;
 `;
