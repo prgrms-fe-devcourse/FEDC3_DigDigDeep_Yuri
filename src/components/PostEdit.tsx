@@ -1,22 +1,61 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
+import { getPost } from '../utils/post';
 
 interface Props {
+  postId?: string;
   hasId: boolean;
+  title: string;
+  body: string;
+  setTitle: (v: string) => void;
+  setBody: (v: string) => void;
   handleTitle: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleBody: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const PostEdit = ({ hasId, handleTitle, handleBody }: Props) => {
+const PostEdit = ({
+  postId,
+  hasId,
+  title,
+  body,
+  setTitle,
+  setBody,
+  handleTitle,
+  handleBody,
+}: Props) => {
+  const fetchPost = useCallback(async () => {
+    try {
+      if (postId) {
+        const { title } = await getPost(postId);
+        const data = JSON.parse(title);
+        setTitle(data.title);
+        setBody(data.body);
+      }
+    } catch (error) {
+      alert('그라운드 정보를 불러올 수 없습니다.');
+    }
+  }, [postId, setTitle, setBody]);
+
+  useEffect(() => {
+    if (postId) {
+      fetchPost();
+    }
+  }, [postId, fetchPost]);
+
   return (
     <Container>
       <Title
         onChange={handleTitle}
-        placeholder={hasId ? '이미 있음' : '그라운드 제목을 주세요...'}
+        placeholder={hasId ? '' : '그라운드 제목을 주세요...'}
+        value={title}
       />
-      <Body onChange={handleBody} placeholder="내용을 입력해주세요..." />
+      <Body
+        onChange={handleBody}
+        placeholder="내용을 입력해주세요..."
+        value={body}
+      />
       <Button>
         <Icon name="add-image" size={40} />
       </Button>

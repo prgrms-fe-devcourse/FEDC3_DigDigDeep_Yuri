@@ -29,6 +29,8 @@ const usePost = () => {
   return {
     title,
     body,
+    setTitle,
+    setBody,
     handleChangeTitle,
     handleChangeBody,
   };

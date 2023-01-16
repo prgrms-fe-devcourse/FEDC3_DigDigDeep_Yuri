@@ -5,12 +5,17 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import usePost from '../hooks/usePost';
 
-type PostId = string;
-
 const PostEditPage = () => {
-  const { postId } = useParams<PostId>();
+  const { postId } = useParams<string>();
   const [hasId, setHasId] = useState<boolean>(false);
-  const { title, body, handleChangeTitle, handleChangeBody } = usePost();
+  const {
+    title,
+    body,
+    setTitle,
+    setBody,
+    handleChangeTitle,
+    handleChangeBody,
+  } = usePost();
 
   useEffect(() => {
     if (postId) setHasId(true);
@@ -26,7 +31,12 @@ const PostEditPage = () => {
         body={body}
       />
       <PostEdit
+        postId={postId}
         hasId={hasId}
+        title={title}
+        body={body}
+        setTitle={setTitle}
+        setBody={setBody}
         handleTitle={handleChangeTitle}
         handleBody={handleChangeBody}
       />
