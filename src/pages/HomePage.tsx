@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { PostResponse } from '../types/response';
 import { createPost, getPosts, updatePost } from '../utils/post';
 import useLogout from '../hooks/useLogout';
+import Searchbar from '../components/Searchbar';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
@@ -26,6 +27,7 @@ const HomePage = () => {
   return (
     <Container>
       <Header />
+      <Searchbar />
       <List>
         {posts.map((post) => (
           <Post
@@ -79,7 +81,6 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  position: relative;
 `;
 
 const List = styled.ul`
