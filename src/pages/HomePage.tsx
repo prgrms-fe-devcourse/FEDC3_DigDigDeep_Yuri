@@ -83,10 +83,14 @@ const Container = styled.div`
 `;
 
 const List = styled.ul`
-  width: 90%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+  }
 `;
 
 export default HomePage;
