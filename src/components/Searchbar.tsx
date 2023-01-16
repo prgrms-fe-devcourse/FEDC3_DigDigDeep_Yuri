@@ -43,7 +43,7 @@ const Searchbar = () => {
   return (
     <Form isFocus={isFocus} onSubmit={onSubmit}>
       <Button>
-        <Icon name="search" width={13} height={13} />
+        <Icon name="search" size={13} />
       </Button>
       <Input
         type="text"
