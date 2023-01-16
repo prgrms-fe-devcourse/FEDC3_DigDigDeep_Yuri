@@ -18,13 +18,11 @@ const Searchbar = ({ isMobile }: { isMobile: boolean }) => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
-  };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSelect(e.target.value);
-  };
 
   const handleReset = () => setSearch('');
 
