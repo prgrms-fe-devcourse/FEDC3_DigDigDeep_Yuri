@@ -19,14 +19,6 @@ jobs:
                 "source": "/api/:url*",
                 "destination": "${{ secrets.API_BASE_URL }}/:url*"
               }
-            ],
-            "version": 2,
-            "public": false,
-            "github": {
-              "enabled": false
-            },
-            "builds": [
-              { "src": "{{Source for distribution}}", "use": "@vercel/static" }
             ]
           }
           ' >> vercel.json
