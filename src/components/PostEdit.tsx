@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
