@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { createPost } from '../utils/post';
 import { COLOR } from '../utils/color';
 import { useNavigate } from 'react-router-dom';
+import useToast from '../hooks/useToast';
 
 interface Props {
   text?: string;
@@ -12,6 +13,8 @@ interface Props {
 
 const EditButton = ({ text, title, body }: Props) => {
   const navigator = useNavigate();
+  const { showToast } = useToast();
+
   const createGround = useCallback(async () => {
     try {
       const data = await createPost(
@@ -19,11 +22,13 @@ const EditButton = ({ text, title, body }: Props) => {
         null,
         '63b5b86c21d0f92287bd6474'
       );
+      showToast({ message: '그라운드를 생성했습니다.' });
       navigator(`/posts/${data._id}`);
     } catch {
-      alert('그라운드 생성에 실패했습니다.');
+      showToast({ message: '그라운드 생성에 실패했습니다.' });
     }
-  }, [navigator, title, body]);
+  }, [navigator, showToast, title, body]);
+
   return (
     <Button onClick={() => (text === 'CREATE' ? createGround() : '')}>
       {text}
