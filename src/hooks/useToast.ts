@@ -17,7 +17,7 @@ const useToast = () => {
       ...currentToasts,
       { ...toast, id: newToastId },
     ]);
-    setTimeout(() => hideToast(newToastId), 500 + (toast.duration ?? 1500));
+    setTimeout(() => hideToast(newToastId), 500 + (toast.duration ?? 1000));
   };
 
   return { toasts, showToast };
