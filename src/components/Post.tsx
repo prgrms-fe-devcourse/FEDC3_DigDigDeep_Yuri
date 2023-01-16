@@ -23,6 +23,7 @@ const Post = ({
   const [user, setUser] = useRecoilState(userState);
   const [likesState, setLikesState] = useState(likes);
   const navigate = useNavigate();
+  const postContent = title[0] === '{' ? JSON.parse(title) : title;
 
   const handleShare = (postId: string) => {
     navigator.clipboard.writeText(`${window.location.href}posts/${postId}`);
@@ -84,9 +85,13 @@ const Post = ({
         </Wrapper>
       </PostHeader>
       <Section onClick={() => toPostDetail(_id)}>
-        <Title>{title}</Title>
+        <Title>
+          {typeof postContent === 'string' ? postContent : postContent.title}
+        </Title>
         {image && <Image src={image} />}
-        <Text>{title}</Text>
+        <Text>
+          {typeof postContent === 'string' ? postContent : postContent.body}
+        </Text>
       </Section>
       <Footer>
         {likesState.find((like) => like.user === user._id) ? (
