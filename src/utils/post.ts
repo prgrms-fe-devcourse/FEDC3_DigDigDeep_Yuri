@@ -1,32 +1,38 @@
 import { PostResponse } from '../types/response';
 import axiosInstance from './axios';
 
-interface PostParam {
-  (title: string, image: number | null, channelId: string): void;
-}
+export const createPost = async (
+  title: string,
+  image: Blob | null,
+  channelId: string
+) => {
+  const formData = new FormData();
 
-export const createPost: PostParam = async (title, image, channelId) => {
-  await axiosInstance.post(`/posts/create`, {
-    title,
-    image,
-    channelId,
-  });
+  formData.append('title', title);
+  image && formData.append('image', image);
+  formData.append('channelId', channelId);
+
+  const { data } = await axiosInstance.post(`/posts/create`, formData);
+  return data;
 };
 
 export const updatePost = async (
   postId: string,
   title: string,
-  image: number | null,
+  image: Blob | null,
   channelId: string,
   imageToDeletePublicId?: string
 ) => {
-  await axiosInstance.put(`/posts/update`, {
-    postId,
-    title,
-    image,
-    channelId,
-    imageToDeletePublicId,
-  });
+  const formData = new FormData();
+
+  formData.append('postId', postId);
+  formData.append('title', title);
+  image && formData.append('image', image);
+  formData.append('channelId', channelId);
+  imageToDeletePublicId &&
+    formData.append('imageToDeletePublicId', imageToDeletePublicId);
+
+  await axiosInstance.put(`/posts/update`, formData);
 };
 
 export const getPosts = async () => {

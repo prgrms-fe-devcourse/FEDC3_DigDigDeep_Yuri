@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ToastProps } from '../../recoil/atoms/toast';
 import { COLOR } from '../../utils/color';
 
-const ToastItem = ({ message, duration = 1500 }: ToastProps) => {
+const ToastItem = ({ message, duration = 1000 }: ToastProps) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -41,5 +41,5 @@ const Toast = styled.div<{ visible: boolean }>`
   color: ${COLOR.text};
 
   opacity: ${({ visible }) => (visible ? 0.7 : 0)};
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-in-out;
 `;

@@ -65,6 +65,8 @@ const PostPage = () => {
   );
 };
 
+export default PostPage;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,5 +102,3 @@ const Text = styled.div`
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
 `;
-
-export default PostPage;

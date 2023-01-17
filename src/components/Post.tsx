@@ -43,6 +43,7 @@ const Post = ({
   const { showModal } = useModal();
   const getMyInfo = useGetMyInfo();
   const navigate = useNavigate();
+  const postContent = title[0] === '{' ? JSON.parse(title) : title;
 
   const handleShare = (postId: string) => {
     navigator.clipboard.writeText(`${window.location.host}/posts/${postId}`);
@@ -131,9 +132,13 @@ const Post = ({
         </Wrapper>
       </PostHeader>
       <Section onClick={() => toPostDetail(_id)}>
-        <Title isDetailPage={isDetailPage}>{title}</Title>
+        <Title>
+          {typeof postContent === 'string' ? postContent : postContent.title}
+        </Title>
         {image && <Image src={image} />}
-        <Text isDetailPage={isDetailPage}>{title}</Text>
+        <Text>
+          {typeof postContent === 'string' ? postContent : postContent.body}
+        </Text>
       </Section>
       {checkIsMine && user._id === author._id ? (
         <Footer>

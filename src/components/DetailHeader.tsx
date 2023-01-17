@@ -2,20 +2,44 @@ import Icon from './Base/Icon';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
+import EditButton from './EditButton';
 interface Props {
-  title: string;
+  name: string;
   isButton: boolean;
   buttonText?: string;
+  title?: string;
+  body?: string;
+  postId?: string;
+  image?: Blob | null;
+  imageId?: string;
 }
 
-const DetailHeader = ({ title, isButton, buttonText }: Props) => {
+const DetailHeader = ({
+  name,
+  isButton,
+  buttonText,
+  title,
+  body,
+  postId,
+  image,
+  imageId,
+}: Props) => {
   return (
     <Container>
       <BackHomeLink to="/">
         <Icon name="back" width={20} height={16} />
       </BackHomeLink>
-      <Title>{title}</Title>
-      {isButton && <Button>{buttonText}</Button>}
+      <Title>{name}</Title>
+      {isButton && (
+        <EditButton
+          text={buttonText}
+          title={title}
+          body={body}
+          postId={postId}
+          image={image}
+          imageId={imageId}
+        />
+      )}
     </Container>
   );
 };
@@ -48,16 +72,4 @@ const Title = styled.h3`
   color: ${COLOR.text};
   justify-self: center;
   width: max-content;
-`;
-
-const Button = styled.button`
-  background: ${COLOR.green};
-  border-radius: 23.5px;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-  color: ${COLOR.white};
-  padding: 1.1rem 2.2rem;
-  width: fit-content;
-  justify-self: right;
 `;
