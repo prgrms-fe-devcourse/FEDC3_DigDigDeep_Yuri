@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Icon from '../components/Base/Icon';
 import Header from '../components/Header';
 import Post from '../components/Post';
 import { PostResponse, UserResponse } from '../types/response';
@@ -10,8 +11,13 @@ import { getPost } from '../utils/post';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [userResult, setUserResult] = useState<UserResponse[]>([]);
   const [postResult, setPostResult] = useState<PostResponse[]>([]);
+
+  const toUserProfile = (authorId: string) => {
+    navigate(`/profile/${authorId}`);
+  };
 
   const getSearch = useCallback(async () => {
     const getType = searchParams.get('type');
@@ -41,14 +47,23 @@ const SearchPage = () => {
     <Container>
       <Header />
       {searchParams.get('type') === 'users' ? (
-        <ul>
-          {userResult.map((el) => (
-            <div key={el._id}>
-              <li>{el.image}</li>
-              <li>{el.fullName}</li>
-            </div>
+        <List>
+          {userResult.map((user) => (
+            <UserListItem
+              key={user._id}
+              onClick={() => toUserProfile(user._id)}
+            >
+              {user.image ? (
+                <Image src={user.image} />
+              ) : (
+                <Icon name="default-profile" size={38} />
+              )}
+              <Text>
+                <Strong>{user.fullName}</Strong>
+              </Text>
+            </UserListItem>
           ))}
-        </ul>
+        </List>
       ) : postResult.length ? (
         <List>
           {postResult.map((post) => (
@@ -58,7 +73,7 @@ const SearchPage = () => {
           ))}
         </List>
       ) : (
-        <Text>검색 결과가 없습니다.</Text>
+        <BigText>검색 결과가 없습니다.</BigText>
       )}
     </Container>
   );
@@ -72,6 +87,24 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+`;
+
+const Strong = styled.strong`
+  font-weight: 700;
+`;
+
+const UserListItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 1.4rem;
+  border-bottom: 0.3px solid ${COLOR.lightGray};
+`;
+
+const Image = styled.img`
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
 `;
 
 const List = styled.ul`
@@ -91,6 +124,14 @@ const ListItem = styled.li`
 `;
 
 const Text = styled.span`
+  font-weight: 350;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
+  color: #715141;
+`;
+
+const BigText = styled.span`
   width: 100%;
   font-weight: 500;
   font-size: 2rem;
