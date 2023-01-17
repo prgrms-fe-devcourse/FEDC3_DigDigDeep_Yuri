@@ -1,7 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FollowResponse, UserResponse } from '../../types/response';
 import { unfollow } from '../../utils/api/follow';
+import { COLOR } from '../../utils/color';
+import Icon from '../Base/Icon';
 
 interface UserItemProps {
   user: UserResponse;
@@ -10,14 +12,12 @@ interface UserItemProps {
   onUnfollow?: () => any;
 }
 
-const User = ({ user, type, follow, onUnfollow }: UserItemProps) => {
+const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   const { userId } = useParams() as { userId: string };
+  const navigate = useNavigate();
 
-  const onClick = async () => {
-    console.log(user);
-    console.log(follow);
+  const onClickUnfollow = async () => {
     if (!user || !follow) return;
-    // if (user?._id === follow.user) await unfollow({ followId: follow._id });
     await unfollow({ followId: follow._id });
     onUnfollow && (await onUnfollow());
   };
@@ -26,17 +26,26 @@ const User = ({ user, type, follow, onUnfollow }: UserItemProps) => {
     return userId === 'me' && type === 'following';
   };
 
+  const onContainerClick = () => {
+    navigate(`/profile/${user._id}`);
+  };
+
   const render = () => {
     if (!user) return null;
     return (
-      <Container>
-        <h4>
-          <Link to={`/profile/${user._id}`}>
-            {user.fullName} | {user._id}
-          </Link>
-          {isUnfollowable() && <Button onClick={onClick}>X</Button>}
-          {/* <Button onClick={onClick}>X</Button> */}
-        </h4>
+      <Container onClick={onContainerClick}>
+        <ImageWrapper>
+          <Image
+            src={user.image ? user.image : '/image/default-profile.png'}
+            alt="user-profile"
+          />
+        </ImageWrapper>
+        <Text>{user.fullName}</Text>
+        {isUnfollowable() && (
+          <Button onClick={onClickUnfollow}>
+            <Icon name="close" />
+          </Button>
+        )}
       </Container>
     );
   };
@@ -44,14 +53,38 @@ const User = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   return <>{render()}</>;
 };
 
-export default User;
+export default UserItem;
 
 const Container = styled.div`
-  margin: 3rem;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 2.2rem;
+  cursor: pointer;
+`;
+
+const ImageWrapper = styled.div`
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+`;
+
+const Text = styled.div`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  color: ${COLOR.text};
 `;
 
 const Button = styled.button`
-  padding: 1rem;
-  background-color: red;
+  margin-left: auto;
   cursor: pointer;
 `;
