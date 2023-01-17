@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import PostList from '../components/PostList';
+import Post from '../components/Post';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
@@ -33,7 +33,18 @@ const MyLikesPage = () => {
   return (
     <div>
       <h2>MyLikesPage</h2>
-      <PostList posts={posts} />
+      {posts.map((post) => (
+        <Post
+          key={post._id}
+          _id={post._id}
+          title={post.title}
+          createdAt={post.createdAt}
+          author={post.author}
+          likes={post.likes}
+          comments={post.comments}
+          image={post.image}
+        />
+      ))}
     </div>
   );
 };

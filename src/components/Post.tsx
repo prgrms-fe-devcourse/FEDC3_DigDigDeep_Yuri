@@ -42,7 +42,7 @@ const Post = ({
   };
 
   const toUserProfile = (authorId: string) => {
-    navigate(`/profile/${authorId}`);
+    navigate(`/profile/${authorId === 'me' ? user._id : authorId}`);
   };
 
   const toPostDetail = (postId: string) => {
