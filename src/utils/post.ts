@@ -40,8 +40,8 @@ export const getPost = async (postId: string) => {
   return data;
 };
 
-export const getPostByAuthor = async (authorId: string) => {
-  const { data } = await axiosInstance.get<PostResponse>(
+export const getPostsByAuthor = async (authorId: string) => {
+  const { data } = await axiosInstance.get<PostResponse[]>(
     `/posts/author/${authorId}`
   );
   return data;
