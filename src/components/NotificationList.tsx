@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Notification from './Notification';
 import { getNotification, seenNotification } from '../utils/notification';
 import { NotificationResponse } from '../types/response';
+import useToast from '../hooks/useToast';
 
 const NotificationList = () => {
   const [notifications, setNotification] = useState<NotificationResponse[]>([]);
+
+  const { showToast } = useToast();
 
   const fetchNotification = useCallback(async () => {
     try {
@@ -14,9 +17,10 @@ const NotificationList = () => {
 
       await seenNotification();
     } catch {
-      alert('알림을 불러올 수 없습니다.');
+      setNotification([]);
+      showToast({ message: '알림을 불러올 수 없습니다.' });
     }
-  }, []);
+  }, [showToast]);
 
   useEffect(() => {
     fetchNotification();

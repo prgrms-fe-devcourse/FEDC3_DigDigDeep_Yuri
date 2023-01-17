@@ -1,17 +1,26 @@
+import { useCallback, useEffect, useState } from 'react';
 import { PostResponse } from '../types/response';
+import { getPostsByAuthor } from '../utils/post';
 import Post from './Post';
 
 interface Props {
-  posts: PostResponse[];
+  authorId: string;
 }
 
-const PostList = ({ posts }: Props) => {
+const PostList = ({ authorId }: Props) => {
+  const [posts, setPosts] = useState<PostResponse[]>();
+
+  const fetchPosts = useCallback(async () => {
+    const posts = await getPostsByAuthor(authorId);
+    setPosts(posts);
+  }, [authorId]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts, authorId]);
+
   return (
-    <ul>
-      {posts.map((post) => (
-        <Post key={post._id} {...post} />
-      ))}
-    </ul>
+    <ul>{posts && posts.map((post) => <Post key={post._id} {...post} />)}</ul>
   );
 };
 
