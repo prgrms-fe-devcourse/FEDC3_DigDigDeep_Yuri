@@ -29,7 +29,7 @@ const Post = ({
   };
 
   const toUserProfile = (authorId: string) => {
-    navigate(`/profile/${authorId}`);
+    navigate(`/profile/${authorId === 'me' ? user._id : authorId}`);
   };
 
   const toPostDetail = (postId: string) => {
@@ -67,7 +67,7 @@ const Post = ({
   return (
     <ListItem {...props}>
       <PostHeader>
-        <Wrapper onClick={() => toUserProfile(_id)}>
+        <Wrapper onClick={() => toUserProfile(author._id)}>
           {author.image ? (
             <ProfileImage src={author.image} />
           ) : (
