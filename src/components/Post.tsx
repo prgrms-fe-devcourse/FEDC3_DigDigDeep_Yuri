@@ -14,6 +14,11 @@ import Icon from './Base/Icon';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
+  isDetailPage?: boolean;
+}
+
+interface PostHeaderProps {
+  isDetailPage?: boolean;
 }
 
 const Post = ({
@@ -25,6 +30,7 @@ const Post = ({
   comments,
   image,
   checkIsMine = false,
+  isDetailPage = false,
   ...props
 }: PostProps) => {
   const [user, setUser] = useRecoilState(userState);
@@ -88,7 +94,7 @@ const Post = ({
 
   return (
     <Container {...props}>
-      <PostHeader>
+      <PostHeader isDetailPage={isDetailPage}>
         <Wrapper onClick={() => toUserProfile(author._id)}>
           {author.image ? (
             <ProfileImage src={author.image} />
@@ -199,11 +205,13 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const PostHeader = styled.div`
+const PostHeader = styled.div<PostHeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 0;
+  margin: 0 auto;
+  width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
 `;
 
 const Section = styled.div`
@@ -225,6 +233,11 @@ const Title = styled.span`
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   margin-bottom: 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const Text = styled.div`
