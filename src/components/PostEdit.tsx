@@ -10,10 +10,11 @@ interface Props {
   hasId: boolean;
   title: string;
   body: string;
-  image?: Blob;
+  image?: Blob | null;
   isLoading: boolean;
   setTitle: (v: string) => void;
   setBody: (v: string) => void;
+  setImage: (v: Blob | null) => void;
   setImageId: (v: string) => void;
   handleTitle: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleBody: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -30,6 +31,7 @@ const PostEdit = ({
   isLoading,
   setTitle,
   setBody,
+  setImage,
   setImageId,
   handleTitle,
   handleBody,
@@ -51,6 +53,14 @@ const PostEdit = ({
       alert('그라운드 정보를 불러올 수 없습니다.');
     }
   }, [postId, setTitle, setBody, setPreviewImage, setImageId]);
+
+  const handleRemoveImage = () => {
+    if (previewImage) {
+      setPreviewImage('');
+    } else {
+      setImage(null);
+    }
+  };
 
   useEffect(() => {
     if (postId) {
@@ -79,13 +89,29 @@ const PostEdit = ({
         <Input id="file" type="file" accept="image/*" onChange={handleImage} />
       </Wrapper>
       {previewImage && !image && (
-        <ImageFile src={previewImage} alt="첨부 이미지" />
+        <ImageFileWrapper>
+          <ImageFile src={previewImage} alt="첨부 이미지" />
+          <ImageDetail>
+            <ImageHeader>
+              <ImageTitle>기존 이미지</ImageTitle>
+              <RemoveButton onClick={handleRemoveImage}>
+                <Icon name="close" size={12} />
+              </RemoveButton>
+            </ImageHeader>
+            <ImageName>{name}</ImageName>
+          </ImageDetail>
+        </ImageFileWrapper>
       )}
       {image && (
         <ImageFileWrapper>
           <ImageFile src={URL.createObjectURL(image)} alt="첨부 이미지" />
           <ImageDetail>
-            <ImageTitle>첨부 파일</ImageTitle>
+            <ImageHeader>
+              <ImageTitle>첨부 파일</ImageTitle>
+              <RemoveButton onClick={handleRemoveImage}>
+                <Icon name="close" size={12} />
+              </RemoveButton>
+            </ImageHeader>
             <ImageName>{name}</ImageName>
           </ImageDetail>
         </ImageFileWrapper>
@@ -222,6 +248,12 @@ const ImageDetail = styled.div`
   gap: 0.8rem;
 `;
 
+const ImageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const ImageTitle = styled.h3`
   font-size: 1.4rem;
   font-weight: 700;
@@ -230,6 +262,11 @@ const ImageTitle = styled.h3`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     font-size: 1.2rem;
   }
+`;
+
+const RemoveButton = styled.button`
+  display: flex;
+  margin: 0 0.5rem;
 `;
 
 const ImageName = styled.span`

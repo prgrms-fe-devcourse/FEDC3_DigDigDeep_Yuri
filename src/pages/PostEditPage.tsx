@@ -17,6 +17,7 @@ const PostEditPage = () => {
     isLoading,
     setTitle,
     setBody,
+    setImage,
     setImageId,
     handleChangeTitle,
     handleChangeBody,
@@ -49,6 +50,7 @@ const PostEditPage = () => {
         isLoading={isLoading}
         setTitle={setTitle}
         setBody={setBody}
+        setImage={setImage}
         setImageId={setImageId}
         handleTitle={handleChangeTitle}
         handleBody={handleChangeBody}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 const usePost = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
-  const [image, setImage] = useState<Blob>();
+  const [image, setImage] = useState<Blob | null>();
 
   const [imageId, setImageId] = useState<string>('');
 

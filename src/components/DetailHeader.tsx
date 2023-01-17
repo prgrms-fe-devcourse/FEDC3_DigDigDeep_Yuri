@@ -10,7 +10,7 @@ interface Props {
   title?: string;
   body?: string;
   postId?: string;
-  image?: Blob;
+  image?: Blob | null;
   imageId?: string;
 }
 
