@@ -122,4 +122,6 @@ const Button = styled.button<ButtonProps>`
     isConfirm ? COLOR.green : COLOR.lightGray};
   border-radius: 23.5px;
   padding: 1rem;
+
+  cursor: pointer;
 `;
