@@ -6,6 +6,7 @@ import CommentInput from '../components/CommentInput';
 import Header from '../components/Header';
 import Post from '../components/Post';
 import { PostResponse } from '../types/response';
+import { COLOR } from '../utils/color';
 import { getPost } from '../utils/post';
 
 type PostId = string;
@@ -44,23 +45,26 @@ const PostPage = () => {
             comments={post.comments}
             image={post.image}
             checkIsMine={true}
+            isDetailPage={true}
           />
-          {post.comments.length ? (
-            post.comments.map((comment) => (
-              <div key={comment._id}>
-                <Comment
-                  _id={comment._id}
-                  comment={comment.comment}
-                  author={comment.author}
-                  createdAt={comment.createdAt}
-                  post={comment.post}
-                  fetchHandler={fetchHandler}
-                />
-              </div>
-            ))
-          ) : (
-            <div>댓글이 없습니다.</div>
-          )}
+          <List>
+            {post.comments.length ? (
+              post.comments.map((comment) => (
+                <ListItem key={comment._id}>
+                  <Comment
+                    _id={comment._id}
+                    comment={comment.comment}
+                    author={comment.author}
+                    createdAt={comment.createdAt}
+                    post={comment.post}
+                    fetchHandler={fetchHandler}
+                  />
+                </ListItem>
+              ))
+            ) : (
+              <Text>댓글이 없습니다.</Text>
+            )}
+          </List>
           <CommentInput
             _id={post._id}
             author={post.author}
@@ -76,10 +80,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: 6.4rem;
 `;
+
+const List = styled.ul``;
+
+const ListItem = styled.li``;
 
 const Wrapper = styled.ul`
   width: 50%;
@@ -88,8 +96,18 @@ const Wrapper = styled.ul`
   margin: 0 auto;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
+    width: 100%;
   }
+`;
+
+const Text = styled.div`
+  width: 100%;
+  text-align: center;
+  font-weight: 350;
+  font-size: 0.8rem;
+  line-height: 1.4rem;
+  letter-spacing: -0.01em;
+  color: ${COLOR.brown};
 `;
 
 export default PostPage;
