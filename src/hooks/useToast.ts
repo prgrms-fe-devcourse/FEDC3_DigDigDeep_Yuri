@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { ToastProps, toastsState } from '../recoil/atoms/toast';
 import { v4 } from 'uuid';
@@ -5,20 +6,26 @@ import { v4 } from 'uuid';
 const useToast = () => {
   const [toasts, setToasts] = useRecoilState(toastsState);
 
-  const hideToast = (toastId: string | undefined) => {
-    setToasts((currentToasts) =>
-      currentToasts.filter((toast) => toast.id !== toastId)
-    );
-  };
+  const hideToast = useCallback(
+    (toastId: string | undefined) => {
+      setToasts((currentToasts) =>
+        currentToasts.filter((toast) => toast.id !== toastId)
+      );
+    },
+    [setToasts]
+  );
 
-  const showToast = (toast: ToastProps) => {
-    const newToastId = v4();
-    setToasts((currentToasts) => [
-      ...currentToasts,
-      { ...toast, id: newToastId },
-    ]);
-    setTimeout(() => hideToast(newToastId), 500 + (toast.duration ?? 1000));
-  };
+  const showToast = useCallback(
+    (toast: ToastProps) => {
+      const newToastId = v4();
+      setToasts((currentToasts) => [
+        ...currentToasts,
+        { ...toast, id: newToastId },
+      ]);
+      setTimeout(() => hideToast(newToastId), 500 + (toast.duration ?? 1000));
+    },
+    [hideToast, setToasts]
+  );
 
   return { toasts, showToast };
 };

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Post from '../components/Post';
 import Header from '../components/Header';
 import { PostResponse } from '../types/response';
-import { createPost, getPosts, updatePost } from '../utils/post';
+import { getPosts } from '../utils/post';
 import useLogout from '../hooks/useLogout';
-import Searchbar from '../components/Searchbar';
+import { COLOR } from '../utils/color';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
@@ -27,53 +27,30 @@ const HomePage = () => {
   return (
     <Container>
       <Header />
-      <Searchbar />
+      <LogOutButton onClick={logout}>로그아웃</LogOutButton>
       <List>
         {posts.map((post) => (
-          <Post
-            key={post._id}
-            _id={post._id}
-            title={post.title}
-            createdAt={post.createdAt}
-            author={post.author}
-            likes={post.likes}
-            comments={post.comments}
-            image={post.image}
-          />
+          <ListItem key={post._id}>
+            <Post {...post} />
+          </ListItem>
         ))}
       </List>
-      {/* 테스트 & 예시 코드입니다. */}
-      <button onClick={logout}>로그아웃</button>
-      <button
-        onClick={async () => {
-          await createPost(
-            '민재가 하는 테스트',
-            null,
-            '63b5b86c21d0f92287bd6474'
-          );
-          const posts = await getPosts();
-          setPosts(posts);
-        }}
-      >
-        New Post
-      </button>
-      <button
-        onClick={async () => {
-          await updatePost(
-            '63bfc1dfec8c5b4385125337',
-            '민재가 바꾼 테스트',
-            null,
-            '63b5b86c21d0f92287bd6474'
-          );
-          const posts = await getPosts();
-          setPosts(posts);
-        }}
-      >
-        Edit Test
-      </button>
     </Container>
   );
 };
+
+const LogOutButton = styled.div`
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  background-color: ${COLOR.text};
+  color: ${COLOR.white};
+  border-radius: 2rem;
+  width: 2.4%;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 10%;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -84,10 +61,19 @@ const Container = styled.div`
 `;
 
 const List = styled.ul`
-  width: 90%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+  }
+`;
+
+const ListItem = styled.li`
+  width: 100%;
+  margin: 0.5rem auto;
 `;
 
 export default HomePage;

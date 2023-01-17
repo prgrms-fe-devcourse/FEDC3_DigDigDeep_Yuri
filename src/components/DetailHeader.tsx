@@ -51,10 +51,12 @@ const Container = styled.div`
   grid-template-columns: 1fr 1.5fr 1fr;
   padding: 2rem 0;
   width: 50%;
+  min-width: 767px;
   align-items: center;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
     padding: 1.7rem 0;
+    min-width: 86%;
   }
 `;
 
@@ -63,11 +65,11 @@ const BackHomeLink = styled(Link)`
 `;
 
 const Title = styled.h3`
-  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 1.9rem;
   letter-spacing: -0.01em;
   color: ${COLOR.text};
   justify-self: center;
+  width: max-content;
 `;

@@ -118,8 +118,6 @@ const Input = styled.input`
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.6rem;
-  font-family: 'Inter';
-  font-style: normal;
   flex-shrink: 1;
   flex-grow: 1;
   padding: 0;

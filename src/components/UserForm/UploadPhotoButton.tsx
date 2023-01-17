@@ -59,8 +59,6 @@ const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 1.7rem;

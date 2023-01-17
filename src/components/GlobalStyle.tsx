@@ -2,9 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import { COLOR } from '../utils/color';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${COLOR.bgColor};
-  }
   html,
   body,
   div,
@@ -95,6 +92,11 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
   }
+  body {
+    background-color: ${COLOR.bgColor};
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-style: normal;
+  }
   /* HTML5 display-role reset for older browsers */
   article,
   aside,
@@ -136,6 +138,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
     padding: 0;
     margin: 0;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
   }
   input {
     border: none;
@@ -145,6 +148,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     resize: none;
     outline: none;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
   }
   a {
     color: black;

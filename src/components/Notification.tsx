@@ -49,8 +49,6 @@ const Image = styled.img`
 `;
 
 const Text = styled.span`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-style: normal;
   font-weight: 350;
   font-size: 1.4rem;
   line-height: 2rem;
