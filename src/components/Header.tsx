@@ -55,71 +55,86 @@ const Header = () => {
   }, []);
 
   return (
-    <Container>
-      {isMobile ? (
-        <>
-          {isSearchbarShow ? (
-            <SearchWrapper>
-              <Searchbar isMobile={isMobile} />
-            </SearchWrapper>
-          ) : token ? (
-            <>
-              <Wrapper>
-                <LogoButton to="/">
-                  <Logo />
-                </LogoButton>
-                <Button onClick={toggleSearchbar}>
-                  <Icon name="search" size={24} />
-                </Button>
-              </Wrapper>
-              <Wrapper>
-                <LinkButton to="/" name="new" size={24} />
-                <LinkButton to="/notifications" name="notification" size={24} />
-                <LinkButton to="/profile/me" name="profile" size={24} />
-              </Wrapper>
-            </>
-          ) : (
-            <>
-              <Wrapper>
-                <LogoButton to="/">
-                  <Logo />
-                </LogoButton>
-                <Button onClick={toggleSearchbar}>
-                  <Icon name="search" size={24} />
-                </Button>
-              </Wrapper>
-              <Wrapper>
+    <HeaderContainer>
+      <Container>
+        {isMobile ? (
+          <>
+            {isSearchbarShow ? (
+              <SearchWrapper>
+                <Searchbar isMobile={isMobile} />
+              </SearchWrapper>
+            ) : token ? (
+              <>
                 <Wrapper>
-                  <LogInButton to="/login">LOG IN</LogInButton>
+                  <LogoButton to="/">
+                    <Logo />
+                  </LogoButton>
+                  <Button onClick={toggleSearchbar}>
+                    <Icon name="search" size={24} />
+                  </Button>
                 </Wrapper>
+                <Wrapper>
+                  <LinkButton to="/" name="new" size={24} />
+                  <LinkButton
+                    to="/notifications"
+                    name="notification"
+                    size={24}
+                  />
+                  <LinkButton to="/profile/me" name="profile" size={24} />
+                </Wrapper>
+              </>
+            ) : (
+              <>
+                <Wrapper>
+                  <LogoButton to="/">
+                    <Logo />
+                  </LogoButton>
+                  <Button onClick={toggleSearchbar}>
+                    <Icon name="search" size={24} />
+                  </Button>
+                </Wrapper>
+                <Wrapper>
+                  <Wrapper>
+                    <LogInButton to="/login">LOG IN</LogInButton>
+                  </Wrapper>
+                </Wrapper>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <WebSearchWrapper>
+              <LogoButton to="/">
+                <Logo />
+              </LogoButton>
+              <Searchbar isMobile={isMobile} />
+            </WebSearchWrapper>
+            {token ? (
+              <Wrapper>
+                <LinkButton to="/" name="new" size={20} />
+                <LinkButton to="/notifications" name="notification" size={20} />
+                <LinkButton to="/profile/me" name="profile" size={20} />
               </Wrapper>
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          <WebSearchWrapper>
-            <LogoButton to="/">
-              <Logo />
-            </LogoButton>
-            <Searchbar isMobile={isMobile} />
-          </WebSearchWrapper>
-          {token ? (
-            <Wrapper>
-              <LinkButton to="/" name="new" size={20} />
-              <LinkButton to="/notifications" name="notification" size={20} />
-              <LinkButton to="/profile/me" name="profile" size={20} />
-            </Wrapper>
-          ) : (
-            <Wrapper>
-              <LogInButton to="/login">LOG IN</LogInButton>
-            </Wrapper>
-          )}
-        </>
-      )}
-    </Container>
+            ) : (
+              <Wrapper>
+                <LogInButton to="/login">LOG IN</LogInButton>
+              </Wrapper>
+            )}
+          </>
+        )}
+      </Container>
+    </HeaderContainer>
   );
 };
+
+const HeaderContainer = styled.div`
+  width: 100%;
+  background-color: ${COLOR.bgColor};
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  box-sizing: border-box;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -130,9 +145,6 @@ const Container = styled.div`
   z-index: 1;
   height: 5rem;
   align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: ${COLOR.bgColor};
   border-bottom: 1px solid #eeeeee;
   box-sizing: border-box;
   @media screen and (max-width: 767px) and (orientation: portrait) {
