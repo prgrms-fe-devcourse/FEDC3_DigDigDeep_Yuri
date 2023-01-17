@@ -34,7 +34,7 @@ const MyLikesPage = () => {
 
   return (
     <Container>
-      <DetailHeader title="내가 좋아한 그라운드" isButton={false} />
+      <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
       {posts.map((post) => (
         <Post key={post._id} {...post} />
       ))}
