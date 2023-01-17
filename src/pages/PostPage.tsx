@@ -1,69 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { userState } from '../recoil/atoms/user';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import Comment from '../components/Comment';
+import CommentInput from '../components/CommentInput';
+import Header from '../components/Header';
+import Post from '../components/Post';
 import { PostResponse } from '../types/response';
-import { createComment, deleteComment } from '../utils/comment';
-import { sendNotification } from '../utils/notification';
-import { deletePost, getPost } from '../utils/post';
+import { getPost } from '../utils/post';
 
 type PostId = string;
 
 const PostPage = () => {
   const { postId } = useParams<PostId>();
   const [post, setPost] = useState<PostResponse>();
-  const [comment, setComment] = useState('');
-  const [user, setUser] = useRecoilState(userState);
-  const navigate = useNavigate();
-
-  const handleDelete = useCallback(async () => {
-    if (postId) {
-      if (window.confirm('정말로 삭제하시겠습니다?')) {
-        await deletePost(postId);
-        navigate('/');
-      }
-    }
-  }, [postId, navigate]);
-
-  const handleEdit = () => {
-    navigate(`/edit/${post?._id}`);
-  };
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setComment(e.target.value);
-  };
-
-  const onSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-    content: string,
-    postId: string
-  ) => {
-    e.preventDefault();
-    try {
-      const data = await createComment(content, postId);
-      if (post) {
-        sendNotification('COMMENT', data._id, post.author._id, postId);
-      }
-      setUser({ ...user, comments: [...user.comments, data] });
-      fetchHandler();
-      setComment('');
-    } catch (error) {
-      console.error('댓글 등록에 실패하였습니다.');
-    }
-  };
-
-  const handleDeleteComment = async (commentId: string) => {
-    try {
-      await deleteComment(commentId);
-      setUser({
-        ...user,
-        comments: user.comments.filter((comment) => comment._id !== commentId),
-      });
-      fetchHandler();
-    } catch (error) {
-      console.error(error, '댓글 삭제에 실패하였습니다.');
-    }
-  };
 
   const fetchHandler = useCallback(async () => {
     if (postId) {
@@ -81,60 +30,66 @@ const PostPage = () => {
   }, [fetchHandler]);
 
   return (
-    <div>
-      <div>PostPage, postId: {postId}</div>
-      <div>
-        <Link to="/notifications">
-          <button>notification</button>
-        </Link>
-        <Link to="/profile/me">
-          <button>profile</button>
-        </Link>
-      </div>
+    <Container>
+      <Header />
       {post && (
-        <>
-          <div>
-            <div>{post.title}</div>
-            <div>{post.createdAt}</div>
-            <div>{post.author.fullName}</div>
-            {user._id === post.author._id && (
-              <div>
-                <button onClick={handleDelete}>삭제</button>
-                <button onClick={handleEdit}>수정</button>
-              </div>
-            )}
-          </div>
-          <div>likes: {post.likes.length}</div>
-          <div>comments: {post.comments.length}</div>
-          <button>share</button>
+        <Wrapper>
+          <Post
+            key={post._id}
+            _id={post._id}
+            title={post.title}
+            createdAt={post.createdAt}
+            author={post.author}
+            likes={post.likes}
+            comments={post.comments}
+            image={post.image}
+            checkIsMine={true}
+          />
           {post.comments.length ? (
             post.comments.map((comment) => (
               <div key={comment._id}>
-                <div>
-                  {comment.author.fullName}: {comment.comment}
-                </div>
-                {comment.author._id === user._id && (
-                  <button
-                    onClick={() => {
-                      handleDeleteComment(comment._id);
-                    }}
-                  >
-                    삭제
-                  </button>
-                )}
+                <Comment
+                  _id={comment._id}
+                  comment={comment.comment}
+                  author={comment.author}
+                  createdAt={comment.createdAt}
+                  post={comment.post}
+                  fetchHandler={fetchHandler}
+                />
               </div>
             ))
           ) : (
-            <div>'댓글이 없습니다.'</div>
+            <div>댓글이 없습니다.</div>
           )}
-          <form onSubmit={(e) => onSubmit(e, comment, post._id)}>
-            <input type="text" value={comment} onChange={onChange} />
-            <button>디깅</button>
-          </form>
-        </>
+          <CommentInput
+            _id={post._id}
+            author={post.author}
+            fetchHandler={fetchHandler}
+          />
+        </Wrapper>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+`;
+
+const Wrapper = styled.ul`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+  }
+`;
 
 export default PostPage;
