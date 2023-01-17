@@ -9,7 +9,7 @@ import { userState } from '../recoil/atoms/user';
 import { PostResponse, UserResponse } from '../types/response';
 import type { FollowResponse } from '../types/user';
 import { getUser, getUsers } from '../utils/api/user';
-import { formatDate } from '../utils/formatDate';
+import { COLOR } from '../utils/color';
 
 const testFollowers = [
   {
@@ -91,24 +91,31 @@ const ProfilePage = () => {
       <div>
         <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>
       </div>
-      <div>
-        <img src={userInfo?.image} alt={userInfo?.fullName} />
-        <h1>{userInfo?.fullName}</h1>
-        <p>member since {userInfo && formatDate.year(userInfo.createdAt)}</p>
-      </div>
-      <TabList>
-        {TabMenuItems.map((item) => {
-          return (
-            <TabItem
-              key={item}
-              item={item}
-              value={userInfo && userInfo[item].length}
-              isActive={activeTab === item}
-              onClick={() => setActiveTab(item)}
-            />
-          );
-        })}
-      </TabList>
+      <Header>
+        <ImageContainer>
+          <Image
+            src={userInfo?.image ?? '/image/icon/default-profile.png'}
+            alt={userInfo?.fullName}
+          />
+        </ImageContainer>
+        <Name>{userInfo?.fullName}</Name>
+
+        <TabList>
+          {TabMenuItems.map((item) => {
+            return (
+              <TabItemContainer>
+                <TabItem
+                  key={item}
+                  item={item}
+                  value={userInfo && userInfo[item].length}
+                  isActive={activeTab === item}
+                  onClick={() => setActiveTab(item)}
+                />
+              </TabItemContainer>
+            );
+          })}
+        </TabList>
+      </Header>
       <TabContent>
         {activeTab === 'posts' && posts && <PostList posts={posts} />}
         {activeTab === 'following' && following && (
@@ -125,9 +132,47 @@ const ProfilePage = () => {
 export default ProfilePage;
 
 const TabList = styled.div`
-  display: flex;
+  display: block;
+  width: 100%;
+  background-color: ${COLOR.bgColor};
+`;
+
+const TabItemContainer = styled.span`
+  display: inline-block;
+  width: 33.33%;
+  text-align: center;
 `;
 
 const TabContent = styled.ul`
   display: block;
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1.5rem;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  width: 8rem;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+`;
+
+const Name = styled.h1`
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: ${COLOR.text};
+  margin: 1rem 0 2.5rem;
 `;
