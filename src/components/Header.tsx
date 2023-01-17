@@ -193,7 +193,8 @@ const LogInButton = styled(Link)`
   background-color: ${COLOR.green};
   border-radius: 23.5px;
   border: none;
-  min-width: 3rem;
+  margin-left: 1rem;
+  min-width: max-content;
   cursor: pointer;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {

@@ -73,8 +73,10 @@ const Container = styled.div`
   padding-bottom: 2rem;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0px -6px 3px rgba(4, 4, 4, 0.11);
+  min-width: 767px;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
+    min-width: 100%;
   }
 `;
 
