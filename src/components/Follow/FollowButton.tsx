@@ -7,10 +7,10 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 interface FollowButtonProps {
   targetId: string;
-  followId?: string;
+  fetchUser: (...any: any[]) => any;
 }
 
-const FollowButton = ({ targetId }: FollowButtonProps) => {
+const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
   const user = useRecoilValue(userState);
 
   const [isFollowable, setIsFollowable] = useState(false);
@@ -30,13 +30,14 @@ const FollowButton = ({ targetId }: FollowButtonProps) => {
     }
   }, [checkMyFollow]);
 
-  const onClick = async () => {
+  const handleOnClick = async () => {
     if (isFollowable) {
       await followUser();
     } else {
       await unFollowUser();
     }
     getMyInfo();
+    fetchUser();
   };
 
   const followUser = async () => {
@@ -52,7 +53,7 @@ const FollowButton = ({ targetId }: FollowButtonProps) => {
   return (
     <>
       {targetId === 'me' ? null : (
-        <Button onClick={onClick}>
+        <Button onClick={handleOnClick}>
           {isFollowable ? 'FOLLOW' : 'UNFOLLOW'}
         </Button>
       )}

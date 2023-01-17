@@ -2,21 +2,29 @@ import styled from 'styled-components';
 import { FollowResponse } from '../../types/response';
 import FollowItem from './FollowItem';
 
-interface Following {
+interface BasicFollow {
+  follows: FollowResponse[];
+  onUnfollow: () => any;
+}
+
+interface Following extends BasicFollow {
   type: 'following';
-  follows: FollowResponse[];
 }
 
-interface Followers {
+interface Followers extends BasicFollow {
   type: 'followers';
-  follows: FollowResponse[];
 }
 
-const FollowList = ({ type, follows }: Following | Followers) => {
+const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
   return (
     <List>
       {follows.map((follow) => (
-        <FollowItem key={follow._id} type={type} follow={follow} />
+        <FollowItem
+          key={follow._id}
+          type={type}
+          follow={follow}
+          onUnfollow={onUnfollow}
+        />
       ))}
     </List>
   );

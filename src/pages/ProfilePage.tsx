@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import FollowButton from '../components/Follow/FollowButton';
 import FollowList from '../components/Follow/FollowList';
 import PostList from '../components/PostList';
 import TabItem from '../components/TabItem';
@@ -25,25 +26,45 @@ const ProfilePage = () => {
 
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
 
-  const tabItems = {
-    posts: <PostList authorId={userId === 'me' ? myId : (userId as string)} />,
-    followers: <FollowList type="followers" follows={userInfo['followers']} />,
-    following: <FollowList type="following" follows={userInfo['following']} />,
-  };
-
   const fetchUser = useCallback(async () => {
-    const user = await getUserInfo(userId);
+    const user = await getUserInfo(userId === 'me' ? myId : userId);
     setUserInfo(user);
-  }, [userId]);
+  }, [userId, myId]);
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'posts':
+        return <PostList authorId={userId === 'me' ? myId : userId} />;
+      case 'followers':
+        return (
+          <FollowList
+            type="followers"
+            follows={userInfo['followers']}
+            onUnfollow={fetchUser}
+          />
+        );
+      case 'following':
+        return (
+          <FollowList
+            type="following"
+            follows={userInfo['following']}
+            onUnfollow={fetchUser}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <div>
-        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>
+        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>{' '}
+        | <FollowButton targetId={userId} fetchUser={fetchUser} />
       </div>
       <Header>
         <ImageContainer>
@@ -69,7 +90,7 @@ const ProfilePage = () => {
           })}
         </TabList>
       </Header>
-      <TabContent>{tabItems[activeTab]}</TabContent>
+      <TabContent>{renderTabContent()}</TabContent>
     </div>
   );
 };
