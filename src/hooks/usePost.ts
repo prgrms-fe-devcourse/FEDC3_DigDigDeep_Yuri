@@ -3,9 +3,11 @@ import { useState } from 'react';
 const usePost = () => {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
+  const [image, setImage] = useState<Blob>();
 
-  // const [errors, setErrors] = useState({});
-  // const [isLoading, setIsLoading] = useState(false);
+  const [imageId, setImageId] = useState<string>('');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -15,24 +17,32 @@ const usePost = () => {
     setBody(e.target.value);
   };
 
-  // const handleSubmit = async (e) => {
-  //   setIsLoading(true);
-  //   e.preventDefault();
-  //   const newErrors = validate(values);
-  //   if (Object.keys(newErrors).length === 0) {
-  //     await onSubmit();
-  //   }
-  // setErrors(newErrors);
-  // setIsLoading(false);
-  // };
+  const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsLoading(true);
+    setImage(file);
+    try {
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return {
     title,
     body,
+    image,
+    imageId,
+    isLoading,
     setTitle,
     setBody,
+    setImage,
+    setImageId,
     handleChangeTitle,
     handleChangeBody,
+    handleChangeImage,
   };
 };
 

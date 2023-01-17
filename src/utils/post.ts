@@ -6,28 +6,33 @@ export const createPost = async (
   image: Blob | null,
   channelId: string
 ) => {
-  const { data } = await axiosInstance.post(`/posts/create`, {
-    title,
-    image,
-    channelId,
-  });
+  const formData = new FormData();
+
+  formData.append('title', title);
+  image && formData.append('image', image);
+  formData.append('channelId', channelId);
+
+  const { data } = await axiosInstance.post(`/posts/create`, formData);
   return data;
 };
 
 export const updatePost = async (
   postId: string,
   title: string,
-  image: number | null,
+  image: Blob | null,
   channelId: string,
   imageToDeletePublicId?: string
 ) => {
-  await axiosInstance.put(`/posts/update`, {
-    postId,
-    title,
-    image,
-    channelId,
-    imageToDeletePublicId,
-  });
+  const formData = new FormData();
+
+  formData.append('postId', postId);
+  formData.append('title', title);
+  image && formData.append('image', image);
+  formData.append('channelId', channelId);
+  imageToDeletePublicId &&
+    formData.append('imageToDeletePublicId', imageToDeletePublicId);
+
+  await axiosInstance.put(`/posts/update`, formData);
 };
 
 export const getPosts = async () => {

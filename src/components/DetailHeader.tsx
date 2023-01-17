@@ -10,6 +10,8 @@ interface Props {
   title?: string;
   body?: string;
   postId?: string;
+  image?: Blob;
+  imageId?: string;
 }
 
 const DetailHeader = ({
@@ -19,6 +21,8 @@ const DetailHeader = ({
   title,
   body,
   postId,
+  image,
+  imageId,
 }: Props) => {
   return (
     <Container>
@@ -32,6 +36,8 @@ const DetailHeader = ({
           title={title}
           body={body}
           postId={postId}
+          image={image}
+          imageId={imageId}
         />
       )}
     </Container>

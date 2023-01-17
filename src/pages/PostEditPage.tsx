@@ -11,10 +11,15 @@ const PostEditPage = () => {
   const {
     title,
     body,
+    image,
+    imageId,
+    isLoading,
     setTitle,
     setBody,
+    setImageId,
     handleChangeTitle,
     handleChangeBody,
+    handleChangeImage,
   } = usePost();
 
   useEffect(() => {
@@ -30,16 +35,22 @@ const PostEditPage = () => {
         title={title}
         body={body}
         postId={postId}
+        image={image}
+        imageId={imageId}
       />
       <PostEdit
         postId={postId}
         hasId={hasId}
         title={title}
         body={body}
+        image={image}
+        isLoading={isLoading}
         setTitle={setTitle}
         setBody={setBody}
+        setImageId={setImageId}
         handleTitle={handleChangeTitle}
         handleBody={handleChangeBody}
+        handleImage={handleChangeImage}
       />
     </Container>
   );

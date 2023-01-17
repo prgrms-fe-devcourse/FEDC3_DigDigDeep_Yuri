@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { createPost, updatePost } from '../utils/post';
 import { COLOR } from '../utils/color';
@@ -10,45 +10,54 @@ interface Props {
   title?: string;
   body?: string;
   postId?: string;
+  image?: Blob;
+  imageId?: string;
 }
 
-const EditButton = ({ text, title, body, postId }: Props) => {
+const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
   const navigator = useNavigate();
   const { showToast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const createGround = useCallback(async () => {
     try {
+      setIsLoading(true);
       const data = await createPost(
         JSON.stringify({ title, body }),
-        null,
+        image ?? null,
         '63b5b86c21d0f92287bd6474'
       );
       showToast({ message: '그라운드를 생성했습니다.' });
       navigator(`/posts/${data._id}`);
+      setIsLoading(false);
     } catch {
       showToast({ message: '그라운드 생성에 실패했습니다.' });
     }
-  }, [navigator, showToast, title, body]);
+  }, [navigator, showToast, title, body, image]);
 
   const updateGround = useCallback(async () => {
     try {
       if (postId) {
+        setIsLoading(true);
         await updatePost(
           postId,
           JSON.stringify({ title, body }),
-          null,
-          '63b5b86c21d0f92287bd6474'
+          image ?? null,
+          '63b5b86c21d0f92287bd6474',
+          imageId
         );
         showToast({ message: '그라운드를 수정했습니다.' });
         navigator(`/`);
+        setIsLoading(false);
       }
     } catch {
       showToast({ message: '그라운드 수정에 실패했습니다.' });
     }
-  }, [showToast, navigator, postId, title, body]);
+  }, [showToast, navigator, postId, title, body, image, imageId]);
 
   return (
     <Button
+      disabled={isLoading}
       onClick={() => (text === 'CREATE' ? createGround() : updateGround())}
     >
       {text}

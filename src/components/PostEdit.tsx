@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
@@ -9,10 +9,14 @@ interface Props {
   hasId: boolean;
   title: string;
   body: string;
+  image?: Blob;
+  isLoading: boolean;
   setTitle: (v: string) => void;
   setBody: (v: string) => void;
+  setImageId: (v: string) => void;
   handleTitle: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleBody: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PostEdit = ({
@@ -20,23 +24,31 @@ const PostEdit = ({
   hasId,
   title,
   body,
+  image,
+  isLoading,
   setTitle,
   setBody,
+  setImageId,
   handleTitle,
   handleBody,
+  handleImage,
 }: Props) => {
+  const [previewImage, setPreviewImage] = useState<string>('');
+
   const fetchPost = useCallback(async () => {
     try {
       if (postId) {
-        const { title } = await getPost(postId);
+        const { title, image, imagePublicId } = await getPost(postId);
         const data = JSON.parse(title);
         setTitle(data.title);
         setBody(data.body);
+        image && setPreviewImage(image);
+        imagePublicId && setImageId(imagePublicId);
       }
     } catch (error) {
       alert('그라운드 정보를 불러올 수 없습니다.');
     }
-  }, [postId, setTitle, setBody]);
+  }, [postId, setTitle, setBody, setPreviewImage, setImageId]);
 
   useEffect(() => {
     if (postId) {
@@ -56,9 +68,16 @@ const PostEdit = ({
         placeholder="내용을 입력해주세요..."
         value={body}
       />
-      <Button>
-        <Icon name="add-image" size={40} />
-      </Button>
+      <Wrapper>
+        <Button disabled={isLoading}>
+          <Label htmlFor="file">
+            <Icon name="add-image" size={40} />
+          </Label>
+        </Button>
+        <Input id="file" type="file" accept="image/*" onChange={handleImage} />
+      </Wrapper>
+      {previewImage && !image && <img src={previewImage} alt="첨부 이미지" />}
+      {image && <img src={URL.createObjectURL(image)} alt="첨부 이미지" />}
     </Container>
   );
 };
@@ -108,7 +127,7 @@ const Title = styled.textarea`
 
 const Body = styled.textarea`
   width: 90%;
-  height: 100%;
+  height: 69%;
   font-family: 'Noto Sans KR', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -137,3 +156,13 @@ const Button = styled.button`
     right: 2rem;
   }
 `;
+
+const Label = styled.label`
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  display: none;
+`;
+
+const Wrapper = styled.div``;
