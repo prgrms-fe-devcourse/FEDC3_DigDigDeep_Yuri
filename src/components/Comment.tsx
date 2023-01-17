@@ -30,19 +30,17 @@ const Comment = ({
   const navigate = useNavigate();
   const isMyComment = author._id === user._id;
 
-  const toUserProfile = (authorId: string) => {
-    navigate(`/profile/${authorId}`);
+  const toUserProfile = () => {
+    navigate(`/profile/${author._id}`);
   };
 
-  const handleDeleteComment = async (commentId: string) => {
+  const handleDeleteComment = async () => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       try {
-        await deleteComment(commentId);
+        await deleteComment(_id);
         setUser({
           ...user,
-          comments: user.comments.filter(
-            (comment) => comment._id !== commentId
-          ),
+          comments: user.comments.filter((comment) => comment._id !== _id),
         });
         if (fetchHandler) fetchHandler();
       } catch (error) {
@@ -55,7 +53,7 @@ const Comment = ({
     <Container {...props} isMyComment={isMyComment}>
       <CommentWrapper>
         <CommentHeader>
-          <Wrapper onClick={() => toUserProfile(author._id)}>
+          <Wrapper onClick={toUserProfile}>
             {author.image ? (
               <ProfileImage src={author.image} />
             ) : (
@@ -67,11 +65,7 @@ const Comment = ({
           </Wrapper>
           <Wrapper>
             {isMyComment && (
-              <Button
-                onClick={() => {
-                  handleDeleteComment(_id);
-                }}
-              >
+              <Button onClick={handleDeleteComment}>
                 <Icon name="close" size={12} />
               </Button>
             )}
