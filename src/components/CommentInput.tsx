@@ -66,33 +66,33 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
 
 const Container = styled.div`
   background-color: ${COLOR.white};
-  width: 100%;
+  width: 50%;
   position: fixed;
   bottom: 0;
   padding-top: 1rem;
   padding-bottom: 2rem;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0px -6px 3px rgba(4, 4, 4, 0.11);
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 100%;
+  }
 `;
 
 const Form = styled.form<FormProps>`
   background-color: ${COLOR.white};
   width: 90%;
   margin: 0 auto;
-  padding-bottom: 2rem;
   display: flex;
+  padding: 1.2rem 1rem;
   border-radius: 23.5px;
   align-items: center;
   justify-content: space-between;
   gap: 1.3rem;
   border: 1px solid;
+  min-height: 20r;
   box-sizing: border-box;
   border-color: ${({ isFocus }) =>
     isFocus ? COLOR.lightBrown : COLOR.lightGray};
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 0.8rem 1.8rem;
-  }
 `;
 
 const Input = styled.input`
@@ -105,6 +105,7 @@ const Input = styled.input`
   font-size: 1.2rem;
   line-height: 1.6rem;
   padding: 0;
+  padding-left: 1rem;
 
   ::placeholder {
     color: ${COLOR.brownGray};

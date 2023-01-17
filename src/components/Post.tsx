@@ -17,7 +17,7 @@ interface PostProps extends PostResponse {
   isDetailPage?: boolean;
 }
 
-interface PostHeaderProps {
+interface PostDetailProps {
   isDetailPage?: boolean;
 }
 
@@ -112,9 +112,9 @@ const Post = ({
         </Wrapper>
       </PostHeader>
       <Section onClick={() => toPostDetail(_id)}>
-        <Title>{title}</Title>
+        <Title isDetailPage={isDetailPage}>{title}</Title>
         {image && <Image src={image} />}
-        <Text>{title}</Text>
+        <Text isDetailPage={isDetailPage}>{title}</Text>
       </Section>
       {checkIsMine && user._id === author._id ? (
         <Footer>
@@ -205,13 +205,17 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const PostHeader = styled.div<PostHeaderProps>`
+const PostHeader = styled.div<PostDetailProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 0;
   margin: 0 auto;
-  width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
+  width: 95%;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
+  }
 `;
 
 const Section = styled.div`
@@ -225,7 +229,23 @@ const Footer = styled.div`
   padding: 1rem 1.4rem;
 `;
 
-const Title = styled.span`
+const detailBody = `
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+const detailsTitle = `
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+const Title = styled.span<PostDetailProps>`
   display: block;
   font-weight: 700;
   font-size: 1.2rem;
@@ -233,24 +253,16 @@ const Title = styled.span`
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   margin-bottom: 0.4rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
 `;
 
-const Text = styled.div`
+const Text = styled.div<PostDetailProps>`
   font-weight: 350;
   font-size: 0.8rem;
   line-height: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  ${({ isDetailPage }) => (isDetailPage ? '' : detailBody)};
 `;
 
 const SmText = styled.span`

@@ -92,15 +92,18 @@ const Container = styled.div<ContainerProps>`
 `;
 
 const CommentWrapper = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+  }
 `;
 
 const CommentHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* padding: 0 0 1rem 1.4rem; */
 `;
 
 const Section = styled.div`
@@ -113,6 +116,10 @@ const Text = styled.div`
   line-height: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
+  margin: 0 auto;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 0;
+  }
 `;
 
 const ProfileImage = styled.img`
