@@ -74,7 +74,7 @@ const Header = () => {
                   </Button>
                 </Wrapper>
                 <Wrapper>
-                  <LinkButton to="/" name="new" size={24} />
+                  <LinkButton to="/newPost" name="new" size={24} />
                   <LinkButton
                     to="/notifications"
                     name="notification"
