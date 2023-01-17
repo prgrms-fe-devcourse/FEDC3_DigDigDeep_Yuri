@@ -21,7 +21,6 @@ const TabItem = ({ item, value, isActive, onClick }: TabProps) => {
 export default TabItem;
 
 const Button = styled.button<{ isActive: boolean }>`
-  /* background-color: ${({ isActive }) => (isActive ? 'red' : 'white')}; */
   cursor: pointer;
   width: 7rem;
   border-bottom: 2px solid

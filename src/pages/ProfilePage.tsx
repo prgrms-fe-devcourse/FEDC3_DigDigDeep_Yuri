@@ -134,6 +134,7 @@ export default ProfilePage;
 const TabList = styled.div`
   display: block;
   width: 100%;
+  max-width: 1200px;
   background-color: ${COLOR.bgColor};
 `;
 
