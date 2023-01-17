@@ -2,35 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import FollowList from '../components/Follow/FollowList';
 import PostList from '../components/PostList';
 import TabItem from '../components/TabItem';
-import UserList from '../components/UserList';
 import { userState } from '../recoil/atoms/user';
-import { PostResponse, UserResponse } from '../types/response';
-import type { FollowResponse } from '../types/user';
-import { getUser, getUsers } from '../utils/api/user';
+import { UserResponse } from '../types/response';
+import { getUserInfo } from '../utils/api/user';
 import { COLOR } from '../utils/color';
-
-const testFollowers = [
-  {
-    createdAt: '2023-01-10T08:42:37.943Z',
-    updatedAt: '2023-01-10T08:42:37.943Z',
-    __v: 0,
-    _id: '63bd24fd4b0e607612a82bf0',
-  },
-  {
-    createdAt: '2023-01-10T08:42:37.943Z',
-    updatedAt: '2023-01-10T08:42:37.943Z',
-    __v: 0,
-    _id: '63bd22a14b0e607612a82b98',
-  },
-  {
-    createdAt: '2023-01-10T08:42:37.943Z',
-    updatedAt: '2023-01-10T08:42:37.943Z',
-    __v: 0,
-    _id: '63bd1ffa4b0e607612a82b35',
-  },
-];
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -40,51 +18,27 @@ export type TTabMenuItems = keyof Pick<
 const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
 
 const ProfilePage = () => {
-  const { userId } = useParams();
+  const { userId } = useParams() as { userId: string };
+  const { _id: myId } = useRecoilValue(userState);
+  const [userInfo, setUserInfo] = useState<UserResponse>({} as UserResponse);
   const navigate = useNavigate();
-  const user = useRecoilValue(userState);
-  const [userInfo, setUserInfo] = useState<UserResponse>();
-  const [followUsersInfo, setFollowUsersInfo] = useState<UserResponse[]>();
+
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
-  const [posts, setPosts] = useState<PostResponse[]>();
-  const [followers, setFollowers] = useState<FollowResponse[]>();
-  const [following, setFollowing] = useState<FollowResponse[]>();
+
+  const tabItems = {
+    posts: <PostList authorId={userId === 'me' ? myId : (userId as string)} />,
+    followers: <FollowList type="followers" follows={userInfo['followers']} />,
+    following: <FollowList type="following" follows={userInfo['following']} />,
+  };
 
   const fetchUser = useCallback(async () => {
-    try {
-      let data: UserResponse;
-      if (userId === 'me') {
-        data = user as UserResponse;
-      } else {
-        data = await getUser(userId as string);
-      }
-      setUserInfo(data);
-      setPosts(data.posts);
-      setFollowers(data.followers);
-      setFollowing(data.following);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [user, userId]);
-
-  const fetchFollowUsers = useCallback(async (followUser: FollowResponse[]) => {
-    try {
-      const data = await getUsers();
-      const filteredUsers = data.filter((user) => {
-        return followUser.find((follow) => {
-          return follow._id === user._id;
-        });
-      });
-      setFollowUsersInfo(filteredUsers);
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
+    const user = await getUserInfo(userId);
+    setUserInfo(user);
+  }, [userId]);
 
   useEffect(() => {
     fetchUser();
-    fetchFollowUsers(testFollowers);
-  }, [fetchFollowUsers, fetchUser]);
+  }, [fetchUser]);
 
   return (
     <div>
@@ -103,11 +57,10 @@ const ProfilePage = () => {
         <TabList>
           {TabMenuItems.map((item) => {
             return (
-              <TabItemContainer>
+              <TabItemContainer key={item}>
                 <TabItem
-                  key={item}
                   item={item}
-                  value={userInfo && userInfo[item].length}
+                  value={userInfo[item] ? userInfo[item].length : 0}
                   isActive={activeTab === item}
                   onClick={() => setActiveTab(item)}
                 />
@@ -116,15 +69,7 @@ const ProfilePage = () => {
           })}
         </TabList>
       </Header>
-      <TabContent>
-        {activeTab === 'posts' && posts && <PostList posts={posts} />}
-        {activeTab === 'following' && following && (
-          <UserList users={followUsersInfo!} unfollowable={true} />
-        )}
-        {activeTab === 'followers' && followers && (
-          <UserList users={followUsersInfo!} unfollowable={false} />
-        )}
-      </TabContent>
+      <TabContent>{tabItems[activeTab]}</TabContent>
     </div>
   );
 };
