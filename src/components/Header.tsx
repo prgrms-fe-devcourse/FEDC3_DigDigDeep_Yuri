@@ -111,7 +111,7 @@ const Header = () => {
             </WebSearchWrapper>
             {token ? (
               <Wrapper>
-                <LinkButton to="/" name="new" size={20} />
+                <LinkButton to="/newPost" name="new" size={20} />
                 <LinkButton to="/notifications" name="notification" size={20} />
                 <LinkButton to="/profile/me" name="profile" size={20} />
               </Wrapper>
