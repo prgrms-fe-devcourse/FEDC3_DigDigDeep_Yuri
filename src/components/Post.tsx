@@ -8,8 +8,14 @@ import { COLOR } from '../utils/color';
 import { formatDate } from '../utils/formatDate';
 import { createLike, deleteLike } from '../utils/like';
 import { sendNotification } from '../utils/notification';
+import { deletePost } from '../utils/post';
 import Divider from './Base/Divider';
 import Icon from './Base/Icon';
+
+interface PostProps extends PostResponse {
+  checkIsMine?: boolean;
+}
+
 const Post = ({
   _id,
   title,
@@ -18,8 +24,9 @@ const Post = ({
   likes,
   comments,
   image,
+  checkIsMine = false,
   ...props
-}: PostResponse) => {
+}: PostProps) => {
   const [user, setUser] = useRecoilState(userState);
   const [likesState, setLikesState] = useState(likes);
   const navigate = useNavigate();
@@ -34,6 +41,21 @@ const Post = ({
 
   const toPostDetail = (postId: string) => {
     navigate(`/posts/${postId}`);
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('정말로 삭제하시겠습니다?')) {
+      try {
+        await deletePost(_id);
+        navigate('/');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const handleEdit = () => {
+    navigate(`/edit/${_id}`);
   };
 
   const handleLike = async (postId: string, authorId: string) => {
@@ -65,9 +87,9 @@ const Post = ({
   };
 
   return (
-    <ListItem {...props}>
+    <Container {...props}>
       <PostHeader>
-        <Wrapper onClick={() => toUserProfile(_id)}>
+        <Wrapper onClick={() => toUserProfile(author._id)}>
           {author.image ? (
             <ProfileImage src={author.image} />
           ) : (
@@ -88,44 +110,93 @@ const Post = ({
         {image && <Image src={image} />}
         <Text>{title}</Text>
       </Section>
-      <Footer>
-        {likesState.find((like) => like.user === user._id) ? (
+      {checkIsMine && user._id === author._id ? (
+        <Footer>
+          <IconContainer>
+            <StyledDiv>
+              {likesState.find((like) => like.user === user._id) ? (
+                <IconWrapper>
+                  <Button onClick={() => handleLike(_id, author._id)}>
+                    <Icon name="liked" size={12} />
+                  </Button>
+                  <SmText>{likesState.length}</SmText>
+                </IconWrapper>
+              ) : (
+                <IconWrapper>
+                  <Button onClick={() => handleLike(_id, author._id)}>
+                    <Icon name="unliked" size={12} />
+                  </Button>
+                  {likesState.length > 999 ? (
+                    <SmText>999+</SmText>
+                  ) : (
+                    <SmText>{likesState.length}</SmText>
+                  )}
+                </IconWrapper>
+              )}
+              <IconWrapper>
+                <Button onClick={() => toPostDetail(_id)}>
+                  <Icon name="comment" size={12} />
+                </Button>
+                {comments.length > 999 ? (
+                  <SmText>999+</SmText>
+                ) : (
+                  <SmText>{comments.length}</SmText>
+                )}
+              </IconWrapper>
+            </StyledDiv>
+            <StyledDiv>
+              <IconWrapper>
+                <Button onClick={handleDelete}>
+                  <Icon name="delete" size={13} />
+                </Button>
+              </IconWrapper>
+              <IconWrapper>
+                <Button onClick={handleEdit}>
+                  <Icon name="edit" size={16} />
+                </Button>
+              </IconWrapper>
+            </StyledDiv>
+          </IconContainer>
+        </Footer>
+      ) : (
+        <Footer>
+          {likesState.find((like) => like.user === user._id) ? (
+            <IconWrapper>
+              <Button onClick={() => handleLike(_id, author._id)}>
+                <Icon name="liked" size={12} />
+              </Button>
+              <SmText>{likesState.length}</SmText>
+            </IconWrapper>
+          ) : (
+            <IconWrapper>
+              <Button onClick={() => handleLike(_id, author._id)}>
+                <Icon name="unliked" size={12} />
+              </Button>
+              {likesState.length > 999 ? (
+                <SmText>999+</SmText>
+              ) : (
+                <SmText>{likesState.length}</SmText>
+              )}
+            </IconWrapper>
+          )}
           <IconWrapper>
-            <Button onClick={() => handleLike(_id, author._id)}>
-              <Icon name="liked" size={12} />
+            <Button onClick={() => toPostDetail(_id)}>
+              <Icon name="comment" size={12} />
             </Button>
-            <SmText>{likesState.length}</SmText>
-          </IconWrapper>
-        ) : (
-          <IconWrapper>
-            <Button onClick={() => handleLike(_id, author._id)}>
-              <Icon name="unliked" size={12} />
-            </Button>
-            {likesState.length > 999 ? (
+            {comments.length > 999 ? (
               <SmText>999+</SmText>
             ) : (
-              <SmText>{likesState.length}</SmText>
+              <SmText>{comments.length}</SmText>
             )}
           </IconWrapper>
-        )}
-        <IconWrapper>
-          <Button onClick={() => toPostDetail(_id)}>
-            <Icon name="comment" size={12} />
-          </Button>
-          {comments.length > 999 ? (
-            <SmText>999+</SmText>
-          ) : (
-            <SmText>{comments.length}</SmText>
-          )}
-        </IconWrapper>
-      </Footer>
-    </ListItem>
+        </Footer>
+      )}
+    </Container>
   );
 };
 
-const ListItem = styled.li`
+const Container = styled.div`
   width: 100%;
-  margin: 0.5rem auto;
 `;
 
 const PostHeader = styled.div`
@@ -191,6 +262,16 @@ const IconWrapper = styled.div`
   &:first-child {
     margin-right: 1rem;
   }
+`;
+
+const StyledDiv = styled.div`
+  display: flex;
+`;
+
+const IconContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Button = styled.button`
