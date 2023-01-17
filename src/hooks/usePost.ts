@@ -7,6 +7,8 @@ const usePost = () => {
 
   const [imageId, setImageId] = useState<string>('');
 
+  const [name, setName] = useState<string>('');
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,6 +24,7 @@ const usePost = () => {
     if (!file) return;
     setIsLoading(true);
     setImage(file);
+    setName(file.name);
     try {
     } catch (error) {
       console.error(error);
@@ -31,6 +34,7 @@ const usePost = () => {
   };
 
   return {
+    name,
     title,
     body,
     image,

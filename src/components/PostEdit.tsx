@@ -5,6 +5,7 @@ import Icon from './Base/Icon';
 import { getPost } from '../utils/post';
 
 interface Props {
+  name?: string;
   postId?: string;
   hasId: boolean;
   title: string;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const PostEdit = ({
+  name,
   postId,
   hasId,
   title,
@@ -76,8 +78,18 @@ const PostEdit = ({
         </Button>
         <Input id="file" type="file" accept="image/*" onChange={handleImage} />
       </Wrapper>
-      {previewImage && !image && <img src={previewImage} alt="첨부 이미지" />}
-      {image && <img src={URL.createObjectURL(image)} alt="첨부 이미지" />}
+      {previewImage && !image && (
+        <ImageFile src={previewImage} alt="첨부 이미지" />
+      )}
+      {image && (
+        <ImageFileWrapper>
+          <ImageFile src={URL.createObjectURL(image)} alt="첨부 이미지" />
+          <ImageDetail>
+            <ImageTitle>첨부 파일</ImageTitle>
+            <ImageName>{name}</ImageName>
+          </ImageDetail>
+        </ImageFileWrapper>
+      )}
     </Container>
   );
 };
@@ -151,6 +163,7 @@ const Button = styled.button`
   position: absolute;
   right: 3rem;
   bottom: 2rem;
+  z-index: 11;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     right: 2rem;
@@ -166,3 +179,69 @@ const Input = styled.input`
 `;
 
 const Wrapper = styled.div``;
+
+const ImageFileWrapper = styled.div`
+  position: absolute;
+  left: 3rem;
+  bottom: 2.5rem;
+  background-color: ${COLOR.white};
+  width: fit-content;
+  height: 8rem;
+  padding: 0 1.5rem;
+  border: 0.2px solid rgba(191, 176, 168, 0.6);
+  border-radius: 8px;
+  box-shadow: 0px 2px 3px 1px rgba(219, 219, 219, 0.37);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 10;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    left: 2.5rem;
+    height: 7.5rem;
+  }
+`;
+
+const ImageFile = styled.img`
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 10px;
+  object-fit: cover;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 5rem;
+    height: 5rem;
+  }
+`;
+
+const ImageDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+`;
+
+const ImageTitle = styled.h3`
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: ${COLOR.lightBrown};
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 1.2rem;
+  }
+`;
+
+const ImageName = styled.span`
+  font-size: 1.4rem;
+  color: ${COLOR.lightBrown};
+  max-width: 17rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 1.2rem;
+    max-width: 8rem;
+  }
+`;

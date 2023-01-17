@@ -9,6 +9,7 @@ const PostEditPage = () => {
   const { postId } = useParams<string>();
   const [hasId, setHasId] = useState<boolean>(false);
   const {
+    name,
     title,
     body,
     image,
@@ -39,6 +40,7 @@ const PostEditPage = () => {
         imageId={imageId}
       />
       <PostEdit
+        name={name}
         postId={postId}
         hasId={hasId}
         title={title}
