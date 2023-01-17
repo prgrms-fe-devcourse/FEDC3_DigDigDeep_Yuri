@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import useModal from '../hooks/useModal';
 import { userState } from '../recoil/atoms/user';
 import { CommentResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { deleteComment } from '../utils/comment';
 import { formatDate } from '../utils/formatDate';
+import useGetMyInfo from '../hooks/useGetMyInfo';
+import useToast from '../hooks/useToast';
 import Divider from './Base/Divider';
 import Icon from './Base/Icon';
 
@@ -26,8 +29,11 @@ const Comment = ({
   fetchHandler,
   ...props
 }: CommentProps) => {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
+  const { showModal } = useModal();
+  const { showToast } = useToast();
+  const getMyInfo = useGetMyInfo();
   const isMyComment = author._id === user._id;
 
   const toUserProfile = () => {
@@ -35,18 +41,20 @@ const Comment = ({
   };
 
   const handleDeleteComment = async () => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      try {
-        await deleteComment(_id);
-        setUser({
-          ...user,
-          comments: user.comments.filter((comment) => comment._id !== _id),
-        });
-        if (fetchHandler) fetchHandler();
-      } catch (error) {
-        console.error(error, '댓글 삭제에 실패하였습니다.');
-      }
-    }
+    showModal({
+      message: '정말로 삭제하시겠습니다?',
+      handleConfirm: async () => {
+        try {
+          await deleteComment(_id);
+          await getMyInfo();
+          if (fetchHandler) fetchHandler();
+          showToast({ message: '디깅 -1' });
+        } catch (error) {
+          console.error(error, '댓글 삭제에 실패하였습니다.');
+          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        }
+      },
+    });
   };
 
   return (
