@@ -246,13 +246,13 @@ const detailsTitle = `
 `;
 
 const Title = styled.span<PostDetailProps>`
-  display: block;
   font-weight: 700;
   font-size: 1.2rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   margin-bottom: 0.4rem;
+  word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
 `;
 
@@ -262,6 +262,7 @@ const Text = styled.div<PostDetailProps>`
   line-height: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
+  word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailBody)};
 `;
 
