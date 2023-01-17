@@ -30,16 +30,9 @@ const HomePage = () => {
       <LogOutButton onClick={logout}>로그아웃</LogOutButton>
       <List>
         {posts.map((post) => (
-          <Post
-            key={post._id}
-            _id={post._id}
-            title={post.title}
-            createdAt={post.createdAt}
-            author={post.author}
-            likes={post.likes}
-            comments={post.comments}
-            image={post.image}
-          />
+          <ListItem key={post._id}>
+            <Post {...post} />
+          </ListItem>
         ))}
       </List>
     </Container>
@@ -65,7 +58,6 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  position: relative;
 `;
 
 const List = styled.ul`
@@ -77,6 +69,11 @@ const List = styled.ul`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 90%;
   }
+`;
+
+const ListItem = styled.li`
+  width: 100%;
+  margin: 0.5rem auto;
 `;
 
 export default HomePage;
