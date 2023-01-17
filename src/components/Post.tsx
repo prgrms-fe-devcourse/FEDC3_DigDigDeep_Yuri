@@ -18,10 +18,21 @@ import Icon from './Base/Icon';
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
   isDetailPage?: boolean;
+  isMyLikes?: boolean;
 }
 
 interface PostDetailProps {
   isDetailPage?: boolean;
+}
+
+interface FlexContainerProps {
+  direction?: 'row' | 'column';
+  color?: string;
+}
+
+interface ImageContainerProps {
+  width?: string;
+  height?: string;
 }
 
 const Post = ({
@@ -34,6 +45,7 @@ const Post = ({
   image,
   checkIsMine = false,
   isDetailPage = false,
+  isMyLikes = false,
   ...props
 }: PostProps) => {
   const user = useRecoilValue(userState);
@@ -131,15 +143,78 @@ const Post = ({
           </Button>
         </Wrapper>
       </PostHeader>
-      <Section onClick={() => toPostDetail(_id)}>
-        <Title>
-          {typeof postContent === 'string' ? postContent : postContent.title}
-        </Title>
-        {image && <Image src={image} />}
-        <Text>
-          {typeof postContent === 'string' ? postContent : postContent.body}
-        </Text>
-      </Section>
+      {isMyLikes ? (
+        <FlexContainer
+          direction="row"
+          color={COLOR.white}
+          onClick={() => toPostDetail(_id)}
+        >
+          {image && (
+            <ImageContainer>
+              <Image src={image} />
+            </ImageContainer>
+          )}
+          <FlexContainer direction="column">
+            <PaddingContainer>
+              <Title>
+                {typeof postContent === 'string'
+                  ? postContent
+                  : postContent.title}
+              </Title>
+              <Text>
+                {typeof postContent === 'string'
+                  ? postContent
+                  : postContent.body}
+              </Text>
+            </PaddingContainer>
+            <Footer>
+              {likesState.find((like) => like.user === user._id) ? (
+                <IconWrapper>
+                  <Button onClick={() => handleLike(_id, author._id)}>
+                    <Icon name="liked" size={12} />
+                  </Button>
+                  <SmText>{likesState.length}</SmText>
+                </IconWrapper>
+              ) : (
+                <IconWrapper>
+                  <Button onClick={() => handleLike(_id, author._id)}>
+                    <Icon name="unliked" size={12} />
+                  </Button>
+                  {likesState.length > 999 ? (
+                    <SmText>999+</SmText>
+                  ) : (
+                    <SmText>{likesState.length}</SmText>
+                  )}
+                </IconWrapper>
+              )}
+              <IconWrapper>
+                <Button onClick={() => toPostDetail(_id)}>
+                  <Icon name="comment" size={12} />
+                </Button>
+                {comments.length > 999 ? (
+                  <SmText>999+</SmText>
+                ) : (
+                  <SmText>{comments.length}</SmText>
+                )}
+              </IconWrapper>
+            </Footer>
+          </FlexContainer>
+        </FlexContainer>
+      ) : (
+        <Section onClick={() => toPostDetail(_id)}>
+          <Title>
+            {typeof postContent === 'string' ? postContent : postContent.title}
+          </Title>
+          {image && (
+            <ImageContainer width="100%">
+              <Image src={image} />
+            </ImageContainer>
+          )}
+          <Text>
+            {typeof postContent === 'string' ? postContent : postContent.body}
+          </Text>
+        </Section>
+      )}
       {checkIsMine && user._id === author._id ? (
         <Footer>
           <IconContainer>
@@ -189,37 +264,39 @@ const Post = ({
           </IconContainer>
         </Footer>
       ) : (
-        <Footer>
-          {likesState.find((like) => like.user === user._id) ? (
+        !isMyLikes && (
+          <Footer>
+            {likesState.find((like) => like.user === user._id) ? (
+              <IconWrapper>
+                <Button onClick={() => handleLike(_id, author._id)}>
+                  <Icon name="liked" size={12} />
+                </Button>
+                <SmText>{likesState.length}</SmText>
+              </IconWrapper>
+            ) : (
+              <IconWrapper>
+                <Button onClick={() => handleLike(_id, author._id)}>
+                  <Icon name="unliked" size={12} />
+                </Button>
+                {likesState.length > 999 ? (
+                  <SmText>999+</SmText>
+                ) : (
+                  <SmText>{likesState.length}</SmText>
+                )}
+              </IconWrapper>
+            )}
             <IconWrapper>
-              <Button onClick={() => handleLike(_id, author._id)}>
-                <Icon name="liked" size={12} />
+              <Button onClick={() => toPostDetail(_id)}>
+                <Icon name="comment" size={12} />
               </Button>
-              <SmText>{likesState.length}</SmText>
-            </IconWrapper>
-          ) : (
-            <IconWrapper>
-              <Button onClick={() => handleLike(_id, author._id)}>
-                <Icon name="unliked" size={12} />
-              </Button>
-              {likesState.length > 999 ? (
+              {comments.length > 999 ? (
                 <SmText>999+</SmText>
               ) : (
-                <SmText>{likesState.length}</SmText>
+                <SmText>{comments.length}</SmText>
               )}
             </IconWrapper>
-          )}
-          <IconWrapper>
-            <Button onClick={() => toPostDetail(_id)}>
-              <Icon name="comment" size={12} />
-            </Button>
-            {comments.length > 999 ? (
-              <SmText>999+</SmText>
-            ) : (
-              <SmText>{comments.length}</SmText>
-            )}
-          </IconWrapper>
-        </Footer>
+          </Footer>
+        )
       )}
     </Container>
   );
@@ -227,6 +304,7 @@ const Post = ({
 
 const Container = styled.div`
   width: 100%;
+  margin: 2rem 0;
 `;
 
 const PostHeader = styled.div<PostDetailProps>`
@@ -235,7 +313,6 @@ const PostHeader = styled.div<PostDetailProps>`
   justify-content: space-between;
   padding: 1rem 0;
   margin: 0 auto;
-  width: 95%;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
@@ -245,6 +322,17 @@ const PostHeader = styled.div<PostDetailProps>`
 const Section = styled.div`
   background-color: ${COLOR.white};
   padding: 1rem 1.4rem;
+`;
+
+const FlexContainer = styled.div<FlexContainerProps>`
+  display: flex;
+  flex-direction: ${({ direction }) =>
+    direction === 'column' ? 'column' : 'row'};
+  background-color: ${({ color }) => color};
+`;
+
+const PaddingContainer = styled.div`
+  padding: 1rem;
 `;
 
 const Footer = styled.div`
@@ -351,6 +439,20 @@ const ProfileImage = styled.img`
   margin-right: 0.4rem;
 `;
 
-const Image = styled.img``;
+const ImageContainer = styled.div<ImageContainerProps>`
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: ${({ width }) => width ?? '10rem'};
+  min-width: 10rem;
+  aspect-ratio: 1 / 1;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+`;
 
 export default Post;
