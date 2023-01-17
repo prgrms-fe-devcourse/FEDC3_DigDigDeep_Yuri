@@ -31,15 +31,7 @@ const HomePage = () => {
       <List>
         {posts.map((post) => (
           <ListItem key={post._id}>
-            <Post
-              _id={post._id}
-              title={post.title}
-              createdAt={post.createdAt}
-              author={post.author}
-              likes={post.likes}
-              comments={post.comments}
-              image={post.image}
-            />
+            <Post {...post} />
           </ListItem>
         ))}
       </List>

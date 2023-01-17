@@ -35,18 +35,7 @@ const PostPage = () => {
       <Header />
       {post && (
         <Wrapper>
-          <Post
-            key={post._id}
-            _id={post._id}
-            title={post.title}
-            createdAt={post.createdAt}
-            author={post.author}
-            likes={post.likes}
-            comments={post.comments}
-            image={post.image}
-            checkIsMine={true}
-            isDetailPage={true}
-          />
+          <Post {...post} checkIsMine={true} isDetailPage={true} />
           <List>
             {post.comments.length ? (
               post.comments.map((comment) => (
@@ -94,9 +83,11 @@ const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  min-width: 767px;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
+    min-width: 100%;
   }
 `;
 
