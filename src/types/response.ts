@@ -14,8 +14,8 @@ export interface UserResponse extends BasicResponse {
   posts: PostResponse[];
   likes: LikeResponse[];
   comments: CommentResponse[];
-  followers: [];
-  following: [];
+  followers: FollowResponse[];
+  following: FollowResponse[];
   notifications: NotificationResponse[];
   messages: [];
   fullName: string;
