@@ -63,8 +63,10 @@ const ProfilePage = () => {
   return (
     <div>
       <div>
-        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>{' '}
-        | <FollowButton targetId={userId} fetchUser={fetchUser} />
+        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>
+        {userId !== 'me' && (
+          <FollowButton targetId={userId} fetchUser={fetchUser} />
+        )}
       </div>
       <Header>
         <ImageContainer>
