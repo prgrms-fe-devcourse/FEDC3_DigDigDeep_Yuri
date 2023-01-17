@@ -12,6 +12,7 @@ interface Props {
   postId?: string;
   image?: Blob | null;
   imageId?: string;
+  route?: string;
 }
 
 const DetailHeader = ({
@@ -23,10 +24,11 @@ const DetailHeader = ({
   postId,
   image,
   imageId,
+  route,
 }: Props) => {
   return (
     <Container>
-      <BackHomeLink to="/">
+      <BackHomeLink to={route ?? '/'}>
         <Icon name="back" width={20} height={16} />
       </BackHomeLink>
       <Title>{name}</Title>
