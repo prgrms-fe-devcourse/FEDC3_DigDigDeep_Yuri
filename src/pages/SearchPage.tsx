@@ -6,6 +6,7 @@ import Post from '../components/Post';
 import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 import { COLOR } from '../utils/color';
+import { getPost } from '../utils/post';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -27,7 +28,8 @@ const SearchPage = () => {
         `/search/all/${getSearchTerm}`
       );
       const postOnly = data.filter((el) => 'author' in el);
-      setPostResult(postOnly);
+      const posts = postOnly.map((post) => getPost(post._id));
+      Promise.all(posts).then((data) => setPostResult(data));
     }
   }, [searchParams]);
 
