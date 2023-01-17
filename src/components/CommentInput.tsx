@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { userState } from '../recoil/atoms/user';
+import useGetMyInfo from '../hooks/useGetMyInfo';
+import useToast from '../hooks/useToast';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { createComment } from '../utils/comment';
@@ -19,7 +19,8 @@ interface FormProps {
 
 const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
   const [comment, setComment] = useState('');
-  const [user, setUser] = useRecoilState(userState);
+  const { showToast } = useToast();
+  const getMyInfo = useGetMyInfo();
   const [isFocus, setIsFocus] = useState(false);
 
   const onInputFocus = () => setIsFocus(true);
@@ -38,12 +39,14 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     e.preventDefault();
     try {
       const data = await createComment(content, postId);
+      await getMyInfo();
       sendNotification('COMMENT', data._id, author._id, postId);
-      setUser({ ...user, comments: [...user.comments, data] });
       if (fetchHandler) fetchHandler();
+      showToast({ message: '디깅 +1' });
       setComment('');
     } catch (error) {
       console.error('댓글 등록에 실패하였습니다.');
+      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
     }
   };
 

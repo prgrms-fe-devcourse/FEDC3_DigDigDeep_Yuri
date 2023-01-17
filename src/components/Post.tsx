@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userState } from '../recoil/atoms/user';
+import useGetMyInfo from '../hooks/useGetMyInfo';
+import useModal from '../hooks/useModal';
+import useToast from '../hooks/useToast';
+import { tokenState, userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { formatDate } from '../utils/formatDate';
@@ -33,12 +36,17 @@ const Post = ({
   isDetailPage = false,
   ...props
 }: PostProps) => {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
+  const token = useRecoilValue(tokenState);
   const [likesState, setLikesState] = useState(likes);
+  const { showToast } = useToast();
+  const { showModal } = useModal();
+  const getMyInfo = useGetMyInfo();
   const navigate = useNavigate();
 
   const handleShare = (postId: string) => {
-    navigator.clipboard.writeText(`${window.location.href}posts/${postId}`);
+    navigator.clipboard.writeText(`${window.location.host}/posts/${postId}`);
+    showToast({ message: '클립보드에 저장되었습니다.' });
   };
 
   const toUserProfile = (authorId: string) => {
@@ -50,14 +58,19 @@ const Post = ({
   };
 
   const handleDelete = async () => {
-    if (window.confirm('정말로 삭제하시겠습니다?')) {
-      try {
-        await deletePost(_id);
-        navigate('/');
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    showModal({
+      message: '정말로 삭제하시겠습니다?',
+      handleConfirm: async () => {
+        try {
+          await deletePost(_id);
+          navigate('/');
+          showToast({ message: '그라운드가 삭제되었습니다.' });
+        } catch (error) {
+          console.error(error);
+          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        }
+      },
+    });
   };
 
   const handleEdit = () => {
@@ -66,29 +79,35 @@ const Post = ({
 
   const handleLike = async (postId: string, authorId: string) => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
+    if (!token) {
+      return showToast({ message: '로그인이 필요합니다.' });
+    }
+
     if (isLike === -1) {
-      const { data } = await createLike(postId);
-      if (user.likes && user._id) {
+      try {
+        const { data } = await createLike(postId);
         setLikesState([...likesState, data]);
-        setUser({
-          ...user,
-          likes: [...user.likes, data],
-        });
+        await getMyInfo();
         sendNotification('LIKE', data._id, authorId, postId);
+        showToast({ message: '좋아요를 눌렀습니다.' });
+      } catch (error) {
+        console.error(error);
+        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
       }
     } else {
-      setLikesState(
-        likesState.filter((item) => item._id !== likesState[isLike]._id)
-      );
-      if (user.likes) {
-        setUser({
-          ...user,
-          likes: user.likes.filter(
-            (item) => item._id !== likesState[isLike]._id
-          ),
-        });
+      try {
+        setLikesState(
+          likesState.filter((item) => item._id !== likesState[isLike]._id)
+        );
+        deleteLike(likesState[isLike]._id);
+        if (user.likes) {
+          getMyInfo();
+        }
+        showToast({ message: '좋아요를 취소했습니다.' });
+      } catch (error) {
+        console.log(error);
+        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
       }
-      deleteLike(likesState[isLike]._id);
     }
   };
 
