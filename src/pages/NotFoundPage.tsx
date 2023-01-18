@@ -29,6 +29,10 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 20vw;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 50vw;
+  }
 `;
 
 const Title = styled.h1`
@@ -36,12 +40,21 @@ const Title = styled.h1`
   font-weight: 600;
   font-size: 3rem;
   margin: 5rem 0 1.7rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    margin: 3rem 0 1rem;
+    font-size: 2.2rem;
+  }
 `;
 
 const Detail = styled.h2`
   color: ${COLOR.white};
   font-weight: 400;
   font-size: 2rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Button = styled.button`
@@ -59,4 +72,8 @@ const Background = styled.img`
   position: absolute;
   left: 0;
   bottom: -2.8rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    bottom: 0;
+  }
 `;
