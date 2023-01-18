@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import {
   updatePassword,
@@ -14,16 +14,15 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import FormImageFile from '../UserForm/FormProfileImage';
+import { loadingState } from '../../recoil/atoms/loading';
 
 const ProfileEditForm = () => {
-  const navigate = useNavigate();
-
-  const getMyInfo = useGetMyInfo();
-
   const user = useRecoilValue(userState);
-
+  const setLoading = useSetRecoilState(loadingState);
+  const getMyInfo = useGetMyInfo();
   const { showToast } = useToast();
 
+  const navigate = useNavigate();
   const {
     handleSubmit,
     resetField,
@@ -63,9 +62,11 @@ const ProfileEditForm = () => {
 
     if (promises.length === 0) return;
 
+    setLoading(true);
     Promise.all(promises)
       .then(() => {
         getMyInfo();
+        setLoading(false);
         showToast({ message: '변경되었습니다.' });
         navigate(ROUTES.PROFILE_ME);
       })
