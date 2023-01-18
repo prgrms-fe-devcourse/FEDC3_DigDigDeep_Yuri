@@ -33,9 +33,14 @@ const SearchPage = () => {
       const { data } = await axiosInstance.get<PostResponse[]>(
         `/search/all/${getSearchTerm}`
       );
-      const postOnly = data.filter((el) => 'author' in el);
-      const posts = postOnly.map((post) => getPost(post._id));
-      Promise.all(posts).then((data) => setPostResult(data));
+      Promise.all(
+        data.reduce<Promise<PostResponse>[]>((prev, post) => {
+          if ('author' in post) {
+            prev.push(getPost(post._id));
+          }
+          return prev;
+        }, [])
+      ).then((data) => setPostResult(data));
     }
   }, [searchParams]);
 
