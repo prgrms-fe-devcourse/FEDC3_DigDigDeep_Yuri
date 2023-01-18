@@ -4,12 +4,10 @@ import { COLOR } from '../../utils/color';
 import { NotificationResponse } from '../../types/response';
 
 const Notification = ({
-  _id,
   author,
   like,
   follow,
   comment,
-  seen,
 }: NotificationResponse) => {
   return (
     <>
