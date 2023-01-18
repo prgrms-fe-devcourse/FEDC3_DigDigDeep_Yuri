@@ -67,6 +67,7 @@ const Container = styled.div`
 `;
 
 const BackLink = styled.button`
+  cursor: pointer;
   font-size: 1.6rem;
   justify-self: start;
 `;
