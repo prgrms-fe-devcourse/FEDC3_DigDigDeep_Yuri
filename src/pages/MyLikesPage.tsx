@@ -6,6 +6,7 @@ import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
 import styled from 'styled-components';
+import Header from '../components/Header';
 
 const MyLikesPage = () => {
   const user = useRecoilValue(userState);
@@ -33,12 +34,19 @@ const MyLikesPage = () => {
   }, [fetchPosts]);
 
   return (
-    <Container>
-      <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
-      {posts.map((post) => (
-        <Post key={post._id} {...post} />
-      ))}
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <DetailHeader
+          route="/profile/me"
+          name="내가 좋아한 그라운드"
+          isButton={false}
+        />
+        {posts.map((post) => (
+          <Post key={post._id} {...post} isMyLikes={true} />
+        ))}
+      </Container>
+    </>
   );
 };
 
@@ -54,6 +62,6 @@ const Container = styled.div`
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
-    min-width: 100%;
+    min-width: 325px;
   }
 `;
