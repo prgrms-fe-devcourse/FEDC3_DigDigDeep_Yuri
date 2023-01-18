@@ -1,5 +1,5 @@
-import { CommentResponse } from '../types/response';
-import axiosInstance from './axios';
+import { CommentResponse } from '../../types/response';
+import axiosInstance from '../axios';
 
 interface CommentParam {
   (comment: string, postId: string): Promise<CommentResponse>;

@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
+import { COLOR } from '../../utils/color';
 
 interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   item: string;

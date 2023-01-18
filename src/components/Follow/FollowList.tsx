@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { FollowResponse, UserResponse } from '../../types/response';
-import { getUserInfo } from '../../utils/api/user';
+import { getUser } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
@@ -32,7 +32,7 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
     Promise.allSettled(
       follows.map((follow) => {
         const userId = type === 'following' ? follow.user : follow.follower;
-        return getUserInfo(userId);
+        return getUser(userId);
       })
     )
       .then((results) => {
@@ -62,15 +62,15 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
     <>
       <List>
         {users.map((user, index) => (
-        <UserListItem>
-          <UserItem
-            key={user._id}
-            type={type}
-            user={user}
-            onUnfollow={onUnfollow}
-            follow={follows[index]}
-          />
-        </UserListItem>
+          <UserListItem>
+            <UserItem
+              key={user._id}
+              type={type}
+              user={user}
+              onUnfollow={onUnfollow}
+              follow={follows[index]}
+            />
+          </UserListItem>
         ))}
       </List>
       <Spinner loading={loading} />

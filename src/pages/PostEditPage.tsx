@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import DetailHeader from '../components/DetailHeader';
-import PostEdit from '../components/PostEdit';
+import DetailHeader from '../components/Header/DetailHeader';
+import PostEdit from '../components/Post/PostEdit';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import usePost from '../hooks/usePost';

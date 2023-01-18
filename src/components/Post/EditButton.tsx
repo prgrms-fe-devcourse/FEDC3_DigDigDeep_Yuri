@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { createPost, updatePost } from '../utils/post';
-import { COLOR } from '../utils/color';
+import { createPost, updatePost } from '../../utils/api/post';
+import { COLOR } from '../../utils/color';
 import { useNavigate } from 'react-router-dom';
-import useToast from '../hooks/useToast';
-import { ROUTES } from '../utils/routes';
+import useToast from '../../hooks/useToast';
+import { ROUTES } from '../../utils/routes';
 
 interface Props {
   text?: string;

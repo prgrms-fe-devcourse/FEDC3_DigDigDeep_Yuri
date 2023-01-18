@@ -5,7 +5,7 @@ import useNotification from '../../hooks/useNotification';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { COLOR } from '../../utils/color';
-import { seenNotification } from '../../utils/notification';
+import { seenNotification } from '../../utils/api/notification';
 
 const NotificationList = () => {
   const [user] = useRecoilState(userState);

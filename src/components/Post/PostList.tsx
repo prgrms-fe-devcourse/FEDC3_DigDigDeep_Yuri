@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { userState } from '../recoil/atoms/user';
-import { PostResponse } from '../types/response';
-import { getPostsByAuthor } from '../utils/post';
+import { userState } from '../../recoil/atoms/user';
+import { PostResponse } from '../../types/response';
+import { getPostsByAuthor } from '../../utils/api/post';
 import Post from './Post';
 
 interface Props {
