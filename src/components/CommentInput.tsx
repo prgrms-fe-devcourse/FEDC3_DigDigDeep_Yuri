@@ -37,6 +37,7 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     postId: string
   ) => {
     e.preventDefault();
+    if (!comment) return showToast({ message: '디깅을 먼저 작성해주세요.' });
     try {
       const data = await createComment(content, postId);
       await getMyInfo();
@@ -66,6 +67,8 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     </Container>
   );
 };
+
+export default CommentInput;
 
 const Container = styled.div`
   background-color: ${COLOR.white};
@@ -127,5 +130,3 @@ const Button = styled.button`
   color: ${COLOR.brown};
   cursor: pointer;
 `;
-
-export default CommentInput;
