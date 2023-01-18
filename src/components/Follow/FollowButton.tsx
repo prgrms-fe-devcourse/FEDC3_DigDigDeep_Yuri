@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms/user';
+import { tokenState, userState } from '../../recoil/atoms/user';
 import { useEffect, useState, useCallback } from 'react';
 import { follow, unfollow } from '../../utils/api/follow';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
+import useToast from '../../hooks/useToast';
+import { COLOR } from '../../utils/color';
+import { sendNotification } from '../../utils/notification';
 
 interface FollowButtonProps {
   targetId: string;
@@ -12,7 +15,8 @@ interface FollowButtonProps {
 
 const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
   const user = useRecoilValue(userState);
-
+  const { showToast } = useToast();
+  const token = useRecoilValue(tokenState);
   const [isFollowable, setIsFollowable] = useState(false);
 
   const checkMyFollow = useCallback(() => {
@@ -41,20 +45,35 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
   };
 
   const followUser = async () => {
-    await follow({ userId: targetId });
+    if (!token) return showToast({ message: '로그인이 필요합니다.' });
+
+    try {
+      const data = await follow({ userId: targetId });
+      showToast({ message: '팔로우 했습니다.' });
+      sendNotification('FOLLOW', data._id, targetId, null);
+    } catch (error) {
+      console.error(error);
+      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+    }
   };
 
   const unFollowUser = async () => {
     const { _id } = checkMyFollow() || {};
     if (!_id) return;
-    await unfollow({ followId: _id });
+    try {
+      await unfollow({ followId: _id });
+      showToast({ message: '언팔로우 했습니다.' });
+    } catch (error) {
+      console.error(error);
+      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+    }
   };
 
   return (
     <>
-      {targetId === 'me' || targetId === user._id ? null : (
-        <Button onClick={handleOnClick}>
-          {isFollowable ? 'FOLLOW' : 'UNFOLLOW'}
+      {targetId === 'me' ? null : (
+        <Button onClick={handleOnClick} isFollowable={isFollowable}>
+          {isFollowable ? 'FOLLOW' : 'FOLLOWING'}
         </Button>
       )}
     </>
@@ -63,7 +82,13 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 
 export default FollowButton;
 
-const Button = styled.button`
-  padding: 1rem;
-  background-color: red;
+const Button = styled.button<{ isFollowable: boolean }>`
+  cursor: pointer;
+  padding: 1.2rem;
+  background-color: ${({ isFollowable }) =>
+    isFollowable ? COLOR.green : COLOR.lightGray};
+  border-radius: 5rem;
+  color: ${COLOR.white};
+  font-weight: 500;
+  font-size: 1rem;
 `;

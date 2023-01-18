@@ -1,7 +1,7 @@
 import axiosInstance from './axios';
 
 interface LikeParam {
-  (type: string, dataId: string, userId: string, postId: string): void;
+  (type: string, dataId: string, userId: string, postId: string | null): void;
 }
 
 export const getNotification = async () => {
