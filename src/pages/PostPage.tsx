@@ -14,6 +14,19 @@ type PostId = string;
 const PostPage = () => {
   const { postId } = useParams<PostId>();
   const [post, setPost] = useState<PostResponse>();
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
+
+  const fetchAndScroll = async () => {
+    await fetchHandler();
+    setCommentSubmitted(true);
+  };
+
+  const toScrollBottom = () =>
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 100,
+      behavior: 'smooth',
+    });
 
   const fetchHandler = useCallback(async () => {
     if (postId) {
@@ -29,6 +42,13 @@ const PostPage = () => {
   useEffect(() => {
     fetchHandler();
   }, [fetchHandler]);
+
+  useEffect(() => {
+    if (commentSubmitted) {
+      toScrollBottom();
+      setCommentSubmitted(false);
+    }
+  }, [commentSubmitted]);
 
   return (
     <Container>
@@ -57,7 +77,7 @@ const PostPage = () => {
           <CommentInput
             _id={post._id}
             author={post.author}
-            fetchHandler={fetchHandler}
+            fetchHandler={fetchAndScroll}
           />
         </Wrapper>
       )}
@@ -73,7 +93,7 @@ const Container = styled.div`
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  margin-bottom: 6.4rem;
+  margin-bottom: 7.5rem;
 `;
 
 const List = styled.ul``;
