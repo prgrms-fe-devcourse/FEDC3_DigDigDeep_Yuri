@@ -4,6 +4,7 @@ import { createPost, updatePost } from '../utils/post';
 import { COLOR } from '../utils/color';
 import { useNavigate } from 'react-router-dom';
 import useToast from '../hooks/useToast';
+import { ROUTES } from '../utils/routes';
 
 interface Props {
   text?: string;
@@ -28,7 +29,7 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
         '63b5b86c21d0f92287bd6474'
       );
       showToast({ message: '그라운드를 생성했습니다.' });
-      navigator(`/posts/${data._id}`);
+      navigator(ROUTES.POSTS_BY_ID(data._id));
       setIsLoading(false);
     } catch {
       showToast({ message: '그라운드 생성에 실패했습니다.' });
@@ -47,7 +48,7 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
           imageId
         );
         showToast({ message: '그라운드를 수정했습니다.' });
-        navigator(`/`);
+        navigator(ROUTES.HOME);
         setIsLoading(false);
       }
     } catch {

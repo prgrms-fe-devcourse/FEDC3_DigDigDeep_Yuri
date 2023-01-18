@@ -11,13 +11,14 @@ import Icon from './Base/Icon';
 import LinkButton from './LinkButton';
 import Searchbar from './Searchbar';
 import useNotification from '../hooks/useNotification';
+import { ROUTES } from '../utils/routes';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
   const location = useLocation();
   const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
+
   const { isSeen } = useNotification();
   const logout = useLogout();
   const { showModal } = useModal();
@@ -56,7 +57,7 @@ const Header = () => {
       message: '정말로 로그아웃 하시겠습니까?',
       handleConfirm: async () => {
         try {
-          navigate('/');
+          navigate(ROUTES.HOME);
           await logout();
         } catch (error) {
           console.error(error);
@@ -95,7 +96,7 @@ const Header = () => {
             ) : token ? (
               <>
                 <Wrapper>
-                  <LogoButton to="/">
+                  <LogoButton to={ROUTES.HOME}>
                     <Logo />
                   </LogoButton>
                   <Button onClick={toggleSearchbar}>
@@ -107,13 +108,17 @@ const Header = () => {
                     <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
                   ) : (
                     <>
-                      <LinkButton to="/newPost" name="new" size={24} />
+                      <LinkButton to={ROUTES.POSTS_NEW} name="new" size={24} />
                       <LinkButton
-                        to="/notifications"
+                        to={ROUTES.NOTIFICATION}
                         name={isSeen ? 'notification-off' : 'notification-on'}
                         size={24}
                       />
-                      <LinkButton to="/profile/me" name="profile" size={24} />
+                      <LinkButton
+                        to={ROUTES.PROFILE_ME}
+                        name="profile"
+                        size={24}
+                      />
                     </>
                   )}
                 </Wrapper>
@@ -150,19 +155,23 @@ const Header = () => {
                   <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
                 ) : (
                   <>
-                    <LinkButton to="/newPost" name="new" size={20} />
+                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={20} />
                     <LinkButton
-                      to="/notifications"
+                      to={ROUTES.NOTIFICATION}
                       name={isSeen ? 'notification-off' : 'notification-on'}
                       size={20}
                     />
-                    <LinkButton to="/profile/me" name="profile" size={20} />
+                    <LinkButton
+                      to={ROUTES.PROFILE_ME}
+                      name="profile"
+                      size={20}
+                    />
                   </>
                 )}
               </Wrapper>
             ) : (
               <Wrapper>
-                <LogInButton to="/login">LOG IN</LogInButton>
+                <LogInButton to={ROUTES.LOGIN}>LOG IN</LogInButton>
               </Wrapper>
             )}
           </>

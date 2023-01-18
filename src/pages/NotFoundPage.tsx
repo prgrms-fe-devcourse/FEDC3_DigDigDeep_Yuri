@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../utils/routes';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const NotFoundPage = () => {
       <Image src="/image/icon/404.png" />
       <Title>찾을 수 없는 페이지입니다.</Title>
       <Detail>요청하신 페이지가 사라졌거나, 잘못된 경로입니다...</Detail>
-      <Button onClick={() => navigate('/')}>홈으로 이동</Button>
+      <Button onClick={() => navigate(ROUTES.HOME)}>홈으로 이동</Button>
       <Background src="/image/icon/ground.png" />
     </Container>
   );

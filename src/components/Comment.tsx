@@ -11,6 +11,7 @@ import useGetMyInfo from '../hooks/useGetMyInfo';
 import useToast from '../hooks/useToast';
 import Divider from './Base/Divider';
 import Icon from './Base/Icon';
+import { ROUTES } from '../utils/routes';
 
 interface CommentProps extends CommentResponse {
   fetchHandler?: () => Promise<void>;
@@ -37,7 +38,7 @@ const Comment = ({
   const isMyComment = author._id === user._id;
 
   const toUserProfile = () => {
-    navigate(`/profile/${author._id}`);
+    navigate(ROUTES.PROFILE_BY_USER_ID(author._id));
   };
 
   const handleDeleteComment = async () => {

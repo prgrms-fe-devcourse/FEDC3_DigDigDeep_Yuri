@@ -8,6 +8,7 @@ import FormButton from '../UserForm/FormButton';
 import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
+import { ROUTES } from '../../utils/routes';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const ProfileEditForm = () => {
       .then(() => {
         getMyInfo();
         showToast({ message: '변경되었습니다.' });
-        navigate('/profile/me');
+        navigate(ROUTES.PROFILE_ME_EDIT);
       })
       .catch((error) => {
         console.error(error);
