@@ -233,7 +233,6 @@ const LinkContainer = css`
   letter-spacing: -0.01em;
   color: ${COLOR.white};
   padding: 1.2rem 1.6rem;
-  /* background-color: ${(isMe) => (isMe ? COLOR.lightGray : COLOR.green)}; */
   border-radius: 23.5px;
   border: none;
   margin-left: 1rem;
