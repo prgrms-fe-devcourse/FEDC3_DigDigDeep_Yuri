@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../components/Base/Spinner';
-import Header from '../components/Header';
-import Post from '../components/Post';
+import Header from '../components/Header/Header';
+import Post from '../components/Post/Post';
 import UserItem from '../components/User/UserItem';
 import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 import { COLOR } from '../utils/color';
-import { getPost } from '../utils/post';
+import { getPost } from '../utils/api/post';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();

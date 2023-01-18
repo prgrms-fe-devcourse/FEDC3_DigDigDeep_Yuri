@@ -1,9 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
-import Divider from './Base/Divider';
-import Icon from './Base/Icon';
+import { COLOR } from '../../utils/color';
+import { ROUTES } from '../../utils/routes';
+import Divider from './../Base/Divider';
+import Icon from './../Base/Icon';
 
 interface FormProps {
   children: ReactNode[];
@@ -29,7 +30,7 @@ const Searchbar = ({ isMobile }: { isMobile: boolean }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search) {
-      return navigate(`/search?q=${search}&type=${select}`);
+      return navigate(ROUTES.SEARCH_BY_QUERY(search, select));
     }
     alert('검색어를 입력해주세요.');
   };

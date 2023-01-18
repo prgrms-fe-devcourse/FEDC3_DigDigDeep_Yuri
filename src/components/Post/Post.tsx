@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import useGetMyInfo from '../hooks/useGetMyInfo';
-import useModal from '../hooks/useModal';
-import useToast from '../hooks/useToast';
-import { tokenState, userState } from '../recoil/atoms/user';
-import { PostResponse } from '../types/response';
-import { COLOR } from '../utils/color';
-import { formatDate } from '../utils/formatDate';
-import { createLike, deleteLike } from '../utils/like';
-import { sendNotification } from '../utils/notification';
-import { deletePost } from '../utils/post';
-import Divider from './Base/Divider';
-import Icon from './Base/Icon';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
+import useModal from '../../hooks/useModal';
+import useToast from '../../hooks/useToast';
+import { tokenState, userState } from '../../recoil/atoms/user';
+import { PostResponse } from '../../types/response';
+import { COLOR } from '../../utils/color';
+import { formatDate } from '../../utils/formatDate';
+import { createLike, deleteLike } from '../../utils/api/like';
+import { sendNotification } from '../../utils/api/notification';
+import { deletePost } from '../../utils/api/post';
+import { ROUTES } from '../../utils/routes';
+import Divider from './../Base/Divider';
+import Icon from './../Base/Icon';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
@@ -63,11 +64,12 @@ const Post = ({
   };
 
   const toUserProfile = () => {
-    navigate(`/profile/${author._id === user._id ? 'me' : author._id}`);
+    const userId = author._id === user._id ? 'me' : author._id;
+    navigate(ROUTES.PROFILE_BY_USER_ID(userId));
   };
 
   const toPostDetail = () => {
-    navigate(`/posts/${_id}`);
+    navigate(ROUTES.POSTS_BY_ID(_id));
   };
 
   const handleDelete = async () => {
@@ -76,7 +78,7 @@ const Post = ({
       handleConfirm: async () => {
         try {
           await deletePost(_id);
-          navigate('/');
+          navigate(ROUTES.HOME);
           showToast({ message: '그라운드가 삭제되었습니다.' });
         } catch (error) {
           console.error(error);
@@ -87,7 +89,7 @@ const Post = ({
   };
 
   const handleEdit = () => {
-    navigate(`/edit/${_id}`);
+    navigate(ROUTES.POSTS_EDIT_BY_ID(_id));
   };
 
   const handleLike = async () => {

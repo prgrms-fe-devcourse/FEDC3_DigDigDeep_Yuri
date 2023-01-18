@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { userState } from '../recoil/atoms/user';
-import { getUserInfo } from '../utils/api/user';
+import { getUser } from '../utils/api/user';
 import useLogout from './useLogout';
 
 const useGetMyInfo = () => {
@@ -9,7 +9,7 @@ const useGetMyInfo = () => {
 
   const getMyInfo = async () => {
     try {
-      const responseUser = await getUserInfo(user._id);
+      const responseUser = await getUser(user._id);
       setUser({ ...user, ...responseUser });
     } catch (error) {
       console.error(error);

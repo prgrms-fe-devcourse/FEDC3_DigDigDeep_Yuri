@@ -4,15 +4,16 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import FollowButton from '../components/Follow/FollowButton';
 import FollowList from '../components/Follow/FollowList';
-import PostList from '../components/PostList';
-import TabItem from '../components/TabItem';
-import DetailHeader from '../components/DetailHeader';
+import PostList from '../components/Post/PostList';
+import TabItem from '../components/Profile/TabItem';
+import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { UserResponse } from '../types/response';
-import { getUserInfo } from '../utils/api/user';
+import { getUser } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
+import { ROUTES } from '../utils/routes';
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -30,7 +31,7 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
 
   const fetchUser = useCallback(async () => {
-    const user = await getUserInfo(userId === 'me' ? myId : userId);
+    const user = await getUser(userId === 'me' ? myId : userId);
     setUserInfo(user);
   }, [userId, myId]);
 
@@ -70,10 +71,10 @@ const ProfilePage = () => {
         <DetailHeader name="" isButton={false}>
           {userId === 'me' ? (
             <ButtonContainer>
-              <Button onClick={() => navigate('/profile/me/likes')}>
+              <Button onClick={() => navigate(ROUTES.PROFILE_ME_LIKES)}>
                 <Icon name="my-like" height={22} />
               </Button>
-              <Button onClick={() => navigate('/profile/me/edit')}>
+              <Button onClick={() => navigate(ROUTES.PROFILE_ME_EDIT)}>
                 <Icon name="setting" height={20} />
               </Button>
             </ButtonContainer>

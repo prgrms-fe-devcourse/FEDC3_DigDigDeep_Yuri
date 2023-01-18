@@ -12,6 +12,7 @@ import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
 import { COLOR } from '../../utils/color';
 import ErrorMessage from '../UserForm/ErrorMessage';
+import { ROUTES } from '../../utils/routes';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -92,7 +93,7 @@ const LoginForm = () => {
       <Divider type="horizontal" size={24} style={{ width: '70%' }} />
       <SignUpLinkWrapper>
         아직 회원이 아니신가요?
-        <SignUpLink to="/signup">SIGN UP</SignUpLink>
+        <SignUpLink to={ROUTES.SIGNUP}>SIGN UP</SignUpLink>
       </SignUpLinkWrapper>
     </UserForm>
   );

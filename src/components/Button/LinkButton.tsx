@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from './Base/Icon';
+import Icon from './../Base/Icon';
 
 interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   to: string;

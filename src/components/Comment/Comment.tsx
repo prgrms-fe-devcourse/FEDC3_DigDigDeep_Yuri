@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import useModal from '../hooks/useModal';
-import { userState } from '../recoil/atoms/user';
-import { CommentResponse } from '../types/response';
-import { COLOR } from '../utils/color';
-import { deleteComment } from '../utils/comment';
-import { formatDate } from '../utils/formatDate';
-import useGetMyInfo from '../hooks/useGetMyInfo';
-import useToast from '../hooks/useToast';
-import Divider from './Base/Divider';
-import Icon from './Base/Icon';
+import useModal from '../../hooks/useModal';
+import { userState } from '../../recoil/atoms/user';
+import { CommentResponse } from '../../types/response';
+import { COLOR } from '../../utils/color';
+import { deleteComment } from '../../utils/api/comment';
+import { formatDate } from '../../utils/formatDate';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
+import useToast from '../../hooks/useToast';
+import Divider from './../Base/Divider';
+import Icon from './../Base/Icon';
+import { ROUTES } from '../../utils/routes';
 
 interface CommentProps extends CommentResponse {
   fetchHandler?: () => Promise<void>;
@@ -37,7 +38,7 @@ const Comment = ({
   const isMyComment = author._id === user._id;
 
   const toUserProfile = () => {
-    navigate(`/profile/${author._id}`);
+    navigate(ROUTES.PROFILE_BY_USER_ID(author._id));
   };
 
   const handleDeleteComment = async () => {

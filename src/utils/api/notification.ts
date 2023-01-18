@@ -1,4 +1,4 @@
-import axiosInstance from './axios';
+import axiosInstance from '../axios';
 
 interface LikeParam {
   (type: string, dataId: string, userId: string, postId: string | null): void;
