@@ -57,17 +57,17 @@ const Post = ({
   const navigate = useNavigate();
   const postContent = title[0] === '{' ? JSON.parse(title) : title;
 
-  const handleShare = (postId: string) => {
-    navigator.clipboard.writeText(`${window.location.host}/posts/${postId}`);
+  const handleShare = () => {
+    navigator.clipboard.writeText(`${window.location.host}/posts/${_id}`);
     showToast({ message: '클립보드에 저장되었습니다.' });
   };
 
-  const toUserProfile = (authorId: string) => {
-    navigate(`/profile/${authorId === 'me' ? user._id : authorId}`);
+  const toUserProfile = () => {
+    navigate(`/profile/${author._id === user._id ? 'me' : author._id}`);
   };
 
-  const toPostDetail = (postId: string) => {
-    navigate(`/posts/${postId}`);
+  const toPostDetail = () => {
+    navigate(`/posts/${_id}`);
   };
 
   const handleDelete = async () => {
@@ -90,7 +90,7 @@ const Post = ({
     navigate(`/edit/${_id}`);
   };
 
-  const handleLike = async (postId: string, authorId: string) => {
+  const handleLike = async () => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
     if (!token) {
       return showToast({ message: '로그인이 필요합니다.' });
@@ -98,10 +98,10 @@ const Post = ({
 
     if (isLike === -1) {
       try {
-        const { data } = await createLike(postId);
+        const { data } = await createLike(_id);
         setLikesState([...likesState, data]);
         await getMyInfo();
-        sendNotification('LIKE', data._id, authorId, postId);
+        sendNotification('LIKE', data._id, author._id, _id);
         showToast({ message: '좋아요를 눌렀습니다.' });
       } catch (error) {
         console.error(error);
@@ -127,7 +127,7 @@ const Post = ({
   return (
     <Container {...props}>
       <PostHeader isDetailPage={isDetailPage}>
-        <Wrapper onClick={() => toUserProfile(author._id)}>
+        <Wrapper onClick={toUserProfile}>
           {author.image ? (
             <ProfileImage src={author.image} />
           ) : (
@@ -138,7 +138,7 @@ const Post = ({
           <Date>{formatDate.fullDate(createdAt)}</Date>
         </Wrapper>
         <Wrapper>
-          <Button onClick={() => handleShare(_id)}>
+          <Button onClick={handleShare}>
             <Icon name="share" size={12} />
           </Button>
         </Wrapper>
@@ -147,7 +147,7 @@ const Post = ({
         <FlexContainer
           direction="row"
           color={COLOR.white}
-          onClick={() => toPostDetail(_id)}
+          onClick={toPostDetail}
         >
           {image && (
             <ImageContainer>
@@ -170,14 +170,14 @@ const Post = ({
             <Footer>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
-                  <Button onClick={() => handleLike(_id, author._id)}>
+                  <Button onClick={handleLike}>
                     <Icon name="liked" size={12} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
-                  <Button onClick={() => handleLike(_id, author._id)}>
+                  <Button onClick={handleLike}>
                     <Icon name="unliked" size={12} />
                   </Button>
                   {likesState.length > 999 ? (
@@ -188,7 +188,7 @@ const Post = ({
                 </IconWrapper>
               )}
               <IconWrapper>
-                <Button onClick={() => toPostDetail(_id)}>
+                <Button onClick={toPostDetail}>
                   <Icon name="comment" size={12} />
                 </Button>
                 {comments.length > 999 ? (
@@ -201,7 +201,7 @@ const Post = ({
           </FlexContainer>
         </FlexContainer>
       ) : (
-        <Section onClick={() => toPostDetail(_id)}>
+        <Section onClick={toPostDetail}>
           <Title>
             {typeof postContent === 'string' ? postContent : postContent.title}
           </Title>
@@ -221,14 +221,14 @@ const Post = ({
             <StyledDiv>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
-                  <Button onClick={() => handleLike(_id, author._id)}>
+                  <Button onClick={handleLike}>
                     <Icon name="liked" size={12} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
-                  <Button onClick={() => handleLike(_id, author._id)}>
+                  <Button onClick={handleLike}>
                     <Icon name="unliked" size={12} />
                   </Button>
                   {likesState.length > 999 ? (
@@ -239,7 +239,7 @@ const Post = ({
                 </IconWrapper>
               )}
               <IconWrapper>
-                <Button onClick={() => toPostDetail(_id)}>
+                <Button onClick={toPostDetail}>
                   <Icon name="comment" size={12} />
                 </Button>
                 {comments.length > 999 ? (
@@ -268,14 +268,14 @@ const Post = ({
           <Footer>
             {likesState.find((like) => like.user === user._id) ? (
               <IconWrapper>
-                <Button onClick={() => handleLike(_id, author._id)}>
+                <Button onClick={handleLike}>
                   <Icon name="liked" size={12} />
                 </Button>
                 <SmText>{likesState.length}</SmText>
               </IconWrapper>
             ) : (
               <IconWrapper>
-                <Button onClick={() => handleLike(_id, author._id)}>
+                <Button onClick={handleLike}>
                   <Icon name="unliked" size={12} />
                 </Button>
                 {likesState.length > 999 ? (
@@ -286,7 +286,7 @@ const Post = ({
               </IconWrapper>
             )}
             <IconWrapper>
-              <Button onClick={() => toPostDetail(_id)}>
+              <Button onClick={toPostDetail}>
                 <Icon name="comment" size={12} />
               </Button>
               {comments.length > 999 ? (
