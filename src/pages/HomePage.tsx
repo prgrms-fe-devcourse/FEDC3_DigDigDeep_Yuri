@@ -4,12 +4,9 @@ import Post from '../components/Post';
 import Header from '../components/Header';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
-import useLogout from '../hooks/useLogout';
-import { COLOR } from '../utils/color';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
-  const logout = useLogout();
 
   const fetchHandler = useCallback(async () => {
     try {
@@ -27,7 +24,6 @@ const HomePage = () => {
   return (
     <Container>
       <Header />
-      <LogOutButton onClick={logout}>로그아웃</LogOutButton>
       <List>
         {posts.map((post) => (
           <ListItem key={post._id}>
@@ -38,19 +34,6 @@ const HomePage = () => {
     </Container>
   );
 };
-
-const LogOutButton = styled.div`
-  margin: 0 auto;
-  padding: 2rem 3rem;
-  background-color: ${COLOR.text};
-  color: ${COLOR.white};
-  border-radius: 2rem;
-  width: 2.4%;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 10%;
-  }
-`;
 
 const Container = styled.div`
   display: flex;

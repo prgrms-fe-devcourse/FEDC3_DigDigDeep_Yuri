@@ -12,6 +12,7 @@ import { UserResponse } from '../types/response';
 import { getUserInfo } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
+import Header from '../components/Header';
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -64,6 +65,7 @@ const ProfilePage = () => {
 
   return (
     <>
+      <Header />
       <Wrapper>
         <DetailHeader name="" isButton={false}>
           {userId === 'me' ? (
