@@ -13,6 +13,7 @@ import { getUserInfo } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
 import Header from '../components/Header';
+import { ROUTES } from '../utils/routes';
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -70,10 +71,10 @@ const ProfilePage = () => {
         <DetailHeader name="" isButton={false}>
           {userId === 'me' ? (
             <ButtonContainer>
-              <Button onClick={() => navigate('/profile/me/likes')}>
+              <Button onClick={() => navigate(ROUTES.PROFILE_ME_LIKES)}>
                 <Icon name="my-like" height={22} />
               </Button>
-              <Button onClick={() => navigate('/profile/me/edit')}>
+              <Button onClick={() => navigate(ROUTES.PROFILE_ME_EDIT)}>
                 <Icon name="setting" height={20} />
               </Button>
             </ButtonContainer>
