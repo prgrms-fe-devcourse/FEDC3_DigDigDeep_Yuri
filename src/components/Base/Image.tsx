@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 interface ImageProps {
@@ -12,6 +12,10 @@ const Image = ({ src, alt }: ImageProps) => {
   const onLoad = () => {
     setLoaded(true);
   };
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [src]);
 
   return (
     <>
