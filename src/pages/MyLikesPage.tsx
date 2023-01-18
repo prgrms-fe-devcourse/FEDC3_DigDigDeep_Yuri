@@ -7,13 +7,16 @@ import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
 import styled from 'styled-components';
 import Header from '../components/Header';
+import Spinner from '../components/Base/Spinner';
 
 const MyLikesPage = () => {
   const user = useRecoilValue(userState);
   const [posts, setPosts] = useState<PostResponse[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchPosts = useCallback(async () => {
     try {
+      setLoading(true);
       const likedPosts = user.likes
         ?.filter((like) => like.post)
         .map((like) => like.post);
@@ -24,6 +27,7 @@ const MyLikesPage = () => {
         });
       });
       setPosts(filteredPosts);
+      setLoading(false);
     } catch (err) {
       console.error(err);
     }
@@ -41,6 +45,7 @@ const MyLikesPage = () => {
         {posts.map((post) => (
           <Post key={post._id} {...post} isMyLikes={true} />
         ))}
+        <Spinner loading={loading} />
       </Container>
     </>
   );

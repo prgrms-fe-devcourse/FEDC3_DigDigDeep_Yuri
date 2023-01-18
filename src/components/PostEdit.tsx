@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
 import { getPost } from '../utils/post';
-
 interface Props {
   name?: string;
   postId?: string;

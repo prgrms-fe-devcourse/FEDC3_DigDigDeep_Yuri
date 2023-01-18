@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Spinner from '../components/Base/Spinner';
 import Header from '../components/Header';
 import Post from '../components/Post';
 import UserItem from '../components/User/UserItem';
@@ -14,6 +15,7 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const [userResult, setUserResult] = useState<UserResponse[]>([]);
   const [postResult, setPostResult] = useState<PostResponse[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const toUserProfile = (authorId: string) => {
     navigate(`/profile/${authorId}`);
@@ -24,12 +26,15 @@ const SearchPage = () => {
     const getSearchTerm = searchParams.get('q');
 
     if (getType === 'users') {
+      setLoading(true);
       const { data } = await axiosInstance.get<UserResponse[]>(
         `/search/users/${getSearchTerm}`
       );
       setUserResult(data);
+      setLoading(false);
     }
     if (searchParams.get('type') === 'posts') {
+      setLoading(true);
       const { data } = await axiosInstance.get<PostResponse[]>(
         `/search/all/${getSearchTerm}`
       );
@@ -41,6 +46,7 @@ const SearchPage = () => {
           return prev;
         }, [])
       ).then((data) => setPostResult(data));
+      setLoading(false);
     }
   }, [searchParams]);
 
@@ -73,6 +79,7 @@ const SearchPage = () => {
       ) : (
         <BigText>검색 결과가 없습니다.</BigText>
       )}
+      <Spinner loading={loading} />
     </Container>
   );
 };

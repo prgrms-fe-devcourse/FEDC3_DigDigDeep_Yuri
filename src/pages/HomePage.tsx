@@ -4,15 +4,14 @@ import Post from '../components/Post';
 import Header from '../components/Header';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
-import useLogout from '../hooks/useLogout';
-import { COLOR } from '../utils/color';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import Spinner from '../components/Base/Spinner';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
   const [currentPosts, setCurrnetPosts] = useState<PostResponse[]>([]);
   const postsLength = useMemo(() => posts.length, [posts]);
-  const logout = useLogout();
+  const [loading, setLoading] = useState(false);
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     let offset = currentPosts.length;
@@ -27,9 +26,11 @@ const HomePage = () => {
 
   const fetchHandler = useCallback(async () => {
     try {
+      setLoading(true);
       const posts = await getPosts();
       setPosts(posts);
       setCurrnetPosts(posts.slice(0, 10));
+      setLoading(false);
     } catch {
       alert('포스트 정보를 불러올 수 없습니다.');
     }
@@ -50,24 +51,12 @@ const HomePage = () => {
           </ListItem>
         ))}
       </List>
+      <Spinner loading={loading} />
     </Container>
   );
 };
 
 const ObservedDiv = styled.div``;
-
-const LogOutButton = styled.div`
-  margin: 0 auto;
-  padding: 2rem 3rem;
-  background-color: ${COLOR.text};
-  color: ${COLOR.white};
-  border-radius: 2rem;
-  width: 2.4%;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 10%;
-  }
-`;
 
 const Container = styled.div`
   display: flex;
