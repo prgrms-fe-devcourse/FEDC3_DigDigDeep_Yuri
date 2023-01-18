@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { userState } from '../../recoil/atoms/user';
 import { FollowResponse, UserResponse } from '../../types/response';
 import { unfollow } from '../../utils/api/follow';
 import { COLOR } from '../../utils/color';
@@ -15,6 +17,7 @@ interface UserItemProps {
 const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   const { userId } = useParams() as { userId: string };
   const navigate = useNavigate();
+  const myUser = useRecoilValue(userState);
 
   const onClickUnfollow = async () => {
     if (!user || !follow) return;
@@ -27,7 +30,7 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   };
 
   const onContainerClick = () => {
-    navigate(`/profile/${user._id}`);
+    navigate(`/profile/${user._id === myUser._id ? 'me' : user._id}`);
   };
 
   const render = () => {
