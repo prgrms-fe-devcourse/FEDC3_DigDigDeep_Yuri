@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
-import useLogout from '../hooks/useLogout';
-import useModal from '../hooks/useModal';
-import useToast from '../hooks/useToast';
-import { tokenState } from '../recoil/atoms/user';
-import { COLOR } from '../utils/color';
-import Icon from './Base/Icon';
-import LinkButton from './LinkButton';
+import useLogout from '../../hooks/useLogout';
+import useModal from '../../hooks/useModal';
+import useToast from '../../hooks/useToast';
+import { tokenState } from '../../recoil/atoms/user';
+import { COLOR } from '../../utils/color';
+import Icon from './../Base/Icon';
+import LinkButton from '../Button/LinkButton';
 import Searchbar from './Searchbar';
-import useNotification from '../hooks/useNotification';
-import { ROUTES } from '../utils/routes';
+import useNotification from '../../hooks/useNotification';
+import { ROUTES } from '../../utils/routes';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);

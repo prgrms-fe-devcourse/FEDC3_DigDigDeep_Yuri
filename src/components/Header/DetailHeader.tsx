@@ -1,8 +1,8 @@
-import Icon from './Base/Icon';
+import Icon from './../Base/Icon';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
-import EditButton from './EditButton';
+import { COLOR } from '../../utils/color';
+import EditButton from './../Post/EditButton';
 interface Props {
   name: string;
   isButton: boolean;

@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
-import { ROUTES } from '../utils/routes';
-import Divider from './Base/Divider';
-import Icon from './Base/Icon';
+import { COLOR } from '../../utils/color';
+import { ROUTES } from '../../utils/routes';
+import Divider from './../Base/Divider';
+import Icon from './../Base/Icon';
 
 interface FormProps {
   children: ReactNode[];

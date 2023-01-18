@@ -1,13 +1,13 @@
 import React, { ReactNode, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import useGetMyInfo from '../hooks/useGetMyInfo';
-import useToast from '../hooks/useToast';
-import { tokenState } from '../recoil/atoms/user';
-import { PostResponse } from '../types/response';
-import { COLOR } from '../utils/color';
-import { createComment } from '../utils/comment';
-import { sendNotification } from '../utils/notification';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
+import useToast from '../../hooks/useToast';
+import { tokenState } from '../../recoil/atoms/user';
+import { PostResponse } from '../../types/response';
+import { COLOR } from '../../utils/color';
+import { createComment } from '../../utils/comment';
+import { sendNotification } from '../../utils/notification';
 
 interface CommentInputProps extends Pick<PostResponse, '_id' | 'author'> {
   fetchHandler?: () => Promise<void>;

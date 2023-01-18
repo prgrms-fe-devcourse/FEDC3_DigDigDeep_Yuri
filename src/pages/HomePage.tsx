@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import Post from '../components/Post';
-import Header from '../components/Header';
+import Post from '../components/Post/Post';
+import Header from '../components/Header/Header';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';

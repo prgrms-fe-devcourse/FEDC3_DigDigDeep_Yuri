@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Comment from '../components/Comment';
-import CommentInput from '../components/CommentInput';
-import Header from '../components/Header';
-import Post from '../components/Post';
+import Comment from '../components/Comment/Comment';
+import CommentInput from '../components/Comment/CommentInput';
+import Header from '../components/Header/Header';
+import Post from '../components/Post/Post';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { getPost } from '../utils/post';
