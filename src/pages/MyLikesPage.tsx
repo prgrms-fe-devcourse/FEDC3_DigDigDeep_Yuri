@@ -55,13 +55,12 @@ export default MyLikesPage;
 const Container = styled.div`
   display: block;
   margin: 0 auto;
-  padding: 0 3rem;
   width: 50%;
-  min-width: 767px;
+  min-width: calc(767px - 10%);
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 100%;
-    min-width: 325px;
+    width: 90%;
+    min-width: 90%;
   }
 `;
