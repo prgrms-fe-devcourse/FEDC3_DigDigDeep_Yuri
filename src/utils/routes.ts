@@ -1,0 +1,15 @@
+export const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  SEARCH: '/search',
+  POSTS_NEW: '/posts/new',
+  POSTS_DETAIL: '/posts/:postId',
+  POSTS_EDIT: '/posts/:postId/edit',
+  PROFILE_DETAIL: '/profile/:userId',
+  PROFILE_ME: '/profile/me',
+  PROFILE_ME_LIKES: '/profile/me/likes',
+  PROFILE_ME_EDIT: '/profile/me/edit',
+  NOTIFICATION: '/notifications',
+  NOT_FOUND: '*',
+};
