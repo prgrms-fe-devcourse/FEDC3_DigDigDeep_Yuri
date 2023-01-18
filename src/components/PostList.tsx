@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { getPostsByAuthor } from '../utils/post';
@@ -24,13 +25,17 @@ const PostList = ({ authorId }: Props) => {
   }, [fetchPosts, authorId]);
 
   return (
-    <ul>
+    <UnorderedList>
       {posts &&
         posts.map((post) => (
           <Post key={post._id} checkIsMine={checkIsMine} {...post} />
         ))}
-    </ul>
+    </UnorderedList>
   );
 };
 
 export default PostList;
+
+const UnorderedList = styled.ul`
+  width: 100%;
+`;

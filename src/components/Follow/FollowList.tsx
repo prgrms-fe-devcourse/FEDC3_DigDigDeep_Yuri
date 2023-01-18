@@ -4,6 +4,7 @@ import { FollowResponse, UserResponse } from '../../types/response';
 import { getUserInfo } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
+import { COLOR } from '../../utils/color';
 
 interface BasicFollow {
   follows: FollowResponse[];
@@ -54,13 +55,15 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
   return (
     <List>
       {users.map((user, index) => (
-        <UserItem
-          key={user._id}
-          type={type}
-          user={user}
-          onUnfollow={onUnfollow}
-          follow={follows[index]}
-        />
+        <UserListItem>
+          <UserItem
+            key={user._id}
+            type={type}
+            user={user}
+            onUnfollow={onUnfollow}
+            follow={follows[index]}
+          />
+        </UserListItem>
       ))}
     </List>
   );
@@ -69,6 +72,10 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
 export default FollowList;
 
 const List = styled.ul`
-  margin-top: 1px;
-  background-color: #ddd;
+  width: 100%;
+`;
+
+const UserListItem = styled.div`
+  padding: 1.4rem;
+  border-bottom: 0.3px solid ${COLOR.lightGray};
 `;
