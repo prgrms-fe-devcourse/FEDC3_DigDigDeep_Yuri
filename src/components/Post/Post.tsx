@@ -15,6 +15,7 @@ import { deletePost } from '../../utils/api/post';
 import { ROUTES } from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
+import Image from '../Base/Image';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
@@ -153,7 +154,7 @@ const Post = ({
         >
           {image && (
             <ImageContainer>
-              <Image src={image} />
+              <Image src={image} alt="post-image" />
             </ImageContainer>
           )}
           <FlexContainer direction="column">
@@ -209,7 +210,7 @@ const Post = ({
           </Title>
           {image && (
             <ImageContainer width="100%">
-              <Image src={image} />
+              <Image src={image} alt="post-image" />
             </ImageContainer>
           )}
           <Text>
@@ -450,11 +451,11 @@ const ImageContainer = styled.div<ImageContainerProps>`
   aspect-ratio: 1 / 1;
 `;
 
-const Image = styled.img`
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-`;
+// const Image = styled.img`
+//   width: 100%;
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+// `;
 
 export default Post;
