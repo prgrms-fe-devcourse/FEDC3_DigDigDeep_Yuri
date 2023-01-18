@@ -1,6 +1,9 @@
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { FollowResponse } from '../../types/response';
-import FollowItem from './FollowItem';
+import { FollowResponse, UserResponse } from '../../types/response';
+import { getUserInfo } from '../../utils/api/user';
+import UserItem from '../User/UserItem';
+import useToast from '../../hooks/useToast';
 
 interface BasicFollow {
   follows: FollowResponse[];
@@ -16,14 +19,47 @@ interface Followers extends BasicFollow {
 }
 
 const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
+  const { showToast } = useToast();
+
+  const [users, setUsers] = useState<UserResponse[]>([]);
+
+  const fetchUsers = useCallback(async () => {
+    Promise.allSettled(
+      follows.map((follow) => {
+        const userId = type === 'following' ? follow.user : follow.follower;
+        return getUserInfo(userId);
+      })
+    )
+      .then((results) => {
+        const users = results.map((result) => {
+          if (result.status !== 'fulfilled' || !result.value)
+            throw new Error('');
+
+          return result.value;
+        });
+        setUsers(users);
+      })
+      .catch((error) => {
+        console.error(error);
+        showToast({
+          message: '유저 정보를 가져오던 중 문제가 발생했습니다.',
+        });
+      });
+  }, [follows, showToast, type]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
   return (
     <List>
-      {follows.map((follow) => (
-        <FollowItem
-          key={follow._id}
+      {users.map((user, index) => (
+        <UserItem
+          key={user._id}
           type={type}
-          follow={follow}
+          user={user}
           onUnfollow={onUnfollow}
+          follow={follows[index]}
         />
       ))}
     </List>

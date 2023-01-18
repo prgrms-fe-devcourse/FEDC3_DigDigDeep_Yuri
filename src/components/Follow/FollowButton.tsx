@@ -63,4 +63,7 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 
 export default FollowButton;
 
-const Button = styled.button``;
+const Button = styled.button`
+  padding: 1rem;
+  background-color: red;
+`;
