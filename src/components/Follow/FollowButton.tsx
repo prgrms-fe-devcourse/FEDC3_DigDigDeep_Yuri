@@ -6,6 +6,7 @@ import { follow, unfollow } from '../../utils/api/follow';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
+import { sendNotification } from '../../utils/notification';
 
 interface FollowButtonProps {
   targetId: string;
@@ -47,8 +48,9 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
     if (!token) return showToast({ message: '로그인이 필요합니다.' });
 
     try {
-      await follow({ userId: targetId });
+      const data = await follow({ userId: targetId });
       showToast({ message: '팔로우 했습니다.' });
+      sendNotification('FOLLOW', data._id, targetId, null);
     } catch (error) {
       console.error(error);
       showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
