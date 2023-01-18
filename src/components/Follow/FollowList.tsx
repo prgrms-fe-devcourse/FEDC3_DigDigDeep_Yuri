@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { FollowResponse, UserResponse } from '../../types/response';
 import { getUserInfo } from '../../utils/api/user';
