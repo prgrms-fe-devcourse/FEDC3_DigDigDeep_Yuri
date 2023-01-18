@@ -7,6 +7,7 @@ import { unfollow } from '../../utils/api/follow';
 import { COLOR } from '../../utils/color';
 import Icon from '../Base/Icon';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
+import Image from '../Base/Image';
 
 interface UserItemProps {
   user: UserResponse;
@@ -76,12 +77,6 @@ const ImageWrapper = styled.div`
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
 `;
 
 const Text = styled.div`
