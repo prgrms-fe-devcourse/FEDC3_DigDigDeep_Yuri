@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useLogout from '../hooks/useLogout';
+import useModal from '../hooks/useModal';
+import useToast from '../hooks/useToast';
 import { tokenState } from '../recoil/atoms/user';
 import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
@@ -10,8 +13,15 @@ import Searchbar from './Searchbar';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
+  const location = useLocation();
   const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const logout = useLogout();
+  const { showModal } = useModal();
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const isMe = location.pathname.split('/').includes('me');
 
   const toggleSearchbar = () => {
     setIsSearchbarShow(!isSearchbarShow);
@@ -34,6 +44,23 @@ const Header = () => {
     if (window.innerWidth < 420) {
       setIsMobile(true);
     }
+  };
+
+  const handleLogout = async () => {
+    if (!token) return;
+
+    showModal({
+      message: '정말로 로그아웃 하시겠습니까?',
+      handleConfirm: async () => {
+        try {
+          navigate('/');
+          await logout();
+        } catch (error) {
+          console.error(error);
+          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        }
+      },
+    });
   };
 
   useEffect(() => {
@@ -74,13 +101,19 @@ const Header = () => {
                   </Button>
                 </Wrapper>
                 <Wrapper>
-                  <LinkButton to="/newPost" name="new" size={24} />
-                  <LinkButton
-                    to="/notifications"
-                    name="notification"
-                    size={24}
-                  />
-                  <LinkButton to="/profile/me" name="profile" size={24} />
+                  {isMe ? (
+                    <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
+                  ) : (
+                    <>
+                      <LinkButton to="/newPost" name="new" size={24} />
+                      <LinkButton
+                        to="/notifications"
+                        name="notification"
+                        size={24}
+                      />
+                      <LinkButton to="/profile/me" name="profile" size={24} />
+                    </>
+                  )}
                 </Wrapper>
               </>
             ) : (
@@ -111,9 +144,19 @@ const Header = () => {
             </WebSearchWrapper>
             {token ? (
               <Wrapper>
-                <LinkButton to="/newPost" name="new" size={20} />
-                <LinkButton to="/notifications" name="notification" size={20} />
-                <LinkButton to="/profile/me" name="profile" size={20} />
+                {isMe ? (
+                  <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
+                ) : (
+                  <>
+                    <LinkButton to="/newPost" name="new" size={20} />
+                    <LinkButton
+                      to="/notifications"
+                      name="notification"
+                      size={20}
+                    />
+                    <LinkButton to="/profile/me" name="profile" size={20} />
+                  </>
+                )}
               </Wrapper>
             ) : (
               <Wrapper>
@@ -182,7 +225,7 @@ const SearchWrapper = styled.div`
   padding: 1.8rem 0;
 `;
 
-const LogInButton = styled(Link)`
+const LinkContainer = css`
   width: 100%;
   font-weight: 600;
   text-decoration: none;
@@ -190,7 +233,6 @@ const LogInButton = styled(Link)`
   letter-spacing: -0.01em;
   color: ${COLOR.white};
   padding: 1.2rem 1.6rem;
-  background-color: ${COLOR.green};
   border-radius: 23.5px;
   border: none;
   margin-left: 1rem;
@@ -200,6 +242,17 @@ const LogInButton = styled(Link)`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     padding: 1.4rem 1.8rem;
   }
+`;
+
+const LogInButton = styled(Link)`
+  background-color: ${COLOR.green};
+  ${LinkContainer}
+`;
+
+const LogOutButton = styled.button`
+  color: ${COLOR.white};
+  background-color: ${COLOR.lightGray};
+  ${LinkContainer}
 `;
 
 const Button = styled.div`

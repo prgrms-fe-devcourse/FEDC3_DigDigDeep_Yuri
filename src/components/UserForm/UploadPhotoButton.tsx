@@ -32,10 +32,12 @@ const UploadPhotoButton = () => {
     <ImageButtonContainer>
       <StyledButton disabled={isLoading}>
         <StyledLabel htmlFor="file">
-          <StyledImage
-            src={user.image ? user.image : '/image/default-profile.png'}
-            alt="default-profile"
-          />
+          <ImageContainer>
+            <Image
+              src={user.image ? user.image : '/image/default-profile.png'}
+              alt="default-profile"
+            />
+          </ImageContainer>
           <StyledSpan>EDIT</StyledSpan>
         </StyledLabel>
       </StyledButton>
@@ -58,6 +60,7 @@ const StyledInput = styled.input`
 const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.6rem;
   font-weight: 600;
   font-size: 1.4rem;
@@ -81,7 +84,17 @@ const StyledButton = styled.button`
 
 const StyledSpan = styled.span``;
 
-const StyledImage = styled.img`
+const ImageContainer = styled.div`
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+`;
+
+const Image = styled.img`
+  display: block;
   width: 100%;
   height: 100%;
 `;

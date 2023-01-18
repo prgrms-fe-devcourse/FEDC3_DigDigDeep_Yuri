@@ -42,7 +42,6 @@ const HomePage = () => {
   return (
     <Container>
       <Header />
-      <LogOutButton onClick={logout}>로그아웃</LogOutButton>
       <List>
         {currentPosts.map((post) => (
           <ListItem key={post._id}>
