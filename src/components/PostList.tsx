@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { getPostsByAuthor } from '../utils/post';
 import Post from './Post';
@@ -8,7 +10,9 @@ interface Props {
 }
 
 const PostList = ({ authorId }: Props) => {
+  const { _id: myId } = useRecoilValue(userState);
   const [posts, setPosts] = useState<PostResponse[]>();
+  const checkIsMine = authorId === myId ? true : false;
 
   const fetchPosts = useCallback(async () => {
     const posts = await getPostsByAuthor(authorId);
@@ -20,7 +24,12 @@ const PostList = ({ authorId }: Props) => {
   }, [fetchPosts, authorId]);
 
   return (
-    <ul>{posts && posts.map((post) => <Post key={post._id} {...post} />)}</ul>
+    <ul>
+      {posts &&
+        posts.map((post) => (
+          <Post key={post._id} checkIsMine={checkIsMine} {...post} />
+        ))}
+    </ul>
   );
 };
 
