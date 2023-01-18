@@ -12,7 +12,6 @@ interface Props {
   postId?: string;
   image?: Blob | null;
   imageId?: string;
-  route?: string;
   children?: React.ReactNode;
 }
 
@@ -25,7 +24,6 @@ const DetailHeader = ({
   postId,
   image,
   imageId,
-  route,
   children,
 }: Props) => {
   const navigate = useNavigate();

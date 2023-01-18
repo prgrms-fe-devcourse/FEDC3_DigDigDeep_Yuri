@@ -37,11 +37,7 @@ const MyLikesPage = () => {
     <>
       <Header />
       <Container>
-        <DetailHeader
-          route="/profile/me"
-          name="내가 좋아한 그라운드"
-          isButton={false}
-        />
+        <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
         {posts.map((post) => (
           <Post key={post._id} {...post} isMyLikes={true} />
         ))}
