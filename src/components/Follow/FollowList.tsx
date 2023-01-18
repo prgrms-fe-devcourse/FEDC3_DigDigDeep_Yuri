@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { FollowResponse, UserResponse } from '../../types/response';
 import { getUserInfo } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
+import { COLOR } from '../../utils/color';
 import Spinner from '../Base/Spinner';
 
 interface BasicFollow {
@@ -61,6 +62,7 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
     <>
       <List>
         {users.map((user, index) => (
+        <UserListItem>
           <UserItem
             key={user._id}
             type={type}
@@ -68,6 +70,7 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
             onUnfollow={onUnfollow}
             follow={follows[index]}
           />
+        </UserListItem>
         ))}
       </List>
       <Spinner loading={loading} />
@@ -78,6 +81,10 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
 export default FollowList;
 
 const List = styled.ul`
-  margin-top: 1px;
-  background-color: #ddd;
+  width: 100%;
+`;
+
+const UserListItem = styled.div`
+  padding: 1.4rem;
+  border-bottom: 0.3px solid ${COLOR.lightGray};
 `;

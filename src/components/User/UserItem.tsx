@@ -1,10 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { userState } from '../../recoil/atoms/user';
 import { FollowResponse, UserResponse } from '../../types/response';
 import { unfollow } from '../../utils/api/follow';
 import { COLOR } from '../../utils/color';
 import Icon from '../Base/Icon';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
+import Image from '../Base/Image';
 
 interface UserItemProps {
   user: UserResponse;
@@ -16,6 +19,7 @@ interface UserItemProps {
 const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   const { userId } = useParams() as { userId: string };
   const navigate = useNavigate();
+  const myUser = useRecoilValue(userState);
 
   const getMyInfo = useGetMyInfo();
 
@@ -34,7 +38,7 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   };
 
   const onContainerClick = () => {
-    navigate(`/profile/${user._id}`);
+    navigate(`/profile/${user._id === myUser._id ? 'me' : user._id}`);
   };
 
   const render = () => {
@@ -73,12 +77,6 @@ const ImageWrapper = styled.div`
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
 `;
 
 const Text = styled.div`

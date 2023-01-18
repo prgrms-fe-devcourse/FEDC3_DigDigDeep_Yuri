@@ -17,9 +17,15 @@ const LoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  width: 100%;
+  width: 50%;
+  min-width: calc(767px - 10%);
   height: 100vh;
-  padding: 0 1.6rem;
   box-sizing: border-box;
   text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10rem;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+    min-width: 90%;
+  }
 `;

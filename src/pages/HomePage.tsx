@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Post from '../components/Post';
 import Header from '../components/Header';
@@ -6,15 +6,30 @@ import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/post';
 import useLogout from '../hooks/useLogout';
 import { COLOR } from '../utils/color';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
+  const [currentPosts, setCurrnetPosts] = useState<PostResponse[]>([]);
+  const postsLength = useMemo(() => posts.length, [posts]);
   const logout = useLogout();
+
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    let offset = currentPosts.length;
+    if (postsLength < offset) return;
+    if (isIntersecting) {
+      const slicedPost = posts.slice(offset, offset + 10);
+      setCurrnetPosts([...currentPosts, ...slicedPost]);
+    }
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
 
   const fetchHandler = useCallback(async () => {
     try {
       const posts = await getPosts();
       setPosts(posts);
+      setCurrnetPosts(posts.slice(0, 10));
     } catch {
       alert('포스트 정보를 불러올 수 없습니다.');
     }
@@ -27,17 +42,19 @@ const HomePage = () => {
   return (
     <Container>
       <Header />
-      <LogOutButton onClick={logout}>로그아웃</LogOutButton>
       <List>
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <ListItem key={post._id}>
             <Post {...post} />
+            <ObservedDiv ref={setTarget}></ObservedDiv>
           </ListItem>
         ))}
       </List>
     </Container>
   );
 };
+
+const ObservedDiv = styled.div``;
 
 const LogOutButton = styled.div`
   margin: 0 auto;

@@ -12,6 +12,7 @@ import { UserResponse } from '../types/response';
 import { getUserInfo } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
+import Header from '../components/Header';
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -64,23 +65,24 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Container>
+      <Header />
+      <Wrapper>
         <DetailHeader name="" isButton={false}>
           {userId === 'me' ? (
-            <div>
-              <button onClick={() => navigate('/profile/me/likes')}>
+            <ButtonContainer>
+              <Button onClick={() => navigate('/profile/me/likes')}>
                 <Icon name="my-like" height={22} />
-              </button>
-              <button>
+              </Button>
+              <Button onClick={() => navigate('/profile/me/edit')}>
                 <Icon name="setting" height={20} />
-              </button>
-            </div>
+              </Button>
+            </ButtonContainer>
           ) : (
             <FollowButton targetId={userId} fetchUser={fetchUser} />
           )}
         </DetailHeader>
-      </Container>
-      <Header>
+      </Wrapper>
+      <Container>
         <ImageContainer>
           <Image
             src={userInfo?.image ?? '/image/icon/default-profile.png'}
@@ -103,8 +105,8 @@ const ProfilePage = () => {
             );
           })}
         </TabList>
-      </Header>
-      <TabContent>{renderTabContent()}</TabContent>
+      </Container>
+      <Container>{renderTabContent()}</Container>
     </>
   );
 };
@@ -112,33 +114,37 @@ const ProfilePage = () => {
 export default ProfilePage;
 
 const TabList = styled.div`
-  display: block;
+  display: flex;
   width: 100%;
-  max-width: 1200px;
   background-color: ${COLOR.bgColor};
+  justify-content: space-between;
 `;
 
 const TabItemContainer = styled.span`
   display: inline-block;
-  width: 33.33%;
   text-align: center;
 `;
 
-const TabContent = styled.ul`
-  display: block;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
+  width: 50%;
+  min-width: calc(767px - 10%);
+  margin: 0 auto;
   margin-bottom: 1.5rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+    min-width: 90%;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -161,4 +167,17 @@ const Name = styled.h1`
   font-size: 1.6rem;
   color: ${COLOR.text};
   margin: 1rem 0 2.5rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: block;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  display: inline-block;
+
+  :not(:first-child) {
+    margin-left: 1.5rem;
+  }
 `;
