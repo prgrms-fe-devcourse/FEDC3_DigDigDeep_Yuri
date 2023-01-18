@@ -23,7 +23,7 @@ const PostPage = () => {
 
   const toScrollBottom = () =>
     window.scroll({
-      top: document.body.scrollHeight + 150,
+      top: document.body.scrollHeight,
       left: 100,
       behavior: 'smooth',
     });
