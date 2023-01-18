@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon from '../components/Base/Icon';
 import Header from '../components/Header';
 import Post from '../components/Post';
+import UserItem from '../components/User/UserItem';
 import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 import { COLOR } from '../utils/color';
@@ -58,14 +58,7 @@ const SearchPage = () => {
               key={user._id}
               onClick={() => toUserProfile(user._id)}
             >
-              {user.image ? (
-                <Image src={user.image} />
-              ) : (
-                <Icon name="default-profile" size={38} />
-              )}
-              <Text>
-                <Strong>{user.fullName}</Strong>
-              </Text>
+              <UserItem user={user} />
             </UserListItem>
           ))}
         </List>
@@ -94,22 +87,12 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Strong = styled.strong`
-  font-weight: 700;
-`;
-
 const UserListItem = styled.li`
   display: flex;
   align-items: center;
   gap: 1.8rem;
   padding: 1.4rem;
   border-bottom: 0.3px solid ${COLOR.lightGray};
-`;
-
-const Image = styled.img`
-  width: 3.8rem;
-  height: 3.8rem;
-  border-radius: 50%;
 `;
 
 const List = styled.ul`
@@ -126,14 +109,6 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 100%;
   margin: 0.5rem auto;
-`;
-
-const Text = styled.span`
-  font-weight: 350;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.01em;
-  color: #715141;
 `;
 
 const BigText = styled.span`
