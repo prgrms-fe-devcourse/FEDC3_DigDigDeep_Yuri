@@ -9,7 +9,7 @@ import TabItem from '../components/Profile/TabItem';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { UserResponse } from '../types/response';
-import { getUserInfo } from '../utils/api/user';
+import { getUser } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
 import Header from '../components/Header/Header';
@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
 
   const fetchUser = useCallback(async () => {
-    const user = await getUserInfo(userId === 'me' ? myId : userId);
+    const user = await getUser(userId === 'me' ? myId : userId);
     setUserInfo(user);
   }, [userId, myId]);
 
