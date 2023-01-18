@@ -4,6 +4,7 @@ import { FollowResponse, UserResponse } from '../../types/response';
 import { unfollow } from '../../utils/api/follow';
 import { COLOR } from '../../utils/color';
 import Icon from '../Base/Icon';
+import useGetMyInfo from '../../hooks/useGetMyInfo';
 
 interface UserItemProps {
   user: UserResponse;
@@ -16,9 +17,15 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
   const { userId } = useParams() as { userId: string };
   const navigate = useNavigate();
 
-  const onClickUnfollow = async () => {
+  const getMyInfo = useGetMyInfo();
+
+  const onClickUnfollow = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
     if (!user || !follow) return;
     await unfollow({ followId: follow._id });
+    await getMyInfo();
     onUnfollow && (await onUnfollow());
   };
 
@@ -42,7 +49,7 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
         </ImageWrapper>
         <Text>{user.fullName}</Text>
         {isUnfollowable() && (
-          <Button onClick={onClickUnfollow}>
+          <Button onClick={onClickUnfollow} type="button">
             <Icon name="close" />
           </Button>
         )}
