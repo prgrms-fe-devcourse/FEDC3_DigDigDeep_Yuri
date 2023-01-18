@@ -1,5 +1,5 @@
 import Icon from './Base/Icon';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR } from '../utils/color';
 import EditButton from './EditButton';
@@ -12,7 +12,7 @@ interface Props {
   postId?: string;
   image?: Blob | null;
   imageId?: string;
-  route?: string;
+  children?: React.ReactNode;
 }
 
 const DetailHeader = ({
@@ -24,13 +24,15 @@ const DetailHeader = ({
   postId,
   image,
   imageId,
-  route,
+  children,
 }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <BackHomeLink to={route ?? '/'}>
+      <BackLink onClick={() => navigate(-1)}>
         <Icon name="back" width={20} height={16} />
-      </BackHomeLink>
+      </BackLink>
       <Title>{name}</Title>
       {isButton && (
         <EditButton
@@ -42,6 +44,7 @@ const DetailHeader = ({
           imageId={imageId}
         />
       )}
+      {children}
     </Container>
   );
 };
@@ -53,8 +56,9 @@ const Container = styled.div`
   grid-template-columns: 1fr 1.5fr 1fr;
   padding: 2rem 0;
   width: 50%;
-  min-width: 767px;
+  min-width: calc(767px - 14%);
   align-items: center;
+  justify-items: end;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
     padding: 1.7rem 0;
@@ -62,8 +66,9 @@ const Container = styled.div`
   }
 `;
 
-const BackHomeLink = styled(Link)`
+const BackLink = styled.button`
   font-size: 1.6rem;
+  justify-self: start;
 `;
 
 const Title = styled.h3`

@@ -6,10 +6,12 @@ import FollowButton from '../components/Follow/FollowButton';
 import FollowList from '../components/Follow/FollowList';
 import PostList from '../components/PostList';
 import TabItem from '../components/TabItem';
+import DetailHeader from '../components/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { UserResponse } from '../types/response';
 import { getUserInfo } from '../utils/api/user';
 import { COLOR } from '../utils/color';
+import Icon from '../components/Base/Icon';
 
 export type TTabMenuItems = keyof Pick<
   UserResponse,
@@ -61,11 +63,23 @@ const ProfilePage = () => {
   };
 
   return (
-    <div>
-      <div>
-        <button onClick={() => navigate('/profile/me/likes')}>MY LIKES</button>
-        <FollowButton targetId={userId} fetchUser={fetchUser} />
-      </div>
+    <>
+      <Container>
+        <DetailHeader name="" isButton={false}>
+          {userId === 'me' ? (
+            <div>
+              <button onClick={() => navigate('/profile/me/likes')}>
+                <Icon name="my-like" height={22} />
+              </button>
+              <button>
+                <Icon name="setting" height={20} />
+              </button>
+            </div>
+          ) : (
+            <FollowButton targetId={userId} fetchUser={fetchUser} />
+          )}
+        </DetailHeader>
+      </Container>
       <Header>
         <ImageContainer>
           <Image
@@ -91,7 +105,7 @@ const ProfilePage = () => {
         </TabList>
       </Header>
       <TabContent>{renderTabContent()}</TabContent>
-    </div>
+    </>
   );
 };
 
@@ -112,6 +126,11 @@ const TabItemContainer = styled.span`
 
 const TabContent = styled.ul`
   display: block;
+`;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Header = styled.div`

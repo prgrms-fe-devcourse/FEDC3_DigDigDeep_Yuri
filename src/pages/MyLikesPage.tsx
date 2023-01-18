@@ -37,11 +37,7 @@ const MyLikesPage = () => {
     <>
       <Header />
       <Container>
-        <DetailHeader
-          route="/profile/me"
-          name="내가 좋아한 그라운드"
-          isButton={false}
-        />
+        <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
         {posts.map((post) => (
           <Post key={post._id} {...post} isMyLikes={true} />
         ))}
@@ -55,13 +51,12 @@ export default MyLikesPage;
 const Container = styled.div`
   display: block;
   margin: 0 auto;
-  padding: 0 3rem;
   width: 50%;
-  min-width: 767px;
+  min-width: calc(767px - 10%);
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 100%;
-    min-width: 325px;
+    width: 90%;
+    min-width: 90%;
   }
 `;
