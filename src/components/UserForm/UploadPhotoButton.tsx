@@ -5,6 +5,7 @@ import { userState } from '../../recoil/atoms/user';
 import { useState } from 'react';
 import { uploadPhoto } from '../../utils/api/user';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
+import Image from '../Base/Image';
 
 const UploadPhotoButton = () => {
   const user = useRecoilValue(userState);
@@ -29,25 +30,27 @@ const UploadPhotoButton = () => {
   };
 
   return (
-    <ImageButtonContainer>
-      <StyledButton disabled={isLoading}>
-        <StyledLabel htmlFor="file">
-          <ImageContainer>
-            <Image
-              src={user.image ? user.image : '/image/default-profile.png'}
-              alt="default-profile"
-            />
-          </ImageContainer>
-          <StyledSpan>EDIT</StyledSpan>
-        </StyledLabel>
-      </StyledButton>
-      <StyledInput
-        id="file"
-        type="file"
-        accept="image/*"
-        onChange={handleFileChange}
-      />
-    </ImageButtonContainer>
+    <>
+      <ImageButtonContainer>
+        <StyledButton disabled={isLoading}>
+          <StyledLabel htmlFor="file">
+            <ImageContainer>
+              <Image
+                src={user.image ? user.image : '/image/default-profile.png'}
+                alt="default-profile"
+              />
+            </ImageContainer>
+            <StyledSpan>EDIT</StyledSpan>
+          </StyledLabel>
+        </StyledButton>
+        <StyledInput
+          id="file"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+      </ImageButtonContainer>
+    </>
   );
 };
 
@@ -73,6 +76,7 @@ const StyledLabel = styled.label`
 
 const ImageButtonContainer = styled.div`
   margin-top: 6rem;
+  position: relative;
 `;
 
 const StyledButton = styled.button`
@@ -91,10 +95,4 @@ const ImageContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-`;
-
-const Image = styled.img`
-  display: block;
-  width: 100%;
-  height: 100%;
 `;
