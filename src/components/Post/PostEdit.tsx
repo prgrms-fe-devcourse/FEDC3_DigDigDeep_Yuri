@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
 import Icon from './../Base/Icon';
-import { getPost } from '../../utils/post';
+import { getPost } from '../../utils/api/post';
 
 interface Props {
   name?: string;

@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { getNotification } from '../utils/notification';
+import { getNotification } from '../utils/api/notification';
 import { NotificationResponse } from '../types/response';
 import useToast from './useToast';
 

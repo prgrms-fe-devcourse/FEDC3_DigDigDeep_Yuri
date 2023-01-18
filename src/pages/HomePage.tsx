@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Post from '../components/Post/Post';
 import Header from '../components/Header/Header';
 import { PostResponse } from '../types/response';
-import { getPosts } from '../utils/post';
+import { getPosts } from '../utils/api/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 const HomePage = () => {

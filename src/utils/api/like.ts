@@ -1,4 +1,4 @@
-import axiosInstance from './axios';
+import axiosInstance from '../axios';
 
 export const deleteLike = async (likeId: string) =>
   await axiosInstance.delete(`/likes/delete`, {

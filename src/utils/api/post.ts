@@ -1,5 +1,5 @@
-import { PostResponse } from '../types/response';
-import axiosInstance from './axios';
+import { PostResponse } from '../../types/response';
+import axiosInstance from '../axios';
 
 export const createPost = async (
   title: string,

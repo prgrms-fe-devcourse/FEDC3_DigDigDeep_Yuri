@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { createPost, updatePost } from '../../utils/post';
+import { createPost, updatePost } from '../../utils/api/post';
 import { COLOR } from '../../utils/color';
 import { useNavigate } from 'react-router-dom';
 import useToast from '../../hooks/useToast';

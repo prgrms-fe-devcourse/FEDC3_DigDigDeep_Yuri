@@ -4,7 +4,7 @@ import Post from '../components/Post/Post';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
-import { getPosts } from '../utils/post';
+import { getPosts } from '../utils/api/post';
 import styled from 'styled-components';
 import Header from '../components/Header/Header';
 

@@ -6,7 +6,7 @@ import { follow, unfollow } from '../../utils/api/follow';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
-import { sendNotification } from '../../utils/notification';
+import { sendNotification } from '../../utils/api/notification';
 
 interface FollowButtonProps {
   targetId: string;

@@ -6,8 +6,8 @@ import useToast from '../../hooks/useToast';
 import { tokenState } from '../../recoil/atoms/user';
 import { PostResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
-import { createComment } from '../../utils/comment';
-import { sendNotification } from '../../utils/notification';
+import { createComment } from '../../utils/api/comment';
+import { sendNotification } from '../../utils/api/notification';
 
 interface CommentInputProps extends Pick<PostResponse, '_id' | 'author'> {
   fetchHandler?: () => Promise<void>;

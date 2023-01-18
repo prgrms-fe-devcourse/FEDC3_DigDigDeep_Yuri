@@ -7,7 +7,7 @@ import UserItem from '../components/User/UserItem';
 import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 import { COLOR } from '../utils/color';
-import { getPost } from '../utils/post';
+import { getPost } from '../utils/api/post';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();

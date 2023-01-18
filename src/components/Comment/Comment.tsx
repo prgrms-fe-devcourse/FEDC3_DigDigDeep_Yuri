@@ -5,7 +5,7 @@ import useModal from '../../hooks/useModal';
 import { userState } from '../../recoil/atoms/user';
 import { CommentResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
-import { deleteComment } from '../../utils/comment';
+import { deleteComment } from '../../utils/api/comment';
 import { formatDate } from '../../utils/formatDate';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';

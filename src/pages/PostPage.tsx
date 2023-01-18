@@ -7,7 +7,7 @@ import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
-import { getPost } from '../utils/post';
+import { getPost } from '../utils/api/post';
 
 type PostId = string;
 
