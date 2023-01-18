@@ -52,7 +52,7 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 
   return (
     <>
-      {targetId === 'me' ? null : (
+      {targetId === 'me' || targetId === user._id ? null : (
         <Button onClick={handleOnClick}>
           {isFollowable ? 'FOLLOW' : 'UNFOLLOW'}
         </Button>
