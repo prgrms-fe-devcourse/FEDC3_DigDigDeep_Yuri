@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Notification from './Notification';
-import { getNotification, seenNotification } from '../utils/notification';
-import { NotificationResponse } from '../types/response';
-import useToast from '../hooks/useToast';
+import { getNotification, seenNotification } from '../../utils/notification';
+import { NotificationResponse } from '../../types/response';
+import useToast from '../../hooks/useToast';
 
 const NotificationList = () => {
   const [notifications, setNotification] = useState<NotificationResponse[]>([]);
