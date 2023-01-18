@@ -6,4 +6,5 @@ export const defaultUserValue = {
   fullName: '',
   email: '',
   following: [],
+  notifications: [],
 };

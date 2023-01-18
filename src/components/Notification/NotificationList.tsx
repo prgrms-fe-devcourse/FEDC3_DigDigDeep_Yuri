@@ -1,36 +1,39 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Notification from './Notification';
-import { getNotification, seenNotification } from '../../utils/notification';
-import { NotificationResponse } from '../../types/response';
-import useToast from '../../hooks/useToast';
+import useNotification from '../../hooks/useNotification';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/atoms/user';
+import { COLOR } from '../../utils/color';
+import { seenNotification } from '../../utils/notification';
 
 const NotificationList = () => {
-  const [notifications, setNotification] = useState<NotificationResponse[]>([]);
+  const [user] = useRecoilState(userState);
+  const { notifications } = useNotification();
 
-  const { showToast } = useToast();
-
-  const fetchNotification = useCallback(async () => {
+  const fetchSeenNotifications = useCallback(async () => {
     try {
-      const notifications = await getNotification();
-      setNotification(notifications);
-
       await seenNotification();
-    } catch {
-      setNotification([]);
-      showToast({ message: '알림을 불러올 수 없습니다.' });
+    } catch (error) {
+      console.error(error);
     }
-  }, [showToast]);
+  }, []);
 
   useEffect(() => {
-    fetchNotification();
-  }, [fetchNotification]);
+    fetchSeenNotifications();
+  }, [fetchSeenNotifications]);
 
   return (
     <List>
-      {notifications.map((notification) => (
-        <Notification key={notification._id} {...notification} />
-      ))}
+      {notifications.length === 0 ? (
+        <Text>아무 알림도 오지 않았어요 ... 🦔</Text>
+      ) : (
+        notifications
+          .filter((notification) => notification.author._id !== user._id)
+          .map((notification) => (
+            <Notification key={notification._id} {...notification} />
+          ))
+      )}
     </List>
   );
 };
@@ -42,4 +45,12 @@ const List = styled.ul`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 86%;
   }
+`;
+
+const Text = styled.h3`
+  margin-top: 4rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-align: center;
+  color: ${COLOR.lightBrown};
 `;
