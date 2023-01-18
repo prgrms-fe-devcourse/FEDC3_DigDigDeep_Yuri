@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import Icon from './Base/Icon';
-import { COLOR } from '../utils/color';
-import { NotificationResponse } from '../types/response';
+import Icon from '../Base/Icon';
+import { COLOR } from '../../utils/color';
+import { NotificationResponse } from '../../types/response';
 
 const Notification = ({
-  _id,
   author,
   like,
   follow,
   comment,
-  seen,
 }: NotificationResponse) => {
   return (
     <>

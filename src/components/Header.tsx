@@ -10,12 +10,15 @@ import { COLOR } from '../utils/color';
 import Icon from './Base/Icon';
 import LinkButton from './LinkButton';
 import Searchbar from './Searchbar';
+import useNotification from '../hooks/useNotification';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
   const location = useLocation();
   const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  const { isSeen } = useNotification();
   const logout = useLogout();
   const { showModal } = useModal();
   const { showToast } = useToast();
@@ -80,7 +83,6 @@ const Header = () => {
       window.removeEventListener('resize', resizeScreen);
     };
   }, []);
-
   return (
     <HeaderContainer>
       <Container>
@@ -108,7 +110,7 @@ const Header = () => {
                       <LinkButton to="/newPost" name="new" size={24} />
                       <LinkButton
                         to="/notifications"
-                        name="notification"
+                        name={isSeen ? 'notification-off' : 'notification-on'}
                         size={24}
                       />
                       <LinkButton to="/profile/me" name="profile" size={24} />
@@ -151,7 +153,7 @@ const Header = () => {
                     <LinkButton to="/newPost" name="new" size={20} />
                     <LinkButton
                       to="/notifications"
-                      name="notification"
+                      name={isSeen ? 'notification-off' : 'notification-on'}
                       size={20}
                     />
                     <LinkButton to="/profile/me" name="profile" size={20} />
