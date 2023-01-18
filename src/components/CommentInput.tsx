@@ -1,7 +1,9 @@
 import React, { ReactNode, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import useGetMyInfo from '../hooks/useGetMyInfo';
 import useToast from '../hooks/useToast';
+import { tokenState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { createComment } from '../utils/comment';
@@ -21,6 +23,7 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
   const [comment, setComment] = useState('');
   const { showToast } = useToast();
   const getMyInfo = useGetMyInfo();
+  const token = useRecoilValue(tokenState);
   const [isFocus, setIsFocus] = useState(false);
 
   const onInputFocus = () => setIsFocus(true);
@@ -37,6 +40,7 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     postId: string
   ) => {
     e.preventDefault();
+    if (!token) return showToast({ message: '로그인이 필요합니다.' });
     if (!comment) return showToast({ message: '디깅을 먼저 작성해주세요.' });
     try {
       const data = await createComment(content, postId);
