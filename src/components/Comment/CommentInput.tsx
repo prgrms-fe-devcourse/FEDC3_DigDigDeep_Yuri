@@ -8,6 +8,7 @@ import { PostResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
 import { createComment } from '../../utils/api/comment';
 import { sendNotification } from '../../utils/api/notification';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 interface CommentInputProps extends Pick<PostResponse, '_id' | 'author'> {
   fetchHandler?: () => Promise<void>;
@@ -40,18 +41,19 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     postId: string
   ) => {
     e.preventDefault();
-    if (!token) return showToast({ message: '로그인이 필요합니다.' });
-    if (!comment) return showToast({ message: '디깅을 먼저 작성해주세요.' });
+    if (!token) return showToast({ message: ERROR_MESSAGES.REQUIRE_LOGIN });
+    if (!comment)
+      return showToast({ message: ERROR_MESSAGES.REQUIRE_INPUT('디깅을') });
     try {
       const data = await createComment(content, postId);
       await getMyInfo();
       sendNotification('COMMENT', data._id, author._id, postId);
       if (fetchHandler) fetchHandler();
-      showToast({ message: '디깅 +1' });
+      showToast({ message: SUCCESS_MESSAGES.CREATE_COMMENT_SUCCESS });
       setComment('');
     } catch (error) {
-      console.error('댓글 등록에 실패하였습니다.');
-      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+      console.error(ERROR_MESSAGES.CREATE_ERROR('댓글'), error);
+      showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
     }
   };
 

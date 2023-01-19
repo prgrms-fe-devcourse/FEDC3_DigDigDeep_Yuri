@@ -7,6 +7,7 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
 import { sendNotification } from '../../utils/api/notification';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 interface FollowButtonProps {
   targetId: string;
@@ -45,15 +46,15 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
   };
 
   const followUser = async () => {
-    if (!token) return showToast({ message: '로그인이 필요합니다.' });
+    if (!token) return showToast({ message: ERROR_MESSAGES.REQUIRE_LOGIN });
 
     try {
       const data = await follow({ userId: targetId });
-      showToast({ message: '팔로우 했습니다.' });
+      showToast({ message: SUCCESS_MESSAGES.FOLLOW_SUCCESS });
       sendNotification('FOLLOW', data._id, targetId, null);
     } catch (error) {
       console.error(error);
-      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+      showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
     }
   };
 
@@ -62,10 +63,10 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
     if (!_id) return;
     try {
       await unfollow({ followId: _id });
-      showToast({ message: '언팔로우 했습니다.' });
+      showToast({ message: SUCCESS_MESSAGES.UNFOLLOW_SUCCESS });
     } catch (error) {
       console.error(error);
-      showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+      showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
     }
   };
 

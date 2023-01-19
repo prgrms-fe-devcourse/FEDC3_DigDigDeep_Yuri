@@ -15,6 +15,7 @@ import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import FormImageFile from '../UserForm/FormProfileImage';
 import { loadingState } from '../../recoil/atoms/loading';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 const ProfileEditForm = () => {
   const user = useRecoilValue(userState);
@@ -67,12 +68,12 @@ const ProfileEditForm = () => {
       .then(() => {
         getMyInfo();
         setLoading(false);
-        showToast({ message: '변경되었습니다.' });
+        showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('') });
         navigate(ROUTES.PROFILE_ME);
       })
       .catch((error) => {
         console.error(error);
-        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       });
   };
 
