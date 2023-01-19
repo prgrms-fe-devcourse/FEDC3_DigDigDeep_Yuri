@@ -40,6 +40,7 @@ interface FlexContainerProps {
 interface ImageContainerProps {
   width?: string;
   height?: string;
+  isMyLikes?: boolean;
 }
 
 const Post = ({
@@ -158,7 +159,7 @@ const Post = ({
           onClick={toPostDetail}
         >
           {image && (
-            <ImageContainer>
+            <ImageContainer isMyLikes={isMyLikes}>
               <Image src={image} alt="post-image" />
             </ImageContainer>
           )}
@@ -456,7 +457,8 @@ const ImageContainer = styled.div<ImageContainerProps>`
   min-width: 10rem;
   aspect-ratio: 1 / 1;
   background-color: #fafafa;
-  border-radius: 15px;
+  border-radius: ${({ isMyLikes }) => (isMyLikes ? 0 : '15px')};
+  margin-right: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : 0)};
 `;
 
 export default Post;

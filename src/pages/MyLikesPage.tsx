@@ -38,30 +38,33 @@ const MyLikesPage = () => {
   }, [fetchPosts]);
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
-        <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
+      <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
+      <Wrapper>
         {posts.map((post) => (
           <Post key={post._id} {...post} isMyLikes={true} />
         ))}
         <Spinner loading={loading} />
-      </Container>
-    </>
+      </Wrapper>
+    </Container>
   );
 };
 
 export default MyLikesPage;
 
 const Container = styled.div`
-  display: block;
-  margin: 0 auto;
-  width: 50%;
-  min-width: calc(767px - 10%);
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Wrapper = styled.div`
+  width: 35%;
+  min-width: 350px;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
-    min-width: 90%;
+    width: 100%;
+    min-width: 0;
   }
 `;
