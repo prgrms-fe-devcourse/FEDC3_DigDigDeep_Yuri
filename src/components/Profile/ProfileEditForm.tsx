@@ -16,6 +16,7 @@ import { ROUTES } from '../../utils/routes';
 import FormImageFile from '../UserForm/FormProfileImage';
 import { loadingState } from '../../recoil/atoms/loading';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
+import { PROFILE_EDIT_RULES } from '../../utils/formRules';
 
 const ProfileEditForm = () => {
   const user = useRecoilValue(userState);
@@ -61,7 +62,11 @@ const ProfileEditForm = () => {
       promises.push(updatePassword(data));
     }
 
-    if (promises.length === 0) return;
+    if (promises.length === 0) {
+      showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('') });
+      navigate(ROUTES.PROFILE_ME);
+      return;
+    }
 
     setLoading(true);
     Promise.all(promises)
@@ -72,6 +77,7 @@ const ProfileEditForm = () => {
         navigate(ROUTES.PROFILE_ME);
       })
       .catch((error) => {
+        setLoading(false);
         console.error(error);
         showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       });
@@ -83,10 +89,8 @@ const ProfileEditForm = () => {
       <FormInput
         control={control}
         name="fullName"
-        placeholder="user name"
-        rules={{
-          required: '이름을 입력해주세요.',
-        }}
+        placeholder="nickname"
+        rules={PROFILE_EDIT_RULES.nickname}
         resetField={resetField}
       />
       <FormInput
@@ -100,6 +104,7 @@ const ProfileEditForm = () => {
         name="password"
         placeholder="password"
         type="password"
+        rules={PROFILE_EDIT_RULES.password}
         resetField={resetField}
         icon="lock"
       />
@@ -108,10 +113,7 @@ const ProfileEditForm = () => {
         name="confirmPassword"
         placeholder="password check"
         type="password"
-        rules={{
-          validate: (value) =>
-            value === watch('password') || '비밀번호가 일치하지 않습니다.',
-        }}
+        rules={PROFILE_EDIT_RULES.confirmPassword(watch('password'))}
         resetField={resetField}
         icon="lock"
       />

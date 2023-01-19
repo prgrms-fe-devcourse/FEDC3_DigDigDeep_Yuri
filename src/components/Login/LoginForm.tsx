@@ -13,15 +13,20 @@ import { Link } from 'react-router-dom';
 import { COLOR } from '../../utils/color';
 import ErrorMessage from '../UserForm/ErrorMessage';
 import { ROUTES } from '../../utils/routes';
+import { ERROR_MESSAGES } from '../../utils/messages';
+import useToast from '../../hooks/useToast';
+import { loadingState } from '../../recoil/atoms/loading';
+import { FORM_RULE_MESSAGE, LOGIN_RULES } from '../../utils/formRules';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
 
 const LoginForm = () => {
+  const [errorMessage, setErrorMessage] = useState('');
   const setUser = useSetRecoilState(userState);
   const setToken = useSetRecoilState(tokenState);
-
-  const [errorMessage, setErrorMessage] = useState('');
+  const setLoading = useSetRecoilState(loadingState);
+  const { showToast } = useToast();
 
   const {
     handleSubmit,
@@ -37,20 +42,21 @@ const LoginForm = () => {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
+      setLoading(true);
       const { user, token } = await login(data);
+      setLoading(false);
       setErrorMessage('');
       setUser(user);
       setToken(token);
     } catch (error) {
+      setLoading(false);
       console.error(error);
       if (error instanceof AxiosError && error.response?.data) {
         if (error.response.data === RESPONSE_ERROR_MESSAGE) {
-          setErrorMessage(
-            '이메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.'
-          );
+          setErrorMessage(FORM_RULE_MESSAGE.INCORRECT_LOGIN_INFO);
         }
       } else {
-        setErrorMessage('서버와 통신 중 문제가 발생했습니다.');
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
     }
   };
@@ -61,9 +67,7 @@ const LoginForm = () => {
         control={control}
         name="email"
         placeholder="email"
-        rules={{
-          required: '이메일을 입력해주세요.',
-        }}
+        rules={LOGIN_RULES.email}
         resetField={resetField}
       />
       <FormInput
@@ -71,9 +75,7 @@ const LoginForm = () => {
         name="password"
         placeholder="password"
         type="password"
-        rules={{
-          required: '비밀번호를 입력해주세요.',
-        }}
+        rules={LOGIN_RULES.password}
         resetField={resetField}
         icon="lock"
       />
