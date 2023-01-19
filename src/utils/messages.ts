@@ -7,6 +7,7 @@ export const ERROR_MESSAGES = {
   REQUIRE_LOGIN: '로그인이 필요합니다.',
   REQUIRE_INPUT: (type: string) => `${type} 작성해주세요.`,
   SEARCH_INPUT: '검색어를 입력해주세요.',
+  MAX_SIZE_IS_10MB: '파일 크기는 10MB를 넘길 수 없습니다.',
 };
 
 export const CONFIRM_MESSAGES = {

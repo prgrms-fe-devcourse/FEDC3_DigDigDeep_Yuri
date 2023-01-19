@@ -17,6 +17,7 @@ import FormImageFile from '../UserForm/FormProfileImage';
 import { loadingState } from '../../recoil/atoms/loading';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { PROFILE_EDIT_RULES } from '../../utils/formRules';
+import { queryLowImage } from '../../utils/image';
 
 const ProfileEditForm = () => {
   const user = useRecoilValue(userState);
@@ -85,7 +86,11 @@ const ProfileEditForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
-      <FormImageFile control={control} name="image" src={user.image} />
+      <FormImageFile
+        control={control}
+        name="image"
+        src={user.image ? queryLowImage(user.image, 'profile') : ''}
+      />
       <FormInput
         control={control}
         name="fullName"

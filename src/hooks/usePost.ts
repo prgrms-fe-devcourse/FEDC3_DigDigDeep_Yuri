@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { checkFileSize } from '../utils/formRules';
+import { ERROR_MESSAGES } from '../utils/messages';
+import useToast from './useToast';
 
 const usePost = () => {
   const [title, setTitle] = useState<string>('');
@@ -9,7 +12,7 @@ const usePost = () => {
 
   const [name, setName] = useState<string>('');
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
@@ -22,14 +25,16 @@ const usePost = () => {
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setIsLoading(true);
+
+    if (!checkFileSize(file.size)) {
+      showToast({ message: ERROR_MESSAGES.MAX_SIZE_IS_10MB });
+      return;
+    }
     setImage(file);
     setName(file.name);
     try {
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -39,7 +44,6 @@ const usePost = () => {
     body,
     image,
     imageId,
-    isLoading,
     setTitle,
     setBody,
     setImage,

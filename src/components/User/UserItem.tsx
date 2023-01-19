@@ -8,6 +8,7 @@ import { COLOR } from '../../utils/color';
 import Icon from '../Base/Icon';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import Image from '../Base/Image';
+import { queryLowImage } from '../../utils/image';
 
 interface UserItemProps {
   user: UserResponse;
@@ -47,7 +48,11 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
       <Container onClick={onContainerClick}>
         <ImageWrapper>
           <Image
-            src={user.image ? user.image : '/image/default-profile.png'}
+            src={
+              user.image
+                ? queryLowImage(user.image, 'profile')
+                : '/image/default-profile.png'
+            }
             alt="user-profile"
           />
         </ImageWrapper>

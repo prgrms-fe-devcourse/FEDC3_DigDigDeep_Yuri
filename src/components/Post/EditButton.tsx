@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 import { createPost, updatePost } from '../../utils/api/post';
 import { COLOR } from '../../utils/color';
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '../../recoil/atoms/loading';
 
 interface Props {
   text?: string;
@@ -19,11 +21,11 @@ interface Props {
 const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
   const navigator = useNavigate();
   const { showToast } = useToast();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const setLoading = useSetRecoilState(loadingState);
 
   const createGround = useCallback(async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       const data = await createPost(
         JSON.stringify({ title, body }),
         image ?? null,
@@ -31,16 +33,16 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
       );
       showToast({ message: SUCCESS_MESSAGES.CREATE_SUCCESS('그라운드가') });
       navigator(ROUTES.POSTS_BY_ID(data._id));
-      setIsLoading(false);
+      setLoading(false);
     } catch {
       showToast({ message: ERROR_MESSAGES.CREATE_ERROR('그라운드') });
     }
-  }, [navigator, showToast, title, body, image]);
+  }, [setLoading, title, body, image, showToast, navigator]);
 
   const updateGround = useCallback(async () => {
     try {
       if (postId) {
-        setIsLoading(true);
+        setLoading(true);
         await updatePost(
           postId,
           JSON.stringify({ title, body }),
@@ -50,16 +52,15 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
         );
         showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('그라운드가') });
         navigator(ROUTES.HOME);
-        setIsLoading(false);
+        setLoading(false);
       }
     } catch {
       showToast({ message: ERROR_MESSAGES.EDIT_ERROR('그라운드') });
     }
-  }, [showToast, navigator, postId, title, body, image, imageId]);
+  }, [postId, setLoading, title, body, image, imageId, showToast, navigator]);
 
   return (
     <Button
-      disabled={isLoading}
       onClick={() => (text === 'CREATE' ? createGround() : updateGround())}
     >
       {text}

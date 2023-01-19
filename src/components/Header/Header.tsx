@@ -13,6 +13,7 @@ import Searchbar from './Searchbar';
 import useNotification from '../../hooks/useNotification';
 import { ROUTES } from '../../utils/routes';
 import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
+import { queryLowImage } from '../../utils/image';
 
 const longLogo = require('../../assets/images/logo/long.png');
 const smallLogo = require('../../assets/images/logo/small.png');
@@ -127,7 +128,7 @@ const Header = () => {
                       {user.image ? (
                         <LinkButton
                           to={ROUTES.PROFILE_ME}
-                          src={user.image}
+                          src={queryLowImage(user.image, 'profile')}
                           alt="profile-image"
                           isProfile={true}
                           name="profile"
@@ -188,7 +189,7 @@ const Header = () => {
                     {user.image ? (
                       <LinkButton
                         to={ROUTES.PROFILE_ME}
-                        src={user.image}
+                        src={queryLowImage(user.image, 'profile')}
                         alt="profile-image"
                         isProfile={true}
                         name="profile"

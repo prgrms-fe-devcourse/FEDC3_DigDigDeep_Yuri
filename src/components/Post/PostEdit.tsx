@@ -13,7 +13,6 @@ interface Props {
   title: string;
   body: string;
   image?: Blob | null;
-  isLoading: boolean;
   setTitle: (v: string) => void;
   setBody: (v: string) => void;
   setImage: (v: Blob | null) => void;
@@ -30,7 +29,6 @@ const PostEdit = ({
   title,
   body,
   image,
-  isLoading,
   setTitle,
   setBody,
   setImage,
@@ -84,7 +82,7 @@ const PostEdit = ({
         value={body}
       />
       <Wrapper>
-        <Button disabled={isLoading}>
+        <Button>
           <Label htmlFor="file">
             <Icon
               name="add"
