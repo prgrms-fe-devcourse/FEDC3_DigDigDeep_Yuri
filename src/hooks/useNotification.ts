@@ -23,7 +23,7 @@ const useCheckNotifications = () => {
       if (!token) return;
       const notifications = await getNotifications();
       setNotifications(notifications);
-    }, 5000);
+    }, 15000);
     return () => {
       clearInterval(handleInterval);
     };
