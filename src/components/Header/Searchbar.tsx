@@ -6,6 +6,8 @@ import { COLOR } from '../../utils/color';
 import { ROUTES } from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
+import useToast from '../../hooks/useToast';
+import { ERROR_MESSAGES } from '../../utils/messages';
 
 export type EventTypes = 'mousedown' | 'touchstart';
 
@@ -31,6 +33,8 @@ const Searchbar = ({
   const ref = useRef(null);
   const navigate = useNavigate();
 
+  const { showToast } = useToast();
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
 
@@ -44,7 +48,7 @@ const Searchbar = ({
     if (search) {
       return navigate(ROUTES.SEARCH_BY_QUERY(search, select));
     }
-    alert('검색어를 입력해주세요.');
+    showToast({ message: ERROR_MESSAGES.SEARCH_INPUT });
   };
 
   const onInputBlur = () => setIsFocus(false);
