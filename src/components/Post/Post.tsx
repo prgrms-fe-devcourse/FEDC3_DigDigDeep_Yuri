@@ -147,7 +147,7 @@ const Post = ({
         </Wrapper>
         <Wrapper>
           <Button onClick={handleShare}>
-            <Icon name="share" size={12} />
+            <Icon name="share" size={16} />
           </Button>
         </Wrapper>
       </PostHeader>
@@ -179,14 +179,14 @@ const Post = ({
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" size={12} />
+                    <Icon name="liked" size={16} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" size={12} />
+                    <Icon name="unliked" size={16} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -197,7 +197,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" size={12} />
+                  <Icon name="comment" size={16} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -230,14 +230,14 @@ const Post = ({
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" size={12} />
+                    <Icon name="liked" size={16} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" size={12} />
+                    <Icon name="unliked" size={16} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -248,7 +248,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" size={12} />
+                  <Icon name="comment" size={16} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -260,12 +260,12 @@ const Post = ({
             <StyledDiv>
               <IconWrapper>
                 <Button onClick={handleDelete}>
-                  <Icon name="delete" size={13} />
+                  <Icon name="delete" size={16} />
                 </Button>
               </IconWrapper>
               <IconWrapper>
                 <Button onClick={handleEdit}>
-                  <Icon name="edit" size={16} />
+                  <Icon name="edit" size={20} />
                 </Button>
               </IconWrapper>
             </StyledDiv>
@@ -277,14 +277,14 @@ const Post = ({
             {likesState.find((like) => like.user === user._id) ? (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="liked" size={12} />
+                  <Icon name="liked" size={16} />
                 </Button>
                 <SmText>{likesState.length}</SmText>
               </IconWrapper>
             ) : (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="unliked" size={12} />
+                  <Icon name="unliked" size={16} />
                 </Button>
                 {likesState.length > 999 ? (
                   <SmText>999+</SmText>
@@ -295,7 +295,7 @@ const Post = ({
             )}
             <IconWrapper>
               <Button onClick={toPostDetail}>
-                <Icon name="comment" size={12} />
+                <Icon name="comment" size={16} />
               </Button>
               {comments.length > 999 ? (
                 <SmText>999+</SmText>
@@ -367,19 +367,20 @@ const detailsTitle = `
 
 const Title = styled.span<PostDetailProps>`
   font-weight: 700;
-  font-size: 1.2rem;
-  line-height: 2rem;
+  font-size: 2rem;
+  /* line-height: 2.2rem; */
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
-  margin-bottom: 0.4rem;
+  margin: 1.2rem 0;
   word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
 `;
 
 const Text = styled.div<PostDetailProps>`
-  font-weight: 350;
-  font-size: 0.8rem;
-  line-height: 1.4rem;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  margin: 0.8rem 0;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   word-break: break-all;
@@ -387,8 +388,8 @@ const Text = styled.div<PostDetailProps>`
 `;
 
 const SmText = styled.span`
-  font-weight: 350;
-  font-size: 0.8rem;
+  font-weight: 400;
+  font-size: 1rem;
   line-height: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
@@ -433,8 +434,8 @@ const UserName = styled.span`
 `;
 
 const Date = styled.span`
-  font-weight: 350;
-  font-size: 0.8rem;
+  font-weight: 400;
+  font-size: 1rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.date};

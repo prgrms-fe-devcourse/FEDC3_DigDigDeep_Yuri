@@ -38,7 +38,7 @@ const Image = styled.img`
 
 const Title = styled.h1`
   color: ${COLOR.white};
-  font-weight: 600;
+  font-weight: 700;
   font-size: 3rem;
   margin: 5rem 0 1.7rem;
 
@@ -63,7 +63,7 @@ const Button = styled.button`
   border: 4px solid ${COLOR.white};
   color: ${COLOR.white};
   padding: 0.8rem 4rem;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem;
   margin-top: 5rem;
 `;
