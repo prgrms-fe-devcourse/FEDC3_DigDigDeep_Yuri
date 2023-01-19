@@ -22,8 +22,8 @@ export default TabItem;
 
 const Button = styled.button<{ isActive: boolean }>`
   cursor: pointer;
-  width: 7rem;
-  border-bottom: 2px solid
+  width: 8rem;
+  border-bottom: 3px solid
     ${({ isActive }) => (isActive ? COLOR.green : 'transparent')};
 `;
 
@@ -36,6 +36,7 @@ const Value = styled.div`
 
 const Title = styled.div`
   color: ${COLOR.brownGray};
-  font-size: 1.2rem;
-  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding-bottom: 0.7rem;
 `;

@@ -54,7 +54,7 @@ const Text = styled.span`
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: #715141;
+  color: ${COLOR.text};
 `;
 
 const Strong = styled.strong`

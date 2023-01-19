@@ -9,6 +9,8 @@ import { checkFileSize } from '../../utils/formRules';
 import useToast from '../../hooks/useToast';
 import { ERROR_MESSAGES } from '../../utils/messages';
 
+const defaultProfile = require('../../assets/images/icon/default-profile.png');
+
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<T>;
@@ -50,7 +52,7 @@ const FormProfileImage = <T extends FieldValues>({
         <Label htmlFor={name}>
           <ImageContainer>
             <Image
-              src={previewSrc ? previewSrc : '/image/default-profile.png'}
+              src={previewSrc ? previewSrc : defaultProfile}
               alt="default-profile"
             />
           </ImageContainer>

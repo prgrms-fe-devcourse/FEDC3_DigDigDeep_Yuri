@@ -83,6 +83,10 @@ export default FollowList;
 
 const List = styled.ul`
   width: 100%;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    width: 90%;
+  }
 `;
 
 const UserListItem = styled.div`

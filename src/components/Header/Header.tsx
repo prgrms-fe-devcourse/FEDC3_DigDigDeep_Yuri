@@ -15,6 +15,9 @@ import { ROUTES } from '../../utils/routes';
 import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 import { queryLowImage } from '../../utils/image';
 
+const longLogo = require('../../assets/images/logo/long.png');
+const smallLogo = require('../../assets/images/logo/small.png');
+
 const Header = () => {
   const token = useRecoilValue(tokenState);
   const user = useRecoilValue(userState);
@@ -30,8 +33,8 @@ const Header = () => {
 
   const isMe = location.pathname.split('/').includes('me');
 
-  const toggleSearchbar = () => {
-    setIsSearchbarShow(!isSearchbarShow);
+  const onSearchbar = () => {
+    setIsSearchbarShow(true);
   };
 
   const offSearchbar = () => {
@@ -39,17 +42,19 @@ const Header = () => {
   };
 
   const resizeScreen = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
-      setIsSearchbarShow(true);
+      setIsSearchbarShow(false);
     }
   };
 
   const checkIsMobile = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
   };
 
@@ -105,7 +110,7 @@ const Header = () => {
                   <LogoButton to={ROUTES.HOME}>
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
@@ -146,7 +151,7 @@ const Header = () => {
                   <LogoButton to="/">
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
@@ -226,21 +231,20 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 3rem 2.7rem;
   z-index: 1;
   height: 5rem;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
   box-sizing: border-box;
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
     display: flex;
     z-index: 1;
-    padding: 0 0;
+    padding: 0 2rem;
     justify-content: space-between;
     height: 6rem;
     align-items: center;
-    border-bottom: none;
   }
 `;
 
@@ -248,9 +252,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1.8rem 0;
-  gap: 1rem;
-  margin-left: 1rem;
+  padding: 1.8rem 1rem;
+  gap: 2rem;
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     gap: 1.5rem;
   }
@@ -270,19 +274,18 @@ const SearchWrapper = styled.div`
 
 const LinkContainer = css`
   width: 100%;
-  font-weight: 500;
-  text-decoration: none;
-  line-height: 0.2rem;
+  font-weight: 700;
+  font-size: 1.3rem;
   letter-spacing: -0.01em;
   color: ${COLOR.white};
-  padding: 1.2rem 1.6rem;
+  padding: 1.3rem 2rem;
   border-radius: 23.5px;
   border: none;
   min-width: max-content;
   cursor: pointer;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 1.4rem 1.8rem;
+    padding: 1.2rem 1.8rem;
   }
 `;
 
@@ -304,14 +307,13 @@ const Button = styled.div`
 const LogoButton = styled(Link)``;
 
 const Logo = styled.img`
-  width: 14rem;
-  height: 2rem;
-  content: url('/image/logo/long.png');
+  height: 2.4rem;
+  content: url(${longLogo});
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 4rem;
-    height: 4rem;
-    content: url('/image/logo/small.png');
+    width: 3.4rem;
+    height: 3.4rem;
+    content: url(${smallLogo});
   }
 `;
 

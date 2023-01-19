@@ -30,7 +30,7 @@ const Searchbar = ({
   const [select, setSelect] = useState('posts');
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(false);
-  const ref = useRef(null);
+  const ref: React.MutableRefObject<any> = useRef(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
@@ -58,8 +58,9 @@ const Searchbar = ({
   const handleEvent = useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (!ref) return;
+      if (!isMobile) return;
 
-      if (e.target !== ref.current) {
+      if (!ref.current.contains(e.target)) {
         setVisible(false);
         const timeout = setTimeout(() => {
           setIsSearchbarShow(false);
@@ -67,7 +68,7 @@ const Searchbar = ({
         }, 300);
       }
     },
-    [setIsSearchbarShow]
+    [setIsSearchbarShow, isMobile]
   );
 
   useEffect(() => {
@@ -124,7 +125,7 @@ const Form = styled.form<FormProps>`
   width: 100%;
   display: flex;
   background: ${COLOR.white};
-  min-width: 50rem;
+  min-width: 250px;
   border-radius: 23.5px;
   align-items: center;
   justify-content: space-between;
