@@ -67,24 +67,24 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
 export default UserItem;
 
 const Container = styled.div`
-  padding: 1rem 2rem;
   display: flex;
-  gap: 2.2rem;
+  align-items: center;
+  gap: 1.8rem;
   cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`
-  width: 5rem;
-  height: 5rem;
+  width: 3.8rem;
+  height: 3.8rem;
   border-radius: 50%;
 `;
 
 const Text = styled.div`
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
   display: flex;
   align-items: center;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.text};
 `;

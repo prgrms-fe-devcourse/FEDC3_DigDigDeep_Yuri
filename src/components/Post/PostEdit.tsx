@@ -132,7 +132,8 @@ const PostEdit = ({
 export default PostEdit;
 
 const Container = styled.div`
-  width: 50%;
+  width: 35%;
+  min-width: 350px;
   height: 90vh;
   background: ${COLOR.white};
   position: relative;
