@@ -73,10 +73,11 @@ const Button = styled.button`
   background: ${COLOR.green};
   border-radius: 23.5px;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.white};
-  padding: 1.1rem 2.2rem;
+  padding: 1.1rem 1.8rem;
   width: fit-content;
   justify-self: right;
+  cursor: pointer;
 `;
