@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
@@ -69,23 +69,23 @@ const Header = () => {
     });
   };
 
-  useEffect(() => {
-    const onScroll = (e: Event) => {
-      const handleSetTimeout = setTimeout(() => {
-        offSearchbar();
-        clearTimeout(handleSetTimeout);
-      }, 300);
-    };
+  const handleChange = useCallback(() => {
+    const handleSetTimeout = setTimeout(() => {
+      offSearchbar();
+      clearTimeout(handleSetTimeout);
+    }, 300);
+  }, []);
 
+  useEffect(() => {
     checkIsMobile();
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleChange);
     window.addEventListener('resize', resizeScreen);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleChange);
       window.removeEventListener('resize', resizeScreen);
     };
-  }, []);
+  }, [handleChange]);
   return (
     <HeaderContainer>
       <Container>
@@ -93,7 +93,10 @@ const Header = () => {
           <>
             {isSearchbarShow ? (
               <SearchWrapper>
-                <Searchbar isMobile={isMobile} />
+                <Searchbar
+                  isMobile={isMobile}
+                  setIsSearchbarShow={setIsSearchbarShow}
+                />
               </SearchWrapper>
             ) : token ? (
               <>
@@ -129,7 +132,7 @@ const Header = () => {
                         <LinkButton
                           to={ROUTES.PROFILE_ME}
                           name="profile"
-                          size={21}
+                          size={24}
                         />
                       )}
                     </>
@@ -160,7 +163,10 @@ const Header = () => {
               <LogoButton to="/">
                 <Logo />
               </LogoButton>
-              <Searchbar isMobile={isMobile} />
+              <Searchbar
+                isMobile={isMobile}
+                setIsSearchbarShow={setIsSearchbarShow}
+              />
             </WebSearchWrapper>
             {token ? (
               <Wrapper>
@@ -168,11 +174,11 @@ const Header = () => {
                   <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
                 ) : (
                   <>
-                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={20} />
+                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={24} />
                     <LinkButton
                       to={ROUTES.NOTIFICATION}
                       name={isSeen ? 'notification-off' : 'notification-on'}
-                      size={21}
+                      size={24}
                     />
                     {user.image ? (
                       <LinkButton
@@ -187,7 +193,7 @@ const Header = () => {
                       <LinkButton
                         to={ROUTES.PROFILE_ME}
                         name="profile"
-                        size={21}
+                        size={24}
                       />
                     )}
                   </>

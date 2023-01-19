@@ -1,4 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState, useRef } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
@@ -6,17 +7,28 @@ import { ROUTES } from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 
+export type EventTypes = 'mousedown' | 'touchstart';
+
+const events: EventTypes[] = ['mousedown', 'touchstart'];
+
 interface FormProps {
   children: ReactNode[];
   isFocus: boolean;
   visible?: boolean;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
-const Searchbar = ({ isMobile }: { isMobile: boolean }) => {
+const Searchbar = ({
+  isMobile,
+  setIsSearchbarShow,
+}: {
+  isMobile: boolean;
+  setIsSearchbarShow: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [search, setSearch] = useState('');
   const [select, setSelect] = useState('posts');
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(false);
+  const ref = useRef(null);
   const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -39,10 +51,29 @@ const Searchbar = ({ isMobile }: { isMobile: boolean }) => {
 
   const onInputFocus = () => setIsFocus(true);
 
+  const handleEvent = useCallback(
+    (e: MouseEvent | TouchEvent) => {
+      if (!ref) return;
+
+      if (e.target !== ref.current) {
+        setVisible(false);
+        const timeout = setTimeout(() => {
+          setIsSearchbarShow(false);
+          clearTimeout(timeout);
+        }, 300);
+      }
+    },
+    [setIsSearchbarShow]
+  );
+
   useEffect(() => {
     setVisible(true);
 
-    const onScroll = (e: Event) => {
+    for (const event of events) {
+      window.addEventListener(event, handleEvent);
+    }
+
+    const onScroll = () => {
       if (isMobile) {
         setVisible(false);
       }
@@ -52,11 +83,14 @@ const Searchbar = ({ isMobile }: { isMobile: boolean }) => {
 
     return () => {
       window.removeEventListener('scroll', onScroll);
+      for (const event of events) {
+        window.removeEventListener(event, handleEvent);
+      }
     };
-  }, [isMobile]);
+  }, [isMobile, handleEvent]);
 
   return (
-    <Form isFocus={isFocus} visible={visible} onSubmit={onSubmit}>
+    <Form ref={ref} isFocus={isFocus} visible={visible} onSubmit={onSubmit}>
       <Button>
         <Icon name="search" size={13} />
       </Button>
