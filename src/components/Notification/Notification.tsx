@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Icon from '../Base/Icon';
 import { COLOR } from '../../utils/color';
 import { NotificationResponse } from '../../types/response';
+import Image from '../Base/Image';
 
 const Notification = ({
   author,
@@ -14,7 +15,9 @@ const Notification = ({
       {like || follow || comment ? (
         <ListItem>
           {author.image ? (
-            <Image src={author.image} />
+            <ImageContainer>
+              <Image src={author.image} alt={author.fullName} />
+            </ImageContainer>
           ) : (
             <Icon name="default-profile" size={38} />
           )}
@@ -40,7 +43,7 @@ const ListItem = styled.li`
   border-bottom: 0.3px solid ${COLOR.lightGray};
 `;
 
-const Image = styled.img`
+const ImageContainer = styled.div`
   width: 3.8rem;
   height: 3.8rem;
   border-radius: 50%;

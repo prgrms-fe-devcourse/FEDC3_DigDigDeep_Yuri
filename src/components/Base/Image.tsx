@@ -4,9 +4,10 @@ import styled from 'styled-components';
 interface ImageProps {
   src: string;
   alt: string;
+  objectFit?: 'contain' | 'cover';
 }
 
-const Image = ({ src, alt }: ImageProps) => {
+const Image = ({ src, alt, objectFit = 'cover' }: ImageProps) => {
   const [loaded, setLoaded] = useState(false);
 
   const onLoad = () => {
@@ -19,7 +20,13 @@ const Image = ({ src, alt }: ImageProps) => {
 
   return (
     <>
-      <StyledImage src={src} onLoad={onLoad} loaded={loaded} alt={alt} />
+      <StyledImage
+        src={src}
+        alt={alt}
+        onLoad={onLoad}
+        loaded={loaded}
+        style={{ objectFit: objectFit }}
+      />
       {!loaded && <Skleton />}
     </>
   );

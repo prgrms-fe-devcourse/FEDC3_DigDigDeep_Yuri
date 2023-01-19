@@ -139,4 +139,5 @@ const ResetButton = styled.button`
   padding: 0;
   width: 1.6rem;
   height: 1.6rem;
+  cursor: pointer;
 `;

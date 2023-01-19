@@ -215,7 +215,7 @@ const Post = ({
           </Title>
           {image && (
             <ImageContainer width="100%">
-              <Image src={image} alt="post-image" />
+              <Image src={image} alt="post-image" objectFit="contain" />
             </ImageContainer>
           )}
           <Text>
@@ -446,6 +446,7 @@ const ProfileImage = styled.img`
   height: 2.5rem;
   border-radius: 50%;
   margin-right: 0.4rem;
+  object-fit: cover;
 `;
 
 const ImageContainer = styled.div<ImageContainerProps>`

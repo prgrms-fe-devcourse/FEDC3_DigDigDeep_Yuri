@@ -76,8 +76,7 @@ const Label = styled.label`
   font-size: 1.4rem;
   line-height: 1.7rem;
   color: ${COLOR.brownGray};
-  width: 10.7rem;
-  height: 10.7rem;
+  width: 10rem;
   cursor: pointer;
 `;
 
@@ -92,8 +91,8 @@ const StyledSpan = styled.span``;
 
 const ImageContainer = styled.div`
   display: block;
-  width: 8rem;
-  height: 8rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
   overflow: hidden;
   position: relative;

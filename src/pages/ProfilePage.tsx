@@ -91,7 +91,6 @@ const ProfilePage = () => {
           />
         </ImageContainer>
         <Name>{userInfo?.fullName}</Name>
-
         <TabList>
           {TabMenuItems.map((item) => {
             return (
@@ -161,6 +160,7 @@ const Image = styled.img`
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 
 const Name = styled.h1`
