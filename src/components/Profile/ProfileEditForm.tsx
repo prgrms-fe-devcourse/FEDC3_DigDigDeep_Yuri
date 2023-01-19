@@ -1,25 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
-import { updatePassword, updateUserName } from '../../utils/api/user';
+import {
+  updatePassword,
+  updateUserName,
+  uploadPhoto,
+} from '../../utils/api/user';
 import UserForm from '../UserForm/UserForm';
 import FormButton from '../UserForm/FormButton';
 import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
+import FormImageFile from '../UserForm/FormProfileImage';
+import { loadingState } from '../../recoil/atoms/loading';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 const ProfileEditForm = () => {
-  const navigate = useNavigate();
-
-  const getMyInfo = useGetMyInfo();
-
   const user = useRecoilValue(userState);
-
+  const setLoading = useSetRecoilState(loadingState);
+  const getMyInfo = useGetMyInfo();
   const { showToast } = useToast();
 
+  const navigate = useNavigate();
   const {
     handleSubmit,
     resetField,
@@ -34,6 +38,7 @@ const ProfileEditForm = () => {
       fullName: user.fullName,
       password: '',
       confirmPassword: '',
+      image: undefined,
     },
   });
 
@@ -41,9 +46,13 @@ const ProfileEditForm = () => {
     email: string;
     fullName: string;
     password: string;
+    image?: File;
   }) => {
     const promises = [];
 
+    if (data.image) {
+      promises.push(uploadPhoto(data.image));
+    }
     if (getValues('fullName') !== user.fullName) {
       promises.push(updateUserName(data));
     }
@@ -54,11 +63,13 @@ const ProfileEditForm = () => {
 
     if (promises.length === 0) return;
 
+    setLoading(true);
     Promise.all(promises)
       .then(() => {
         getMyInfo();
+        setLoading(false);
         showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('') });
-        navigate(ROUTES.PROFILE_ME_EDIT);
+        navigate(ROUTES.PROFILE_ME);
       })
       .catch((error) => {
         console.error(error);
@@ -68,6 +79,7 @@ const ProfileEditForm = () => {
 
   return (
     <UserForm onSubmit={handleSubmit(onSubmit)}>
+      <FormImageFile control={control} name="image" src={user.image} />
       <FormInput
         control={control}
         name="fullName"
