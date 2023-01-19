@@ -134,7 +134,7 @@ const Post = ({
 
   return (
     <Container {...props}>
-      <PostHeader isDetailPage={isDetailPage}>
+      <PostHeader>
         <Wrapper onClick={toUserProfile}>
           {author.image ? (
             <ProfileImage src={author.image} />
@@ -163,18 +163,14 @@ const Post = ({
             </ImageContainer>
           )}
           <FlexContainer direction="column">
-            <PaddingContainer>
-              <Title>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.title}
-              </Title>
-              <Text>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.body}
-              </Text>
-            </PaddingContainer>
+            <Title>
+              {typeof postContent === 'string'
+                ? postContent
+                : postContent.title}
+            </Title>
+            <Text>
+              {typeof postContent === 'string' ? postContent : postContent.body}
+            </Text>
             <Footer>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
@@ -313,23 +309,27 @@ const Post = ({
 const Container = styled.div`
   width: 100%;
   margin: 2rem 0;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    margin: 1.3rem 0;
+  }
 `;
 
-const PostHeader = styled.div<PostDetailProps>`
+const PostHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 0.6rem 1.5rem 0.3rem;
   margin: 0 auto;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
-  }
 `;
 
 const Section = styled.div`
   background-color: ${COLOR.white};
   padding: 1rem 2rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const FlexContainer = styled.div<FlexContainerProps>`
@@ -337,10 +337,6 @@ const FlexContainer = styled.div<FlexContainerProps>`
   flex-direction: ${({ direction }) =>
     direction === 'column' ? 'column' : 'row'};
   background-color: ${({ color }) => color};
-`;
-
-const PaddingContainer = styled.div`
-  /* padding: 1rem 0; */
 `;
 
 const Footer = styled.div`
@@ -459,7 +455,7 @@ const ImageContainer = styled.div<ImageContainerProps>`
   min-width: 10rem;
   aspect-ratio: 1 / 1;
   background-color: #fafafa;
-  border-radius: 23.5px;
+  border-radius: 15px;
 `;
 
 export default Post;
