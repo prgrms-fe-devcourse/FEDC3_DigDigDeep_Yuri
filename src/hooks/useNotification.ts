@@ -1,8 +1,11 @@
 import { useState, useMemo, useEffect } from 'react';
 import { getNotifications } from '../utils/api/notification';
 import { NotificationResponse } from '../types/response';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from '../recoil/atoms/user';
 
 const useCheckNotifications = () => {
+  const token = useRecoilValue(tokenState);
   const [notifications, setNotifications] = useState<NotificationResponse[]>(
     []
   );
@@ -17,13 +20,14 @@ const useCheckNotifications = () => {
 
   useEffect(() => {
     const handleInterval = setInterval(async () => {
+      if (!token) return;
       const notifications = await getNotifications();
       setNotifications(notifications);
     }, 5000);
     return () => {
       clearInterval(handleInterval);
     };
-  }, []);
+  }, [token]);
 
   return {
     isSeen,
