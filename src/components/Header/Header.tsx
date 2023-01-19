@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
@@ -69,23 +69,23 @@ const Header = () => {
     });
   };
 
-  useEffect(() => {
-    const onScroll = (e: Event) => {
-      const handleSetTimeout = setTimeout(() => {
-        offSearchbar();
-        clearTimeout(handleSetTimeout);
-      }, 300);
-    };
+  const handleChange = useCallback(() => {
+    const handleSetTimeout = setTimeout(() => {
+      offSearchbar();
+      clearTimeout(handleSetTimeout);
+    }, 300);
+  }, []);
 
+  useEffect(() => {
     checkIsMobile();
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleChange);
     window.addEventListener('resize', resizeScreen);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleChange);
       window.removeEventListener('resize', resizeScreen);
     };
-  }, []);
+  }, [handleChange]);
   return (
     <HeaderContainer>
       <Container>
@@ -93,7 +93,10 @@ const Header = () => {
           <>
             {isSearchbarShow ? (
               <SearchWrapper>
-                <Searchbar isMobile={isMobile} />
+                <Searchbar
+                  isMobile={isMobile}
+                  setIsSearchbarShow={setIsSearchbarShow}
+                />
               </SearchWrapper>
             ) : token ? (
               <>
@@ -160,7 +163,10 @@ const Header = () => {
               <LogoButton to="/">
                 <Logo />
               </LogoButton>
-              <Searchbar isMobile={isMobile} />
+              <Searchbar
+                isMobile={isMobile}
+                setIsSearchbarShow={setIsSearchbarShow}
+              />
             </WebSearchWrapper>
             {token ? (
               <Wrapper>
