@@ -6,6 +6,8 @@ import type { Control, FieldPath, FieldValues } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import Image from '../Base/Image';
 
+const defaultProfile = require('../../assets/images/icon/default-profile.png');
+
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<T>;
@@ -28,7 +30,6 @@ const FormProfileImage = <T extends FieldValues>({
   const [previewSrc, setPreviewSrc] = useState(src);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     if (!e.target.files) return;
     else {
       const file = e.target.files[0];
@@ -43,7 +44,7 @@ const FormProfileImage = <T extends FieldValues>({
         <Label htmlFor={name}>
           <ImageContainer>
             <Image
-              src={previewSrc ? previewSrc : '/image/default-profile.png'}
+              src={previewSrc ? previewSrc : defaultProfile}
               alt="default-profile"
             />
           </ImageContainer>

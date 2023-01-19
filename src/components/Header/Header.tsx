@@ -14,6 +14,9 @@ import useNotification from '../../hooks/useNotification';
 import { ROUTES } from '../../utils/routes';
 import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 
+const longLogo = require('../../assets/images/logo/long.png');
+const smallLogo = require('../../assets/images/logo/small.png');
+
 const Header = () => {
   const token = useRecoilValue(tokenState);
   const user = useRecoilValue(userState);
@@ -305,12 +308,12 @@ const LogoButton = styled(Link)``;
 const Logo = styled.img`
   width: 14rem;
   height: 2rem;
-  content: url('/image/logo/long.png');
+  content: url(${longLogo});
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 4rem;
     height: 4rem;
-    content: url('/image/logo/small.png');
+    content: url(${smallLogo});
   }
 `;
 
