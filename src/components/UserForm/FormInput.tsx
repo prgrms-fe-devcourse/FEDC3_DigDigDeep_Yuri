@@ -129,6 +129,7 @@ const Input = styled.input`
 
   :disabled {
     background: inherit;
+    color: ${COLOR.brownGray};
   }
 `;
 

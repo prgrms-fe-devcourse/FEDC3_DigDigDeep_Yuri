@@ -116,7 +116,7 @@ const TextWrapper = styled.div`
 
 const H1 = styled.h1`
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 4.8rem;
   line-height: 5.8rem;
   letter-spacing: -0.01em;

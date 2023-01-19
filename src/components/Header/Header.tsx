@@ -249,6 +249,7 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 1.8rem 0;
   gap: 1rem;
+  margin-left: 1rem;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     gap: 1.5rem;
   }
@@ -268,7 +269,7 @@ const SearchWrapper = styled.div`
 
 const LinkContainer = css`
   width: 100%;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   line-height: 0.2rem;
   letter-spacing: -0.01em;
@@ -276,7 +277,6 @@ const LinkContainer = css`
   padding: 1.2rem 1.6rem;
   border-radius: 23.5px;
   border: none;
-  margin-left: 1rem;
   min-width: max-content;
   cursor: pointer;
 

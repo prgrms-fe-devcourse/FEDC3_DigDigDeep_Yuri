@@ -172,7 +172,7 @@ const Body = styled.textarea`
 
   ::placeholder {
     color: ${COLOR.brownGray};
-    font-weight: 300;
+    font-weight: 400;
   }
 
   @media screen and (max-width: 767px) and (orientation: portrait) {

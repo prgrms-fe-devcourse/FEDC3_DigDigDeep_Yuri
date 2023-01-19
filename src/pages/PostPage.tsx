@@ -116,7 +116,7 @@ const Wrapper = styled.ul`
 const Text = styled.div`
   width: 100%;
   text-align: center;
-  font-weight: 350;
+  font-weight: 400;
   font-size: 0.8rem;
   line-height: 1.4rem;
   letter-spacing: -0.01em;
