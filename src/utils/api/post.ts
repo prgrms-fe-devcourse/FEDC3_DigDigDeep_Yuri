@@ -45,6 +45,11 @@ export const getPosts: GetPostProps = async (limit, offset) => {
   return data;
 };
 
+export const getAllPosts = async () => {
+  const { data } = await axiosInstance.get<PostResponse[]>(`/posts`);
+  return data;
+};
+
 export const getPost = async (postId: string) => {
   const { data } = await axiosInstance.get<PostResponse>(`/posts/${postId}`);
   return data;
