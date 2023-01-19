@@ -231,6 +231,7 @@ const Container = styled.div`
   align-items: center;
   border-bottom: 1px solid #eeeeee;
   box-sizing: border-box;
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: flex;
     z-index: 1;

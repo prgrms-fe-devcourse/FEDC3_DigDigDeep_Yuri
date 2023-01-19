@@ -67,8 +67,8 @@ const Container = styled.div`
 `;
 
 const List = styled.ul`
-  width: 50%;
-  min-width: calc(767px - 10%);
+  width: 35%;
+  /* min-width: calc(767px - 10%); */
   display: flex;
   flex-direction: column;
   margin: 0 auto;
