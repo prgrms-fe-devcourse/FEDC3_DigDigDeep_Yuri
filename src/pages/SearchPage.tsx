@@ -95,6 +95,8 @@ const Container = styled.div`
 `;
 
 const UserListItem = styled.li`
+  width: 90%;
+  margin: 0.5rem auto;
   display: flex;
   align-items: center;
   gap: 1.8rem;
@@ -103,13 +105,15 @@ const UserListItem = styled.li`
 `;
 
 const List = styled.ul`
-  width: 50%;
+  width: 35%;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
+    width: 100%;
+    min-width: 0;
   }
 `;
 
