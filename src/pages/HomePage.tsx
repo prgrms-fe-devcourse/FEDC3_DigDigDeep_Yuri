@@ -8,6 +8,8 @@ import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { getChannelInfo } from '../utils/api/channel';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '../recoil/atoms/loading';
+import { ERROR_MESSAGES } from '../utils/messages';
+import useToast from '../hooks/useToast';
 import GlobalSpinner from '../components/Base/GlobalSpinner';
 
 const HomePage = () => {
@@ -15,6 +17,7 @@ const HomePage = () => {
   const [postLength, setPostLength] = useState(0);
   const [offset, setOffset] = useState(0);
   const setLoading = useSetRecoilState(loadingState);
+  const { showToast } = useToast();
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
@@ -52,9 +55,9 @@ const HomePage = () => {
       setOffset(10);
       setLoading(false);
     } catch {
-      alert('포스트 정보를 불러올 수 없습니다.');
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('포스트를') });
     }
-  }, [setLoading]);
+  }, [showToast, setLoading]);
 
   useEffect(() => {
     getPostsLength();

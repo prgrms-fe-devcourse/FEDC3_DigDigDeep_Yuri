@@ -45,7 +45,6 @@ const ConfirmModal = ({ message, handleClose, handleConfirm }: ModalProps) => {
     <Background visible={visible} onClick={close}>
       <Container visible={visible}>
         <Messasge>{message}</Messasge>
-
         <ButtonContainer>
           <Button onClick={onCancel}>NO</Button>
           <Button isConfirm={true} onClick={onConfirm}>
@@ -63,14 +62,14 @@ const Background = styled.div<{ visible: boolean }>`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(108, 108, 108, 0.318);
   z-index: 1000;
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 `;
 
 const Container = styled.div<{ visible: boolean }>`
-  width: 75%;
+  width: 20vw;
   position: relative;
   top: 50%;
   left: 50%;
@@ -78,9 +77,9 @@ const Container = styled.div<{ visible: boolean }>`
   flex-direction: column;
   gap: 3.2rem;
   transform: translate(-50%, -50%);
-  padding: 6rem 4.6rem 3rem 4.6rem;
+  padding: 4.4rem 4.6rem 3.3rem;
   background: ${COLOR.white};
-  box-shadow: 0px 3px 4px rgba(95, 95, 95, 0.24);
+  box-shadow: 0px 3px 4px rgba(95, 95, 95, 0.191);
   border-radius: 15px;
   box-sizing: border-box;
 
@@ -88,25 +87,27 @@ const Container = styled.div<{ visible: boolean }>`
   transition: opacity 0.3s ease-in-out;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 4rem 2.5rem;
+    width: 72vw;
+    padding: 4rem 2.5rem 3rem;
   }
 `;
 
 const Messasge = styled.div`
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1.6rem;
   line-height: 2.3rem;
   letter-spacing: -0.01em;
   text-align: center;
   word-break: keep-all;
-
   color: ${COLOR.text};
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  padding: 0 1rem;
+  justify-content: space-around;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    justify-content: space-evenly;
+  }
 `;
 
 const Button = styled.button<ButtonProps>`
@@ -116,12 +117,10 @@ const Button = styled.button<ButtonProps>`
   text-align: center;
   letter-spacing: -0.01em;
   width: 7rem;
-
   color: ${COLOR.white};
   background-color: ${({ isConfirm }) =>
     isConfirm ? COLOR.green : COLOR.lightGray};
   border-radius: 23.5px;
   padding: 1rem;
-
   cursor: pointer;
 `;

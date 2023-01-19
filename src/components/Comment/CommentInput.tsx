@@ -43,7 +43,7 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
     e.preventDefault();
     if (!token) return showToast({ message: ERROR_MESSAGES.REQUIRE_LOGIN });
     if (!comment)
-      return showToast({ message: ERROR_MESSAGES.REQUIRE_INPUT('디깅을') });
+      return showToast({ message: ERROR_MESSAGES.REQUIRE_INPUT('내용을') });
     try {
       const data = await createComment(content, postId);
       await getMyInfo();
