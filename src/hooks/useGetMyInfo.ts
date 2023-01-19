@@ -10,7 +10,7 @@ const useGetMyInfo = () => {
   const getMyInfo = async () => {
     try {
       const responseUser = await getUser(user._id);
-      setUser({ ...user, ...responseUser });
+      setUser(responseUser);
     } catch (error) {
       console.error(error);
       logout();
