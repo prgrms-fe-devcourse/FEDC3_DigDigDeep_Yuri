@@ -54,7 +54,7 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
         <Text>{user.fullName}</Text>
         {isUnfollowable() && (
           <Button onClick={onClickUnfollow} type="button">
-            <Icon name="close" />
+            <Icon name="close" size={13} />
           </Button>
         )}
       </Container>

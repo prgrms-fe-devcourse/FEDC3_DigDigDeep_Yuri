@@ -36,14 +36,9 @@ const LinkButton = ({
 };
 
 const Container = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
   border: 0.5px solid ${COLOR.lightGray};
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 2.1rem;
-    height: 2.1rem;
-  }
 `;
 export default LinkButton;

@@ -139,7 +139,7 @@ const Post = ({
           {author.image ? (
             <ProfileImage src={author.image} />
           ) : (
-            <Icon name="default-profile" size={25} />
+            <Icon name="default-profile" size={28} />
           )}
           <UserName>{author.fullName}</UserName>
           <Divider type="vertical" size={0.5} />
@@ -179,14 +179,14 @@ const Post = ({
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" size={16} />
+                    <Icon name="liked" width={16} height={14} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" size={16} />
+                    <Icon name="unliked" width={16} height={14} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -197,7 +197,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" size={16} />
+                  <Icon name="comment" width={16} height={14} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -230,14 +230,14 @@ const Post = ({
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" size={16} />
+                    <Icon name="liked" width={16} height={14} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" size={16} />
+                    <Icon name="unliked" width={16} height={14} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -248,7 +248,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" size={16} />
+                  <Icon name="comment" width={16} height={14} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -277,14 +277,14 @@ const Post = ({
             {likesState.find((like) => like.user === user._id) ? (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="liked" size={16} />
+                  <Icon name="liked" width={16} height={14} />
                 </Button>
                 <SmText>{likesState.length}</SmText>
               </IconWrapper>
             ) : (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="unliked" size={16} />
+                  <Icon name="unliked" width={16} height={14} />
                 </Button>
                 {likesState.length > 999 ? (
                   <SmText>999+</SmText>
@@ -295,7 +295,7 @@ const Post = ({
             )}
             <IconWrapper>
               <Button onClick={toPostDetail}>
-                <Icon name="comment" size={16} />
+                <Icon name="comment" width={16} height={14} />
               </Button>
               {comments.length > 999 ? (
                 <SmText>999+</SmText>
@@ -442,8 +442,8 @@ const Date = styled.span`
 `;
 
 const ProfileImage = styled.img`
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 50%;
   margin-right: 0.4rem;
   object-fit: cover;
