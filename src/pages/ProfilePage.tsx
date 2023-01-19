@@ -14,6 +14,8 @@ import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
 import Header from '../components/Header/Header';
 import { ROUTES } from '../utils/routes';
+import Image from '../components/Base/Image';
+import { queryLowImage } from '../utils/image';
 
 const defaultProfile = require('../assets/images/icon/default-profile.png');
 
@@ -88,7 +90,11 @@ const ProfilePage = () => {
       <Container>
         <ImageContainer>
           <Image
-            src={userInfo?.image ?? defaultProfile}
+            src={
+              userInfo.image
+                ? queryLowImage(userInfo.image, 'profile')
+                : defaultProfile
+            }
             alt={userInfo?.fullName}
           />
         </ImageContainer>
@@ -156,13 +162,6 @@ const ImageContainer = styled.div`
   width: 7rem;
   border-radius: 50%;
   overflow: hidden;
-`;
-
-const Image = styled.img`
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const Name = styled.h1`
