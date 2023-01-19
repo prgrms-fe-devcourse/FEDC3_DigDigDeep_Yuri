@@ -32,7 +32,6 @@ const FormProfileImage = <T extends FieldValues>({
   const [previewSrc, setPreviewSrc] = useState(src);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     if (!e.target.files) return;
     else {
       const file = e.target.files[0];
