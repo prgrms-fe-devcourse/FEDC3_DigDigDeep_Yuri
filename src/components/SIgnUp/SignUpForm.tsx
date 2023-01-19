@@ -11,12 +11,7 @@ import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { useSetRecoilState } from 'recoil';
-import {
-  confirmPasswordRule,
-  emailRule,
-  nickNameRule,
-  passwordRule,
-} from '../../utils/formRules';
+import { SIGN_UP_RULES } from '../../utils/formRules';
 import { loadingState } from '../../recoil/atoms/loading';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
@@ -57,6 +52,7 @@ const SignUpForm = () => {
       showToast({ message: SUCCESS_MESSAGES.SIGNUP_SUCCESS });
       navigate(ROUTES.LOGIN);
     } catch (error) {
+      setLoading(false);
       if (error instanceof AxiosError && error.response?.data) {
         if (error.response?.data === RESPONSE_ERROR_MESSAGE) {
           setErrorMessage('이미 사용중인 이메일입니다.');
@@ -64,7 +60,6 @@ const SignUpForm = () => {
       } else {
         showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
-      setLoading(false);
     }
   };
 
@@ -74,14 +69,14 @@ const SignUpForm = () => {
         control={control}
         name="fullName"
         placeholder="nickname"
-        rules={nickNameRule}
+        rules={SIGN_UP_RULES.NICKNAME}
         resetField={resetField}
       />
       <FormInput
         control={control}
         name="email"
         placeholder="email"
-        rules={emailRule}
+        rules={SIGN_UP_RULES.EMAIL}
         resetField={resetField}
       />
       <FormInput
@@ -89,7 +84,7 @@ const SignUpForm = () => {
         name="password"
         placeholder="password"
         type="password"
-        rules={passwordRule}
+        rules={SIGN_UP_RULES.PASSWORD}
         resetField={resetField}
         icon="lock"
       />
@@ -98,7 +93,7 @@ const SignUpForm = () => {
         name="confirmPassword"
         placeholder="password check"
         type="password"
-        rules={confirmPasswordRule(watch('password'))}
+        rules={SIGN_UP_RULES.CONFIRM_PASSWORD(watch('password'))}
         resetField={resetField}
         icon="lock"
       />
