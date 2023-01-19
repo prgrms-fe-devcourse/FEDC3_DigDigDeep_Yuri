@@ -2,7 +2,7 @@ export const nickNameRule = {
   required: '닉네임을 입력해주세요.',
   pattern: {
     value: /^[A-Za-z0-9가-힣]{4,12}$/,
-    message: '2-8자리 영어, 숫자, 한글만 입력 가능합니다.',
+    message: '영어, 숫자, 한글만 입력 가능합니다. (2-8자리)',
   },
 };
 
@@ -18,8 +18,8 @@ export const emailRule = {
 export const passwordRule = {
   required: '비밀번호를 입력해주세요.',
   pattern: {
-    value: /^[A-Za-z0-9]{4,12}$/,
-    message: '6-12자리 영어, 숫자만 입력 가능합니다.',
+    value: /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/,
+    message: '영문, 숫자를 섞어 입력해주세요. (4-12자리)',
   },
 };
 
