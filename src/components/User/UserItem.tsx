@@ -10,6 +10,8 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import Image from '../Base/Image';
 import { queryLowImage } from '../../utils/image';
 
+const defaultProfile = require('../../assets/images/icon/default-profile.png');
+
 interface UserItemProps {
   user: UserResponse;
   type?: 'following' | 'followers';
@@ -49,9 +51,7 @@ const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {
         <ImageWrapper>
           <Image
             src={
-              user.image
-                ? queryLowImage(user.image, 'profile')
-                : '/image/default-profile.png'
+              user.image ? queryLowImage(user.image, 'profile') : defaultProfile
             }
             alt="user-profile"
           />
