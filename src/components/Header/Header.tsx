@@ -132,7 +132,7 @@ const Header = () => {
                         <LinkButton
                           to={ROUTES.PROFILE_ME}
                           name="profile"
-                          size={21}
+                          size={24}
                         />
                       )}
                     </>
@@ -174,11 +174,11 @@ const Header = () => {
                   <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
                 ) : (
                   <>
-                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={20} />
+                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={24} />
                     <LinkButton
                       to={ROUTES.NOTIFICATION}
                       name={isSeen ? 'notification-off' : 'notification-on'}
-                      size={20}
+                      size={24}
                     />
                     {user.image ? (
                       <LinkButton
@@ -193,7 +193,7 @@ const Header = () => {
                       <LinkButton
                         to={ROUTES.PROFILE_ME}
                         name="profile"
-                        size={21}
+                        size={24}
                       />
                     )}
                   </>
