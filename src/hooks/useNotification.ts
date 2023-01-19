@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { getNotification } from '../utils/api/notification';
 import { NotificationResponse } from '../types/response';
 import useToast from './useToast';
+import { ERROR_MESSAGES } from '../utils/messages';
 
 const useNotification = () => {
   const [notifications, setNotification] = useState<NotificationResponse[]>([]);
@@ -22,7 +23,7 @@ const useNotification = () => {
       setNotification(notifications);
     } catch (error) {
       setNotification([]);
-      showToast({ message: '알림을 불러올 수 없습니다.' });
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('알림을') });
     }
   }, [showToast]);
 

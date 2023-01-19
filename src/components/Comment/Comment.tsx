@@ -12,6 +12,11 @@ import useToast from '../../hooks/useToast';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import { ROUTES } from '../../utils/routes';
+import {
+  CONFIRM_MESSAGES,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+} from '../../utils/messages';
 
 interface CommentProps extends CommentResponse {
   fetchHandler?: () => Promise<void>;
@@ -43,16 +48,16 @@ const Comment = ({
 
   const handleDeleteComment = async () => {
     showModal({
-      message: '정말로 삭제하시겠습니다?',
+      message: CONFIRM_MESSAGES.DELETE_CONFIRM,
       handleConfirm: async () => {
         try {
           await deleteComment(_id);
           await getMyInfo();
           if (fetchHandler) fetchHandler();
-          showToast({ message: '디깅 -1' });
+          showToast({ message: SUCCESS_MESSAGES.DELETE_COMMENT_SUCCESS });
         } catch (error) {
-          console.error(error, '댓글 삭제에 실패하였습니다.');
-          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+          console.error(error, ERROR_MESSAGES.DELETE_ERROR('댓글'));
+          showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
         }
       },
     });

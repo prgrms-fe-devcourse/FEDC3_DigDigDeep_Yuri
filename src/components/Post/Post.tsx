@@ -16,6 +16,11 @@ import { ROUTES } from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import Image from '../Base/Image';
+import {
+  CONFIRM_MESSAGES,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+} from '../../utils/messages';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
@@ -61,7 +66,7 @@ const Post = ({
 
   const handleShare = () => {
     navigator.clipboard.writeText(`${window.location.host}/posts/${_id}`);
-    showToast({ message: '클립보드에 저장되었습니다.' });
+    showToast({ message: SUCCESS_MESSAGES.SHARE_SUCCESS });
   };
 
   const toUserProfile = () => {
@@ -75,15 +80,15 @@ const Post = ({
 
   const handleDelete = async () => {
     showModal({
-      message: '정말로 삭제하시겠습니다?',
+      message: CONFIRM_MESSAGES.DELETE_CONFIRM,
       handleConfirm: async () => {
         try {
           await deletePost(_id);
           navigate(ROUTES.HOME);
-          showToast({ message: '그라운드가 삭제되었습니다.' });
+          showToast({ message: SUCCESS_MESSAGES.DELETE_SUCCESS('그라운드가') });
         } catch (error) {
           console.error(error);
-          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+          showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
         }
       },
     });
@@ -96,7 +101,7 @@ const Post = ({
   const handleLike = async () => {
     const isLike = likesState.findIndex((like) => like.user === user._id);
     if (!token) {
-      return showToast({ message: '로그인이 필요합니다.' });
+      return showToast({ message: ERROR_MESSAGES.REQUIRE_LOGIN });
     }
 
     if (isLike === -1) {
@@ -105,10 +110,10 @@ const Post = ({
         setLikesState([...likesState, data]);
         await getMyInfo();
         sendNotification('LIKE', data._id, author._id, _id);
-        showToast({ message: '좋아요를 눌렀습니다.' });
+        showToast({ message: SUCCESS_MESSAGES.LIKE_SUCCESS });
       } catch (error) {
         console.error(error);
-        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
     } else {
       try {
@@ -119,10 +124,10 @@ const Post = ({
         if (user.likes) {
           getMyInfo();
         }
-        showToast({ message: '좋아요를 취소했습니다.' });
+        showToast({ message: SUCCESS_MESSAGES.UNLIKE_SUCCESS });
       } catch (error) {
         console.log(error);
-        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
     }
   };
@@ -450,12 +455,5 @@ const ImageContainer = styled.div<ImageContainerProps>`
   min-width: 10rem;
   aspect-ratio: 1 / 1;
 `;
-
-// const Image = styled.img`
-//   width: 100%;
-//   position: absolute;
-//   top: 50%;
-//   transform: translateY(-50%);
-// `;
 
 export default Post;

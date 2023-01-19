@@ -6,6 +6,7 @@ import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
 import Spinner from '../Base/Spinner';
+import { ERROR_MESSAGES } from '../../utils/messages';
 
 interface BasicFollow {
   follows: FollowResponse[];
@@ -49,7 +50,7 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
         setLoading(false);
         console.error(error);
         showToast({
-          message: '유저 정보를 가져오던 중 문제가 발생했습니다.',
+          message: ERROR_MESSAGES.GET_ERROR('사용자 정보'),
         });
       });
   }, [follows, showToast, type]);

@@ -9,6 +9,7 @@ import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 const ProfileEditForm = () => {
   const navigate = useNavigate();
@@ -56,12 +57,12 @@ const ProfileEditForm = () => {
     Promise.all(promises)
       .then(() => {
         getMyInfo();
-        showToast({ message: '변경되었습니다.' });
+        showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('') });
         navigate(ROUTES.PROFILE_ME_EDIT);
       })
       .catch((error) => {
         console.error(error);
-        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       });
   };
 
