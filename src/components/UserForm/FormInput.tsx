@@ -54,7 +54,6 @@ const FormInput = <T extends FieldValues>({
   };
 
   const onResetButtonClick = () => {
-    ref(() => {});
     if (resetField) resetField(name);
   };
 

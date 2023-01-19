@@ -35,6 +35,7 @@ const LoginForm = () => {
     control,
     formState: { isSubmitting, isValid },
   } = useForm({
+    mode: 'all',
     defaultValues: {
       email: '',
       password: '',
