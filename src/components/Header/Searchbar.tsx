@@ -104,7 +104,7 @@ const Searchbar = ({
       />
       {search && (
         <Button type="button" onClick={handleReset}>
-          <Icon name="close" width={12} height={12} />
+          <Icon name="close" size={12} />
         </Button>
       )}
       <Divider type="vertical" size={0} />

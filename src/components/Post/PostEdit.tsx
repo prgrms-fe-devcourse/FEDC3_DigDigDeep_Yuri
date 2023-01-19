@@ -83,7 +83,13 @@ const PostEdit = ({
       <Wrapper>
         <Button disabled={isLoading}>
           <Label htmlFor="file">
-            <Icon name="add-image" size={40} />
+            <Icon
+              name="add"
+              size={37}
+              style={{
+                filter: 'drop-shadow(0px 2px 4px rgba(191, 176, 168, 0.5))',
+              }}
+            />
           </Label>
         </Button>
         <Input id="file" type="file" accept="image/*" onChange={handleImage} />

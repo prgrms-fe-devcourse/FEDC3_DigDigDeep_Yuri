@@ -61,7 +61,7 @@ const FormInput = <T extends FieldValues>({
   return (
     <InputContainer>
       <InputWrapper error={error} isFocus={isFocus}>
-        <Icon name={icon} size={16} />
+        <Icon name={icon} width={14} height={16} />
         <InputLabel htmlFor={name} />
         <Input
           value={value}
@@ -74,7 +74,7 @@ const FormInput = <T extends FieldValues>({
         />
         {resetField && value && (
           <ResetButton onClick={onResetButtonClick} type="button">
-            <Icon name="close" size={16} />
+            <Icon name="close" size={13} />
           </ResetButton>
         )}
       </InputWrapper>
