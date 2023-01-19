@@ -14,7 +14,7 @@ export const ROUTES = {
   NOT_FOUND: '*',
   POSTS_BY_ID: (postId: string) => `/posts/${postId}`,
   PROFILE_BY_USER_ID: (userId: string) => `/profile/${userId}`,
-  POSTS_EDIT_BY_ID: (postId: string) => `/posts/${postId}`,
+  POSTS_EDIT_BY_ID: (postId: string) => `/posts/${postId}/edit`,
   SEARCH_BY_QUERY: (search: string, select: string) =>
     `/search?q=${search}&type=${select}`,
 };
