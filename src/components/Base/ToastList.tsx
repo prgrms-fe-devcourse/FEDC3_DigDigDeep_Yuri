@@ -20,7 +20,7 @@ export default ToastList;
 const StyledToastList = styled.div`
   position: fixed;
   width: 100%;
-  bottom: 0;
+  bottom: 10%;
   left: 0;
   z-index: 10;
 `;

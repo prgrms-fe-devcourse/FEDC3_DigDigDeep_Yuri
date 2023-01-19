@@ -7,11 +7,11 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <Image src="/image/icon/404.png" />
+      <Image src={require('../assets/images/icon/404.png')} />
       <Title>찾을 수 없는 페이지입니다.</Title>
       <Detail>요청하신 페이지가 사라졌거나, 잘못된 경로입니다...</Detail>
       <Button onClick={() => navigate(ROUTES.HOME)}>홈으로 이동</Button>
-      <Background src="/image/icon/ground.png" />
+      <Background src={require('../assets/images/icon/ground.png')} />
     </Container>
   );
 };

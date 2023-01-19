@@ -34,8 +34,18 @@ export const updatePost = async (
 
   await axiosInstance.put(`/posts/update`, formData);
 };
+interface GetPostProps {
+  (limit: number, offset: number): Promise<PostResponse[]>;
+}
 
-export const getPosts = async () => {
+export const getPosts: GetPostProps = async (limit, offset) => {
+  const { data } = await axiosInstance.get<PostResponse[]>(
+    `/posts?limit=${limit}&offset=${offset}`
+  );
+  return data;
+};
+
+export const getAllPosts = async () => {
   const { data } = await axiosInstance.get<PostResponse[]>(`/posts`);
   return data;
 };

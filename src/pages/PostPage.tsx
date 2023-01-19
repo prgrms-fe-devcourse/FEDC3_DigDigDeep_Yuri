@@ -8,6 +8,8 @@ import Post from '../components/Post/Post';
 import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { getPost } from '../utils/api/post';
+import { ERROR_MESSAGES } from '../utils/messages';
+import useToast from '../hooks/useToast';
 
 type PostId = string;
 
@@ -15,6 +17,7 @@ const PostPage = () => {
   const { postId } = useParams<PostId>();
   const [post, setPost] = useState<PostResponse>();
   const [commentSubmitted, setCommentSubmitted] = useState(false);
+  const { showToast } = useToast();
 
   const fetchAndScroll = async () => {
     await fetchHandler();
@@ -34,10 +37,10 @@ const PostPage = () => {
         const postDetail = await getPost(postId);
         setPost(postDetail);
       } catch {
-        alert('포스트 정보를 불러올 수 없습니다.');
+        showToast({ message: ERROR_MESSAGES.GET_ERROR('포스트를') });
       }
     }
-  }, [postId]);
+  }, [postId, showToast]);
 
   useEffect(() => {
     fetchHandler();

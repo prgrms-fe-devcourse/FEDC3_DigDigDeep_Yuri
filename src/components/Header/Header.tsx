@@ -14,6 +14,9 @@ import useNotification from '../../hooks/useNotification';
 import { ROUTES } from '../../utils/routes';
 import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 
+const longLogo = require('../../assets/images/logo/long.png');
+const smallLogo = require('../../assets/images/logo/small.png');
+
 const Header = () => {
   const token = useRecoilValue(tokenState);
   const user = useRecoilValue(userState);
@@ -29,8 +32,8 @@ const Header = () => {
 
   const isMe = location.pathname.split('/').includes('me');
 
-  const toggleSearchbar = () => {
-    setIsSearchbarShow(!isSearchbarShow);
+  const onSearchbar = () => {
+    setIsSearchbarShow(true);
   };
 
   const offSearchbar = () => {
@@ -38,17 +41,19 @@ const Header = () => {
   };
 
   const resizeScreen = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
-      setIsSearchbarShow(true);
+      setIsSearchbarShow(false);
     }
   };
 
   const checkIsMobile = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
   };
 
@@ -104,7 +109,7 @@ const Header = () => {
                   <LogoButton to={ROUTES.HOME}>
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
@@ -145,7 +150,7 @@ const Header = () => {
                   <LogoButton to="/">
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
@@ -302,12 +307,12 @@ const LogoButton = styled(Link)``;
 
 const Logo = styled.img`
   height: 2.4rem;
-  content: url('/image/logo/long.png');
+  content: url(${longLogo});
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 3.4rem;
     height: 3.4rem;
-    content: url('/image/logo/small.png');
+    content: url(${smallLogo});
   }
 `;
 

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
 import Icon from './../Base/Icon';
 import { getPost } from '../../utils/api/post';
+import { ERROR_MESSAGES } from '../../utils/messages';
+import useToast from '../../hooks/useToast';
 
 interface Props {
   name?: string;
@@ -38,6 +40,7 @@ const PostEdit = ({
   handleImage,
 }: Props) => {
   const [previewImage, setPreviewImage] = useState<string>('');
+  const { showToast } = useToast();
 
   const fetchPost = useCallback(async () => {
     try {
@@ -50,9 +53,9 @@ const PostEdit = ({
         imagePublicId && setImageId(imagePublicId);
       }
     } catch (error) {
-      alert('그라운드 정보를 불러올 수 없습니다.');
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('그라운드를') });
     }
-  }, [postId, setTitle, setBody, setPreviewImage, setImageId]);
+  }, [postId, setTitle, setBody, setPreviewImage, setImageId, showToast]);
 
   const handleRemoveImage = () => {
     if (previewImage) {

@@ -1,57 +1,81 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Post from '../components/Post/Post';
 import Header from '../components/Header/Header';
 import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/api/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-import Spinner from '../components/Base/Spinner';
+import { getChannelInfo } from '../utils/api/channel';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '../recoil/atoms/loading';
+import { ERROR_MESSAGES } from '../utils/messages';
+import useToast from '../hooks/useToast';
+import GlobalSpinner from '../components/Base/GlobalSpinner';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
-  const [currentPosts, setCurrnetPosts] = useState<PostResponse[]>([]);
-  const postsLength = useMemo(() => posts.length, [posts]);
-  const [loading, setLoading] = useState(false);
+  const [postLength, setPostLength] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const setLoading = useSetRecoilState(loadingState);
+  const { showToast } = useToast();
 
-  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    let offset = currentPosts.length;
-    if (postsLength < offset) return;
+  const onIntersect: IntersectionObserverCallback = async ([
+    { isIntersecting },
+  ]) => {
+    if (postLength <= offset) return;
     if (isIntersecting) {
-      const slicedPost = posts.slice(offset, offset + 10);
-      setCurrnetPosts([...currentPosts, ...slicedPost]);
+      getMorePost();
+    }
+  };
+
+  const getMorePost = async () => {
+    try {
+      setLoading(true);
+      const fetchedPosts = await getPosts(10, offset);
+      setPosts([...posts, ...fetchedPosts]);
+      setOffset(offset + 10);
+      setLoading(false);
+    } catch {
+      alert('포스트 정보를 불러올 수 없습니다.');
     }
   };
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
+  const getPostsLength = useCallback(async () => {
+    const data = await getChannelInfo();
+    setPostLength(data.posts.length);
+  }, []);
+
   const fetchHandler = useCallback(async () => {
     try {
       setLoading(true);
-      const posts = await getPosts();
-      setPosts(posts);
-      setCurrnetPosts(posts.slice(0, 10));
+      const fetchedPosts = await getPosts(10, 0);
+      setPosts(fetchedPosts);
+      setOffset(10);
       setLoading(false);
     } catch {
-      alert('포스트 정보를 불러올 수 없습니다.');
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('포스트를') });
     }
-  }, []);
+  }, [showToast, setLoading]);
 
   useEffect(() => {
+    getPostsLength();
     fetchHandler();
-  }, [fetchHandler]);
+  }, [getPostsLength, fetchHandler]);
 
   return (
     <Container>
       <Header />
       <List>
-        {currentPosts.map((post) => (
+        {posts.map((post) => (
           <ListItem key={post._id}>
             <Post {...post} />
             <ObservedDiv ref={setTarget}></ObservedDiv>
           </ListItem>
         ))}
       </List>
-      <Spinner loading={loading} />
+      <GlobalSpinner />
     </Container>
   );
 };

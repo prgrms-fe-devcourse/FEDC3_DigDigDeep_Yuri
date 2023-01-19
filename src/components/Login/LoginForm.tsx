@@ -16,7 +16,8 @@ import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
 import { loadingState } from '../../recoil/atoms/loading';
-import { FORM_RULE_MESSAGE, LOGIN_RULES } from '../../utils/formRules';
+import { LOGIN_RULES } from '../../utils/formRules';
+import { FORM_RULE_MESSAGE } from '../../utils/messages';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';

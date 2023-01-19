@@ -138,7 +138,7 @@ const Post = ({
       <PostHeader>
         <Wrapper onClick={toUserProfile}>
           {author.image ? (
-            <ProfileImage src={author.image} />
+            <ProfileImage src={author.image} alt="author" />
           ) : (
             <Icon name="default-profile" size={28} />
           )}
