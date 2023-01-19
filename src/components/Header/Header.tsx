@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import useLogout from '../../hooks/useLogout';
 import useModal from '../../hooks/useModal';
 import useToast from '../../hooks/useToast';
-import { tokenState } from '../../recoil/atoms/user';
+import { tokenState, userState } from '../../recoil/atoms/user';
 import { COLOR } from '../../utils/color';
 import Icon from './../Base/Icon';
 import LinkButton from '../Button/LinkButton';
@@ -16,6 +16,7 @@ import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
+  const user = useRecoilValue(userState);
   const location = useLocation();
   const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -115,11 +116,22 @@ const Header = () => {
                         name={isSeen ? 'notification-off' : 'notification-on'}
                         size={24}
                       />
-                      <LinkButton
-                        to={ROUTES.PROFILE_ME}
-                        name="profile"
-                        size={24}
-                      />
+                      {user.image ? (
+                        <LinkButton
+                          to={ROUTES.PROFILE_ME}
+                          src={user.image}
+                          alt="profile-image"
+                          isProfile={true}
+                          name="profile"
+                          size={24}
+                        />
+                      ) : (
+                        <LinkButton
+                          to={ROUTES.PROFILE_ME}
+                          name="profile"
+                          size={21}
+                        />
+                      )}
                     </>
                   )}
                 </Wrapper>
@@ -162,11 +174,22 @@ const Header = () => {
                       name={isSeen ? 'notification-off' : 'notification-on'}
                       size={20}
                     />
-                    <LinkButton
-                      to={ROUTES.PROFILE_ME}
-                      name="profile"
-                      size={20}
-                    />
+                    {user.image ? (
+                      <LinkButton
+                        to={ROUTES.PROFILE_ME}
+                        src={user.image}
+                        alt="profile-image"
+                        isProfile={true}
+                        name="profile"
+                        size={24}
+                      />
+                    ) : (
+                      <LinkButton
+                        to={ROUTES.PROFILE_ME}
+                        name="profile"
+                        size={21}
+                      />
+                    )}
                   </>
                 )}
               </Wrapper>
