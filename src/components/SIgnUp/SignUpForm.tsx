@@ -10,20 +10,21 @@ import ErrorMessage from '../UserForm/ErrorMessage';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
+import { useSetRecoilState } from 'recoil';
 import {
   confirmPasswordRule,
   emailRule,
   nickNameRule,
   passwordRule,
 } from '../../utils/formRules';
+import { loadingState } from '../../recoil/atoms/loading';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-
   const [errorMessage, setErrorMessage] = useState('');
-
+  const setLoading = useSetRecoilState(loadingState);
   const { showToast } = useToast();
 
   const {
@@ -49,7 +50,9 @@ const SignUpForm = () => {
     confirmPassword: string;
   }) => {
     try {
+      setLoading(true);
       await signUp(data);
+      setLoading(false);
       setErrorMessage('');
       showToast({ message: SUCCESS_MESSAGES.SIGNUP_SUCCESS });
       navigate(ROUTES.LOGIN);
@@ -61,6 +64,7 @@ const SignUpForm = () => {
       } else {
         showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
+      setLoading(false);
     }
   };
 
