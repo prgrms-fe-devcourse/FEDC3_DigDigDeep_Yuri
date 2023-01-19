@@ -42,8 +42,8 @@ const Container = styled.div`
   border: 0.5px solid ${COLOR.lightGray};
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.1rem;
+    height: 2.1rem;
   }
 `;
 export default LinkButton;
