@@ -11,7 +11,8 @@ import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { useSetRecoilState } from 'recoil';
-import { SIGN_UP_RULES, FORM_RULE_MESSAGE } from '../../utils/formRules';
+import { SIGN_UP_RULES } from '../../utils/formRules';
+import { FORM_RULE_MESSAGE } from '../../utils/messages';
 import { loadingState } from '../../recoil/atoms/loading';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';

@@ -26,3 +26,16 @@ export const SUCCESS_MESSAGES = {
   CREATE_COMMENT_SUCCESS: '디깅 +1',
   DELETE_COMMENT_SUCCESS: '디깅 -1',
 };
+
+export const FORM_RULE_MESSAGE = {
+  NICKNAME_REQUIRED: '닉네임을 입력해주세요.',
+  NICKNAME_PATTERN: '영어, 숫자, 한글만 입력 가능합니다. (2-8자리)',
+  EMAIL_REQUIRED: '이메일을 입력해주세요.',
+  EMAIL_PATTERN: '올바르지 않은 이메일 형식입니다.',
+  PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',
+  PASSWORD_PATTERN: '영문, 숫자를 섞어 입력해주세요. (4-12자리)',
+  CONFIRM_PASSWORD_VALIDATE: '비밀번호가 일치하지 않습니다.',
+  EMAIL_ALREADY_IN_USE: '이미 사용중인 이메일입니다.',
+  INCORRECT_LOGIN_INFO:
+    '이메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
+};
