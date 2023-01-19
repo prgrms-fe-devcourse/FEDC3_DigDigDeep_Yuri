@@ -58,6 +58,7 @@ const Searchbar = ({
   const handleEvent = useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (!ref) return;
+      if (!isMobile) return;
 
       if (e.target !== ref.current) {
         setVisible(false);
@@ -67,7 +68,7 @@ const Searchbar = ({
         }, 300);
       }
     },
-    [setIsSearchbarShow]
+    [setIsSearchbarShow, isMobile]
   );
 
   useEffect(() => {
