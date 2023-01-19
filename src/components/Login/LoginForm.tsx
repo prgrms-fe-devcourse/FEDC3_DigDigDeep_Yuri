@@ -69,7 +69,7 @@ const LoginForm = () => {
         control={control}
         name="email"
         placeholder="email"
-        rules={LOGIN_RULES.EMAIL}
+        rules={LOGIN_RULES.email}
         resetField={resetField}
       />
       <FormInput
@@ -77,7 +77,7 @@ const LoginForm = () => {
         name="password"
         placeholder="password"
         type="password"
-        rules={LOGIN_RULES.PASSWORD}
+        rules={LOGIN_RULES.password}
         resetField={resetField}
         icon="lock"
       />

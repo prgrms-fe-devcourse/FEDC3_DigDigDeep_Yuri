@@ -9,7 +9,7 @@ export const FORM_RULE_MESSAGE = {
 };
 
 export const SIGN_UP_RULES = {
-  NICKNAME: {
+  nickname: {
     required: FORM_RULE_MESSAGE.NICKNAME_REQUIRED,
     pattern: {
       value: /^[A-Za-z0-9가-힣]{4,12}$/,
@@ -17,7 +17,7 @@ export const SIGN_UP_RULES = {
     },
   },
 
-  EMAIL: {
+  email: {
     required: FORM_RULE_MESSAGE.EMAIL_REQUIRED,
     pattern: {
       value:
@@ -26,7 +26,7 @@ export const SIGN_UP_RULES = {
     },
   },
 
-  PASSWORD: {
+  password: {
     required: FORM_RULE_MESSAGE.PASSWORD_REQUIRED,
     pattern: {
       value: /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/,
@@ -34,7 +34,7 @@ export const SIGN_UP_RULES = {
     },
   },
 
-  CONFIRM_PASSWORD: (password: string) => {
+  confirmPassword: (password: string) => {
     return {
       required: FORM_RULE_MESSAGE.PASSWORD_REQUIRED,
       validate: (confirmPassword: string) =>
@@ -45,11 +45,32 @@ export const SIGN_UP_RULES = {
 };
 
 export const LOGIN_RULES = {
-  EMAIL: {
+  email: {
     required: FORM_RULE_MESSAGE.EMAIL_REQUIRED,
   },
 
-  PASSWORD: {
+  password: {
     required: FORM_RULE_MESSAGE.PASSWORD_REQUIRED,
+  },
+};
+
+export const PROFILE_EDIT_RULES = {
+  nickname: {
+    required: FORM_RULE_MESSAGE.NICKNAME_REQUIRED,
+  },
+
+  password: {
+    pattern: {
+      value: /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/,
+      message: FORM_RULE_MESSAGE.PASSWORD_PATTERN,
+    },
+  },
+
+  confirmPassword: (password: string) => {
+    return {
+      validate: (confirmPassword?: string) =>
+        confirmPassword === password ||
+        FORM_RULE_MESSAGE.CONFIRM_PASSWORD_VALIDATE,
+    };
   },
 };

@@ -69,14 +69,14 @@ const SignUpForm = () => {
         control={control}
         name="fullName"
         placeholder="nickname"
-        rules={SIGN_UP_RULES.NICKNAME}
+        rules={SIGN_UP_RULES.nickname}
         resetField={resetField}
       />
       <FormInput
         control={control}
         name="email"
         placeholder="email"
-        rules={SIGN_UP_RULES.EMAIL}
+        rules={SIGN_UP_RULES.email}
         resetField={resetField}
       />
       <FormInput
@@ -84,7 +84,7 @@ const SignUpForm = () => {
         name="password"
         placeholder="password"
         type="password"
-        rules={SIGN_UP_RULES.PASSWORD}
+        rules={SIGN_UP_RULES.password}
         resetField={resetField}
         icon="lock"
       />
@@ -93,7 +93,7 @@ const SignUpForm = () => {
         name="confirmPassword"
         placeholder="password check"
         type="password"
-        rules={SIGN_UP_RULES.CONFIRM_PASSWORD(watch('password'))}
+        rules={SIGN_UP_RULES.confirmPassword(watch('password'))}
         resetField={resetField}
         icon="lock"
       />
