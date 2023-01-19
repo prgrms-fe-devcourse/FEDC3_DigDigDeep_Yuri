@@ -10,6 +10,12 @@ import ErrorMessage from '../UserForm/ErrorMessage';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
+import {
+  confirmPasswordRule,
+  emailRule,
+  nickNameRule,
+  passwordRule,
+} from '../../utils/formRules';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
@@ -63,23 +69,15 @@ const SignUpForm = () => {
       <FormInput
         control={control}
         name="fullName"
-        placeholder="user name"
-        rules={{
-          required: '이름을 입력해주세요.',
-        }}
+        placeholder="nickname"
+        rules={nickNameRule}
         resetField={resetField}
       />
       <FormInput
         control={control}
         name="email"
         placeholder="email"
-        rules={{
-          required: '이메일을 입력해주세요.',
-          pattern: {
-            value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: '올바르지 않은 형식입니다.',
-          },
-        }}
+        rules={emailRule}
         resetField={resetField}
       />
       <FormInput
@@ -87,9 +85,7 @@ const SignUpForm = () => {
         name="password"
         placeholder="password"
         type="password"
-        rules={{
-          required: '비밀번호를 입력해주세요.',
-        }}
+        rules={passwordRule}
         resetField={resetField}
         icon="lock"
       />
@@ -98,11 +94,7 @@ const SignUpForm = () => {
         name="confirmPassword"
         placeholder="password check"
         type="password"
-        rules={{
-          required: '비밀번호를 입력해주세요.',
-          validate: (value) =>
-            value === watch('password') || '비밀번호가 일치하지 않습니다.',
-        }}
+        rules={confirmPasswordRule(watch('password'))}
         resetField={resetField}
         icon="lock"
       />
