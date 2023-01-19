@@ -56,7 +56,10 @@ export const LOGIN_RULES = {
 
 export const PROFILE_EDIT_RULES = {
   nickname: {
-    required: FORM_RULE_MESSAGE.NICKNAME_REQUIRED,
+    pattern: {
+      value: /^[A-Za-z0-9가-힣]{4,12}$/,
+      message: FORM_RULE_MESSAGE.NICKNAME_PATTERN,
+    },
   },
 
   password: {
