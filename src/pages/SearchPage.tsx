@@ -95,7 +95,7 @@ const Container = styled.div`
 `;
 
 const UserListItem = styled.li`
-  width: 90%;
+  width: 80%;
   margin: 0.5rem auto;
   display: flex;
   align-items: center;
