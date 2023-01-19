@@ -101,24 +101,23 @@ const List = styled.ul``;
 const ListItem = styled.li``;
 
 const Wrapper = styled.ul`
-  width: 50%;
+  width: 35%;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  min-width: 767px;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
-    min-width: 100%;
+    min-width: 0;
   }
 `;
 
 const Text = styled.div`
-  width: 100%;
   text-align: center;
   font-weight: 400;
-  font-size: 0.8rem;
-  line-height: 1.4rem;
+  font-size: 1.4rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLOR.brownGray};
+  margin-bottom: 3rem;
 `;

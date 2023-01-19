@@ -311,7 +311,8 @@ const Container = styled.div`
   margin: 2rem 0;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    margin: 1.3rem 0;
+    margin: 1.3rem auto;
+    width: 90%;
   }
 `;
 

@@ -68,13 +68,15 @@ const Container = styled.div`
 
 const List = styled.ul`
   width: 35%;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
+    width: 100%;
+    min-width: 0;
   }
 `;
 

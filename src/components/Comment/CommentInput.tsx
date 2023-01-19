@@ -78,8 +78,8 @@ export default CommentInput;
 
 const Container = styled.div`
   background-color: ${COLOR.white};
-  width: 50%;
-  min-width: 767px;
+  width: 35%;
+  min-width: 350px;
   position: fixed;
   bottom: 0;
   padding-top: 1.3rem;
@@ -88,7 +88,8 @@ const Container = styled.div`
   box-shadow: 0px -4px 5px rgba(164, 164, 164, 0.198);
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    min-width: 100%;
+    width: 100%;
+    min-width: 0;
   }
 `;
 

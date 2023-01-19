@@ -246,7 +246,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1.8rem 0;
+  padding: 1.8rem 1rem;
   gap: 2rem;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
