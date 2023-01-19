@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
 import EditButton from './../Post/EditButton';
 interface Props {
-  name: string;
+  name?: string;
   isButton: boolean;
   buttonText?: string;
   title?: string;
