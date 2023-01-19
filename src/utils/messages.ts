@@ -4,8 +4,9 @@ export const ERROR_MESSAGES = {
   CREATE_ERROR: (type: string) => `${type} 생성에 실패했습니다. `,
   GET_ERROR: (type: string) => `${type} 불러오던 중 문제가 발생했습니다.`,
   SERVER_ERROR: '서버와 통신 중 문제가 발생했습니다.',
-  REQUIRE_LOGIN: '로그인 먼저 해주세요.',
-  REQUIRE_INPUT: (type: string) => `${type} 먼저 작성해주세요.`,
+  REQUIRE_LOGIN: '로그인이 필요합니다.',
+  REQUIRE_INPUT: (type: string) => `${type} 작성해주세요.`,
+  SEARCH_INPUT: '검색어를 입력해주세요.',
 };
 
 export const CONFIRM_MESSAGES = {
@@ -33,7 +34,7 @@ export const FORM_RULE_MESSAGE = {
   EMAIL_REQUIRED: '이메일을 입력해주세요.',
   EMAIL_PATTERN: '올바르지 않은 이메일 형식입니다.',
   PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',
-  PASSWORD_PATTERN: '영문, 숫자를 섞어 입력해주세요. (4-12자리)',
+  PASSWORD_PATTERN: '영문과 숫자를 조합해주세요. (4-12자리)',
   CONFIRM_PASSWORD_VALIDATE: '비밀번호가 일치하지 않습니다.',
   EMAIL_ALREADY_IN_USE: '이미 사용중인 이메일입니다.',
   INCORRECT_LOGIN_INFO:

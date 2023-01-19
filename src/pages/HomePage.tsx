@@ -6,12 +6,15 @@ import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/api/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import Spinner from '../components/Base/Spinner';
+import { ERROR_MESSAGES } from '../utils/messages';
+import useToast from '../hooks/useToast';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);
   const [currentPosts, setCurrnetPosts] = useState<PostResponse[]>([]);
   const postsLength = useMemo(() => posts.length, [posts]);
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     let offset = currentPosts.length;
@@ -32,9 +35,9 @@ const HomePage = () => {
       setCurrnetPosts(posts.slice(0, 10));
       setLoading(false);
     } catch {
-      alert('포스트 정보를 불러올 수 없습니다.');
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('포스트를') });
     }
-  }, []);
+  }, [showToast]);
 
   useEffect(() => {
     fetchHandler();
