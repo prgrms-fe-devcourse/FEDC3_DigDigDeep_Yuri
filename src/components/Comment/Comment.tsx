@@ -64,7 +64,7 @@ const Comment = ({
   };
 
   return (
-    <Container {...props} isMyComment={isMyComment}>
+    <Container {...props}>
       <CommentWrapper>
         <CommentHeader>
           <Wrapper onClick={toUserProfile}>
@@ -73,7 +73,7 @@ const Comment = ({
             ) : (
               <Icon name="default-profile" size={25} />
             )}
-            <UserName>{author.fullName}</UserName>
+            <UserName isMyComment={isMyComment}>{author.fullName}</UserName>
             <Divider type="vertical" size={0.5} />
             <Date>{formatDate.fullDate(createdAt)}</Date>
           </Wrapper>
@@ -93,19 +93,14 @@ const Comment = ({
   );
 };
 
-const Container = styled.div<ContainerProps>`
-  padding: 1rem 0;
-  background-color: ${({ isMyComment }) =>
-    isMyComment ? COLOR.gray : COLOR.white};
+const Container = styled.div`
+  background-color: ${COLOR.white};
+  border-bottom: 0.5px solid #e9e9e9;
 `;
 
 const CommentWrapper = styled.div`
-  width: 95%;
+  padding: 1.5rem 2.4rem;
   margin: 0 auto;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
-  }
 `;
 
 const CommentHeader = styled.div`
@@ -115,26 +110,25 @@ const CommentHeader = styled.div`
 `;
 
 const Section = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 `;
 
 const Text = styled.div`
-  font-weight: 400;
-  font-size: 0.8rem;
-  line-height: 1.4rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLOR.text};
+  padding: 0 0.2rem;
   margin: 0 auto;
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 0;
-  }
 `;
 
 const ProfileImage = styled.img`
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   margin-right: 0.4rem;
+  border: 0.5px solid ${COLOR.lightGray};
 `;
 
 const Wrapper = styled.div`
@@ -144,18 +138,16 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const UserName = styled.span`
+const UserName = styled.span<ContainerProps>`
   font-weight: 500;
-  font-size: 1rem;
-  line-height: 2rem;
+  font-size: 1.2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${({ isMyComment }) => (isMyComment ? '#76a727' : COLOR.lightBrown)};
 `;
 
 const Date = styled.span`
   font-weight: 400;
-  font-size: 0.8rem;
-  line-height: 0.8rem;
+  font-size: 1.1rem;
   letter-spacing: -0.01em;
   color: ${COLOR.date};
 `;
