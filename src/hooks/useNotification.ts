@@ -3,9 +3,12 @@ import { getNotification } from '../utils/api/notification';
 import { NotificationResponse } from '../types/response';
 import useToast from './useToast';
 import { ERROR_MESSAGES } from '../utils/messages';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from '../recoil/atoms/user';
 
 const useNotification = () => {
   const [notifications, setNotification] = useState<NotificationResponse[]>([]);
+  const token = useRecoilValue(tokenState);
 
   const isSeen = useMemo(() => {
     const seenResults = notifications.map((v) => v.seen);
@@ -28,8 +31,9 @@ const useNotification = () => {
   }, [showToast]);
 
   useEffect(() => {
+    if (!token) return;
     fetchNotification();
-  }, [fetchNotification]);
+  }, [fetchNotification, token]);
 
   return {
     isSeen,
