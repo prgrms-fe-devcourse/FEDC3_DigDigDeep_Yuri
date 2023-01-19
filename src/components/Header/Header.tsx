@@ -29,8 +29,8 @@ const Header = () => {
 
   const isMe = location.pathname.split('/').includes('me');
 
-  const toggleSearchbar = () => {
-    setIsSearchbarShow(!isSearchbarShow);
+  const onSearchbar = () => {
+    setIsSearchbarShow(true);
   };
 
   const offSearchbar = () => {
@@ -38,17 +38,19 @@ const Header = () => {
   };
 
   const resizeScreen = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
-      setIsSearchbarShow(true);
+      setIsSearchbarShow(false);
     }
   };
 
   const checkIsMobile = () => {
-    if (window.innerWidth < 420) {
+    if (window.innerWidth < 545) {
       setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
   };
 
@@ -104,7 +106,7 @@ const Header = () => {
                   <LogoButton to={ROUTES.HOME}>
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
@@ -145,7 +147,7 @@ const Header = () => {
                   <LogoButton to="/">
                     <Logo />
                   </LogoButton>
-                  <Button onClick={toggleSearchbar}>
+                  <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
                   </Button>
                 </Wrapper>
