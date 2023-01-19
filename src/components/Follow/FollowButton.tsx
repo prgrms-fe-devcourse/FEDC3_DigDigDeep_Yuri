@@ -84,12 +84,15 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 export default FollowButton;
 
 const Button = styled.button<{ isFollowable: boolean }>`
-  cursor: pointer;
-  padding: 1.2rem;
   background-color: ${({ isFollowable }) =>
     isFollowable ? COLOR.green : COLOR.lightGray};
-  border-radius: 5rem;
+  border-radius: 23.5px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
   color: ${COLOR.white};
-  font-weight: 500;
-  font-size: 1rem;
+  padding: 1.1rem 1.8rem;
+  width: fit-content;
+  justify-self: right;
+  cursor: pointer;
 `;

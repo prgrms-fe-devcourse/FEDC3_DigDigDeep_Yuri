@@ -78,17 +78,18 @@ export default CommentInput;
 
 const Container = styled.div`
   background-color: ${COLOR.white};
-  width: 50%;
+  width: 35%;
+  min-width: 350px;
   position: fixed;
   bottom: 0;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  border-radius: 1rem 1rem 0 0;
-  box-shadow: 0px -6px 3px rgba(4, 4, 4, 0.11);
-  min-width: 767px;
+  padding-top: 1.3rem;
+  padding-bottom: 1.5rem;
+  border-radius: 1.4rem 1.4rem 0 0;
+  box-shadow: 0px -4px 5px rgba(164, 164, 164, 0.198);
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
-    min-width: 100%;
+    min-width: 0;
   }
 `;
 
@@ -103,7 +104,6 @@ const Form = styled.form<FormProps>`
   justify-content: space-between;
   gap: 1.3rem;
   border: 1px solid;
-  min-height: 20r;
   box-sizing: border-box;
   border-color: ${({ isFocus }) =>
     isFocus ? COLOR.lightBrown : COLOR.lightGray};
@@ -111,28 +111,29 @@ const Form = styled.form<FormProps>`
 
 const Input = styled.input`
   width: 100%;
-  border: none;
-  outline: none;
   letter-spacing: -0.01em;
   color: ${COLOR.lightBrown};
-  font-weight: 400;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
+  font-weight: 500;
+  font-size: 1.4rem;
   padding: 0;
-  padding-left: 1rem;
+  padding-left: 1.7rem;
 
   ::placeholder {
     color: ${COLOR.brownGray};
     line-height: 1rem;
+    font-weight: 400;
   }
 `;
 
 const Button = styled.button`
-  width: 10%;
+  width: 5rem;
   font-weight: 700;
-  font-size: 0.8rem;
-  line-height: 1.4rem;
+  font-size: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   cursor: pointer;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding-right: 1rem;
+  }
 `;

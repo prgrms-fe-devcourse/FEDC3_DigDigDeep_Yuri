@@ -117,9 +117,10 @@ export default ProfilePage;
 
 const TabList = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   background-color: ${COLOR.bgColor};
   justify-content: space-between;
+  margin-top: 2rem;
 `;
 
 const TabItemContainer = styled.span`
@@ -138,14 +139,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 50%;
-  min-width: calc(767px - 10%);
+  width: 35%;
+  min-width: 350px;
   margin: 0 auto;
   margin-bottom: 1.5rem;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 90%;
-    min-width: 90%;
+    width: 100%;
   }
 `;
 
@@ -153,7 +153,7 @@ const ImageContainer = styled.div`
   position: relative;
   display: block;
   aspect-ratio: 1 / 1;
-  width: 8rem;
+  width: 7rem;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -167,9 +167,9 @@ const Image = styled.img`
 
 const Name = styled.h1`
   font-weight: 500;
-  font-size: 1.6rem;
-  color: ${COLOR.text};
-  margin: 1rem 0 2.5rem;
+  font-size: 1.7rem;
+  color: ${COLOR.lightBrown};
+  margin: 2rem 0 2.5rem;
 `;
 
 const ButtonContainer = styled.div`

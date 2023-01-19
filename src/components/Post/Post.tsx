@@ -40,6 +40,7 @@ interface FlexContainerProps {
 interface ImageContainerProps {
   width?: string;
   height?: string;
+  isMyLikes?: boolean;
 }
 
 const Post = ({
@@ -134,7 +135,7 @@ const Post = ({
 
   return (
     <Container {...props}>
-      <PostHeader isDetailPage={isDetailPage}>
+      <PostHeader>
         <Wrapper onClick={toUserProfile}>
           {author.image ? (
             <ProfileImage src={author.image} alt="author" />
@@ -158,35 +159,31 @@ const Post = ({
           onClick={toPostDetail}
         >
           {image && (
-            <ImageContainer>
+            <ImageContainer isMyLikes={isMyLikes}>
               <Image src={image} alt="post-image" />
             </ImageContainer>
           )}
           <FlexContainer direction="column">
-            <PaddingContainer>
-              <Title>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.title}
-              </Title>
-              <Text>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.body}
-              </Text>
-            </PaddingContainer>
+            <Title>
+              {typeof postContent === 'string'
+                ? postContent
+                : postContent.title}
+            </Title>
+            <Text>
+              {typeof postContent === 'string' ? postContent : postContent.body}
+            </Text>
             <Footer>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" width={16} height={14} />
+                    <Icon name="liked" width={18} height={16} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" width={16} height={14} />
+                    <Icon name="unliked" width={18} height={16} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -197,7 +194,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" width={16} height={14} />
+                  <Icon name="comment" width={18} height={16} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -230,14 +227,14 @@ const Post = ({
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="liked" width={16} height={14} />
+                    <Icon name="liked" width={18} height={16} />
                   </Button>
                   <SmText>{likesState.length}</SmText>
                 </IconWrapper>
               ) : (
                 <IconWrapper>
                   <Button onClick={handleLike}>
-                    <Icon name="unliked" width={16} height={14} />
+                    <Icon name="unliked" width={18} height={16} />
                   </Button>
                   {likesState.length > 999 ? (
                     <SmText>999+</SmText>
@@ -248,7 +245,7 @@ const Post = ({
               )}
               <IconWrapper>
                 <Button onClick={toPostDetail}>
-                  <Icon name="comment" width={16} height={14} />
+                  <Icon name="comment" width={18} height={16} />
                 </Button>
                 {comments.length > 999 ? (
                   <SmText>999+</SmText>
@@ -277,14 +274,14 @@ const Post = ({
             {likesState.find((like) => like.user === user._id) ? (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="liked" width={16} height={14} />
+                  <Icon name="liked" width={18} height={16} />
                 </Button>
                 <SmText>{likesState.length}</SmText>
               </IconWrapper>
             ) : (
               <IconWrapper>
                 <Button onClick={handleLike}>
-                  <Icon name="unliked" width={16} height={14} />
+                  <Icon name="unliked" width={18} height={16} />
                 </Button>
                 {likesState.length > 999 ? (
                   <SmText>999+</SmText>
@@ -295,7 +292,7 @@ const Post = ({
             )}
             <IconWrapper>
               <Button onClick={toPostDetail}>
-                <Icon name="comment" width={16} height={14} />
+                <Icon name="comment" width={18} height={16} />
               </Button>
               {comments.length > 999 ? (
                 <SmText>999+</SmText>
@@ -313,23 +310,28 @@ const Post = ({
 const Container = styled.div`
   width: 100%;
   margin: 2rem 0;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    margin: 1.3rem auto;
+    width: 90%;
+  }
 `;
 
-const PostHeader = styled.div<PostDetailProps>`
+const PostHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 1.2rem 0.6rem 1.5rem 0.3rem;
   margin: 0 auto;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: ${({ isDetailPage }) => (isDetailPage ? '90%' : '100%')};
-  }
 `;
 
 const Section = styled.div`
   background-color: ${COLOR.white};
-  padding: 1rem 1.4rem;
+  padding: 1rem 2rem;
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    padding: 1rem 1.5rem;
+  }
 `;
 
 const FlexContainer = styled.div<FlexContainerProps>`
@@ -339,14 +341,10 @@ const FlexContainer = styled.div<FlexContainerProps>`
   background-color: ${({ color }) => color};
 `;
 
-const PaddingContainer = styled.div`
-  padding: 1rem;
-`;
-
 const Footer = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem 1.4rem;
+  padding: 1.4rem 1.2rem;
 `;
 
 const detailBody = `
@@ -367,20 +365,20 @@ const detailsTitle = `
 
 const Title = styled.span<PostDetailProps>`
   font-weight: 700;
-  font-size: 2rem;
-  /* line-height: 2.2rem; */
+  font-size: 1.8rem;
+  line-height: 2.5rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
-  margin: 1.2rem 0;
+  margin: 0.5rem 0 1.5rem;
   word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
 `;
 
 const Text = styled.div<PostDetailProps>`
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 1.8rem;
-  margin: 0.8rem 0;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 1rem 0 0.5rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   word-break: break-all;
@@ -389,7 +387,7 @@ const Text = styled.div<PostDetailProps>`
 
 const SmText = styled.span`
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.4rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
@@ -406,8 +404,9 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
   &:first-child {
-    margin-right: 1rem;
+    margin-right: 1.2rem;
   }
 `;
 
@@ -422,28 +421,29 @@ const IconContainer = styled.div`
 `;
 
 const Button = styled.button`
+  display: flex;
   cursor: pointer;
 `;
 
 const UserName = styled.span`
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLOR.lightBrown};
 `;
 
 const Date = styled.span`
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
   color: ${COLOR.date};
 `;
 
 const ProfileImage = styled.img`
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   margin-right: 0.4rem;
   object-fit: cover;
@@ -456,6 +456,9 @@ const ImageContainer = styled.div<ImageContainerProps>`
   width: ${({ width }) => width ?? '10rem'};
   min-width: 10rem;
   aspect-ratio: 1 / 1;
+  background-color: #fafafa;
+  border-radius: ${({ isMyLikes }) => (isMyLikes ? 0 : '15px')};
+  margin-right: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : 0)};
 `;
 
 export default Post;

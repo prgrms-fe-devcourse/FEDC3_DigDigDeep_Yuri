@@ -61,9 +61,12 @@ const NotificationList = () => {
 export default NotificationList;
 
 const List = styled.ul`
-  width: 50%;
+  width: 35%;
+  min-width: 350px;
+
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    width: 86%;
+    width: 88%;
+    min-width: 0;
   }
 `;
 

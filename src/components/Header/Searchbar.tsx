@@ -125,7 +125,7 @@ const Form = styled.form<FormProps>`
   width: 100%;
   display: flex;
   background: ${COLOR.white};
-  min-width: 50rem;
+  min-width: 250px;
   border-radius: 23.5px;
   align-items: center;
   justify-content: space-between;
