@@ -1,14 +1,11 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
-import { getNotification } from '../utils/api/notification';
+import { useState, useMemo, useEffect } from 'react';
+import { getNotifications } from '../utils/api/notification';
 import { NotificationResponse } from '../types/response';
-import useToast from './useToast';
-import { ERROR_MESSAGES } from '../utils/messages';
-import { useRecoilValue } from 'recoil';
-import { tokenState } from '../recoil/atoms/user';
 
-const useNotification = () => {
-  const [notifications, setNotification] = useState<NotificationResponse[]>([]);
-  const token = useRecoilValue(tokenState);
+const useCheckNotifications = () => {
+  const [notifications, setNotifications] = useState<NotificationResponse[]>(
+    []
+  );
 
   const isSeen = useMemo(() => {
     const seenResults = notifications.map((v) => v.seen);
@@ -18,28 +15,19 @@ const useNotification = () => {
     return true;
   }, [notifications]);
 
-  const { showToast } = useToast();
-
-  const fetchNotification = useCallback(async () => {
-    try {
-      const notifications = await getNotification();
-      setNotification(notifications);
-    } catch (error) {
-      setNotification([]);
-      showToast({ message: ERROR_MESSAGES.GET_ERROR('알림을') });
-    }
-  }, [showToast]);
-
   useEffect(() => {
-    if (!token) return;
-    fetchNotification();
-  }, [fetchNotification, token]);
+    const handleInterval = setInterval(async () => {
+      const notifications = await getNotifications();
+      setNotifications(notifications);
+    }, 5000);
+    return () => {
+      clearInterval(handleInterval);
+    };
+  }, []);
 
   return {
     isSeen,
-    notifications,
-    fetchNotification,
   };
 };
 
-export default useNotification;
+export default useCheckNotifications;

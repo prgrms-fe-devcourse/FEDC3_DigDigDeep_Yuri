@@ -1,19 +1,38 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Notification from './Notification';
-import useNotification from '../../hooks/useNotification';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
 import { COLOR } from '../../utils/color';
-import { seenNotification } from '../../utils/api/notification';
+import {
+  getNotifications,
+  seenNotifications,
+} from '../../utils/api/notification';
+import { NotificationResponse } from '../../types/response';
+import { ERROR_MESSAGES } from '../../utils/messages';
+import useToast from '../../hooks/useToast';
 
 const NotificationList = () => {
   const [user] = useRecoilState(userState);
-  const { notifications } = useNotification();
+  const { showToast } = useToast();
+
+  const [notifications, setNotifications] = useState<NotificationResponse[]>(
+    []
+  );
+
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const notifications = await getNotifications();
+      setNotifications(notifications);
+    } catch (error) {
+      console.error(error);
+      showToast({ message: ERROR_MESSAGES.GET_ERROR('알림을') });
+    }
+  }, [showToast]);
 
   const fetchSeenNotifications = useCallback(async () => {
     try {
-      await seenNotification();
+      await seenNotifications();
     } catch (error) {
       console.error(error);
     }
@@ -21,7 +40,8 @@ const NotificationList = () => {
 
   useEffect(() => {
     fetchSeenNotifications();
-  }, [fetchSeenNotifications]);
+    fetchNotifications();
+  }, [fetchSeenNotifications, fetchNotifications]);
 
   return (
     <List>
