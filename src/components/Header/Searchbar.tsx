@@ -30,7 +30,7 @@ const Searchbar = ({
   const [select, setSelect] = useState('posts');
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(false);
-  const ref = useRef(null);
+  const ref: React.MutableRefObject<any> = useRef(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
@@ -60,7 +60,7 @@ const Searchbar = ({
       if (!ref) return;
       if (!isMobile) return;
 
-      if (e.target !== ref.current) {
+      if (!ref.current.contains(e.target)) {
         setVisible(false);
         const timeout = setTimeout(() => {
           setIsSearchbarShow(false);
