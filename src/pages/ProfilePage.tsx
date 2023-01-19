@@ -15,6 +15,8 @@ import Icon from '../components/Base/Icon';
 import Header from '../components/Header/Header';
 import { ROUTES } from '../utils/routes';
 
+const defaultProfile = require('../assets/images/icon/default-profile.png');
+
 export type TTabMenuItems = keyof Pick<
   UserResponse,
   'posts' | 'followers' | 'following'
@@ -86,7 +88,7 @@ const ProfilePage = () => {
       <Container>
         <ImageContainer>
           <Image
-            src={userInfo?.image ?? '/image/icon/default-profile.png'}
+            src={userInfo?.image ?? defaultProfile}
             alt={userInfo?.fullName}
           />
         </ImageContainer>

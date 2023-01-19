@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import LoginForm from '../components/Login/LoginForm';
 import { COLOR } from '../utils/color';
 
+const bigLogo = require('../assets/images/logo/big.png');
+
 const LoginPage = () => {
   return (
     <Background>
       <Container>
         <ImageWrapper>
-          <Image src="/image/logo/big.png" alt="logo" />
+          <Image src={bigLogo} alt="logo" />
         </ImageWrapper>
         <Divider />
         <FormWrapper>
