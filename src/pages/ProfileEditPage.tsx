@@ -20,14 +20,14 @@ export default ProfileEditPage;
 const LoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
-  min-width: calc(767px - 10%);
+  width: 35%;
+  min-width: 35rem;
   height: 100vh;
   box-sizing: border-box;
   text-align: center;
   margin: 0 auto;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 90%;
-    min-width: 90%;
+    min-width: 0;
   }
 `;

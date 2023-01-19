@@ -1,7 +1,8 @@
+import Icon from './../Base/Icon';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
 import EditButton from './../Post/EditButton';
-import BackButton from '../Button/BackButton';
 interface Props {
   name?: string;
   isButton: boolean;
@@ -25,9 +26,13 @@ const DetailHeader = ({
   imageId,
   children,
 }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <BackButton />
+      <BackLink onClick={() => navigate(-1)}>
+        <Icon name="back" width={20} height={16} />
+      </BackLink>
       <Title>{name}</Title>
       {isButton && (
         <EditButton
@@ -60,6 +65,12 @@ const Container = styled.div`
     min-width: 0;
     height: 6.1rem;
   }
+`;
+
+const BackLink = styled.button`
+  cursor: pointer;
+  font-size: 1.6rem;
+  justify-self: start;
 `;
 
 const Title = styled.h3`
