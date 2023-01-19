@@ -6,6 +6,9 @@ export const FORM_RULE_MESSAGE = {
   PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',
   PASSWORD_PATTERN: '영문, 숫자를 섞어 입력해주세요. (4-12자리)',
   CONFIRM_PASSWORD_VALIDATE: '비밀번호가 일치하지 않습니다.',
+  EMAIL_ALREADY_IN_USE: '이미 사용중인 이메일입니다.',
+  INCORRECT_LOGIN_INFO:
+    '이메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
 };
 
 export const SIGN_UP_RULES = {

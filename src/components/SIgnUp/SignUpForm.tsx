@@ -11,7 +11,7 @@ import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { useSetRecoilState } from 'recoil';
-import { SIGN_UP_RULES } from '../../utils/formRules';
+import { SIGN_UP_RULES, FORM_RULE_MESSAGE } from '../../utils/formRules';
 import { loadingState } from '../../recoil/atoms/loading';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
@@ -55,7 +55,7 @@ const SignUpForm = () => {
       setLoading(false);
       if (error instanceof AxiosError && error.response?.data) {
         if (error.response?.data === RESPONSE_ERROR_MESSAGE) {
-          setErrorMessage('이미 사용중인 이메일입니다.');
+          setErrorMessage(FORM_RULE_MESSAGE.EMAIL_ALREADY_IN_USE);
         }
       } else {
         showToast({ message: ERROR_MESSAGES.SERVER_ERROR });

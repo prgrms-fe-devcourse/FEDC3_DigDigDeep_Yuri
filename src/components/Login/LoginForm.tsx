@@ -16,7 +16,7 @@ import { ROUTES } from '../../utils/routes';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
 import { loadingState } from '../../recoil/atoms/loading';
-import { LOGIN_RULES } from '../../utils/formRules';
+import { FORM_RULE_MESSAGE, LOGIN_RULES } from '../../utils/formRules';
 
 const RESPONSE_ERROR_MESSAGE =
   'Your email and password combination does not match an account.';
@@ -53,9 +53,7 @@ const LoginForm = () => {
       console.error(error);
       if (error instanceof AxiosError && error.response?.data) {
         if (error.response.data === RESPONSE_ERROR_MESSAGE) {
-          setErrorMessage(
-            '이메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.'
-          );
+          setErrorMessage(FORM_RULE_MESSAGE.INCORRECT_LOGIN_INFO);
         }
       } else {
         showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
