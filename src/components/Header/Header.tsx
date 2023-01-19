@@ -12,6 +12,7 @@ import LinkButton from '../Button/LinkButton';
 import Searchbar from './Searchbar';
 import useNotification from '../../hooks/useNotification';
 import { ROUTES } from '../../utils/routes';
+import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 
 const Header = () => {
   const token = useRecoilValue(tokenState);
@@ -54,14 +55,14 @@ const Header = () => {
     if (!token) return;
 
     showModal({
-      message: '정말로 로그아웃 하시겠습니까?',
+      message: CONFIRM_MESSAGES.LOGOUT_CONFIRM,
       handleConfirm: async () => {
         try {
           navigate(ROUTES.HOME);
           await logout();
         } catch (error) {
           console.error(error);
-          showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+          showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
         }
       },
     });

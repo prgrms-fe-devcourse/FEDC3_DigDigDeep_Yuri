@@ -9,6 +9,7 @@ import FormButton from '../UserForm/FormButton';
 import ErrorMessage from '../UserForm/ErrorMessage';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 const RESPONSE_ERROR_MESSAGE = 'The email address is already being used.';
 
@@ -44,7 +45,7 @@ const SignUpForm = () => {
     try {
       await signUp(data);
       setErrorMessage('');
-      showToast({ message: '가입되었습니다.' });
+      showToast({ message: SUCCESS_MESSAGES.SIGNUP_SUCCESS });
       navigate(ROUTES.LOGIN);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data) {
@@ -52,7 +53,7 @@ const SignUpForm = () => {
           setErrorMessage('이미 사용중인 이메일입니다.');
         }
       } else {
-        showToast({ message: '서버와 통신 중 문제가 발생했습니다.' });
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
       }
     }
   };
