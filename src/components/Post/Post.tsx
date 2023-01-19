@@ -21,6 +21,7 @@ import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
 } from '../../utils/messages';
+import { queryLowImage } from '../../utils/image';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
@@ -137,7 +138,7 @@ const Post = ({
       <PostHeader isDetailPage={isDetailPage}>
         <Wrapper onClick={toUserProfile}>
           {author.image ? (
-            <ProfileImage src={author.image} />
+            <ProfileImage src={queryLowImage(author.image, 'postAuthor')} />
           ) : (
             <Icon name="default-profile" size={28} />
           )}
@@ -159,7 +160,7 @@ const Post = ({
         >
           {image && (
             <ImageContainer>
-              <Image src={image} alt="post-image" />
+              <Image src={queryLowImage(image, 'postList')} alt="post-image" />
             </ImageContainer>
           )}
           <FlexContainer direction="column">
@@ -215,7 +216,11 @@ const Post = ({
           </Title>
           {image && (
             <ImageContainer width="100%">
-              <Image src={image} alt="post-image" objectFit="contain" />
+              <Image
+                src={queryLowImage(image, 'postDetail')}
+                alt="post-image"
+                objectFit="contain"
+              />
             </ImageContainer>
           )}
           <Text>
