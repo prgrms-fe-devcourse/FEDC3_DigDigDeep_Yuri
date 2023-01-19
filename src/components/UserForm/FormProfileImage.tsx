@@ -5,6 +5,9 @@ import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import type { Control, FieldPath, FieldValues } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import Image from '../Base/Image';
+import { checkFileSize } from '../../utils/formRules';
+import useToast from '../../hooks/useToast';
+import { ERROR_MESSAGES } from '../../utils/messages';
 
 interface UserInputPrpos<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -25,6 +28,7 @@ const FormProfileImage = <T extends FieldValues>({
     control,
   });
 
+  const { showToast } = useToast();
   const [previewSrc, setPreviewSrc] = useState(src);
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +36,10 @@ const FormProfileImage = <T extends FieldValues>({
     if (!e.target.files) return;
     else {
       const file = e.target.files[0];
+      if (!checkFileSize(file.size)) {
+        showToast({ message: ERROR_MESSAGES.MAX_SIZE_IS_10MB });
+        return;
+      }
       setPreviewSrc(URL.createObjectURL(file));
       onChange(file);
     }

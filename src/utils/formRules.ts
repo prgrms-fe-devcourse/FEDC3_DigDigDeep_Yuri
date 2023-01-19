@@ -1,3 +1,4 @@
+import { LIMITED_FILE_SIZE } from './constants';
 import { FORM_RULE_MESSAGE } from './messages';
 
 export const SIGN_UP_RULES = {
@@ -68,4 +69,8 @@ export const PROFILE_EDIT_RULES = {
         FORM_RULE_MESSAGE.CONFIRM_PASSWORD_VALIDATE,
     };
   },
+};
+
+export const checkFileSize = (fileSize: number) => {
+  return fileSize <= LIMITED_FILE_SIZE;
 };
