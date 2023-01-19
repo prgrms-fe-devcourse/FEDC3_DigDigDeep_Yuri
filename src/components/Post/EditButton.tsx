@@ -72,7 +72,7 @@ export default EditButton;
 const Button = styled.button`
   background: ${COLOR.green};
   border-radius: 23.5px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   letter-spacing: -0.01em;
   color: ${COLOR.white};

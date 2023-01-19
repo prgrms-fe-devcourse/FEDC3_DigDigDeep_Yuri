@@ -47,7 +47,7 @@ const Image = styled.img`
 `;
 
 const Text = styled.span`
-  font-weight: 350;
+  font-weight: 400;
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.01em;

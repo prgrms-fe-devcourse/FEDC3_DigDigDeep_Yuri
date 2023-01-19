@@ -72,7 +72,7 @@ const Label = styled.label`
   flex-direction: column;
   align-items: center;
   gap: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.4rem;
   line-height: 1.7rem;
   color: ${COLOR.brownGray};

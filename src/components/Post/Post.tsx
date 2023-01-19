@@ -434,7 +434,7 @@ const UserName = styled.span`
 `;
 
 const Date = styled.span`
-  font-weight: 350;
+  font-weight: 400;
   font-size: 1rem;
   line-height: 2rem;
   letter-spacing: -0.01em;

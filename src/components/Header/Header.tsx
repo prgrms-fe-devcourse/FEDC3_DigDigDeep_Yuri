@@ -263,7 +263,7 @@ const SearchWrapper = styled.div`
 
 const LinkContainer = css`
   width: 100%;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   line-height: 0.2rem;
   letter-spacing: -0.01em;
