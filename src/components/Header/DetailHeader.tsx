@@ -54,16 +54,16 @@ export default DetailHeader;
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  padding: 1.6rem 0;
   width: 35%;
   min-width: 350px;
+  height: 6.4rem;
   align-items: center;
   justify-items: end;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 88%;
     min-width: 0;
-    padding: 1.4rem 0;
+    height: 6.1rem;
   }
 `;
 
