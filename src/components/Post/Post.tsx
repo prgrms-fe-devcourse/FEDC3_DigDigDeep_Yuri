@@ -214,8 +214,8 @@ const Post = ({
             {typeof postContent === 'string' ? postContent : postContent.title}
           </Title>
           {image && (
-            <ImageContainer width="100%">
-              <Image src={image} alt="post-image" />
+            <ImageContainer width="auto" height="auto">
+              <Image src={image} alt="post-image" objectFit="contain" />
             </ImageContainer>
           )}
           <Text>
@@ -445,6 +445,7 @@ const ProfileImage = styled.img`
   height: 2.5rem;
   border-radius: 50%;
   margin-right: 0.4rem;
+  object-fit: cover;
 `;
 
 const ImageContainer = styled.div<ImageContainerProps>`
@@ -452,8 +453,8 @@ const ImageContainer = styled.div<ImageContainerProps>`
   display: inline-block;
   overflow: hidden;
   width: ${({ width }) => width ?? '10rem'};
+  height: ${({ height }) => height ?? '10rem'};
   min-width: 10rem;
-  aspect-ratio: 1 / 1;
 `;
 
 export default Post;
