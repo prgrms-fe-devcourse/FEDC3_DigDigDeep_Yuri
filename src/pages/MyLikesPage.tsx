@@ -4,7 +4,7 @@ import Post from '../components/Post/Post';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { PostResponse } from '../types/response';
-import { getPosts } from '../utils/api/post';
+import { getAllPosts } from '../utils/api/post';
 import styled from 'styled-components';
 import Header from '../components/Header/Header';
 import Spinner from '../components/Base/Spinner';
@@ -20,7 +20,7 @@ const MyLikesPage = () => {
       const likedPosts = user.likes
         ?.filter((like) => like.post)
         .map((like) => like.post);
-      const posts = await getPosts();
+      const posts = await getAllPosts();
       const filteredPosts = posts.filter((post) => {
         return likedPosts.find((like) => {
           return like === post._id;

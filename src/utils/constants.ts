@@ -8,3 +8,5 @@ export const defaultUserValue = {
   following: [],
   notifications: [],
 };
+
+export const CHANNEL_NAME = 'Test Channel';
