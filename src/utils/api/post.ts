@@ -21,7 +21,7 @@ export const updatePost = async (
   title: string,
   image: Blob | null,
   channelId: string,
-  imageToDeletePublicId?: string
+  imageToDeletePublicId?: string | null
 ) => {
   const formData = new FormData();
 
