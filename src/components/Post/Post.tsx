@@ -139,7 +139,10 @@ const Post = ({
       <PostHeader>
         <Wrapper onClick={toUserProfile}>
           {author.image ? (
-            <ProfileImage src={queryLowImage(author.image, 'postAuthor')} alt="author" />
+            <ProfileImage
+              src={queryLowImage(author.image, 'postAuthor')}
+              alt="author"
+            />
           ) : (
             <Icon name="default-profile" size={28} />
           )}
@@ -452,6 +455,10 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin-right: 0.4rem;
   object-fit: cover;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 `;
 
 const ImageContainer = styled.div<ImageContainerProps>`
