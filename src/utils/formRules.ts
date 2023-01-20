@@ -50,14 +50,14 @@ export const LOGIN_RULES = {
 export const PROFILE_EDIT_RULES = {
   nickname: {
     pattern: {
-      value: /^[A-Za-z0-9가-힣]{4,12}$/,
+      value: /^[A-Za-z0-9가-힣]{2,12}$/,
       message: FORM_RULE_MESSAGE.NICKNAME_PATTERN,
     },
   },
 
   password: {
     pattern: {
-      value: /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/,
+      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/,
       message: FORM_RULE_MESSAGE.PASSWORD_PATTERN,
     },
   },
