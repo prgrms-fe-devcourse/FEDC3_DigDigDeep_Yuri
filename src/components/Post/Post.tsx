@@ -213,7 +213,7 @@ const Post = ({
         </FlexContainer>
       ) : (
         <Section onClick={toPostDetail}>
-          <Title>
+          <Title isDetailPage={isDetailPage}>
             {typeof postContent === 'string' ? postContent : postContent.title}
           </Title>
           {image && (
@@ -225,7 +225,7 @@ const Post = ({
               />
             </ImageContainer>
           )}
-          <Text>
+          <Text isDetailPage={isDetailPage}>
             {typeof postContent === 'string' ? postContent : postContent.body}
           </Text>
         </Section>
@@ -396,6 +396,7 @@ const Text = styled.div<PostDetailProps>`
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
   word-break: break-all;
+  white-space: pre-wrap;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailBody)};
 `;
 
