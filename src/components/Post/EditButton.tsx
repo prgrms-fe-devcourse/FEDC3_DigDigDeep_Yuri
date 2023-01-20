@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { createPost, updatePost } from '../../utils/api/post';
 import { COLOR } from '../../utils/color';
@@ -22,6 +22,18 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
   const navigator = useNavigate();
   const { showToast } = useToast();
   const setLoading = useSetRecoilState(loadingState);
+
+  const onClick = () => {
+    if (!title || title.trim() === '') {
+      showToast({ message: ERROR_MESSAGES.REQUIRE_INPUT('제목을') });
+      return;
+    }
+    if (!body || body.trim() === '') {
+      showToast({ message: ERROR_MESSAGES.REQUIRE_INPUT('내용을') });
+      return;
+    }
+    text === 'CREATE' ? createGround() : updateGround();
+  };
 
   const createGround = useCallback(async () => {
     try {
@@ -59,13 +71,7 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
     }
   }, [postId, setLoading, title, body, image, imageId, showToast, navigator]);
 
-  return (
-    <Button
-      onClick={() => (text === 'CREATE' ? createGround() : updateGround())}
-    >
-      {text}
-    </Button>
-  );
+  return <Button onClick={onClick}>{text}</Button>;
 };
 
 export default EditButton;
