@@ -31,11 +31,13 @@ interface PostProps extends PostResponse {
 
 interface PostDetailProps {
   isDetailPage?: boolean;
+  isMyLikes?: boolean;
 }
 
 interface FlexContainerProps {
   direction?: 'row' | 'column';
   color?: string;
+  isMyLikes?: boolean;
 }
 
 interface ImageContainerProps {
@@ -167,8 +169,8 @@ const Post = ({
               <Image src={queryLowImage(image, 'postList')} alt="post-image" />
             </ImageContainer>
           )}
-          <FlexContainer direction="column">
-            <Title>
+          <FlexContainer direction="column" isMyLikes={isMyLikes}>
+            <Title isMyLikes={isMyLikes}>
               {typeof postContent === 'string'
                 ? postContent
                 : postContent.title}
@@ -176,7 +178,7 @@ const Post = ({
             <Text>
               {typeof postContent === 'string' ? postContent : postContent.body}
             </Text>
-            <Footer>
+            <Footer isMyLikes={isMyLikes}>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
                   <Button onClick={handleLike}>
@@ -347,12 +349,14 @@ const FlexContainer = styled.div<FlexContainerProps>`
   flex-direction: ${({ direction }) =>
     direction === 'column' ? 'column' : 'row'};
   background-color: ${({ color }) => color};
+  padding: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : '')};
+  justify-content: ${({ isMyLikes }) => (isMyLikes ? 'space-between' : '')};
 `;
 
-const Footer = styled.div`
+const Footer = styled.div<{ isMyLikes?: boolean }>`
   display: flex;
   align-items: center;
-  padding: 1.4rem 1.2rem;
+  padding: ${({ isMyLikes }) => (isMyLikes ? '1.4rem 0 0' : '1.4rem 1.2rem;')};
 `;
 
 const detailBody = `
@@ -377,7 +381,7 @@ const Title = styled.span<PostDetailProps>`
   line-height: 2.5rem;
   letter-spacing: -0.01em;
   color: ${COLOR.brown};
-  margin: 0.5rem 0 1.5rem;
+  margin: ${({ isMyLikes }) => (isMyLikes ? '' : '0.5rem 0 1.5rem')};
   word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
 `;
@@ -465,12 +469,12 @@ const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: ${({ width }) => width ?? '10rem'};
-  min-width: 10rem;
+  width: ${({ width }) => width ?? '12rem'};
+  min-width: 12rem;
   aspect-ratio: 1 / 1;
   background-color: #fafafa;
   border-radius: ${({ isMyLikes }) => (isMyLikes ? 0 : '15px')};
-  margin-right: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : 0)};
+  /* margin-right: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : 0)}; */
 `;
 
 export default Post;
