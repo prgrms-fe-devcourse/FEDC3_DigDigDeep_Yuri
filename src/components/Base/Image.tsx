@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 
 interface ImageProps {
@@ -11,20 +11,21 @@ const Image = ({ src, alt, objectFit = 'cover' }: ImageProps) => {
   const [loaded, setLoaded] = useState(false);
   const imageElement = useRef<HTMLImageElement>(null);
 
-  const onLoad = () => {
-    setLoaded(true);
-  };
-
-  useEffect(() => {
-    setLoaded(false);
-  }, [src]);
-
-  useEffect(() => {
+  const onLoad = useCallback(() => {
     if (!imageElement.current) return;
     if (imageElement.current.complete) {
       setLoaded(true);
     }
   }, []);
+
+  useEffect(() => {
+    setLoaded(false);
+    onLoad();
+  }, [src, onLoad]);
+
+  useEffect(() => {
+    onLoad();
+  }, [onLoad]);
 
   return (
     <>
