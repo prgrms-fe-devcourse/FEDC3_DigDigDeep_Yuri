@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 import { createPost, updatePost } from '../../utils/api/post';
 import { COLOR } from '../../utils/color';
