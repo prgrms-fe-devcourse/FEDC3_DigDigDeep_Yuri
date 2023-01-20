@@ -36,7 +36,7 @@ const FormInput = <T extends FieldValues>({
   ...props
 }: UserInputPrpos<T>) => {
   const {
-    field: { value, onChange, onBlur, ref },
+    field: { value, onChange, onBlur },
     fieldState: { error },
   } = useController({
     name,
@@ -54,7 +54,6 @@ const FormInput = <T extends FieldValues>({
   };
 
   const onResetButtonClick = () => {
-    ref(() => {});
     if (resetField) resetField(name);
   };
 
