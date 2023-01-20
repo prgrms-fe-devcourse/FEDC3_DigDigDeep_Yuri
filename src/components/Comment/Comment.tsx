@@ -129,6 +129,10 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   margin-right: 0.4rem;
   border: 0.5px solid ${COLOR.lightGray};
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 `;
 
 const Wrapper = styled.div`

@@ -330,6 +330,10 @@ const Logo = styled.img`
   width: 15rem;
   height: 2.4rem;
   content: url(${longLogo});
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 3.4rem;

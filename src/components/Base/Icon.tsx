@@ -30,9 +30,11 @@ const Icon = ({ name, size, width, height, style, ...props }: IconProps) => {
 };
 
 export default Icon;
+
 const IconContainer = styled.i`
   display: inline-block;
 `;
+
 const StyledIcon = styled.img<StyledIconProps>`
   ${({ size, widthProps, heighProps }) =>
     size
@@ -44,4 +46,15 @@ const StyledIcon = styled.img<StyledIconProps>`
   width: ${widthProps}px;
   height: ${heighProps}px;
 `}
+-webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+const StyledIcon = styled.img`
+  width: inherit;
+  height: inherit;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 `;
