@@ -108,7 +108,13 @@ const Header = () => {
               <>
                 <Wrapper>
                   <LogoButton to={ROUTES.HOME}>
-                    <Logo />
+                    <LogoWrapper>
+                      {window.innerWidth > 767 ? (
+                        <Logo src={longLogo} alt="logo" />
+                      ) : (
+                        <Logo src={smallLogo} alt="logo" />
+                      )}
+                    </LogoWrapper>
                   </LogoButton>
                   <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
@@ -149,7 +155,13 @@ const Header = () => {
               <>
                 <Wrapper>
                   <LogoButton to="/">
-                    <Logo />
+                    <LogoWrapper>
+                      {window.innerWidth > 767 ? (
+                        <Logo src={longLogo} alt="logo" />
+                      ) : (
+                        <Logo src={smallLogo} alt="logo" />
+                      )}
+                    </LogoWrapper>
                   </LogoButton>
                   <Button onClick={onSearchbar}>
                     <Icon name="search" size={24} />
@@ -167,7 +179,13 @@ const Header = () => {
           <>
             <WebSearchWrapper>
               <LogoButton to="/">
-                <Logo />
+                <LogoWrapper>
+                  {window.innerWidth > 767 ? (
+                    <Logo src={longLogo} alt="logo" />
+                  ) : (
+                    <Logo src={smallLogo} alt="logo" />
+                  )}
+                </LogoWrapper>
               </LogoButton>
               <Searchbar
                 isMobile={isMobile}
@@ -306,7 +324,10 @@ const Button = styled.div`
 
 const LogoButton = styled(Link)``;
 
+const LogoWrapper = styled.span``;
+
 const Logo = styled.img`
+  width: 15rem;
   height: 2.4rem;
   content: url(${longLogo});
   -webkit-user-drag: none;
