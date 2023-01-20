@@ -46,13 +46,6 @@ const StyledIcon = styled.img<StyledIconProps>`
   width: ${widthProps}px;
   height: ${heighProps}px;
 `}
--webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-const StyledIcon = styled.img`
-  width: inherit;
-  height: inherit;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
