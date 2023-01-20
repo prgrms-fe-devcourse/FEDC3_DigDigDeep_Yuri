@@ -44,7 +44,7 @@ const HomePage = () => {
 
   const getPostsLength = useCallback(async () => {
     const data = await getChannelInfo();
-    setPostLength(data.posts.length);
+    setPostLength(data.posts ? data.posts.length : 0);
   }, []);
 
   const fetchHandler = useCallback(async () => {
