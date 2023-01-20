@@ -33,8 +33,8 @@ const Background = styled.div`
   padding: 5rem 8rem;
   box-sizing: border-box;
 
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    height: 100vh;
+  @media screen and (max-width: 767px) {
+    padding: 0;
   }
 
   @media screen and (max-height: 767px) and (orientation: landscape) {
@@ -59,6 +59,10 @@ const Container = styled.div`
     box-sizing: border-box;
     flex-direction: column;
     gap: 5rem;
+    border-radius: 0;
+  }
+
+  @media screen and (max-width: 767px) {
     border-radius: 0;
   }
 `;
@@ -122,7 +126,7 @@ const Image = styled.img`
 
 const TextWrapper = styled.div`
   display: block;
-  @media screen and (max-height: 767px) and (orientation: portrait) {
+  @media screen and (max-width: 767px) and (orientation: portrait) {
     display: none;
   }
 `;
