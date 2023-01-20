@@ -90,4 +90,8 @@ const StyledImage = styled.img<{ loaded: boolean }>`
   position: ${({ loaded }) => (loaded ? 'unset' : 'absolute')};
   transition: all 0.5s ease-in;
   border-radius: inherit;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 `;
