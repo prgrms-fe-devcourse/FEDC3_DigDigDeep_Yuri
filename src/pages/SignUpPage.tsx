@@ -44,6 +44,11 @@ const Background = styled.div`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     padding: 0;
   }
+
+  @media screen and (max-height: 767px) and (orientation: landscape) {
+    height: 767px;
+    overflow: hidden;
+  }
 `;
 
 const Container = styled.div`
@@ -105,6 +110,12 @@ const Divider = styled.hr`
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: none;
+  }
+
+  @media screen and (max-height: 767px) and (orientation: landscape) {
+    height: 383.5px;
+    position: fixed;
+    top: 383.5px;
   }
 `;
 
