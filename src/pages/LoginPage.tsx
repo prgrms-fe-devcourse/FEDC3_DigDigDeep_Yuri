@@ -34,7 +34,12 @@ const Background = styled.div`
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 0;
+    height: 100vh;
+  }
+
+  @media screen and (max-height: 767px) and (orientation: landscape) {
+    height: 767px;
+    overflow: hidden;
   }
 `;
 
@@ -86,7 +91,8 @@ const Divider = styled.hr`
   position: absolute;
   display: inline-block;
   width: 1px;
-  height: 50rem;
+  /* height: 50rem; */
+  height: 45%;
   vertical-align: middle;
   border: none;
 
@@ -98,11 +104,16 @@ const Divider = styled.hr`
   @media screen and (max-width: 767px) and (orientation: portrait) {
     display: none;
   }
+
+  @media screen and (max-height: 767px) and (orientation: landscape) {
+    height: 383.5px;
+    position: fixed;
+    top: 383.5px;
+  }
 `;
 
 const Image = styled.img`
   height: min-content;
-  /* width: min-content; */
   max-width: 100%;
   @media screen and (max-width: 767px) and (orientation: portrait) {
     width: 100%;
@@ -111,7 +122,7 @@ const Image = styled.img`
 
 const TextWrapper = styled.div`
   display: block;
-  @media screen and (max-width: 767px) and (orientation: portrait) {
+  @media screen and (max-height: 767px) and (orientation: portrait) {
     display: none;
   }
 `;

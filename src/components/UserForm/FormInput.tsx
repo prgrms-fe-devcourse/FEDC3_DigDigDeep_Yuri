@@ -102,6 +102,12 @@ const InputWrapper = styled.div<InputWrapperProps>`
   border: 1px solid;
   border-color: ${({ error, isFocus }) =>
     error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
+
+  :hover {
+    border-color: ${COLOR.lightBrown};
+  }
+
+  transition: border 0.2s ease-in-out;
 `;
 
 const InputLabel = styled.label`

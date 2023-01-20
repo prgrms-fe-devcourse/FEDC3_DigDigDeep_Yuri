@@ -119,5 +119,5 @@ const SignUpLink = styled(Link)`
   font-size: 1.6rem;
   margin-left: 1rem;
   color: ${COLOR.green};
-  text-decoration: none;
+  text-decoration: underline;
 `;

@@ -5,7 +5,7 @@ export const SIGN_UP_RULES = {
   nickname: {
     required: FORM_RULE_MESSAGE.NICKNAME_REQUIRED,
     pattern: {
-      value: /^[A-Za-z0-9가-힣]{4,12}$/,
+      value: /^[A-Za-z0-9가-힣]{2,12}$/,
       message: FORM_RULE_MESSAGE.NICKNAME_PATTERN,
     },
   },
@@ -22,7 +22,7 @@ export const SIGN_UP_RULES = {
   password: {
     required: FORM_RULE_MESSAGE.PASSWORD_REQUIRED,
     pattern: {
-      value: /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/,
+      value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/,
       message: FORM_RULE_MESSAGE.PASSWORD_PATTERN,
     },
   },
