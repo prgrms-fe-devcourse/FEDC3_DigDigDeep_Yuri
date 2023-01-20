@@ -168,9 +168,7 @@ const Header = () => {
                   </Button>
                 </Wrapper>
                 <Wrapper>
-                  <Wrapper>
-                    <LogInButton to="/login">LOG IN</LogInButton>
-                  </Wrapper>
+                  <LogInButton to="/login">LOG IN</LogInButton>
                 </Wrapper>
               </>
             )}
@@ -315,7 +313,8 @@ const LogInButton = styled(Link)`
 const LogOutButton = styled.button`
   color: ${COLOR.white};
   background-color: ${COLOR.lightGray};
-  ${LinkContainer}
+  ${LinkContainer};
+  font-size: 1rem;
 `;
 
 const Button = styled.div`
