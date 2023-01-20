@@ -159,25 +159,25 @@ const Post = ({
         </Wrapper>
       </PostHeader>
       {isMyLikes ? (
-        <FlexContainer
-          direction="row"
-          color={COLOR.white}
-          onClick={toPostDetail}
-        >
+        <FlexContainer direction="row" color={COLOR.white}>
           {image && (
             <ImageContainer isMyLikes={isMyLikes}>
               <Image src={queryLowImage(image, 'postList')} alt="post-image" />
             </ImageContainer>
           )}
           <FlexContainer direction="column" isMyLikes={isMyLikes}>
-            <Title isMyLikes={isMyLikes}>
-              {typeof postContent === 'string'
-                ? postContent
-                : postContent.title}
-            </Title>
-            <Text>
-              {typeof postContent === 'string' ? postContent : postContent.body}
-            </Text>
+            <PostWrapper onClick={toPostDetail}>
+              <Title isMyLikes={isMyLikes}>
+                {typeof postContent === 'string'
+                  ? postContent
+                  : postContent.title}
+              </Title>
+              <Text>
+                {typeof postContent === 'string'
+                  ? postContent
+                  : postContent.body}
+              </Text>
+            </PostWrapper>
             <Footer isMyLikes={isMyLikes}>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
@@ -352,6 +352,8 @@ const FlexContainer = styled.div<FlexContainerProps>`
   padding: ${({ isMyLikes }) => (isMyLikes ? '1.5rem' : '')};
   justify-content: ${({ isMyLikes }) => (isMyLikes ? 'space-between' : '')};
 `;
+
+const PostWrapper = styled.div``;
 
 const Footer = styled.div<{ isMyLikes?: boolean }>`
   display: flex;
