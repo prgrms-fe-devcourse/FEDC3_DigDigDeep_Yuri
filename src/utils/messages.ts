@@ -35,7 +35,7 @@ export const FORM_RULE_MESSAGE = {
   EMAIL_REQUIRED: '이메일을 입력해주세요.',
   EMAIL_PATTERN: '올바르지 않은 이메일 형식입니다.',
   PASSWORD_REQUIRED: '비밀번호를 입력해주세요.',
-  PASSWORD_PATTERN: '영문과 숫자를 조합해주세요. (4-12자리)',
+  PASSWORD_PATTERN: '영문과 숫자를 조합해주세요. (6-12자리)',
   CONFIRM_PASSWORD_VALIDATE: '비밀번호가 일치하지 않습니다.',
   EMAIL_ALREADY_IN_USE: '이미 사용중인 이메일입니다.',
   INCORRECT_LOGIN_INFO:
