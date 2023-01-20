@@ -41,7 +41,7 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
       const data = await createPost(
         JSON.stringify({ title, body }),
         image ?? null,
-        '63b5b86c21d0f92287bd6474'
+        '63cab9b7bee10265b9975db0'
       );
       showToast({ message: SUCCESS_MESSAGES.CREATE_SUCCESS('그라운드가') });
       navigator(ROUTES.POSTS_BY_ID(data._id));
@@ -59,7 +59,7 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
           postId,
           JSON.stringify({ title, body }),
           image ?? null,
-          '63b5b86c21d0f92287bd6474',
+          '63cab9b7bee10265b9975db0',
           image || image === null ? imageId : undefined
         );
         showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('그라운드가') });
