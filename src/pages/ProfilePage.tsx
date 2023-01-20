@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -30,6 +30,11 @@ const ProfilePage = () => {
   const { userId } = useParams() as { userId: string };
   const { _id: myId } = useRecoilValue(userState);
   const [userInfo, setUserInfo] = useState<UserResponse>({} as UserResponse);
+  const profileImage = useMemo(() => {
+    return userInfo.image
+      ? queryLowImage(userInfo.image, 'profile')
+      : defaultProfile;
+  }, [userInfo]);
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
@@ -89,14 +94,7 @@ const ProfilePage = () => {
       </Wrapper>
       <Container>
         <ImageContainer>
-          <Image
-            src={
-              userInfo.image
-                ? queryLowImage(userInfo.image, 'profile')
-                : defaultProfile
-            }
-            alt={userInfo?.fullName}
-          />
+          <Image src={profileImage} alt={userInfo?.fullName} />
         </ImageContainer>
         <Name>{userInfo?.fullName}</Name>
         <TabList>

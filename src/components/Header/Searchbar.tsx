@@ -29,7 +29,7 @@ const Searchbar = ({
   const [search, setSearch] = useState('');
   const [select, setSelect] = useState('posts');
   const [isFocus, setIsFocus] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(isMobile ? false : true);
   const ref: React.MutableRefObject<any> = useRef(null);
   const navigate = useNavigate();
 

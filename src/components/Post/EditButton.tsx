@@ -60,10 +60,10 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
           JSON.stringify({ title, body }),
           image ?? null,
           '63b5b86c21d0f92287bd6474',
-          imageId
+          image || image === null ? imageId : undefined
         );
         showToast({ message: SUCCESS_MESSAGES.EDIT_SUCCESS('그라운드가') });
-        navigator(ROUTES.HOME);
+        navigator(ROUTES.POSTS_BY_ID(postId));
         setLoading(false);
       }
     } catch {

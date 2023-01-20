@@ -58,9 +58,8 @@ const PostEdit = ({
   const handleRemoveImage = () => {
     if (previewImage) {
       setPreviewImage('');
-    } else {
-      setImage(null);
     }
+    setImage(null);
   };
 
   useEffect(() => {
