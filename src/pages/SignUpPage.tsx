@@ -41,7 +41,7 @@ const Background = styled.div`
   padding: 5rem 8rem;
   box-sizing: border-box;
 
-  @media screen and (max-width: 767px) and (orientation: portrait) {
+  @media screen and (max-width: 767px) {
     padding: 0;
   }
 
@@ -67,6 +67,10 @@ const Container = styled.div`
     box-sizing: border-box;
     flex-direction: column;
     gap: 5rem;
+    border-radius: 0;
+  }
+
+  @media screen and (max-width: 767px) {
     border-radius: 0;
   }
 `;
