@@ -327,7 +327,7 @@ const LogoWrapper = styled.span``;
 
 const Logo = styled.img`
   width: 15rem;
-  height: 2.4rem;
+  height: 100%;
   content: url(${longLogo});
   -webkit-user-drag: none;
   -khtml-user-drag: none;
