@@ -9,6 +9,6 @@ export const defaultUserValue = {
   notifications: [],
 };
 
-export const CHANNEL_NAME = 'Test Channel';
+export const CHANNEL_NAME = '기본 채널';
 
 export const LIMITED_FILE_SIZE = 10485760;
