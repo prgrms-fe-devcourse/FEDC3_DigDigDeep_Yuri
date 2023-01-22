@@ -155,9 +155,8 @@ const Container = styled.div`
 
 const ImageContainer = styled.div`
   position: relative;
-  display: block;
-  aspect-ratio: 1 / 1;
   width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   overflow: hidden;
 `;
