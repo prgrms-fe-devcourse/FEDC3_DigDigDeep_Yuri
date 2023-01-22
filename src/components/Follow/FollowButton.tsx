@@ -50,8 +50,13 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 
     try {
       const data = await follow({ userId: targetId });
-      showToast({ message: SUCCESS_MESSAGES.FOLLOW_SUCCESS });
-      sendNotification('FOLLOW', data._id, targetId, null);
+
+      if (data) {
+        showToast({ message: SUCCESS_MESSAGES.FOLLOW_SUCCESS });
+        sendNotification('FOLLOW', data._id, targetId, null);
+      } else {
+        showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
+      }
     } catch (error) {
       console.error(error);
       showToast({ message: ERROR_MESSAGES.SERVER_ERROR });

@@ -2,10 +2,13 @@ import { FollowResponse } from '../../types/response';
 import axiosInstance from '../axios';
 
 export const follow = async ({ userId }: { userId: string }) => {
-  const { data } = await axiosInstance.post<FollowResponse>('/follow/create', {
-    userId,
-  });
-  return data;
+  const { data, status } = await axiosInstance.post<FollowResponse>(
+    '/follow/create',
+    {
+      userId,
+    }
+  );
+  if (status === 200) return data;
 };
 
 export const unfollow = async ({ followId }: { followId: string }) => {
