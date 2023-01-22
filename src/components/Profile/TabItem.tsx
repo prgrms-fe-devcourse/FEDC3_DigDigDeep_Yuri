@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../../utils/color';
 
@@ -10,10 +10,20 @@ interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const TabItem = ({ item, value, isActive, onClick }: TabProps) => {
+  const [name, setName] = useState<string>(item);
+
+  useEffect(() => {
+    if (name === 'posts') {
+      setName('ground');
+    } else if (name === 'followers') {
+      setName('follower');
+    }
+  }, [name]);
+
   return (
     <Button key={item} onClick={onClick} isActive={isActive}>
       <Value>{value}</Value>
-      <Title>{item.charAt(0).toUpperCase() + item.slice(1)}</Title>
+      <Title>{name.charAt(0).toUpperCase() + name.slice(1)}</Title>
     </Button>
   );
 };
