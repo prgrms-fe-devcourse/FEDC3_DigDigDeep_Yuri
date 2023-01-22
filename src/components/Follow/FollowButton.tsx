@@ -21,7 +21,10 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
   const [isFollowable, setIsFollowable] = useState(false);
 
   const checkMyFollow = useCallback(() => {
-    return user.following.find((follow) => follow.user === targetId);
+    return (
+      user.following &&
+      user.following.find((follow) => follow.user === targetId)
+    );
   }, [targetId, user.following]);
 
   const getMyInfo = useGetMyInfo();
@@ -50,6 +53,7 @@ const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
 
     try {
       const data = await follow({ userId: targetId });
+      console.log(data);
 
       if (data) {
         showToast({ message: SUCCESS_MESSAGES.FOLLOW_SUCCESS });
