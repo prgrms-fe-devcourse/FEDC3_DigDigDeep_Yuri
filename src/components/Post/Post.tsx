@@ -22,14 +22,10 @@ import {
   SUCCESS_MESSAGES,
 } from '../../utils/messages';
 import { queryLowImage } from '../../utils/image';
+import PostContent from './PostContent';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
-  isDetailPage?: boolean;
-  isMyLikes?: boolean;
-}
-
-interface PostDetailProps {
   isDetailPage?: boolean;
   isMyLikes?: boolean;
 }
@@ -66,7 +62,6 @@ const Post = ({
   const { showModal } = useModal();
   const getMyInfo = useGetMyInfo();
   const navigate = useNavigate();
-  const postContent = title[0] === '{' ? JSON.parse(title) : title;
 
   const handleShare = () => {
     navigator.clipboard.writeText(`${window.location.host}/posts/${_id}`);
@@ -166,18 +161,13 @@ const Post = ({
             </ImageContainer>
           )}
           <FlexContainer direction="column" isMyLikes={isMyLikes}>
-            <PostWrapper onClick={toPostDetail}>
-              <Title isMyLikes={isMyLikes}>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.title}
-              </Title>
-              <Text>
-                {typeof postContent === 'string'
-                  ? postContent
-                  : postContent.body}
-              </Text>
-            </PostWrapper>
+            <PostContent
+              _id={_id}
+              title={title}
+              image={image}
+              isDetailPage={isDetailPage}
+              isMyLikes={isMyLikes}
+            />
             <Footer isMyLikes={isMyLikes}>
               {likesState.find((like) => like.user === user._id) ? (
                 <IconWrapper>
@@ -212,23 +202,13 @@ const Post = ({
           </FlexContainer>
         </FlexContainer>
       ) : (
-        <Section onClick={toPostDetail}>
-          <Title isDetailPage={isDetailPage}>
-            {typeof postContent === 'string' ? postContent : postContent.title}
-          </Title>
-          {image && (
-            <ImageContainer width="100%">
-              <Image
-                src={queryLowImage(image, 'postDetail')}
-                alt="post-image"
-                objectFit="contain"
-              />
-            </ImageContainer>
-          )}
-          <Text isDetailPage={isDetailPage}>
-            {typeof postContent === 'string' ? postContent : postContent.body}
-          </Text>
-        </Section>
+        <PostContent
+          _id={_id}
+          title={title}
+          image={image}
+          isDetailPage={isDetailPage}
+          isMyLikes={isMyLikes}
+        />
       )}
       {checkIsMine && user._id === author._id ? (
         <Footer>
@@ -335,15 +315,6 @@ const PostHeader = styled.div`
   margin: 0 auto;
 `;
 
-const Section = styled.div`
-  background-color: ${COLOR.white};
-  padding: 1rem 2rem;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 1rem 1.5rem;
-  }
-`;
-
 const FlexContainer = styled.div<FlexContainerProps>`
   display: flex;
   flex-direction: ${({ direction }) =>
@@ -353,51 +324,10 @@ const FlexContainer = styled.div<FlexContainerProps>`
   justify-content: ${({ isMyLikes }) => (isMyLikes ? 'space-between' : '')};
 `;
 
-const PostWrapper = styled.div``;
-
 const Footer = styled.div<{ isMyLikes?: boolean }>`
   display: flex;
   align-items: center;
   padding: ${({ isMyLikes }) => (isMyLikes ? '1.4rem 0 0' : '1.4rem 1.2rem;')};
-`;
-
-const detailBody = `
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-const detailsTitle = `
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-const Title = styled.span<PostDetailProps>`
-  font-weight: 700;
-  font-size: 1.8rem;
-  line-height: 2.5rem;
-  letter-spacing: -0.01em;
-  color: ${COLOR.brown};
-  margin: ${({ isMyLikes }) => (isMyLikes ? '' : '0.5rem 0 1.5rem')};
-  word-break: break-all;
-  ${({ isDetailPage }) => (isDetailPage ? '' : detailsTitle)};
-`;
-
-const Text = styled.div<PostDetailProps>`
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  margin: 1rem 0 0.5rem;
-  letter-spacing: -0.01em;
-  color: ${COLOR.brown};
-  word-break: break-all;
-  white-space: pre-wrap;
-  ${({ isDetailPage }) => (isDetailPage ? '' : detailBody)};
 `;
 
 const SmText = styled.span`
