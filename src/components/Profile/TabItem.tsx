@@ -10,15 +10,17 @@ interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const TabItem = ({ item, value, isActive, onClick }: TabProps) => {
-  const [name, setName] = useState<string>(item);
+  const [name, setName] = useState<string>('');
 
   useEffect(() => {
-    if (name === 'posts') {
+    if (item === 'posts') {
       setName('ground');
-    } else if (name === 'followers') {
+    } else if (item === 'followers') {
       setName('follower');
+    } else {
+      setName('following');
     }
-  }, [name]);
+  }, [item]);
 
   return (
     <Button key={item} onClick={onClick} isActive={isActive}>
