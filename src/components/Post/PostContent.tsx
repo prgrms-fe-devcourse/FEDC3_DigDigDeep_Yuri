@@ -32,7 +32,7 @@ const PostContent = ({
   isMyLikes,
 }: PostContentProps) => {
   const navigate = useNavigate();
-  const postContent = title[0] === '{' ? JSON.parse(title) : title;
+  const postContent = JSON.parse(title);
 
   const toPostDetail = () => {
     navigate(ROUTES.POSTS_BY_ID(_id));
@@ -41,9 +41,7 @@ const PostContent = ({
   if (isDetailPage) {
     return (
       <Section>
-        <Title isDetailPage={isDetailPage}>
-          {typeof postContent === 'string' ? postContent : postContent.title}
-        </Title>
+        <Title isDetailPage={isDetailPage}>{postContent.title}</Title>
         {image && (
           <ImageContainer width="100%">
             <Image
@@ -53,9 +51,7 @@ const PostContent = ({
             />
           </ImageContainer>
         )}
-        <Text isDetailPage={isDetailPage}>
-          {typeof postContent === 'string' ? postContent : postContent.body}
-        </Text>
+        <Text isDetailPage={isDetailPage}>{postContent.body}</Text>
       </Section>
     );
   }
@@ -63,21 +59,15 @@ const PostContent = ({
   if (isMyLikes) {
     return (
       <PostWrapper onClick={toPostDetail}>
-        <Title isMyLikes={isMyLikes}>
-          {typeof postContent === 'string' ? postContent : postContent.title}
-        </Title>
-        <Text>
-          {typeof postContent === 'string' ? postContent : postContent.body}
-        </Text>
+        <Title isMyLikes={isMyLikes}>{postContent.title}</Title>
+        <Text>{postContent.body}</Text>
       </PostWrapper>
     );
   }
 
   return (
     <Section onClick={toPostDetail}>
-      <Title isDetailPage={isDetailPage}>
-        {typeof postContent === 'string' ? postContent : postContent.title}
-      </Title>
+      <Title isDetailPage={isDetailPage}>{postContent.title}</Title>
       {image && (
         <ImageContainer width="100%">
           <Image
@@ -87,9 +77,7 @@ const PostContent = ({
           />
         </ImageContainer>
       )}
-      <Text isDetailPage={isDetailPage}>
-        {typeof postContent === 'string' ? postContent : postContent.body}
-      </Text>
+      <Text isDetailPage={isDetailPage}>{postContent.body}</Text>
     </Section>
   );
 };
