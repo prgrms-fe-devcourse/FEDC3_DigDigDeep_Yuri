@@ -61,25 +61,39 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
 
   return (
     <>
-      <List>
-        {users.map((user, index) => (
-          <UserListItem>
-            <UserItem
-              key={user._id}
-              type={type}
-              user={user}
-              onUnfollow={onUnfollow}
-              follow={follows[index]}
-            />
-          </UserListItem>
-        ))}
-      </List>
-      <Spinner loading={loading} />
+      {users.length === 0 ? (
+        <Text>아직 정보가 없습니다.</Text>
+      ) : (
+        <>
+          <List>
+            {users.map((user, index) => (
+              <UserListItem>
+                <UserItem
+                  key={user._id}
+                  type={type}
+                  user={user}
+                  onUnfollow={onUnfollow}
+                  follow={follows[index]}
+                />
+              </UserListItem>
+            ))}
+          </List>
+          <Spinner loading={loading} />{' '}
+        </>
+      )}
     </>
   );
 };
 
 export default FollowList;
+
+const Text = styled.h3`
+  margin-top: 4rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-align: center;
+  color: ${COLOR.brownGray};
+`;
 
 const List = styled.ul`
   width: 100%;

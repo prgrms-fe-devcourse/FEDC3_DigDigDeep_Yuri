@@ -75,5 +75,5 @@ const Text = styled.h3`
   font-weight: 400;
   font-size: 1.5rem;
   text-align: center;
-  color: ${COLOR.lightBrown};
+  color: ${COLOR.brownGray};
 `;
