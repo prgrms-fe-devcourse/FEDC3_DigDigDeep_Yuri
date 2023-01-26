@@ -5,6 +5,7 @@ import { userState } from '../../recoil/atoms/user';
 import { PostResponse } from '../../types/response';
 import { getPostsByAuthor } from '../../utils/api/post';
 import Post from './Post';
+import { COLOR } from '../../utils/color';
 
 interface Props {
   authorId: string;
@@ -26,10 +27,13 @@ const PostList = ({ authorId }: Props) => {
 
   return (
     <UnorderedList>
-      {posts &&
-        posts.map((post) => (
+      {posts?.length === 0 ? (
+        <Text>생성된 그라운드가 없습니다.</Text>
+      ) : (
+        posts?.map((post) => (
           <Post key={post._id} checkIsMine={checkIsMine} {...post} />
-        ))}
+        ))
+      )}
     </UnorderedList>
   );
 };
@@ -38,4 +42,12 @@ export default PostList;
 
 const UnorderedList = styled.ul`
   width: 100%;
+`;
+
+const Text = styled.h3`
+  margin-top: 4rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-align: center;
+  color: ${COLOR.brownGray};
 `;
