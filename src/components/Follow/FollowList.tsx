@@ -62,7 +62,9 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
   return (
     <>
       {users.length === 0 ? (
-        <Text>아직 정보가 없습니다.</Text>
+        <Text>
+          아직 {type === 'following' ? '팔로잉' : '팔로워'} 목록이 없습니다.
+        </Text>
       ) : (
         <>
           <List>
