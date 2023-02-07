@@ -35,7 +35,7 @@ export const SIGN_UP_RULES = {
         FORM_RULE_MESSAGE.CONFIRM_PASSWORD_VALIDATE,
     };
   },
-};
+} as const;
 
 export const LOGIN_RULES = {
   email: {
@@ -45,7 +45,7 @@ export const LOGIN_RULES = {
   password: {
     required: FORM_RULE_MESSAGE.PASSWORD_REQUIRED,
   },
-};
+} as const;
 
 export const PROFILE_EDIT_RULES = {
   nickname: {
@@ -69,7 +69,7 @@ export const PROFILE_EDIT_RULES = {
         FORM_RULE_MESSAGE.CONFIRM_PASSWORD_VALIDATE,
     };
   },
-};
+} as const;
 
 export const checkFileSize = (fileSize: number) => {
   return fileSize <= LIMITED_FILE_SIZE;
