@@ -12,7 +12,7 @@ import { getUser } from '../utils/api/user';
 import COLORS from '../utils/colors';
 import Icon from '../components/Base/Icon';
 import Header from '../components/Header/Header';
-import { ROUTES } from '../utils/routes';
+import ROUTES from '../utils/routes';
 import Image from '../components/Base/Image';
 import { queryLowImage } from '../utils/image';
 import type { UserResponse } from '../types/api/user';

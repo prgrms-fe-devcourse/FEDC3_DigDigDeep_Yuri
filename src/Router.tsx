@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { tokenState } from './recoil/atoms/user';
-import { ROUTES } from './utils/routes';
+import ROUTES from './utils/routes';
 import {
   HomePage,
   LoginPage,

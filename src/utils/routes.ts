@@ -1,4 +1,4 @@
-export const ROUTES = {
+const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   SIGNUP: '/signup',
@@ -17,4 +17,6 @@ export const ROUTES = {
   POSTS_EDIT_BY_ID: (postId: string) => `/posts/${postId}/edit`,
   SEARCH_BY_QUERY: (search: string, select: string) =>
     `/search?q=${search}&type=${select}`,
-};
+} as const;
+
+export default ROUTES;

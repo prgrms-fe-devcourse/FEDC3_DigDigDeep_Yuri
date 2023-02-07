@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import COLORS from '../utils/colors';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../utils/routes';
+import ROUTES from '../utils/routes';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();

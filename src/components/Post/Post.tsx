@@ -11,7 +11,7 @@ import { formatDate } from '../../utils/formatDate';
 import { createLike, deleteLike } from '../../utils/api/like';
 import { sendNotification } from '../../utils/api/notification';
 import { deletePost } from '../../utils/api/post';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import Image from '../Base/Image';

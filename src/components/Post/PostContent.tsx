@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import COLORS from '../../utils/colors';
 import { queryLowImage } from '../../utils/image';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import Image from '../Base/Image';
 
 interface PostContentProps {

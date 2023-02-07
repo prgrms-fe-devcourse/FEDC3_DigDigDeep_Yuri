@@ -11,7 +11,7 @@ import Icon from './../Base/Icon';
 import LinkButton from '../Button/LinkButton';
 import Searchbar from './Searchbar';
 import useNotification from '../../hooks/useNotification';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
 import { queryLowImage } from '../../utils/image';
 

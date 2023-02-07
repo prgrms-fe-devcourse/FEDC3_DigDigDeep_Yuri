@@ -4,7 +4,7 @@ import { createPost, updatePost } from '../../utils/api/post';
 import COLORS from '../../utils/colors';
 import { useNavigate } from 'react-router-dom';
 import useToast from '../../hooks/useToast';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '../../recoil/atoms/loading';

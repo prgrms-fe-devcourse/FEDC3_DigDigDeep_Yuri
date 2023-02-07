@@ -12,7 +12,7 @@ import FormButton from '../UserForm/FormButton';
 import FormInput from '../UserForm/FormInput';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import FormImageFile from '../UserForm/FormProfileImage';
 import { loadingState } from '../../recoil/atoms/loading';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';

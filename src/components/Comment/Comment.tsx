@@ -10,7 +10,7 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import {
   CONFIRM_MESSAGES,
   ERROR_MESSAGES,

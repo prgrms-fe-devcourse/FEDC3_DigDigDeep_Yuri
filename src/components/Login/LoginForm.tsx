@@ -12,7 +12,7 @@ import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
 import COLORS from '../../utils/colors';
 import ErrorMessage from '../UserForm/ErrorMessage';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
 import { loadingState } from '../../recoil/atoms/loading';

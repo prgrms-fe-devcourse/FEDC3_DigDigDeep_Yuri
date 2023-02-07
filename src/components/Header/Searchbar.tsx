@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import COLORS from '../../utils/colors';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import useToast from '../../hooks/useToast';
