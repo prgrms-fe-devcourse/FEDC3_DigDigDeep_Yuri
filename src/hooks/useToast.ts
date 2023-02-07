@@ -7,7 +7,7 @@ const useToast = () => {
   const [toasts, setToasts] = useRecoilState(toastsState);
 
   const hideToast = useCallback(
-    (toastId: string | undefined) => {
+    (toastId: string) => {
       setToasts((currentToasts) =>
         currentToasts.filter((toast) => toast.id !== toastId)
       );
