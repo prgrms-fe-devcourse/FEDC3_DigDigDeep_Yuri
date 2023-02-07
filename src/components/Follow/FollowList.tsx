@@ -1,12 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { FollowResponse, UserResponse } from '../../types/response';
 import { getUser } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
 import { COLOR } from '../../utils/color';
 import Spinner from '../Base/Spinner';
 import { ERROR_MESSAGES } from '../../utils/messages';
+import type { UserResponse } from '../../types/api/user';
+import type { FollowResponse } from '../../types/api/follow';
 
 interface BasicFollow {
   follows: FollowResponse[];

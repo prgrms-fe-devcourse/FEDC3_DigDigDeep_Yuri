@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Post from '../components/Post/Post';
 import Header from '../components/Header/Header';
-import { PostResponse } from '../types/response';
 import { getPosts } from '../utils/api/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { getChannelInfo } from '../utils/api/channel';
@@ -11,6 +10,7 @@ import { loadingState } from '../recoil/atoms/loading';
 import { ERROR_MESSAGES } from '../utils/messages';
 import useToast from '../hooks/useToast';
 import GlobalSpinner from '../components/Base/GlobalSpinner';
+import type { PostResponse } from '../types/api/post';
 
 const HomePage = () => {
   const [posts, setPosts] = useState<PostResponse[]>([]);

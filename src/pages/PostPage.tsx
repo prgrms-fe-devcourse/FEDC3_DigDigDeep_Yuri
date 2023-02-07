@@ -5,11 +5,11 @@ import Comment from '../components/Comment/Comment';
 import CommentInput from '../components/Comment/CommentInput';
 import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
-import { PostResponse } from '../types/response';
 import { COLOR } from '../utils/color';
 import { getPost } from '../utils/api/post';
 import { ERROR_MESSAGES } from '../utils/messages';
 import useToast from '../hooks/useToast';
+import type { PostResponse } from '../types/api/post';
 
 type PostId = string;
 

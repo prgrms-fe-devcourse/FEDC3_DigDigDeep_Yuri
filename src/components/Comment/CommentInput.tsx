@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { tokenState } from '../../recoil/atoms/user';
-import { PostResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
 import { createComment } from '../../utils/api/comment';
 import { sendNotification } from '../../utils/api/notification';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
+import type { PostResponse } from '../../types/api/post';
 
 interface CommentInputProps extends Pick<PostResponse, '_id' | 'author'> {
   fetchHandler?: () => Promise<void>;

@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import type { AtomEffect } from 'recoil';
-import { User } from '../../types/user';
 import { defaultUserValue } from '../../utils/constants';
+import type { AtomEffect } from 'recoil';
+import type { RecoilUser } from '../../types/recoil/user';
 
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key: string) =>
@@ -16,7 +16,7 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export const userState = atom<User>({
+export const userState = atom<RecoilUser>({
   key: 'userState',
   default: defaultUserValue,
   effects: [localStorageEffect('user')],

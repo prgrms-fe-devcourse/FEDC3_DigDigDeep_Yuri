@@ -1,4 +1,4 @@
-import { FollowResponse } from '../../types/response';
+import type { FollowResponse } from '../../types/api/follow';
 import axiosInstance from '../axios';
 
 export const follow = async ({ userId }: { userId: string }) => {

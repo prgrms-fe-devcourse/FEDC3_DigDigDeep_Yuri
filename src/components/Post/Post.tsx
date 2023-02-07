@@ -6,7 +6,6 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useModal from '../../hooks/useModal';
 import useToast from '../../hooks/useToast';
 import { tokenState, userState } from '../../recoil/atoms/user';
-import { PostResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
 import { formatDate } from '../../utils/formatDate';
 import { createLike, deleteLike } from '../../utils/api/like';
@@ -23,6 +22,7 @@ import {
 } from '../../utils/messages';
 import { queryLowImage } from '../../utils/image';
 import PostContent from './PostContent';
+import type { PostResponse } from '../../types/api/post';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;

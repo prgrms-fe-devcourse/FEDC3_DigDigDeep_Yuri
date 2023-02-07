@@ -8,7 +8,6 @@ import PostList from '../components/Post/PostList';
 import TabItem from '../components/Profile/TabItem';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
-import { UserResponse } from '../types/response';
 import { getUser } from '../utils/api/user';
 import { COLOR } from '../utils/color';
 import Icon from '../components/Base/Icon';
@@ -16,6 +15,7 @@ import Header from '../components/Header/Header';
 import { ROUTES } from '../utils/routes';
 import Image from '../components/Base/Image';
 import { queryLowImage } from '../utils/image';
+import type { UserResponse } from '../types/api/user';
 
 const defaultProfile = require('../assets/images/icon/default-profile.png');
 

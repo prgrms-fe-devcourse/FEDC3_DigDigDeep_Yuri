@@ -2,13 +2,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userState } from '../../recoil/atoms/user';
-import { FollowResponse, UserResponse } from '../../types/response';
 import { unfollow } from '../../utils/api/follow';
 import { COLOR } from '../../utils/color';
 import Icon from '../Base/Icon';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import Image from '../Base/Image';
 import { queryLowImage } from '../../utils/image';
+import type { UserResponse } from '../../types/api/user';
+import type { FollowResponse } from '../../types/api/follow';
 
 const defaultProfile = require('../../assets/images/icon/default-profile.png');
 

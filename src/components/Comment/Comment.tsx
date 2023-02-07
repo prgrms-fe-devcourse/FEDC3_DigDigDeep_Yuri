@@ -3,7 +3,6 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import useModal from '../../hooks/useModal';
 import { userState } from '../../recoil/atoms/user';
-import { CommentResponse } from '../../types/response';
 import { COLOR } from '../../utils/color';
 import { deleteComment } from '../../utils/api/comment';
 import { formatDate } from '../../utils/formatDate';
@@ -17,6 +16,7 @@ import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
 } from '../../utils/messages';
+import type { CommentResponse } from '../../types/api/comment';
 
 interface CommentProps extends CommentResponse {
   fetchHandler?: () => Promise<void>;

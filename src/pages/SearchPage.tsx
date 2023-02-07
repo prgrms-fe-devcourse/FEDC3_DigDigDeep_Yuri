@@ -5,10 +5,11 @@ import Spinner from '../components/Base/Spinner';
 import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 import UserItem from '../components/User/UserItem';
-import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
 import { COLOR } from '../utils/color';
 import { getPost } from '../utils/api/post';
+import type { PostResponse } from '../types/api/post';
+import type { UserResponse } from '../types/api/user';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();

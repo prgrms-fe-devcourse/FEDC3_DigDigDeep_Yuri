@@ -3,11 +3,11 @@ import { useRecoilValue } from 'recoil';
 import Post from '../components/Post/Post';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
-import { PostResponse } from '../types/response';
 import { getAllPosts } from '../utils/api/post';
 import styled from 'styled-components';
 import Header from '../components/Header/Header';
 import Spinner from '../components/Base/Spinner';
+import type { PostResponse } from '../types/api/post';
 
 const MyLikesPage = () => {
   const user = useRecoilValue(userState);

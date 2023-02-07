@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Icon from '../Base/Icon';
 import { COLOR } from '../../utils/color';
-import { NotificationResponse } from '../../types/response';
 import Image from '../Base/Image';
+import type { NotificationResponse } from '../../types/api/notification';
 
 const Notification = ({
   author,

@@ -1,4 +1,4 @@
-import { LoginResponse, UserResponse } from '../../types/response';
+import type { LoginResponse, UserResponse } from '../../types/api/user';
 import axiosInstance from '../axios';
 
 export const signUp = async ({

@@ -8,9 +8,9 @@ import {
   getNotifications,
   seenNotifications,
 } from '../../utils/api/notification';
-import { NotificationResponse } from '../../types/response';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
+import type { NotificationResponse } from '../../types/api/notification';
 
 const NotificationList = () => {
   const [user] = useRecoilState(userState);
