@@ -19,12 +19,12 @@ import type { UserResponse } from '../types/api/user';
 
 const defaultProfile = require('../assets/images/icon/default-profile.png');
 
-export type TTabMenuItems = keyof Pick<
+type TabMenuItem = keyof Pick<
   UserResponse,
   'posts' | 'followers' | 'following'
 >;
 
-const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
+const tabMenuItems: TabMenuItem[] = ['posts', 'followers', 'following'];
 
 const ProfilePage = () => {
   const { userId } = useParams() as { userId: string };
@@ -37,7 +37,7 @@ const ProfilePage = () => {
   }, [userInfo]);
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
+  const [activeTab, setActiveTab] = useState<TabMenuItem>('posts');
 
   const fetchUser = useCallback(async () => {
     const user = await getUser(userId === 'me' ? myId : userId);
@@ -98,7 +98,7 @@ const ProfilePage = () => {
         </ImageContainer>
         <Name>{userInfo?.fullName}</Name>
         <TabList>
-          {TabMenuItems.map((item) => {
+          {tabMenuItems.map((item) => {
             return (
               <TabItemContainer key={item}>
                 <TabItem
