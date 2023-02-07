@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Notification from './Notification';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import {
   getNotifications,
   seenNotifications,
@@ -75,5 +75,5 @@ const Text = styled.h3`
   font-weight: 400;
   font-size: 1.5rem;
   text-align: center;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 
 interface SpinnerProps {
   loading: boolean;
@@ -37,12 +37,12 @@ const StyledSpinner = styled.div<ContainerProps>`
   width: ${({ size }) => `${size.width}rem`};
   height: ${({ size }) => `${size.height}rem`};
 
-  color: ${COLOR.lightGray};
+  color: ${COLORS.lightGray};
   border-width: ${({ stroke }) => `${stroke}rem`};
   border-style: solid;
 
-  border-top-color: ${COLOR.lightGray};
-  border-right-color: ${COLOR.lightGray};
+  border-top-color: ${COLORS.lightGray};
+  border-right-color: ${COLORS.lightGray};
   border-left-color: transparent;
   border-bottom-color: transparent;
   border-radius: 50%;

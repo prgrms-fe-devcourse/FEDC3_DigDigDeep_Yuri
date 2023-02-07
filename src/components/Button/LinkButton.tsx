@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Image from '../Base/Image';
 import Icon from './../Base/Icon';
 
@@ -39,6 +39,6 @@ const Container = styled.div`
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 50%;
-  border: 0.5px solid ${COLOR.lightGray};
+  border: 0.5px solid ${COLORS.lightGray};
 `;
 export default LinkButton;

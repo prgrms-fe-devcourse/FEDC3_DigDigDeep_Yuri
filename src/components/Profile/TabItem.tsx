@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 
 interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   item: string;
@@ -36,18 +36,18 @@ const Button = styled.button<{ isActive: boolean }>`
   cursor: pointer;
   width: 8rem;
   border-bottom: 3px solid
-    ${({ isActive }) => (isActive ? COLOR.green : 'transparent')};
+    ${({ isActive }) => (isActive ? COLORS.green : 'transparent')};
 `;
 
 const Value = styled.div`
   font-size: 1.8rem;
   font-weight: 500;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
   padding-bottom: 0.4rem;
 `;
 
 const Title = styled.div`
-  color: ${COLOR.brownGray};
+  color: ${COLORS.brownGray};
   font-size: 1.3rem;
   font-weight: 500;
   padding-bottom: 0.7rem;

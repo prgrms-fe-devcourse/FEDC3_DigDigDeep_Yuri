@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { userState } from '../../recoil/atoms/user';
 import { unfollow } from '../../utils/api/follow';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Icon from '../Base/Icon';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import Image from '../Base/Image';
@@ -92,7 +92,7 @@ const Text = styled.div`
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
 `;
 
 const Button = styled.button`

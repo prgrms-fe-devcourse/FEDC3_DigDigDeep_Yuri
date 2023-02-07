@@ -6,7 +6,7 @@ import useLogout from '../../hooks/useLogout';
 import useModal from '../../hooks/useModal';
 import useToast from '../../hooks/useToast';
 import { tokenState, userState } from '../../recoil/atoms/user';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Icon from './../Base/Icon';
 import LinkButton from '../Button/LinkButton';
 import Searchbar from './Searchbar';
@@ -235,7 +235,7 @@ const Header = () => {
 
 const HeaderContainer = styled.div`
   width: 100%;
-  background-color: ${COLOR.bgColor};
+  background-color: ${COLORS.bgColor};
   position: sticky;
   z-index: 1;
   top: 0;
@@ -293,7 +293,7 @@ const LinkContainer = css`
   font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   padding: 1.3rem 2rem;
   border-radius: 23.5px;
   border: none;
@@ -306,13 +306,13 @@ const LinkContainer = css`
 `;
 
 const LogInButton = styled(Link)`
-  background-color: ${COLOR.green};
+  background-color: ${COLORS.green};
   ${LinkContainer}
 `;
 
 const LogOutButton = styled.button`
-  color: ${COLOR.white};
-  background-color: ${COLOR.lightGray};
+  color: ${COLORS.white};
+  background-color: ${COLORS.lightGray};
   ${LinkContainer};
   font-size: 1rem;
 `;

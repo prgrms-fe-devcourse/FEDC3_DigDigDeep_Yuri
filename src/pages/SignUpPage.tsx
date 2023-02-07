@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SignUpForm from '../components/SIgnUp/SignUpForm';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 
 const bigLogo = require('../assets/images/logo/big.png');
 
@@ -28,7 +28,7 @@ const Text = styled.span`
   font-size: 1.6rem;
   line-height: 1.9rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
   display: block;
   margin-bottom: 2rem;
   padding: 0 0.8rem;
@@ -37,7 +37,7 @@ const Text = styled.span`
 const Background = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${COLOR.brownGray};
+  background-color: ${COLORS.brownGray};
   padding: 5rem 8rem;
   box-sizing: border-box;
 
@@ -53,7 +53,7 @@ const Background = styled.div`
 
 const Container = styled.div`
   border-radius: 57px;
-  background-color: ${COLOR.bgColor};
+  background-color: ${COLORS.bgColor};
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -99,7 +99,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Divider = styled.hr`
-  background-color: ${COLOR.lightGray};
+  background-color: ${COLORS.lightGray};
   position: absolute;
   display: inline-block;
   width: 1px;

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import styled from 'styled-components';
 import { createPost, updatePost } from '../../utils/api/post';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { useNavigate } from 'react-router-dom';
 import useToast from '../../hooks/useToast';
 import { ROUTES } from '../../utils/routes';
@@ -77,12 +77,12 @@ const EditButton = ({ text, title, body, postId, image, imageId }: Props) => {
 export default EditButton;
 
 const Button = styled.button`
-  background: ${COLOR.green};
+  background: ${COLORS.green};
   border-radius: 23.5px;
   font-weight: 700;
   font-size: 1.2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   padding: 1.1rem 1.8rem;
   width: fit-content;
   justify-self: right;

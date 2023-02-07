@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getUser } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Spinner from '../Base/Spinner';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import type { UserResponse } from '../../types/api/user';
@@ -92,5 +92,5 @@ const List = styled.ul`
 
 const UserListItem = styled.div`
   padding: 1.4rem;
-  border-bottom: 0.3px solid ${COLOR.lightGray};
+  border-bottom: 0.3px solid ${COLORS.lightGray};
 `;

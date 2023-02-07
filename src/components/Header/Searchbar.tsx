@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState, useRef } from 'react';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { ROUTES } from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
@@ -124,7 +124,7 @@ const Searchbar = ({
 const Form = styled.form<FormProps>`
   width: 100%;
   display: flex;
-  background: ${COLOR.white};
+  background: ${COLORS.white};
   min-width: 250px;
   border-radius: 23.5px;
   align-items: center;
@@ -134,7 +134,7 @@ const Form = styled.form<FormProps>`
   border: 1px solid;
   box-sizing: border-box;
   border-color: ${({ isFocus }) =>
-    isFocus ? COLOR.lightBrown : COLOR.lightGray};
+    isFocus ? COLORS.lightBrown : COLORS.lightGray};
   width: ${({ visible }) => (visible ? '100%' : 0)};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: all 0.4s ease-out;
@@ -159,14 +159,14 @@ const Input = styled.input`
   border: none;
   outline: none;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.6rem;
   padding: 0;
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     line-height: 1.3rem;
   }
 `;
@@ -174,7 +174,7 @@ const Input = styled.input`
 const Select = styled.select`
   border: none;
   font-size: 1.2rem;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   outline: none;
 `;
 

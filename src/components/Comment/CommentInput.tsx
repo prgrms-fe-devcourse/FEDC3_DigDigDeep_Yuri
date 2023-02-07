@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import { tokenState } from '../../recoil/atoms/user';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { createComment } from '../../utils/api/comment';
 import { sendNotification } from '../../utils/api/notification';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
@@ -77,7 +77,7 @@ const CommentInput = ({ _id, author, fetchHandler }: CommentInputProps) => {
 export default CommentInput;
 
 const Container = styled.div`
-  background-color: ${COLOR.white};
+  background-color: ${COLORS.white};
   width: 35%;
   min-width: 350px;
   position: fixed;
@@ -94,7 +94,7 @@ const Container = styled.div`
 `;
 
 const Form = styled.form<FormProps>`
-  background-color: ${COLOR.white};
+  background-color: ${COLORS.white};
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -106,20 +106,20 @@ const Form = styled.form<FormProps>`
   border: 1px solid;
   box-sizing: border-box;
   border-color: ${({ isFocus }) =>
-    isFocus ? COLOR.lightBrown : COLOR.lightGray};
+    isFocus ? COLORS.lightBrown : COLORS.lightGray};
 `;
 
 const Input = styled.input`
   width: 100%;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   font-weight: 500;
   font-size: 1.4rem;
   padding: 0;
   padding-left: 1.7rem;
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     line-height: 1rem;
     font-weight: 400;
   }
@@ -130,7 +130,7 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
   cursor: pointer;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {

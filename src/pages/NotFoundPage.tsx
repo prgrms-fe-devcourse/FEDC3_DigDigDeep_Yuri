@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../utils/routes';
 
@@ -37,7 +37,7 @@ const Image = styled.img`
 `;
 
 const Title = styled.h1`
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   font-weight: 700;
   font-size: 3rem;
   margin: 5rem 0 1.7rem;
@@ -49,7 +49,7 @@ const Title = styled.h1`
 `;
 
 const Detail = styled.h2`
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   font-weight: 400;
   font-size: 2rem;
 
@@ -60,8 +60,8 @@ const Detail = styled.h2`
 
 const Button = styled.button`
   border-radius: 23.5px;
-  border: 4px solid ${COLOR.white};
-  color: ${COLOR.white};
+  border: 4px solid ${COLORS.white};
+  color: ${COLORS.white};
   padding: 0.8rem 4rem;
   font-weight: 500;
   font-size: 1.6rem;
