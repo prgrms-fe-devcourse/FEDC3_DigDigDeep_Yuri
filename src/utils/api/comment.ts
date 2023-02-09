@@ -1,4 +1,4 @@
-import { CommentResponse } from '../../types/response';
+import type { CommentResponse } from '../../types/api/comment';
 import axiosInstance from '../axios';
 
 interface CommentParam {

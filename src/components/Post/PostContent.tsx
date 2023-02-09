@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { queryLowImage } from '../../utils/image';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import Image from '../Base/Image';
 
 interface PostContentProps {
@@ -85,7 +85,7 @@ const PostContent = ({
 export default PostContent;
 
 const Section = styled.div`
-  background-color: ${COLOR.white};
+  background-color: ${COLORS.white};
   padding: 1rem 2rem;
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
@@ -108,7 +108,7 @@ const Title = styled.span<PostDetailProps>`
   font-size: 1.8rem;
   line-height: 2.5rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
   margin: ${({ isMyLikes }) => (isMyLikes ? '' : '0.5rem 0 1.5rem')};
   word-break: break-all;
   ${({ isDetailPage }) => (isDetailPage ? '' : shortenContent)};
@@ -120,7 +120,7 @@ const Text = styled.div<PostDetailProps>`
   line-height: 2rem;
   margin: 1rem 0 0.5rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
   word-break: break-all;
   white-space: pre-wrap;
   ${({ isDetailPage }) => (isDetailPage ? '' : shortenContent)};

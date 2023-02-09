@@ -8,23 +8,23 @@ import PostList from '../components/Post/PostList';
 import TabItem from '../components/Profile/TabItem';
 import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
-import { UserResponse } from '../types/response';
 import { getUser } from '../utils/api/user';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 import Icon from '../components/Base/Icon';
 import Header from '../components/Header/Header';
-import { ROUTES } from '../utils/routes';
+import ROUTES from '../utils/routes';
 import Image from '../components/Base/Image';
 import { queryLowImage } from '../utils/image';
+import type { UserResponse } from '../types/api/user';
 
 const defaultProfile = require('../assets/images/icon/default-profile.png');
 
-export type TTabMenuItems = keyof Pick<
+type TabMenuItem = keyof Pick<
   UserResponse,
   'posts' | 'followers' | 'following'
 >;
 
-const TabMenuItems: TTabMenuItems[] = ['posts', 'followers', 'following'];
+const tabMenuItems: TabMenuItem[] = ['posts', 'followers', 'following'];
 
 const ProfilePage = () => {
   const { userId } = useParams() as { userId: string };
@@ -37,7 +37,7 @@ const ProfilePage = () => {
   }, [userInfo]);
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState<TTabMenuItems>('posts');
+  const [activeTab, setActiveTab] = useState<TabMenuItem>('posts');
 
   const fetchUser = useCallback(async () => {
     const user = await getUser(userId === 'me' ? myId : userId);
@@ -98,7 +98,7 @@ const ProfilePage = () => {
         </ImageContainer>
         <Name>{userInfo?.fullName}</Name>
         <TabList>
-          {TabMenuItems.map((item) => {
+          {tabMenuItems.map((item) => {
             return (
               <TabItemContainer key={item}>
                 <TabItem
@@ -122,7 +122,7 @@ export default ProfilePage;
 const TabList = styled.div`
   display: flex;
   width: 90%;
-  background-color: ${COLOR.bgColor};
+  background-color: ${COLORS.bgColor};
   justify-content: space-between;
   margin-top: 2rem;
 `;
@@ -164,7 +164,7 @@ const ImageContainer = styled.div`
 const Name = styled.h1`
   font-weight: 500;
   font-size: 1.7rem;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   margin: 2rem 0 2.5rem;
 `;
 

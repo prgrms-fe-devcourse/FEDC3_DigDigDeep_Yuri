@@ -8,7 +8,7 @@ import FormInput from '../UserForm/FormInput';
 import FormButton from '../UserForm/FormButton';
 import ErrorMessage from '../UserForm/ErrorMessage';
 import useToast from '../../hooks/useToast';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 import { useSetRecoilState } from 'recoil';
 import { SIGN_UP_RULES } from '../../utils/formRules';

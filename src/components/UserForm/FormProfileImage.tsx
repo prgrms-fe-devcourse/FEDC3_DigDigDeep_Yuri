@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 
 import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import type { Control, FieldPath, FieldValues } from 'react-hook-form';
@@ -84,7 +84,7 @@ const Label = styled.label`
   font-weight: 700;
   font-size: 1.4rem;
   line-height: 1.7rem;
-  color: ${COLOR.brownGray};
+  color: ${COLORS.brownGray};
   width: 10rem;
   cursor: pointer;
 `;

@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import { getNotifications } from '../utils/api/notification';
-import { NotificationResponse } from '../types/response';
 import { useRecoilValue } from 'recoil';
 import { tokenState } from '../recoil/atoms/user';
+import type { NotificationResponse } from '../types/api/notification';
 
 const useCheckNotifications = () => {
   const token = useRecoilValue(tokenState);

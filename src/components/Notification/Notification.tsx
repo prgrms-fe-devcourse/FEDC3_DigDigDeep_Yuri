@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Icon from '../Base/Icon';
-import { COLOR } from '../../utils/color';
-import { NotificationResponse } from '../../types/response';
+import COLORS from '../../utils/colors';
 import Image from '../Base/Image';
+import type { NotificationResponse } from '../../types/api/notification';
 
 const Notification = ({
   author,
@@ -40,7 +40,7 @@ const ListItem = styled.li`
   align-items: center;
   gap: 1.8rem;
   padding: 1.4rem;
-  border-bottom: 0.3px solid ${COLOR.lightGray};
+  border-bottom: 0.3px solid ${COLORS.lightGray};
 `;
 
 const ImageContainer = styled.div`
@@ -54,7 +54,7 @@ const Text = styled.span`
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
 `;
 
 const Strong = styled.strong`

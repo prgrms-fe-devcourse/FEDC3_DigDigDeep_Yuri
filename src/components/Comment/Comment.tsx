@@ -3,20 +3,20 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import useModal from '../../hooks/useModal';
 import { userState } from '../../recoil/atoms/user';
-import { CommentResponse } from '../../types/response';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { deleteComment } from '../../utils/api/comment';
 import { formatDate } from '../../utils/formatDate';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import {
   CONFIRM_MESSAGES,
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
 } from '../../utils/messages';
+import type { CommentResponse } from '../../types/api/comment';
 
 interface CommentProps extends CommentResponse {
   fetchHandler?: () => Promise<void>;
@@ -94,7 +94,7 @@ const Comment = ({
 };
 
 const Container = styled.div`
-  background-color: ${COLOR.white};
+  background-color: ${COLORS.white};
   border-bottom: 0.5px solid #e9e9e9;
 `;
 
@@ -118,7 +118,7 @@ const Text = styled.div`
   font-size: 1.4rem;
   line-height: 2.1rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
   padding: 0 0.2rem;
   margin: 0 auto;
 `;
@@ -128,7 +128,7 @@ const ProfileImage = styled.img`
   height: 2.5rem;
   border-radius: 50%;
   margin-right: 0.4rem;
-  border: 0.5px solid ${COLOR.lightGray};
+  border: 0.5px solid ${COLORS.lightGray};
   object-fit: cover;
   -webkit-user-drag: none;
   -khtml-user-drag: none;
@@ -147,14 +147,14 @@ const UserName = styled.span<ContainerProps>`
   font-weight: 500;
   font-size: 1.2rem;
   letter-spacing: -0.01em;
-  color: ${({ isMyComment }) => (isMyComment ? '#76a727' : COLOR.lightBrown)};
+  color: ${({ isMyComment }) => (isMyComment ? '#76a727' : COLORS.lightBrown)};
 `;
 
 const Date = styled.span`
   font-weight: 400;
   font-size: 1.1rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.date};
+  color: ${COLORS.date};
 `;
 
 const Button = styled.button`

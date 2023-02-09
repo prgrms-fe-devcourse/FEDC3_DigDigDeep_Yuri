@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 
 const ErrorMessage = styled.span`
   display: block;
@@ -10,7 +10,7 @@ const ErrorMessage = styled.span`
   white-space: pre-wrap;
   min-height: 1.9rem;
 
-  color: ${COLOR.orange};
+  color: ${COLORS.orange};
 `;
 
 export default ErrorMessage;

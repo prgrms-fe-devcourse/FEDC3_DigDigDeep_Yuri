@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
-import { ToastProps, toastsState } from '../recoil/atoms/toast';
 import { v4 } from 'uuid';
+import { toastsState } from '../recoil/atoms/toast';
+import type { ToastProps } from '../recoil/atoms/toast';
 
 const useToast = () => {
   const [toasts, setToasts] = useRecoilState(toastsState);
 
   const hideToast = useCallback(
-    (toastId: string | undefined) => {
+    (toastId: string) => {
       setToasts((currentToasts) =>
         currentToasts.filter((toast) => toast.id !== toastId)
       );

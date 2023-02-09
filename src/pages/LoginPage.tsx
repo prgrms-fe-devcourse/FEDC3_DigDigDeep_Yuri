@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import LoginForm from '../components/Login/LoginForm';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 
 const bigLogo = require('../assets/images/logo/big.png');
 
@@ -29,7 +29,7 @@ export default LoginPage;
 const Background = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${COLOR.brownGray};
+  background-color: ${COLORS.brownGray};
   padding: 5rem 8rem;
   box-sizing: border-box;
 
@@ -45,7 +45,7 @@ const Background = styled.div`
 
 const Container = styled.div`
   border-radius: 57px;
-  background-color: ${COLOR.bgColor};
+  background-color: ${COLORS.bgColor};
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -91,7 +91,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Divider = styled.hr`
-  background-color: ${COLOR.lightGray};
+  background-color: ${COLORS.lightGray};
   position: absolute;
   display: inline-block;
   width: 1px;
@@ -138,7 +138,7 @@ const H1 = styled.h1`
   line-height: 5.8rem;
   letter-spacing: -0.01em;
 
-  color: ${COLOR.text};
+  color: ${COLORS.text};
 `;
 
 const Text = styled.div`
@@ -148,7 +148,7 @@ const Text = styled.div`
   line-height: 3.6rem;
   letter-spacing: -0.01em;
 
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   margin-bottom: 5rem;
 `;
 

@@ -6,13 +6,12 @@ import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useModal from '../../hooks/useModal';
 import useToast from '../../hooks/useToast';
 import { tokenState, userState } from '../../recoil/atoms/user';
-import { PostResponse } from '../../types/response';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { formatDate } from '../../utils/formatDate';
 import { createLike, deleteLike } from '../../utils/api/like';
 import { sendNotification } from '../../utils/api/notification';
 import { deletePost } from '../../utils/api/post';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import Image from '../Base/Image';
@@ -23,6 +22,7 @@ import {
 } from '../../utils/messages';
 import { queryLowImage } from '../../utils/image';
 import PostContent from './PostContent';
+import type { PostResponse } from '../../types/api/post';
 
 interface PostProps extends PostResponse {
   checkIsMine?: boolean;
@@ -154,7 +154,7 @@ const Post = ({
         </Wrapper>
       </PostHeader>
       {isMyLikes ? (
-        <FlexContainer direction="row" color={COLOR.white}>
+        <FlexContainer direction="row" color={COLORS.white}>
           {image && (
             <ImageContainer isMyLikes={isMyLikes}>
               <Image src={queryLowImage(image, 'postList')} alt="post-image" />
@@ -335,7 +335,7 @@ const SmText = styled.span`
   font-size: 1.1rem;
   line-height: 1.4rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
 `;
 
 const Wrapper = styled.div`
@@ -375,7 +375,7 @@ const UserName = styled.span`
   font-size: 1.5rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
 `;
 
 const Date = styled.span`
@@ -383,7 +383,7 @@ const Date = styled.span`
   font-size: 1.2rem;
   line-height: 2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.date};
+  color: ${COLORS.date};
 `;
 
 const ProfileImage = styled.img`
