@@ -30,7 +30,7 @@ const Searchbar = ({
   const [select, setSelect] = useState('posts');
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(isMobile ? false : true);
-  const ref: React.MutableRefObject<any> = useRef(null);
+  const ref: React.RefObject<HTMLFormElement> = useRef(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
