@@ -23,16 +23,16 @@ const usePost = () => {
   };
 
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!checkFileSize(file.size)) {
-      showToast({ message: ERROR_MESSAGES.MAX_SIZE_IS_10MB });
-      return;
-    }
-    setImage(file);
-    setName(file.name);
     try {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      if (!checkFileSize(file.size)) {
+        showToast({ message: ERROR_MESSAGES.MAX_SIZE_IS_10MB });
+        return;
+      }
+      setImage(file);
+      setName(file.name);
     } catch (error) {
       console.error(error);
     }

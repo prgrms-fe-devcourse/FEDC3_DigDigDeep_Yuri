@@ -30,7 +30,6 @@ const Comment = ({
   _id,
   comment,
   author,
-  post,
   createdAt,
   fetchHandler,
   ...props

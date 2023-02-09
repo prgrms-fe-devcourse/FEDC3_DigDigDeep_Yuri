@@ -2,8 +2,8 @@ import { atom } from 'recoil';
 
 export type ModalProps = {
   message: string;
-  handleClose?: (...arg: any[]) => any;
-  handleConfirm?: (...arg: any[]) => any;
+  handleClose?: (...arg: unknown[]) => unknown;
+  handleConfirm?: (...arg: unknown[]) => unknown;
 };
 
 export const modalState = atom<ModalProps | null>({

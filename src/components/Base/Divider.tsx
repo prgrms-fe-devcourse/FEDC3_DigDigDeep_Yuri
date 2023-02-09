@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const Divider = ({ type = 'horizontal', size = 16, ...props }) => {
+interface Props extends React.ComponentPropsWithoutRef<'hr'> {
+  type: string;
+  size: number;
+}
+
+const Divider = ({ type = 'horizontal', size = 16, ...props }: Props) => {
   const dividerStyle = {
     margin: type === 'vertical' ? `0 ${size}px` : `${size}px auto`,
   };

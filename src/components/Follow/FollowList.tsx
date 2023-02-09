@@ -11,7 +11,7 @@ import type { FollowResponse } from '../../types/api/follow';
 
 interface BasicFollow {
   follows: FollowResponse[];
-  onUnfollow: () => any;
+  onUnfollow: () => unknown;
 }
 
 interface Following extends BasicFollow {
@@ -64,9 +64,8 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
     <>
       <List>
         {users.map((user, index) => (
-          <UserListItem>
+          <UserListItem key={user._id}>
             <UserItem
-              key={user._id}
               type={type}
               user={user}
               onUnfollow={onUnfollow}

@@ -17,7 +17,7 @@ interface UserItemProps {
   user: UserResponse;
   type?: 'following' | 'followers';
   follow?: FollowResponse;
-  onUnfollow?: () => any;
+  onUnfollow?: () => unknown;
 }
 
 const UserItem = ({ user, type, follow, onUnfollow }: UserItemProps) => {

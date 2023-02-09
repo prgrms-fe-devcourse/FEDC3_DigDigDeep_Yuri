@@ -15,7 +15,7 @@ const LoginPage = () => {
         <FormWrapper>
           <TextWrapper>
             <H1>Welcome!</H1>
-            <Text>Let's dig dig deep</Text>
+            <Text>Let&apos;s dig dig deep</Text>
           </TextWrapper>
           <LoginForm />
         </FormWrapper>
