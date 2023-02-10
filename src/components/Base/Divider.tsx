@@ -1,6 +1,17 @@
+import type { CSSProperties } from 'react';
 import styled from 'styled-components';
 
-const Divider = ({ type = 'horizontal', size = 16, ...props }) => {
+interface DividerProps {
+  type: string;
+  size: number;
+  style?: CSSProperties;
+}
+
+const Divider = ({
+  type = 'horizontal',
+  size = 16,
+  ...props
+}: DividerProps) => {
   const dividerStyle = {
     margin: type === 'vertical' ? `0 ${size}px` : `${size}px auto`,
   };

@@ -11,7 +11,7 @@ import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 interface FollowButtonProps {
   targetId: string;
-  fetchUser: (...any: any[]) => any;
+  fetchUser: (...any: unknown[]) => unknown;
 }
 
 const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
