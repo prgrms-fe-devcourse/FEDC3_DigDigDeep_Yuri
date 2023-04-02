@@ -9,9 +9,23 @@ import Icon from './../Base/Icon';
 import useToast from '../../hooks/useToast';
 import { ERROR_MESSAGES } from '../../utils/messages';
 
-export type EventTypes = 'mousedown' | 'touchstart';
+const events = ['mousedown', 'touchstart'] as const;
 
-const events: EventTypes[] = ['mousedown', 'touchstart'];
+type SelectOption = {
+  label: string;
+  value: 'posts' | 'users';
+};
+
+const selectOptions: SelectOption[] = [
+  {
+    label: '그라운드',
+    value: 'posts',
+  },
+  {
+    label: '사용자',
+    value: 'users',
+  },
+];
 
 interface FormProps {
   children: ReactNode[];
@@ -27,26 +41,29 @@ const Searchbar = ({
   setIsSearchbarShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [search, setSearch] = useState('');
-  const [select, setSelect] = useState('posts');
+  const [searchType, setSearchType] = useState<SelectOption>(selectOptions[0]);
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(isMobile ? false : true);
   const ref = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setSelect(e.target.value);
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectOption = selectOptions.find(
+      (option) => option.value === e.target.value
+    );
+    if (selectOption) setSearchType(selectOption);
+  };
 
   const handleReset = () => setSearch('');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search) {
-      return navigate(ROUTES.SEARCH_BY_QUERY(search, select));
+      return navigate(ROUTES.SEARCH_BY_QUERY(search, searchType.value));
     }
     showToast({ message: ERROR_MESSAGES.SEARCH_INPUT });
   };
@@ -102,7 +119,7 @@ const Searchbar = ({
       </Button>
       <Input
         type="text"
-        placeholder="그라운드를 검색해보세요!"
+        placeholder={searchType.label + '를 검색해보세요!'}
         value={search}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
@@ -115,8 +132,11 @@ const Searchbar = ({
       )}
       <Divider type="vertical" size={0} />
       <Select onChange={handleSelect}>
-        <Option value="posts">그라운드</Option>
-        <Option value="users">사용자</Option>
+        {selectOptions.map(({ value, label }) => (
+          <Option key={value} value={value}>
+            {label}
+          </Option>
+        ))}
       </Select>
     </Form>
   );
