@@ -2,46 +2,51 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  src: url(../fonts/Inter/Inter-Regular.woff2) format('woff2'),
-    url(../fonts/Inter/Inter-Regular.ttf) format('ttf');
+  font-display: fallback;
+  src: url(../fonts/Inter/Inter-Regular-subset.woff2) format('woff2'),
+    url(../fonts/Inter/Inter-Regular-subset.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
-  src: url(../fonts/Inter/Inter-Medium.woff2) format('woff2'),
-    url(../fonts/Inter/Inter-Medium.ttf) format('ttf');
+  font-display: fallback;
+  src: url(../fonts/Inter/Inter-Medium-subset.woff2) format('woff2'),
+    url(../fonts/Inter/Inter-Medium-subset.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  src: url(../fonts/Inter/Inter-Bold.woff2) format('woff2'),
-    url(../fonts/Inter/Inter-Bold.ttf) format('ttf');
+  font-display: fallback;
+  src: url(../fonts/Inter/Inter-Bold-subset.woff2) format('woff2'),
+    url(../fonts/Inter/Inter-Bold-subset.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
-  src: url(../fonts/NotoSans/NotoSans-Regular.woff2) format('woff2'),
-    url(../fonts/NotoSans/NotoSans-Regular.ttf) format('ttf');
+  src: url(../fonts/NotoSans/NotoSansKR-Regular-subset.woff2) format('woff2'),
+    url(../fonts/NotoSans/NotoSansKR-Regular-subset.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
-  src: url(../fonts/NotoSans/NotoSans-Medium.woff2) format('woff2'),
-    url(../fonts/NotoSans/NotoSans-Medium.ttf) format('ttf');
+  font-display: fallback;
+  src: url(../fonts/NotoSans/NotoSansKR-Medium-subset.woff2) format('woff2'),
+    url(../fonts/NotoSans/NotoSansKR-Medium-subset.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
-  src: url(../fonts/NotoSans/NotoSans-Bold.woff2) format('woff2'),
-    url(../fonts/NotoSans/NotoSans-Bold.ttf) format('ttf');
+  font-display: fallback;
+  src: url(../fonts/NotoSans/NotoSansKR-Bold-subset.woff2) format('woff2'),
+    url(../fonts/NotoSans/NotoSansKR-Bold-subset.woff) format('woff');
 }
