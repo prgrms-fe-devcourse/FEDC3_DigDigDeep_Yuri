@@ -1,37 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import styled, { css } from 'styled-components';
-import useLogout from '../../hooks/useLogout';
-import useModal from '../../hooks/useModal';
-import useToast from '../../hooks/useToast';
-import { tokenState, userState } from '../../recoil/atoms/user';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import COLORS from '../../utils/colors';
 import Icon from './../Base/Icon';
-import LinkButton from '../Button/LinkButton';
 import Searchbar from './Searchbar';
-import useNotification from '../../hooks/useNotification';
 import ROUTES from '../../utils/routes';
-import { CONFIRM_MESSAGES, ERROR_MESSAGES } from '../../utils/messages';
-import { queryLowImage } from '../../utils/image';
+import LinkButtons from './LinkButtons';
 
 const longLogo = require('../../assets/images/logo/long.png');
 const smallLogo = require('../../assets/images/logo/small.png');
 
 const Header = () => {
-  const token = useRecoilValue(tokenState);
-  const user = useRecoilValue(userState);
-  const location = useLocation();
   const [isSearchbarShow, setIsSearchbarShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
-  const { isSeen } = useNotification();
-  const logout = useLogout();
-  const { showModal } = useModal();
-  const { showToast } = useToast();
-  const navigate = useNavigate();
-
-  const isMe = location.pathname.split('/').includes('me');
 
   const onSearchbar = () => {
     setIsSearchbarShow(true);
@@ -58,23 +39,6 @@ const Header = () => {
     }
   };
 
-  const handleLogout = async () => {
-    if (!token) return;
-
-    showModal({
-      message: CONFIRM_MESSAGES.LOGOUT_CONFIRM,
-      handleConfirm: async () => {
-        try {
-          navigate(ROUTES.HOME);
-          await logout();
-        } catch (error) {
-          console.error(error);
-          showToast({ message: ERROR_MESSAGES.SERVER_ERROR });
-        }
-      },
-    });
-  };
-
   const handleChange = useCallback(() => {
     const handleSetTimeout = setTimeout(() => {
       offSearchbar();
@@ -95,88 +59,17 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Container>
-        {isMobile ? (
-          <>
-            {isSearchbarShow ? (
-              <SearchWrapper>
-                <Searchbar
-                  isMobile={isMobile}
-                  setIsSearchbarShow={setIsSearchbarShow}
-                />
-              </SearchWrapper>
-            ) : token ? (
-              <>
-                <Wrapper>
-                  <LogoButton to={ROUTES.HOME}>
-                    <LogoWrapper>
-                      {window.innerWidth > 767 ? (
-                        <Logo src={longLogo} alt="logo" />
-                      ) : (
-                        <Logo src={smallLogo} alt="logo" />
-                      )}
-                    </LogoWrapper>
-                  </LogoButton>
-                  <Button onClick={onSearchbar}>
-                    <Icon name="search" size={24} />
-                  </Button>
-                </Wrapper>
-                <Wrapper>
-                  {isMe ? (
-                    <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
-                  ) : (
-                    <>
-                      <LinkButton to={ROUTES.POSTS_NEW} name="new" size={24} />
-                      <LinkButton
-                        to={ROUTES.NOTIFICATION}
-                        name={isSeen ? 'notification-off' : 'notification-on'}
-                        size={24}
-                      />
-                      {user.image ? (
-                        <LinkButton
-                          to={ROUTES.PROFILE_ME}
-                          src={queryLowImage(user.image, 'profile')}
-                          alt="profile-image"
-                          isProfile={true}
-                          name="profile"
-                          size={24}
-                        />
-                      ) : (
-                        <LinkButton
-                          to={ROUTES.PROFILE_ME}
-                          name="profile"
-                          size={24}
-                        />
-                      )}
-                    </>
-                  )}
-                </Wrapper>
-              </>
-            ) : (
-              <>
-                <Wrapper>
-                  <LogoButton to="/">
-                    <LogoWrapper>
-                      {window.innerWidth > 767 ? (
-                        <Logo src={longLogo} alt="logo" />
-                      ) : (
-                        <Logo src={smallLogo} alt="logo" />
-                      )}
-                    </LogoWrapper>
-                  </LogoButton>
-                  <Button onClick={onSearchbar}>
-                    <Icon name="search" size={24} />
-                  </Button>
-                </Wrapper>
-                <Wrapper>
-                  <LogInButton to="/login">LOG IN</LogInButton>
-                </Wrapper>
-              </>
-            )}
-          </>
+        {isSearchbarShow ? (
+          <SearchWrapper isMobile={isMobile}>
+            <Searchbar
+              isMobile={isMobile}
+              setIsSearchbarShow={setIsSearchbarShow}
+            />
+          </SearchWrapper>
         ) : (
           <>
-            <WebSearchWrapper>
-              <LogoButton to="/">
+            <Wrapper>
+              <LogoButton to={ROUTES.HOME}>
                 <LogoWrapper>
                   {window.innerWidth > 767 ? (
                     <Logo src={longLogo} alt="logo" />
@@ -185,47 +78,13 @@ const Header = () => {
                   )}
                 </LogoWrapper>
               </LogoButton>
-              <Searchbar
-                isMobile={isMobile}
-                setIsSearchbarShow={setIsSearchbarShow}
-              />
-            </WebSearchWrapper>
-            {token ? (
-              <Wrapper>
-                {isMe ? (
-                  <LogOutButton onClick={handleLogout}>LOGOUT</LogOutButton>
-                ) : (
-                  <>
-                    <LinkButton to={ROUTES.POSTS_NEW} name="new" size={24} />
-                    <LinkButton
-                      to={ROUTES.NOTIFICATION}
-                      name={isSeen ? 'notification-off' : 'notification-on'}
-                      size={24}
-                    />
-                    {user.image ? (
-                      <LinkButton
-                        to={ROUTES.PROFILE_ME}
-                        src={queryLowImage(user.image, 'profile')}
-                        alt="profile-image"
-                        isProfile={true}
-                        name="profile"
-                        size={24}
-                      />
-                    ) : (
-                      <LinkButton
-                        to={ROUTES.PROFILE_ME}
-                        name="profile"
-                        size={24}
-                      />
-                    )}
-                  </>
-                )}
-              </Wrapper>
-            ) : (
-              <Wrapper>
-                <LogInButton to={ROUTES.LOGIN}>LOG IN</LogInButton>
-              </Wrapper>
-            )}
+              <Button onClick={onSearchbar}>
+                <Icon name="search" size={24} />
+              </Button>
+            </Wrapper>
+            <Wrapper>
+              <LinkButtons />
+            </Wrapper>
           </>
         )}
       </Container>
@@ -276,45 +135,17 @@ const Wrapper = styled.div`
   }
 `;
 
-const WebSearchWrapper = styled.div`
+const SearchWrapper = styled.div<{ isMobile: boolean }>`
+  ${({ isMobile }) =>
+    isMobile
+      ? `width: 100%;
+  padding: 1.8rem 0;`
+      : `
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 3rem;
-`;
-
-const SearchWrapper = styled.div`
-  width: 100%;
-  padding: 1.8rem 0;
-`;
-
-const LinkContainer = css`
-  width: 100%;
-  font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: -0.01em;
-  color: ${COLORS.white};
-  padding: 1.3rem 2rem;
-  border-radius: 23.5px;
-  border: none;
-  min-width: max-content;
-  cursor: pointer;
-
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    padding: 1.2rem 1.8rem;
-  }
-`;
-
-const LogInButton = styled(Link)`
-  background-color: ${COLORS.green};
-  ${LinkContainer}
-`;
-
-const LogOutButton = styled.button`
-  color: ${COLORS.white};
-  background-color: ${COLORS.lightGray};
-  ${LinkContainer};
-  font-size: 1rem;
+  `}
 `;
 
 const Button = styled.div`
