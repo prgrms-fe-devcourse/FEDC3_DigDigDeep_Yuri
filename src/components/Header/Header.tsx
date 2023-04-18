@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   const resizeScreen = () => {
-    if (window.innerWidth < 545) {
+    if (window.innerWidth < 767) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
@@ -32,7 +32,7 @@ const Header = () => {
   };
 
   const checkIsMobile = () => {
-    if (window.innerWidth < 545) {
+    if (window.innerWidth < 767) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
@@ -56,37 +56,58 @@ const Header = () => {
       window.removeEventListener('resize', resizeScreen);
     };
   }, [handleChange]);
+
+  if (isMobile)
+    return (
+      <HeaderContainer>
+        <Container>
+          {isSearchbarShow ? (
+            <SearchWrapper isMobile={isMobile}>
+              <Searchbar
+                isMobile={isMobile}
+                setIsSearchbarShow={setIsSearchbarShow}
+              />
+            </SearchWrapper>
+          ) : (
+            <>
+              <Wrapper>
+                <LogoButton to={ROUTES.HOME}>
+                  <LogoWrapper>
+                    <Logo src={smallLogo} alt="logo" />
+                  </LogoWrapper>
+                </LogoButton>
+                <Button onClick={onSearchbar}>
+                  <Icon name="search" size={24} />
+                </Button>
+              </Wrapper>
+              <Wrapper>
+                <LinkButtons />
+              </Wrapper>
+            </>
+          )}
+        </Container>
+      </HeaderContainer>
+    );
+
   return (
     <HeaderContainer>
       <Container>
-        {isSearchbarShow ? (
+        <Wrapper>
+          <LogoButton to={ROUTES.HOME}>
+            <LogoWrapper>
+              <Logo src={longLogo} alt="logo" />
+            </LogoWrapper>
+          </LogoButton>
           <SearchWrapper isMobile={isMobile}>
             <Searchbar
               isMobile={isMobile}
               setIsSearchbarShow={setIsSearchbarShow}
             />
           </SearchWrapper>
-        ) : (
-          <>
-            <Wrapper>
-              <LogoButton to={ROUTES.HOME}>
-                <LogoWrapper>
-                  {window.innerWidth > 767 ? (
-                    <Logo src={longLogo} alt="logo" />
-                  ) : (
-                    <Logo src={smallLogo} alt="logo" />
-                  )}
-                </LogoWrapper>
-              </LogoButton>
-              <Button onClick={onSearchbar}>
-                <Icon name="search" size={24} />
-              </Button>
-            </Wrapper>
-            <Wrapper>
-              <LinkButtons />
-            </Wrapper>
-          </>
-        )}
+        </Wrapper>
+        <Wrapper>
+          <LinkButtons />
+        </Wrapper>
       </Container>
     </HeaderContainer>
   );
