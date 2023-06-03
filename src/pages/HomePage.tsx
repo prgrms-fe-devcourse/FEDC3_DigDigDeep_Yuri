@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Post from '../components/Post/Post';
-import Header from '../components/Header/Header';
 import { getPosts } from '../utils/api/post';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { getChannelInfo } from '../utils/api/channel';
@@ -66,7 +65,6 @@ const HomePage = () => {
 
   return (
     <Container>
-      <Header />
       <List>
         {posts.map((post) => (
           <ListItem key={post._id}>

@@ -11,7 +11,6 @@ import { userState } from '../recoil/atoms/user';
 import { getUser } from '../utils/api/user';
 import COLORS from '../utils/colors';
 import Icon from '../components/Base/Icon';
-import Header from '../components/Header/Header';
 import ROUTES from '../utils/routes';
 import Image from '../components/Base/Image';
 import { queryLowImage } from '../utils/image';
@@ -75,7 +74,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header />
       <Wrapper>
         <DetailHeader name="" isButton={false}>
           {userId === 'me' ? (

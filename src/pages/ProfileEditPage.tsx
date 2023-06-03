@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import DetailHeader from '../components/Header/DetailHeader';
-import Header from '../components/Header/Header';
 import ProfileEditForm from '../components/Profile/ProfileEditForm';
 
 const ProfileEditPage = () => {
   return (
     <>
-      <Header />
       <LoginPageContainer>
         <DetailHeader isButton={false} />
         <ProfileEditForm />
