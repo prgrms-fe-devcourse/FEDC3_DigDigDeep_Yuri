@@ -9,14 +9,9 @@ import Icon from './../Base/Icon';
 import useToast from '../../hooks/useToast';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import { useRecoilState } from 'recoil';
-import { searchState } from '../../recoil/atoms/search';
+import { SelectOption, searchState } from '../../recoil/atoms/search';
 
 const events = ['mousedown', 'touchstart'] as const;
-
-type SelectOption = {
-  label: string;
-  value: 'posts' | 'users';
-};
 
 const selectOptions: SelectOption[] = [
   {

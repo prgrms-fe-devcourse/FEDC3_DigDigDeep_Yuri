@@ -1,11 +1,13 @@
 import { atom } from 'recoil';
 
+export type SelectOption = {
+  label: '그라운드' | '사용자';
+  value: 'posts' | 'users';
+};
+
 export type SearchProps = {
   value: string;
-  options: {
-    label: '그라운드' | '사용자';
-    value: 'posts' | 'users';
-  };
+  options: SelectOption;
 };
 
 export const searchState = atom<SearchProps>({
