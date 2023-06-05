@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Comment from '../components/Comment/Comment';
 import CommentInput from '../components/Comment/CommentInput';
-import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 import COLORS from '../utils/colors';
 import { getPost } from '../utils/api/post';
@@ -55,7 +54,6 @@ const PostPage = () => {
 
   return (
     <Container>
-      <Header />
       {post && (
         <Wrapper>
           <Post {...post} checkIsMine={true} isDetailPage={true} />

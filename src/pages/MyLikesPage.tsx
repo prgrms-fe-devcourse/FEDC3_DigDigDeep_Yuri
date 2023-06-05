@@ -5,7 +5,6 @@ import DetailHeader from '../components/Header/DetailHeader';
 import { userState } from '../recoil/atoms/user';
 import { getAllPosts } from '../utils/api/post';
 import styled from 'styled-components';
-import Header from '../components/Header/Header';
 import Spinner from '../components/Base/Spinner';
 import type { PostResponse } from '../types/api/post';
 
@@ -39,7 +38,6 @@ const MyLikesPage = () => {
 
   return (
     <Container>
-      <Header />
       <DetailHeader name="내가 좋아한 그라운드" isButton={false} />
       <Wrapper>
         {posts.map((post) => (

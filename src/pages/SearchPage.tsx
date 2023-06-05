@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../components/Base/Spinner';
-import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 import UserItem from '../components/User/UserItem';
 import axiosInstance from '../utils/axios';
@@ -57,7 +56,6 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <Header />
       {searchParams.get('type') === 'users' ? (
         <List>
           {userResult.map((user) => (

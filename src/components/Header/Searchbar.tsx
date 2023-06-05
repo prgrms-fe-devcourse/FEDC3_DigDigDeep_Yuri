@@ -8,13 +8,10 @@ import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import useToast from '../../hooks/useToast';
 import { ERROR_MESSAGES } from '../../utils/messages';
+import { useRecoilState } from 'recoil';
+import { SelectOption, searchState } from '../../recoil/atoms/search';
 
 const events = ['mousedown', 'touchstart'] as const;
-
-type SelectOption = {
-  label: string;
-  value: 'posts' | 'users';
-};
 
 const selectOptions: SelectOption[] = [
   {
@@ -40,30 +37,46 @@ const Searchbar = ({
   isMobile: boolean;
   setIsSearchbarShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [search, setSearch] = useState('');
-  const [searchType, setSearchType] = useState<SelectOption>(selectOptions[0]);
+  const [search, setSearchState] = useRecoilState(searchState);
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(isMobile ? false : true);
   const ref = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearch(e.target.value);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchState({
+      ...search,
+      value: e.target.value,
+    });
+  };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectOption = selectOptions.find(
       (option) => option.value === e.target.value
     );
-    if (selectOption) setSearchType(selectOption);
+    if (selectOption) {
+      setSearchState({
+        ...search,
+        options: selectOption,
+      });
+    }
   };
 
-  const handleReset = () => setSearch('');
+  const handleReset = () => {
+    setSearchState({
+      ...search,
+      value: '',
+    });
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (search) {
-      return navigate(ROUTES.SEARCH_BY_QUERY(search, searchType.value));
+    if (search.value) {
+      return navigate(
+        ROUTES.SEARCH_BY_QUERY(search.value, search.options.value)
+      );
     }
     showToast({ message: ERROR_MESSAGES.SEARCH_INPUT });
   };
@@ -119,19 +132,19 @@ const Searchbar = ({
       </Button>
       <Input
         type="text"
-        placeholder={searchType.label + '를 검색해보세요!'}
-        value={search}
+        placeholder={search.options.label + '를 검색해보세요!'}
+        value={search.value}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
         onChange={onChange}
       />
-      {search && (
+      {search.value && (
         <Button type="button" onClick={handleReset}>
           <Icon name="close" size={12} />
         </Button>
       )}
       <Divider type="vertical" size={0} />
-      <Select onChange={handleSelect}>
+      <Select value={search.options.value} onChange={handleSelect}>
         {selectOptions.map(({ value, label }) => (
           <Option key={value} value={value}>
             {label}
