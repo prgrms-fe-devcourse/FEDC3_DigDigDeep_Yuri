@@ -43,17 +43,17 @@ const NotificationList = () => {
     fetchNotifications();
   }, [fetchSeenNotifications, fetchNotifications]);
 
+  if (notifications.length === 0) {
+    return <Text>아무 알림도 오지 않았어요 ... 🦔</Text>;
+  }
+
   return (
     <List>
-      {notifications.length === 0 ? (
-        <Text>아무 알림도 오지 않았어요 ... 🦔</Text>
-      ) : (
-        notifications
-          .filter((notification) => notification.author._id !== user._id)
-          .map((notification) => (
-            <Notification key={notification._id} {...notification} />
-          ))
-      )}
+      {notifications
+        .filter((notification) => notification.author._id !== user._id)
+        .map((notification) => (
+          <Notification key={notification._id} {...notification} />
+        ))}
     </List>
   );
 };

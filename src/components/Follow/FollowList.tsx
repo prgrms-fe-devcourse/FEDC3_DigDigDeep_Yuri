@@ -60,30 +60,31 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
     fetchUsers();
   }, [fetchUsers]);
 
+  if (loading) {
+    return <Spinner loading={loading} />;
+  }
+
+  if (users.length === 0) {
+    return (
+      <Text>
+        아직 {type === 'following' ? '팔로잉' : '팔로워'} 목록이 없습니다.
+      </Text>
+    );
+  }
+
   return (
-    <>
-      {users.length === 0 ? (
-        <Text>
-          아직 {type === 'following' ? '팔로잉' : '팔로워'} 목록이 없습니다.
-        </Text>
-      ) : (
-        <>
-          <List>
-            {users.map((user, index) => (
-              <UserListItem key={user._id}>
-                <UserItem
-                  type={type}
-                  user={user}
-                  onUnfollow={onUnfollow}
-                  follow={follows[index]}
-                />
-              </UserListItem>
-            ))}
-          </List>
-          <Spinner loading={loading} />{' '}
-        </>
-      )}
-    </>
+    <List>
+      {users.map((user, index) => (
+        <UserListItem key={user._id}>
+          <UserItem
+            type={type}
+            user={user}
+            onUnfollow={onUnfollow}
+            follow={follows[index]}
+          />
+        </UserListItem>
+      ))}
+    </List>
   );
 };
 
