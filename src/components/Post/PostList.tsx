@@ -13,7 +13,7 @@ interface Props {
 
 const PostList = ({ authorId }: Props) => {
   const { _id: myId } = useRecoilValue(userState);
-  const [posts, setPosts] = useState<PostResponse[]>();
+  const [posts, setPosts] = useState<PostResponse[]>([]);
   const checkIsMine = authorId === myId ? true : false;
 
   const fetchPosts = useCallback(async () => {
@@ -25,15 +25,13 @@ const PostList = ({ authorId }: Props) => {
     fetchPosts();
   }, [fetchPosts, authorId]);
 
+  if (posts.length === 0) return <Text>생성된 그라운드가 없습니다.</Text>;
+
   return (
     <UnorderedList>
-      {posts?.length === 0 ? (
-        <Text>생성된 그라운드가 없습니다.</Text>
-      ) : (
-        posts?.map((post) => (
-          <Post key={post._id} checkIsMine={checkIsMine} {...post} />
-        ))
-      )}
+      {posts.map((post) => (
+        <Post key={post._id} checkIsMine={checkIsMine} {...post} />
+      ))}
     </UnorderedList>
   );
 };
