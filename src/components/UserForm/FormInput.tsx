@@ -10,7 +10,7 @@ import type {
 import { useController } from 'react-hook-form';
 import styled from 'styled-components';
 import Icon from '../Base/Icon';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import ErrorMessage from './ErrorMessage';
 
 interface UserInputPrpos<T extends FieldValues>
@@ -92,7 +92,7 @@ const InputContainer = styled.div`
 
 const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
-  background: ${COLOR.white};
+  background: ${COLORS.white};
   box-shadow: 0px 2px 4px rgba(146, 113, 96, 0.11);
   border-radius: 23.5px;
   align-items: center;
@@ -101,10 +101,10 @@ const InputWrapper = styled.div<InputWrapperProps>`
   padding: 1.6rem 2.4rem;
   border: 1px solid;
   border-color: ${({ error, isFocus }) =>
-    error ? COLOR.orange : isFocus ? COLOR.lightBrown : COLOR.lightGray};
+    error ? COLORS.orange : isFocus ? COLORS.lightBrown : COLORS.lightGray};
 
   :hover {
-    border-color: ${COLOR.lightBrown};
+    border-color: ${COLORS.lightBrown};
   }
 
   transition: border 0.2s ease-in-out;
@@ -119,7 +119,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.6rem;
@@ -128,13 +128,13 @@ const Input = styled.input`
   padding: 0;
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     line-height: 1.6rem;
   }
 
   :disabled {
     background: inherit;
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
   }
 `;
 

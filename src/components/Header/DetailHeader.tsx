@@ -1,7 +1,7 @@
 import Icon from './../Base/Icon';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import EditButton from './../Post/EditButton';
 interface Props {
   name?: string;
@@ -78,7 +78,7 @@ const Title = styled.h3`
   font-size: 1.6rem;
   line-height: 1.9rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
   justify-self: center;
   width: max-content;
 `;

@@ -5,6 +5,7 @@
 <br />
 
 # 서비스 소개
+
 <img src="https://user-images.githubusercontent.com/25377159/213724873-7d3af0f4-abaa-45fa-8328-d247470ab924.png" alt="logo" >
 디그디그딥은 하나의 주제, 개념, 지직에 대해 깊게 이야기 할 수 있는 장소를 제공한다.
 깊게 땅을 파는 두더
@@ -15,6 +16,7 @@
 <br />
 
 # Members
+
 ![members](https://user-images.githubusercontent.com/25377159/213723856-068944ac-4ed3-4870-ad89-18000497ce8d.jpg)
 
 <table>
@@ -31,6 +33,7 @@
 <br />
 
 # 기술 스텍
+
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="react">
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript">
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" alt="styled-components">
@@ -39,6 +42,7 @@
 <br />
 
 # 개발 컨벤션 및 협업 툴
+
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="git">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" alt="github">
 <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white" alt="prettier">

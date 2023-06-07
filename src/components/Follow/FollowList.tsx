@@ -1,16 +1,17 @@
 import { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { FollowResponse, UserResponse } from '../../types/response';
 import { getUser } from '../../utils/api/user';
 import UserItem from '../User/UserItem';
 import useToast from '../../hooks/useToast';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Spinner from '../Base/Spinner';
 import { ERROR_MESSAGES } from '../../utils/messages';
+import type { UserResponse } from '../../types/api/user';
+import type { FollowResponse } from '../../types/api/follow';
 
 interface BasicFollow {
   follows: FollowResponse[];
-  onUnfollow: () => any;
+  onUnfollow: () => unknown;
 }
 
 interface Following extends BasicFollow {
@@ -69,9 +70,8 @@ const FollowList = ({ type, follows, onUnfollow }: Following | Followers) => {
         <>
           <List>
             {users.map((user, index) => (
-              <UserListItem>
+              <UserListItem key={user._id}>
                 <UserItem
-                  key={user._id}
                   type={type}
                   user={user}
                   onUnfollow={onUnfollow}
@@ -94,7 +94,7 @@ const Text = styled.h3`
   font-weight: 400;
   font-size: 1.5rem;
   text-align: center;
-  color: ${COLOR.brownGray};
+  color: ${COLORS.brownGray};
 `;
 
 const List = styled.ul`
@@ -107,5 +107,5 @@ const List = styled.ul`
 
 const UserListItem = styled.div`
   padding: 1.4rem;
-  border-bottom: 0.3px solid ${COLOR.lightGray};
+  border-bottom: 0.3px solid ${COLORS.lightGray};
 `;

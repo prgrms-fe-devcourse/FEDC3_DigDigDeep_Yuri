@@ -2,16 +2,27 @@ import React, { ReactNode, useEffect, useState, useRef } from 'react';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
-import { ROUTES } from '../../utils/routes';
+import COLORS from '../../utils/colors';
+import ROUTES from '../../utils/routes';
 import Divider from './../Base/Divider';
 import Icon from './../Base/Icon';
 import useToast from '../../hooks/useToast';
 import { ERROR_MESSAGES } from '../../utils/messages';
+import { useRecoilState } from 'recoil';
+import { SelectOption, searchState } from '../../recoil/atoms/search';
 
-export type EventTypes = 'mousedown' | 'touchstart';
+const events = ['mousedown', 'touchstart'] as const;
 
-const events: EventTypes[] = ['mousedown', 'touchstart'];
+const selectOptions: SelectOption[] = [
+  {
+    label: '그라운드',
+    value: 'posts',
+  },
+  {
+    label: '사용자',
+    value: 'users',
+  },
+];
 
 interface FormProps {
   children: ReactNode[];
@@ -26,27 +37,46 @@ const Searchbar = ({
   isMobile: boolean;
   setIsSearchbarShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [search, setSearch] = useState('');
-  const [select, setSelect] = useState('posts');
+  const [search, setSearchState] = useRecoilState(searchState);
   const [isFocus, setIsFocus] = useState(false);
   const [visible, setVisible] = useState(isMobile ? false : true);
-  const ref: React.MutableRefObject<any> = useRef(null);
+  const ref = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
 
   const { showToast } = useToast();
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearch(e.target.value);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchState({
+      ...search,
+      value: e.target.value,
+    });
+  };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setSelect(e.target.value);
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectOption = selectOptions.find(
+      (option) => option.value === e.target.value
+    );
+    if (selectOption) {
+      setSearchState({
+        ...search,
+        options: selectOption,
+      });
+    }
+  };
 
-  const handleReset = () => setSearch('');
+  const handleReset = () => {
+    setSearchState({
+      ...search,
+      value: '',
+    });
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (search) {
-      return navigate(ROUTES.SEARCH_BY_QUERY(search, select));
+    if (search.value) {
+      return navigate(
+        ROUTES.SEARCH_BY_QUERY(search.value, search.options.value)
+      );
     }
     showToast({ message: ERROR_MESSAGES.SEARCH_INPUT });
   };
@@ -57,8 +87,9 @@ const Searchbar = ({
 
   const handleEvent = useCallback(
     (e: MouseEvent | TouchEvent) => {
-      if (!ref) return;
+      if (!ref.current) return;
       if (!isMobile) return;
+      if (!(e.target instanceof Node)) return;
 
       if (!ref.current.contains(e.target)) {
         setVisible(false);
@@ -101,21 +132,24 @@ const Searchbar = ({
       </Button>
       <Input
         type="text"
-        placeholder="그라운드를 검색해보세요!"
-        value={search}
+        placeholder={search.options.label + '를 검색해보세요!'}
+        value={search.value}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
         onChange={onChange}
       />
-      {search && (
+      {search.value && (
         <Button type="button" onClick={handleReset}>
           <Icon name="close" size={12} />
         </Button>
       )}
       <Divider type="vertical" size={0} />
-      <Select onChange={handleSelect}>
-        <Option value="posts">그라운드</Option>
-        <Option value="users">사용자</Option>
+      <Select value={search.options.value} onChange={handleSelect}>
+        {selectOptions.map(({ value, label }) => (
+          <Option key={value} value={value}>
+            {label}
+          </Option>
+        ))}
       </Select>
     </Form>
   );
@@ -124,7 +158,7 @@ const Searchbar = ({
 const Form = styled.form<FormProps>`
   width: 100%;
   display: flex;
-  background: ${COLOR.white};
+  background: ${COLORS.white};
   min-width: 250px;
   border-radius: 23.5px;
   align-items: center;
@@ -134,7 +168,7 @@ const Form = styled.form<FormProps>`
   border: 1px solid;
   box-sizing: border-box;
   border-color: ${({ isFocus }) =>
-    isFocus ? COLOR.lightBrown : COLOR.lightGray};
+    isFocus ? COLORS.lightBrown : COLORS.lightGray};
   width: ${({ visible }) => (visible ? '100%' : 0)};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: all 0.4s ease-out;
@@ -159,14 +193,14 @@ const Input = styled.input`
   border: none;
   outline: none;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.6rem;
   padding: 0;
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     line-height: 1.3rem;
   }
 `;
@@ -174,7 +208,7 @@ const Input = styled.input`
 const Select = styled.select`
   border: none;
   font-size: 1.2rem;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   outline: none;
 `;
 

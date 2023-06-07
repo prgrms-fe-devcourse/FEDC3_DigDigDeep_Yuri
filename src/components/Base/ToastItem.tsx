@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ToastProps } from '../../recoil/atoms/toast';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 
 const ToastItem = ({ message, duration = 1000 }: ToastProps) => {
   const [visible, setVisible] = useState(false);
@@ -27,7 +27,7 @@ const Toast = styled.div<{ visible: boolean }>`
   bottom: 50%;
   padding: 1.5rem 2rem;
   transform: translate(-50%, -50%);
-  background-color: ${COLOR.brownGray};
+  background-color: ${COLORS.brownGray};
 
   font-weight: 500;
   font-size: 1.4rem;
@@ -38,7 +38,7 @@ const Toast = styled.div<{ visible: boolean }>`
   box-shadow: 0px 3px 4px rgba(218, 218, 218, 0.24);
   border-radius: 23.5px;
 
-  color: ${COLOR.white};
+  color: ${COLORS.white};
 
   opacity: ${({ visible }) => (visible ? 0.95 : 0)};
   transition: opacity 0.5s ease-in-out;

@@ -5,13 +5,13 @@ import { useEffect, useState, useCallback } from 'react';
 import { follow, unfollow } from '../../utils/api/follow';
 import useGetMyInfo from '../../hooks/useGetMyInfo';
 import useToast from '../../hooks/useToast';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { sendNotification } from '../../utils/api/notification';
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '../../utils/messages';
 
 interface FollowButtonProps {
   targetId: string;
-  fetchUser: (...any: any[]) => any;
+  fetchUser: (...any: unknown[]) => unknown;
 }
 
 const FollowButton = ({ targetId, fetchUser }: FollowButtonProps) => {
@@ -88,12 +88,12 @@ export default FollowButton;
 
 const Button = styled.button<{ isFollowable: boolean }>`
   background-color: ${({ isFollowable }) =>
-    isFollowable ? COLOR.green : COLOR.lightGray};
+    isFollowable ? COLORS.green : COLORS.lightGray};
   border-radius: 23.5px;
   font-weight: 700;
   font-size: 1.2rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   padding: 1.1rem 1.8rem;
   width: fit-content;
   justify-self: right;

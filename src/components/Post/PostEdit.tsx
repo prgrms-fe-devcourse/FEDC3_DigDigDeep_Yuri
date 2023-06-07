@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import Icon from './../Base/Icon';
 import { getPost } from '../../utils/api/post';
 import { ERROR_MESSAGES } from '../../utils/messages';
@@ -132,7 +132,7 @@ const Container = styled.div`
   width: 35%;
   min-width: 350px;
   height: 90vh;
-  background: ${COLOR.white};
+  background: ${COLORS.white};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -153,11 +153,11 @@ const Title = styled.textarea`
   font-size: 2.7rem;
   line-height: 3.5rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
   margin-top: 3rem;
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     font-weight: 400;
   }
 
@@ -175,10 +175,10 @@ const Body = styled.textarea`
   font-size: 1.8rem;
   line-height: 2.3rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brown};
+  color: ${COLORS.brown};
 
   ::placeholder {
-    color: ${COLOR.brownGray};
+    color: ${COLORS.brownGray};
     font-weight: 400;
   }
 
@@ -213,7 +213,7 @@ const ImageFileWrapper = styled.div`
   position: absolute;
   left: 3rem;
   bottom: 2.5rem;
-  background-color: ${COLOR.white};
+  background-color: ${COLORS.white};
   width: fit-content;
   height: 8rem;
   padding: 0 1.5rem;
@@ -260,7 +260,7 @@ const ImageHeader = styled.div`
 const ImageTitle = styled.h3`
   font-size: 1.4rem;
   font-weight: 700;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
 
   @media screen and (max-width: 767px) and (orientation: portrait) {
     font-size: 1.2rem;
@@ -274,7 +274,7 @@ const RemoveButton = styled.button`
 
 const ImageName = styled.span`
   font-size: 1.4rem;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   max-width: 17rem;
   overflow: hidden;
   white-space: nowrap;

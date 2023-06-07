@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../components/Base/Spinner';
-import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 import UserItem from '../components/User/UserItem';
-import { PostResponse, UserResponse } from '../types/response';
 import axiosInstance from '../utils/axios';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 import { getPost } from '../utils/api/post';
+import type { PostResponse } from '../types/api/post';
+import type { UserResponse } from '../types/api/user';
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -56,7 +56,6 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <Header />
       {searchParams.get('type') === 'users' ? (
         <List>
           {userResult.map((user) => (
@@ -101,7 +100,7 @@ const UserListItem = styled.li`
   align-items: center;
   gap: 1.8rem;
   padding: 1.4rem;
-  border-bottom: 0.3px solid ${COLOR.lightGray};
+  border-bottom: 0.3px solid ${COLORS.lightGray};
 `;
 
 const List = styled.ul`
@@ -128,7 +127,7 @@ const BigText = styled.span`
   font-size: 2rem;
   line-height: 4rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.lightBrown};
+  color: ${COLORS.lightBrown};
   position: absolute;
   top: 30%;
   text-align: center;

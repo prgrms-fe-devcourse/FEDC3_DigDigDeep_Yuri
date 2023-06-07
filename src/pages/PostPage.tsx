@@ -3,13 +3,12 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Comment from '../components/Comment/Comment';
 import CommentInput from '../components/Comment/CommentInput';
-import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
-import { PostResponse } from '../types/response';
-import { COLOR } from '../utils/color';
+import COLORS from '../utils/colors';
 import { getPost } from '../utils/api/post';
 import { ERROR_MESSAGES } from '../utils/messages';
 import useToast from '../hooks/useToast';
+import type { PostResponse } from '../types/api/post';
 
 type PostId = string;
 
@@ -55,7 +54,6 @@ const PostPage = () => {
 
   return (
     <Container>
-      <Header />
       {post && (
         <Wrapper>
           <Post {...post} checkIsMine={true} isDetailPage={true} />
@@ -121,6 +119,6 @@ const Text = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.brownGray};
+  color: ${COLORS.brownGray};
   margin-bottom: 3rem;
 `;

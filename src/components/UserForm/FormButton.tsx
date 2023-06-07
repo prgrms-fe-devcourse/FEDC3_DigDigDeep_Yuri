@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import type { ButtonHTMLAttributes } from 'react';
 
 interface FormButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,10 +39,10 @@ const Button = styled.button<FormButtonProps>`
   font-size: 1.6rem;
   line-height: 1.9rem;
   letter-spacing: -0.01em;
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   padding: 1.6rem 0;
   background-color: ${({ isValid }) =>
-    isValid ? `${COLOR.green}` : `${COLOR.lightGray}`};
+    isValid ? `${COLORS.green}` : `${COLORS.lightGray}`};
   box-shadow: ${({ isValid, isSubmitting }) =>
     !isValid && isSubmitting
       ? '0px 2px 4px 1px rgba(127, 176, 49, 0.37)'

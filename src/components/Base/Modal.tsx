@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import useModal from '../../hooks/useModal';
 import { useRecoilValue } from 'recoil';
 import { ModalProps, modalState } from '../../recoil/atoms/modal';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import { useEffect, useState } from 'react';
 
 interface ButtonProps {
@@ -78,7 +78,7 @@ const Container = styled.div<{ visible: boolean }>`
   gap: 3.2rem;
   transform: translate(-50%, -50%);
   padding: 4.4rem 4.6rem 3.3rem;
-  background: ${COLOR.white};
+  background: ${COLORS.white};
   box-shadow: 0px 3px 4px rgba(95, 95, 95, 0.191);
   border-radius: 15px;
   box-sizing: border-box;
@@ -99,7 +99,7 @@ const Messasge = styled.div`
   letter-spacing: -0.01em;
   text-align: center;
   word-break: keep-all;
-  color: ${COLOR.text};
+  color: ${COLORS.text};
 `;
 
 const ButtonContainer = styled.div`
@@ -117,9 +117,9 @@ const Button = styled.button<ButtonProps>`
   text-align: center;
   letter-spacing: -0.01em;
   width: 7rem;
-  color: ${COLOR.white};
+  color: ${COLORS.white};
   background-color: ${({ isConfirm }) =>
-    isConfirm ? COLOR.green : COLOR.lightGray};
+    isConfirm ? COLORS.green : COLORS.lightGray};
   border-radius: 23.5px;
   padding: 1rem;
   cursor: pointer;

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import Notification from './Notification';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms/user';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import {
   getNotifications,
   seenNotifications,
 } from '../../utils/api/notification';
-import { NotificationResponse } from '../../types/response';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
+import type { NotificationResponse } from '../../types/api/notification';
 
 const NotificationList = () => {
   const [user] = useRecoilState(userState);
@@ -75,5 +75,5 @@ const Text = styled.h3`
   font-weight: 400;
   font-size: 1.5rem;
   text-align: center;
-  color: ${COLOR.brownGray};
+  color: ${COLORS.brownGray};
 `;

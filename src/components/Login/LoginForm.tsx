@@ -10,9 +10,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Divider from '../Base/Divider';
 import { Link } from 'react-router-dom';
-import { COLOR } from '../../utils/color';
+import COLORS from '../../utils/colors';
 import ErrorMessage from '../UserForm/ErrorMessage';
-import { ROUTES } from '../../utils/routes';
+import ROUTES from '../../utils/routes';
 import { ERROR_MESSAGES } from '../../utils/messages';
 import useToast from '../../hooks/useToast';
 import { loadingState } from '../../recoil/atoms/loading';
@@ -112,12 +112,12 @@ const SignUpLinkWrapper = styled.div`
   line-height: 2rem;
   letter-spacing: -0.01em;
 
-  color: ${COLOR.text};
+  color: ${COLORS.text};
 `;
 
 const SignUpLink = styled(Link)`
   font-size: 1.6rem;
   margin-left: 1rem;
-  color: ${COLOR.green};
+  color: ${COLORS.green};
   text-decoration: underline;
 `;

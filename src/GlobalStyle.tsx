@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { COLOR } from './utils/color';
+import COLORS from './utils/colors';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -93,7 +93,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
   body {
-    background-color: ${COLOR.bgColor};
+    background-color: ${COLORS.bgColor};
     font-family: 'Inter', 'Noto Sans KR', sans-serif;
     font-style: normal;
   }
