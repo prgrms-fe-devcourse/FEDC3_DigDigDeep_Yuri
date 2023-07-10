@@ -15,6 +15,11 @@
 
 <br />
 
+# 시연 영상
+[유튜브 시연 영상 바로가기](https://youtu.be/a-2vmgSHIYc)
+
+<br />
+
 # Members
 
 ![members](https://user-images.githubusercontent.com/25377159/213723856-068944ac-4ed3-4870-ad89-18000497ce8d.jpg)
@@ -51,3 +56,5 @@
 <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white" alt="notion">
 
 <br />
+
+
